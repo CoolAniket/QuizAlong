@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.leaderboard.LeaderBoardActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="firstUser"
+            type="com.retrytech.quizbox.model.leaderboard.LeaderBoard.QuizesItem" />
+
+        <variable
+            name="secondUser"
+            type="com.retrytech.quizbox.model.leaderboard.LeaderBoard.QuizesItem" />
+
+        <variable
+            name="thirdUser"
+            type="com.retrytech.quizbox.model.leaderboard.LeaderBoard.QuizesItem" />
+
+        <variable
+            name="viewModel"
+            type="com.retrytech.quizbox.viewmodel.LeaderBoardViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/leader" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="310dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/bg_leader_borad" />
+
+                <RelativeLayout
+                    android:id="@+id/app_bar"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp">
+
+                    <ImageView
+                        android:id="@+id/iv_back"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="15dp"
+                        android:background="@drawable/bg_oval"
+                        android:backgroundTint="@color/white"
+                        android:padding="10dp"
+                        android:src="@drawable/ic_back" />
+
+                    <ImageView
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/leaderboard" />
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/iv_crown"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/app_bar"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/crowns" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/app_bar"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="2"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:layout_width="110dp"
+                        android:layout_height="110dp"
+                        android:background="@drawable/ic_profile_user"
+                        android:backgroundTint="@color/purple_200"
+                        android:padding="12dp"
+                        app:circle_crop="@{secondUser.image}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text='@{""+secondUser.totalPoints}'
+                        android:textColor="@color/white"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:text='@{""+secondUser.fullName}'
+                        android:textColor="@color/white"
+                        android:textSize="15sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/iv_crown"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="7dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:background="@drawable/ic_profile_user"
+                        android:backgroundTint="@color/purple_200"
+                        android:padding="10dp"
+                        app:circle_crop="@{firstUser.image}" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text='@{""+firstUser.totalPoints}'
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:text='@{""+firstUser.fullName}'
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/app_bar"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="29dp"
+                    android:layout_marginEnd="22dp"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="3"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:layout_width="85dp"
+                        android:layout_height="85dp"
+                        android:background="@drawable/ic_profile_user"
+                        android:backgroundTint="@color/purple_200"
+                        android:padding="8dp"
+                        app:circle_crop="@{thirdUser.image}" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text='@{""+thirdUser.totalPoints}'
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:text='@{""+thirdUser.fullName}'
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_leader_board"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp"
+                app:adapter="@{viewModel.leaderBoardAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_leader_board" />
+
+            <FrameLayout
+                android:id="@+id/banner_ads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp" />
+
+        </LinearLayout>
+
+        <include
+            layout="@layout/loader"
+            app:isLoading="@{viewModel.isLoading}" />
+    </RelativeLayout>
+</layout>

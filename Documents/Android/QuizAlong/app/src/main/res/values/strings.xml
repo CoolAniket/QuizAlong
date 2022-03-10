@@ -1,0 +1,91 @@
+<resources>
+    <string name="app_name">QuizBox</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="by_retrytech">By Retrytech</string>
+    <string name="quizbox_is_the_app_where_you_can_nplay_pre_made_quiz_and_increase_your_nknowledge_playing_and_winning_the_quiz_nyou_also_get_rewarded_points_which_you_ncan_redeem_then">QuizBox is the app where you can \n play pre-made quiz and increase your \n knowledge.Playing and winning the quiz, \n you also get rewarded points which you \n can redeem then.</string>
+    <string name="enjoy_and_have_fun">Enjoy and have fun…!</string>
+    <string name="by_signing_in_you_are_agreeing_to_our">By signing in you are agreeing to our</string>
+    <string name="start">Start</string>
+    <string name="log_in_to_continue">Log in to continue</string>
+    <string name="enter_your_mail">Enter your mail</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="log_in">Log in</string>
+    <string name="sign_in_with_google">Sign in with google</string>
+    <string name="sign_in_with_facebook">Sign in with facebook</string>
+    <string name="create_account">Create Account</string>
+    <string name="enter_full_name">Enter Full Name</string>
+    <string name="re_type_password">Re-type Password</string>
+    <string name="referral_code">Referral Code (optional)</string>
+    <string name="register">Register</string>
+    <string name="home">Home</string>
+    <string name="categories">Categories</string>
+    <string name="profile">Profile</string>
+    <string name="start_playing_and_earn_rewards">Start playing and earn rewards..</string>
+    <string name="check_quizes">Check Quizes</string>
+    <string name="popular_quizes">Popular Quizes</string>
+    <string name="points">Points</string>
+    <string name="questions">Questions</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="play_history">Play History</string>
+    <string name="redeem_requests">Redeem Requests</string>
+    <string name="updates">Updates</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_use">Terms Of Use</string>
+    <string name="gold_player">Gold Player</string>
+    <string name="quizes_played">Quizes Played</string>
+    <string name="points_earned">Points Earned</string>
+    <string name="wallet">Wallet</string>
+    <string name="more_coins">More Coins</string>
+    <string name="redeem">Redeem</string>
+    <string name="refer_amp_earn"><![CDATA[Refer & Earn]]></string>
+    <string name="your_code_is">Your code is</string>
+    <string name="log_out">Log Out</string>
+    <string name="select_payment_gateway">Select payment Gateway</string>
+    <string name="enter_account_credentials">Enter Account Credentials</string>
+    <string name="submit">Submit</string>
+    <string name="notifications">Notifications</string>
+    <string name="pending">Pending</string>
+    <string name="completed">Completed</string>
+    <string name="total_score">Total Score</string>
+    <string name="exit">Exit</string>
+    <string name="finished">Finished..!</string>
+    <string name="complete">Complete</string>
+    <string name="cancel">Cancel</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="double_dip">Double Dip</string>
+    <string name="fifty_fifty">Fifty Fifty</string>
+    <string name="this_quiz_is_rapid_fire_nwhere_you_have_to_answer_nall_the_questions_within_nspecific_time_limit_or_nthat_answer_will_be_counted_nas_false_automatically">This Quiz is Rapid Fire ,\nwhere you have to answer\nall the questions within\nspecific time limit or\nthat answer will be counted\nas false automatically !</string>
+    <string name="ok_start">Ok, Start</string>
+    <string name="you_earned">You Earned</string>
+    <string name="next">Next</string>
+
+    <!--    Facebook Login Credential-->
+    <string name="facebook_app_id">471250374008711</string>
+    <string name="fb_login_protocol_scheme">fb471250374008711</string>
+
+    <string name="sign_up_successfully">Check your email for verification</string>
+    <string name="log_in_successfully">Log In successfully...!</string>
+    <string name="correct_answer_is">Correct answer is</string>
+    <string name="silver_player">Silver Player</string>
+    <string name="pro_player">Pro Player</string>
+
+    <!--    Admob-->
+    <string name="admob_app_id">ca-app-pub-2039805943140065~3426164958</string>
+    <string name="admob_interestial">----</string>
+    <string name="admob_rewarded">----</string>
+    <string name="admob_native">----</string>
+    <string name="admob_banner">----</string>
+
+    <!--    FaceBook Ads-->
+    <string name="facebook_interstial">---</string>
+    <string name="facebook_native">---</string>
+    <string name="fbbanner" />
+
+    <string-array name="payment">
+        <item>Select Gateway</item>
+        <item>PayPal</item>
+        <item>Paytm</item>
+    </string-array>
+</resources>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.redeem.HistoryRedeemRequestActivity">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.retrytech.quizbox.viewmodel.HistoryRedeemRequestViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:background="@color/purple" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/purple"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="15dp"
+                android:background="@drawable/bg_oval"
+                android:backgroundTint="@color/white"
+                android:padding="10dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/gilroy_bold"
+                android:text="@string/redeem_requests"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/tv_pending"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_10"
+                android:backgroundTint="@{viewModel.selectPosition == 0 ? @color/purple : @color/dark_grey}"
+                android:fontFamily="@font/gilroy_bold"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onClickItem(0)}"
+                android:paddingVertical="10dp"
+                android:text="@string/pending"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:backgroundTint="@color/purple" />
+
+            <TextView
+                android:id="@+id/tv_completed"
+                android:layout_width="165dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/bg_white_10"
+                android:backgroundTint="@{viewModel.selectPosition == 1 ? @color/purple : @color/dark_grey}"
+                android:fontFamily="@font/gilroy_bold"
+                android:gravity="center"
+                android:onClick="@{()->viewModel.onClickItem(1)}"
+                android:paddingVertical="10dp"
+                android:text="@string/completed"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                tools:backgroundTint="@color/dark_grey" />
+        </LinearLayout>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <FrameLayout
+            android:id="@+id/banner_ads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="5dp" />
+    </LinearLayout>
+</layout>

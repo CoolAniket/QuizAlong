@@ -1,0 +1,829 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.quiz.QuizActivity">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.retrytech.quizbox.viewmodel.QuizViewModel" />
+
+        <variable
+            name="question"
+            type="com.retrytech.quizbox.model.questions.Questions.QuestionsItem" />
+
+        <variable
+            name="answerList"
+            type="java.util.List&lt;String&gt;" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_app" />
+
+        <include
+            layout="@layout/shimmer_quiz"
+            app:isLoading="@{viewModel.isLoading}" />
+
+        <LinearLayout
+            android:id="@+id/iv_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.isLoading || viewModel.isComplete ? View.GONE : View.VISIBLE}"
+            tools:visibility="gone">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/gilroy_bold"
+                android:singleLine="true"
+                android:text="@{viewModel.quizesItem.title}"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="5dp">
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:background="@drawable/bg_oval"
+                            android:fontFamily="@font/gilroy_semi_bold"
+                            android:gravity="center"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text='@{""+viewModel.quizesItem.questionsCount}'
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/gilroy_semi_bold"
+                            android:gravity="center"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="@string/questions"
+                            android:textColor="@color/white" />
+
+                        <TextView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginStart="5dp"
+                            android:background="@drawable/bg_oval"
+                            android:fontFamily="@font/gilroy_semi_bold"
+                            android:gravity="center"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text='@{""+viewModel.quizesItem.totalPoints}'
+                            android:textColor="@color/white"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/gilroy_semi_bold"
+                            android:gravity="center"
+                            android:padding="1dp"
+                            android:singleLine="true"
+                            android:text="@string/points"
+                            android:textColor="@color/white" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_white_5"
+                            android:backgroundTint="@color/dim_white"
+                            android:fontFamily="@font/gilroy_medium"
+                            android:gravity="center"
+                            android:paddingHorizontal="15dp"
+                            android:paddingVertical="4.5dp"
+                            android:text="@{viewModel.quizesItem.category.name}"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="11sp" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:background="@drawable/bg_white_5"
+                            android:backgroundTint="@color/dim_white"
+                            android:gravity="center"
+                            android:paddingHorizontal="15dp"
+                            android:paddingVertical="4.5dp"
+                            android:visibility="@{viewModel.quizesItem.type == 0 ? View.GONE : View.VISIBLE }">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/gilroy_medium"
+                                android:singleLine="true"
+                                android:text="@{viewModel.quizesItem.getTypeInString()}"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_life_line"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_oval"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_light_bulb" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rtl_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/card_main"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="-40dp"
+                    app:cardBackgroundColor="@color/dim_white"
+                    app:cardCornerRadius="20dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="100dp"
+                                android:layout_height="45dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_gravity="end"
+                                android:background="@drawable/bg_top_right_bottom_left_20"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gilroy_bold"
+                                    android:text='@{""+viewModel.totalScore}'
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gilroy_medium"
+                                    android:text="@string/total_score"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginStart="20dp"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_question"
+                                    app:tint="@color/grey" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/gilroy_semi_bold"
+                                    android:text='@{""+viewModel.currentPosition+"/"+viewModel.totalQuestions}' />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/bg_white_25"
+                                android:backgroundTint="@color/purple"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="3dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_coin" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/gilroy_bold"
+                                    android:text='@{question.reward+" Points"}'
+                                    android:textColor="@color/white" />
+                            </LinearLayout>
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="10dp"
+                            android:fontFamily="@font/gilroy_semi_bold"
+                            android:isScrollContainer="true"
+                            android:maxLines="3"
+                            android:scrollbars="none"
+                            android:text="@{question.question}"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            app:scroll_text="@{true}" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="15dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center_horizontal"
+                                android:background="@drawable/bg_white_5"
+                                android:backgroundTint="@color/dim_grey"
+                                android:orientation="horizontal"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="3dp"
+                                android:visibility="gone">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_eye"
+                                    app:tint="@color/grey" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/gilroy_medium"
+                                    android:text="Photo"
+                                    android:textColor="@color/grey" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_centerHorizontal="true"
+                                android:background="@drawable/bg_oval"
+                                android:backgroundTint="@color/purple"
+                                android:fontFamily="@font/gilroy_semi_bold"
+                                android:gravity="center"
+                                android:padding="1dp"
+                                android:singleLine="true"
+                                android:text='@{""+viewModel.rapidFireDuration}'
+                                android:textColor="@color/white"
+                                android:textSize="14sp"
+                                android:visibility="@{viewModel.quizesItem.type == 1 ? View.VISIBLE : View.GONE}" />
+                        </RelativeLayout>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="10dp"
+                            android:onClick="@{()->viewModel.onAnswerClick(0)}"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{answerList.get(0)}"
+                                android:textColor="@{viewModel.trueAnswerPosition == 0 ? @color/white : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
+                                android:textSize="16sp"
+                                tools:text="@tools:sample/date/ddmmyy"
+                                tools:textColor="@color/dim_white" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_white_5"
+                                android:backgroundTint="@color/black_55"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:visibility="@{viewModel.firstAnswerVisibility}" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="10dp"
+                            android:onClick="@{()->viewModel.onAnswerClick(1)}"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@{viewModel.trueAnswerPosition == 1 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @drawable/false_bg : @drawable/bg_white) }" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{answerList.get(1)}"
+                                android:textColor="@{viewModel.trueAnswerPosition == 1 ? @color/white : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @color/white : @color/black)}"
+                                android:textSize="16sp" />
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_white_5"
+                                android:backgroundTint="@color/black_55"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:scaleType="centerCrop"
+                                android:visibility="@{viewModel.secondAnswerVisibility}" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="10dp"
+                            android:onClick="@{()->viewModel.onAnswerClick(2)}"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@{viewModel.trueAnswerPosition == 2 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
+
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{answerList.get(2)}"
+                                android:textColor="@{viewModel.trueAnswerPosition == 2 ? @color/white : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_white_5"
+                                android:backgroundTint="@color/black_55"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:scaleType="centerCrop"
+                                android:visibility="@{viewModel.thirdAnswerVisibility}" />
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:onClick="@{()->viewModel.onAnswerClick(3)}"
+                            app:cardBackgroundColor="@color/white"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{answerList.get(3)}"
+                                android:textColor="@{viewModel.trueAnswerPosition == 3 ? @color/white : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
+                                android:textSize="16sp" />
+
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_white_5"
+                                android:backgroundTint="@color/black_55"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:scaleType="centerCrop"
+                                android:visibility="@{viewModel.fourthAnswerVisibility}" />
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_white_5"
+                android:backgroundTint="@color/dim_white"
+                android:fontFamily="@font/gilroy_semi_bold"
+                android:paddingHorizontal="30dp"
+                android:paddingVertical="3dp"
+                android:text="@string/exit"
+                android:textAllCaps="true"
+                android:textColor="@color/black" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="@{viewModel.isComplete ? View.VISIBLE : View.GONE}"
+            tools:visibility="visible">
+
+            <LinearLayout
+                android:id="@+id/lyt_ss"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+
+                <ImageView
+                    android:layout_width="180dp"
+                    android:layout_height="85dp"
+                    android:src="@drawable/quizbox_logo" />
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:src="@drawable/ic_finish_flag"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:text="@string/finished"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    app:cardCornerRadius="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="20dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:gravity="center"
+                        android:text="Summary"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="40dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/completed_bg" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="40dp"
+                        android:orientation="vertical"
+                        android:paddingHorizontal="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="15dp"
+                            android:ellipsize="end"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:singleLine="true"
+                            android:text="@{viewModel.quizesItem.title}"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:background="@drawable/bg_oval"
+                                android:backgroundTint="@color/purple"
+                                android:fontFamily="@font/gilroy_semi_bold"
+                                android:gravity="center"
+                                android:padding="1dp"
+                                android:singleLine="true"
+                                android:text='@{""+viewModel.quizesItem.questionsCount}'
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/gilroy_semi_bold"
+                                android:gravity="center"
+                                android:padding="1dp"
+                                android:singleLine="true"
+                                android:text="@string/questions"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_marginStart="5dp"
+                                android:background="@drawable/bg_oval"
+                                android:backgroundTint="@color/purple"
+                                android:fontFamily="@font/gilroy_semi_bold"
+                                android:gravity="center"
+                                android:padding="1dp"
+                                android:singleLine="true"
+                                android:text='@{""+viewModel.quizesItem.totalPoints}'
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/gilroy_semi_bold"
+                                android:gravity="center"
+                                android:padding="1dp"
+                                android:singleLine="true"
+                                android:text="@string/points"
+                                android:textColor="@color/white"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_white_5"
+                                android:fontFamily="@font/gilroy_medium"
+                                android:gravity="center"
+                                android:paddingHorizontal="15dp"
+                                android:paddingVertical="4.5dp"
+                                android:text="@{viewModel.quizesItem.category.name}"
+                                android:textAllCaps="true"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:background="@drawable/bg_white_5"
+                                android:gravity="center"
+                                android:paddingHorizontal="15dp"
+                                android:paddingVertical="4.5dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/gilroy_medium"
+                                    android:text="@{viewModel.quizesItem.getTypeInString()}"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/black"
+                                    android:textSize="11sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:gravity="center_vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_gredient_5"
+                                android:fontFamily="@font/gilroy_bold"
+                                android:gravity="center"
+                                android:paddingHorizontal="15dp"
+                                android:paddingVertical="2dp"
+                                android:singleLine="true"
+                                android:text='@{""+viewModel.totalScore}'
+                                android:textColor="@color/white"
+                                android:textSize="22sp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/gilroy_bold"
+                                android:gravity="center"
+                                android:padding="1dp"
+                                android:singleLine="true"
+                                android:text="@string/points_earned"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:id="@+id/lyt_2_x"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_white_50"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="20dp"
+                    android:paddingVertical="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_multi_media" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="2x Points"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lyt_share"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/bg_white_50"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="30dp"
+                    android:paddingVertical="8dp">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_share"
+                        app:tint="@color/purple" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="Share"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_completed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="40dp"
+                android:fontFamily="@font/gilroy_bold"
+                android:text="@string/complete"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/banner_ads"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="5dp" />
+
+    </RelativeLayout>
+</layout>

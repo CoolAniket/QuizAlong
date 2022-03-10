@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#9943C3</color>
+    <color name="purple">#9717CC</color>
+    <color name="purple_700">#9717CC</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="dim_white">#A9FFFFFF</color>
+    <color name="dark_grey">#363636</color>
+    <color name="red">#FF0202</color>
+    <color name="dim_purple">#F4D5FF</color>
+    <color name="white_30">#4FFFFFFF</color>
+    <color name="dim_grey">#DFDFDF</color>
+    <color name="extra_dim_grey">#F0F0F0</color>
+    <color name="grey">#7A7A7A</color>
+    <color name="transparent">#00000000</color>
+
+    <!--    PlashHolder-->
+    <color name="napier_green">#FFC36A</color>
+    <color name="india_red">#FFBBC3</color>
+    <color name="kellygreen">#D1FFA8</color>
+    <color name="tufs_blue">#ADD4FF</color>
+    <color name="tiffanyblue">#AAFFFB</color>
+    <color name="Sanddtorm">#FFE595</color>
+    <color name="salmonpink_1">#FFB8C1</color>
+    <color name="black_55">#99000000</color>
+
+
+</resources>

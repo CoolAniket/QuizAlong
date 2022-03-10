@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "34970230993",
+    "project_id": "quiz-test-12345",
+    "storage_bucket": "quiz-test-12345.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34970230993:android:19bbc11677e6d05462e5f0",
+        "android_client_info": {
+          "package_name": "com.retrytech.quizbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34970230993-8fk91fn825dm0osue7prpsm7p4bgruod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFuXBgZLRPDqyaqfr2atzXCm_qfTQLBFU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34970230993-8fk91fn825dm0osue7prpsm7p4bgruod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

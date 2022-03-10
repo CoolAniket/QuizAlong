@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.retrytech.quizbox.viewmodel.EditProfileViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_app"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            tools:context=".view.edit.EditProfileActivity">
+
+            <TextView
+                android:id="@+id/tv_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/gilroy_semi_bold"
+                android:gravity="bottom"
+                android:paddingTop="35dp"
+                android:paddingBottom="10dp"
+                android:text="@string/cancel"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <RelativeLayout
+                android:id="@+id/rlt_image"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:layout_marginTop="20dp">
+
+
+                <ImageView
+                    android:id="@+id/iv_profile"
+                    android:layout_width="175dp"
+                    android:layout_height="175dp"
+                    android:background="@drawable/bg_oval"
+                    android:backgroundTint="@color/dim_white"
+                    android:transitionName="@string/profile"
+                    app:circle_crop="@{viewModel.user.user.image}" />
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_camera"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/gilroy_medium"
+                android:text="@string/first_name"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,0)}"
+                android:background="@drawable/bg_white_5"
+                android:backgroundTint="@color/dim_white"
+                android:fontFamily="@font/gilroy_reguler"
+                android:inputType="textCapWords"
+                android:paddingHorizontal="15dp"
+                android:text='@{viewModel.firstName}'
+                android:textColor="@color/black" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/gilroy_medium"
+                android:text="@string/last_name"
+                android:textColor="@color/white"
+                android:textSize="18sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,1)}"
+                android:background="@drawable/bg_white_5"
+                android:backgroundTint="@color/dim_white"
+                android:fontFamily="@font/gilroy_reguler"
+                android:inputType="textCapWords"
+                android:paddingHorizontal="15dp"
+                android:text='@{viewModel.lastName}'
+                android:textColor="@color/black" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/bg_white_5"
+                android:backgroundTint="#2B2424"
+                android:fontFamily="@font/gilroy_bold"
+                android:onClick="@{()->viewModel.editProfile()}"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <FrameLayout
+                android:id="@+id/banner_ads"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
+
+        <include
+            layout="@layout/loader"
+            app:isLoading="@{viewModel.isLoading}" />
+    </RelativeLayout>
+</layout>

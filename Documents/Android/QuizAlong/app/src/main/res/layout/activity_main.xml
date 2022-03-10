@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="com.retrytech.quizbox.viewmodel.MainViewModel" />
+    </data>
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".view.main.MainActivity">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:background="@color/purple" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/purple"
+                app:contentInsetStart="0dp">
+
+                <ImageView
+                    android:id="@+id/iv_title"
+                    android:layout_width="105dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/quizbox_logo"
+                    android:transitionName="logo"
+                    android:visibility="@{viewModel.selectedMenu == 0 ? View.VISIBLE : View.GONE}" />
+
+
+                <ImageView
+                    android:layout_width="135dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/categories"
+                    android:transitionName="logo"
+                    android:visibility="@{viewModel.selectedMenu == 1 ? View.VISIBLE : View.GONE}" />
+
+
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/profile"
+                    android:transitionName="logo"
+                    android:visibility="@{viewModel.selectedMenu == 2 ? View.VISIBLE : View.GONE}" />
+
+                <ImageView
+                    android:id="@+id/iv_menu"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="12dp"
+                    android:src="@drawable/nav_icon"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_profile_user"
+                    android:backgroundTint="@color/white"
+                    android:visibility="@{viewModel.selectedMenu == 0 ? View.VISIBLE : View.GONE}"
+                    app:circle_crop="@{viewModel.user.user.image}" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/white"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/lyt_home"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{()->viewModel.onClickMenu(0)}"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/iv_home"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_home"
+                        android:tint="@{viewModel.selectedMenu == 0 ? @color/purple : @color/dark_grey }" />
+
+                    <TextView
+                        android:id="@+id/tv_home"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_light"
+                        android:text="@string/home"
+                        android:textColor="@{viewModel.selectedMenu == 0 ? @color/purple : @color/dark_grey }"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lyt_categories"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{()->viewModel.onClickMenu(1)}"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/iv_cat"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_categories"
+                        android:tint="@{viewModel.selectedMenu == 1 ? @color/purple : @color/dark_grey }" />
+
+                    <TextView
+                        android:id="@+id/tv_cat"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_light"
+                        android:text="@string/categories"
+                        android:textColor="@{viewModel.selectedMenu == 1 ? @color/purple : @color/dark_grey }"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/lyt_profile"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:onClick="@{()->viewModel.onClickMenu(2)}"
+                    android:orientation="vertical">
+
+
+                    <ImageView
+                        android:id="@+id/iv_profile"
+                        android:layout_width="23dp"
+                        android:layout_height="23dp"
+                        android:src="@drawable/ic_profile_user"
+                        android:tint="@{viewModel.selectedMenu == 2 ? @color/purple : @color/dark_grey }" />
+
+                    <TextView
+                        android:id="@+id/tv_profile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/gilroy_light"
+                        android:text="@string/profile"
+                        android:textColor="@{viewModel.selectedMenu == 2 ? @color/purple : @color/dark_grey }"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <include
+            android:id="@+id/nav_drawer"
+            layout="@layout/item_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start" />
+    </androidx.drawerlayout.widget.DrawerLayout>
+</layout>
