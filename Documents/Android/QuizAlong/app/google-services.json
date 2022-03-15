@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "34970230993",
-    "project_id": "quiz-test-12345",
-    "storage_bucket": "quiz-test-12345.appspot.com"
+    "project_number": "22065327434",
+    "project_id": "quizbox-d02d2",
+    "storage_bucket": "quizbox-d02d2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:34970230993:android:19bbc11677e6d05462e5f0",
+        "mobilesdk_app_id": "1:22065327434:android:08a9218e601989161165b3",
         "android_client_info": {
-          "package_name": "com.retrytech.quizbox"
+          "package_name": "com.thequizapp.quizalong"
         }
       },
       "oauth_client": [
         {
-          "client_id": "34970230993-8fk91fn825dm0osue7prpsm7p4bgruod.apps.googleusercontent.com",
+          "client_id": "22065327434-5gg8asd3djijd4v0a8srorndf7m096te.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAFuXBgZLRPDqyaqfr2atzXCm_qfTQLBFU"
+          "current_key": "AIzaSyClu4mZu1EEjgXLWY55XPqE0Zo1kE6DiHA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "34970230993-8fk91fn825dm0osue7prpsm7p4bgruod.apps.googleusercontent.com",
+              "client_id": "22065327434-5gg8asd3djijd4v0a8srorndf7m096te.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
