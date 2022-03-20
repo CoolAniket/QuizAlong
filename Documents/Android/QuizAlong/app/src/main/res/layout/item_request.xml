@@ -5,7 +5,7 @@
 
         <variable
             name="model"
-            type="com.retrytech.quizbox.model.redeemrequest.RedeemRequest.RedeemsItem" />
+            type="com.thequizapp.quizalong.model.redeemrequest.RedeemRequest.RedeemsItem" />
 
     </data>
 

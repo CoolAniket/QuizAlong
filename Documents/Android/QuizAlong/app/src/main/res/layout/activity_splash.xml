@@ -31,7 +31,7 @@
             android:layout_marginBottom="75dp"
             android:fontFamily="@font/gilroy_reguler"
             android:letterSpacing="0.15"
-            android:text="@string/by_retrytech"
+            android:text="@string/by_thequizapp"
             android:textAllCaps="true"
             android:textColor="@color/white"
             android:textSize="16sp" />

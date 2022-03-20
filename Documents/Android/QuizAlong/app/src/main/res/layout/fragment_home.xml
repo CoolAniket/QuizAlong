@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.HomeViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.HomeViewModel" />
     </data>
 
     <RelativeLayout

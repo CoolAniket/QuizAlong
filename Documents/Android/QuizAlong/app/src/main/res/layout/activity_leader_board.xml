@@ -10,19 +10,19 @@
 
         <variable
             name="firstUser"
-            type="com.retrytech.quizbox.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
 
         <variable
             name="secondUser"
-            type="com.retrytech.quizbox.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
 
         <variable
             name="thirdUser"
-            type="com.retrytech.quizbox.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.LeaderBoardViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.LeaderBoardViewModel" />
     </data>
 
     <RelativeLayout

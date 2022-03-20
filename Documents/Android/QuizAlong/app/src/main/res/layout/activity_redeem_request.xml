@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.RedeemRequestViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.RedeemRequestViewModel" />
     </data>
 
     <LinearLayout

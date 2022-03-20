@@ -5,10 +5,10 @@
 
     <data>
 
-        <import type="com.retrytech.quizbox.utils.Global" />
+        <import type="com.thequizapp.quizalong.utils.Global" />
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.ProfileViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.ProfileViewModel" />
     </data>
 
     <LinearLayout

@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.retrytech.quizbox.model.categories.Categories.CategoriesItem" />
+            type="com.thequizapp.quizalong.model.categories.Categories.CategoriesItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

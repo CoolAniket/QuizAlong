@@ -6,11 +6,11 @@
 
         <import type="android.view.View" />
 
-        <import type="com.retrytech.quizbox.utils.Global" />
+        <import type="com.thequizapp.quizalong.utils.Global" />
 
         <variable
             name="model"
-            type="com.retrytech.quizbox.model.home.HomePage.QuizesItem" />
+            type="com.thequizapp.quizalong.model.home.HomePage.QuizesItem" />
     </data>
 
     <androidx.cardview.widget.CardView

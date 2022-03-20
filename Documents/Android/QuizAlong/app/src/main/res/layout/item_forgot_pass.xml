@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.ForgotPasswordViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.ForgotPasswordViewModel" />
 
     </data>
 
