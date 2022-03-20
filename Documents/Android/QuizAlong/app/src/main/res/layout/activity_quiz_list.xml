@@ -10,7 +10,7 @@
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.QuizListViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.QuizListViewModel" />
     </data>
 
     <LinearLayout

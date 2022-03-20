@@ -10,11 +10,11 @@
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.QuizViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.QuizViewModel" />
 
         <variable
             name="question"
-            type="com.retrytech.quizbox.model.questions.Questions.QuestionsItem" />
+            type="com.thequizapp.quizalong.model.questions.Questions.QuestionsItem" />
 
         <variable
             name="answerList"

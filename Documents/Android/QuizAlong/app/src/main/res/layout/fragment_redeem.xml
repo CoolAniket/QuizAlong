@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.HistoryRedeemChildViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.HistoryRedeemChildViewModel" />
     </data>
 
     <LinearLayout

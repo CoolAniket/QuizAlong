@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.retrytech.quizbox.model.home.HomePage.CategoriesItem" />
+            type="com.thequizapp.quizalong.model.home.HomePage.CategoriesItem" />
     </data>
 
     <androidx.cardview.widget.CardView

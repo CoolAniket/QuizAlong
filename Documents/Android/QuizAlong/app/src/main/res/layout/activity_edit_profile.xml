@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.retrytech.quizbox.viewmodel.EditProfileViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.EditProfileViewModel" />
     </data>
 
     <RelativeLayout

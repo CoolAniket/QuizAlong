@@ -11,7 +11,7 @@
 
         <variable
             name="model"
-            type="com.retrytech.quizbox.model.notification.Notifications.NotificationsItem" />
+            type="com.thequizapp.quizalong.model.notification.Notifications.NotificationsItem" />
     </data>
 
     <LinearLayout

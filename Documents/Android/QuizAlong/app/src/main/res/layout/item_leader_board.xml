@@ -10,7 +10,7 @@
 
         <variable
             name="model"
-            type="com.retrytech.quizbox.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
     </data>
 
     <androidx.cardview.widget.CardView
