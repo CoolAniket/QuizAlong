@@ -7,12 +7,28 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:22065327434:android:08a9218e601989161165b3",
+        "mobilesdk_app_id": "1:22065327434:android:22407df8d16588fd1165b3",
         "android_client_info": {
           "package_name": "com.thequizapp.quizalong"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "22065327434-qp4hfchj75elrimjokrmv5mglc38k9tq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thequizapp.quizalong",
+            "certificate_hash": "2acc1690029c39f0ab33e6e0f8ebd4a2fe97e8b4"
+          }
+        },
+        {
+          "client_id": "22065327434-rmh9ahtu96qctkg9gfakj1qungg9q68l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.thequizapp.quizalong",
+            "certificate_hash": "d090f97ffe47224ef8c2d74b0584014240cb318e"
+          }
+        },
         {
           "client_id": "22065327434-5gg8asd3djijd4v0a8srorndf7m096te.apps.googleusercontent.com",
           "client_type": 3
