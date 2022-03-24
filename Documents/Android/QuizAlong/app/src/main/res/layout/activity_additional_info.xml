@@ -9,552 +9,249 @@
 
         <variable
             name="viewModel"
-            type="com.thequizapp.quizalong.viewmodel.AdditionalInfoViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.MainViewModel" />
     </data>
-    <RelativeLayout
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".view.main.MainActivity">
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:background="@color/purple" />
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/purple"
+                app:contentInsetStart="0dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="User Info"
+                    android:textSize="20dip"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"/>
+
+                <ImageView
+                    android:id="@+id/iv_menu"
+                    android:layout_width="50dp"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="12dp"
+                    android:src="@drawable/nav_icon"
+                    app:tint="@color/white" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="end"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/ic_profile_user"
+                    android:backgroundTint="@color/white"
+                    android:visibility="@{viewModel.selectedMenu == 0 ? View.VISIBLE : View.GONE}"
+                    app:circle_crop="@{viewModel.user.user.image}" />
+            </androidx.appcompat.widget.Toolbar>
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0" />
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="15dp">
+
+            <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical"
-                tools:context=".view.main.MainActivity">
-
-                <View
+                android:scaleType="centerCrop"
+                android:src="@drawable/quiz_bg" />
+                <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="24dp"
-                    android:background="@color/cobalt_blue" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="35dp"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:text="@string/select_courses"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-                <androidx.appcompat.widget.Toolbar
+                <Spinner
+                    android:id="@+id/spinner1"
                     android:layout_width="match_parent"
-                    android:layout_height="?actionBarSize"
-                    android:background="@color/cobalt_blue"
-                    app:contentInsetStart="0dp">
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:spinnerMode="dropdown"
+                    android:text="Courses"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="15dp">
 
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="@string/additional_info"
-                        android:textSize="20dip"
-                        android:fontFamily="@font/gilroy_bold"
-                        android:textColor="@color/white"
-                        android:textStyle="bold"/>
-
-                    <!--<ImageView
-                        android:id="@+id/iv_menu"
-                        android:layout_width="50dp"
-                        android:layout_height="match_parent"
-                        android:paddingHorizontal="12dp"
-                        android:src="@drawable/nav_icon"
-                        app:tint="@color/white" />-->
-
-                    <!--<ImageView
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:layout_gravity="end"
-                        android:layout_margin="5dp"
-                        android:background="@drawable/ic_profile_user"
-                        android:backgroundTint="@color/white"
-                        />-->
-                </androidx.appcompat.widget.Toolbar>
-                <ScrollView
+                <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical">
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/quiz_bg" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="35dp"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:text="@string/select_year_pass"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@color/cobalt_blue" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp"
-                                android:fontFamily="@font/gilroy_medium"
-                                android:text="@string/select_year_pass"
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_white_10"
-                                android:backgroundTint="@color/dim_grey"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_gravity="center">
+                <Spinner
+                    android:id="@+id/spinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@android:drawable/btn_dropdown"
+                    android:contentDescription="@string/select_courses"
+                    android:spinnerMode="dropdown"
+                    android:text="Year of passing" />
+            </androidx.cardview.widget.CardView>
 
-                                <Spinner
-                                    android:id="@+id/sp_year"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="35dp"
-                                    android:fontFamily="@font/gilroy_reguler"
-                                    android:dropDownSelector="@color/black"
-                                    android:textSize="14sp"
-                                    android:hint="@string/select_year_pass"
-                                    android:background="@drawable/bg_white_5"
-                                    android:backgroundTint="@color/dim_white"
-                                    />
-                            </LinearLayout>
-                            <!--<Spinner
-                                android:id="@+id/sp_year"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="10dp"
-                                android:background="@android:drawable/btn_dropdown"
-                                android:contentDescription="@string/select_courses"
-                                android:spinnerMode="dropdown"
-                                android:text="Year of passing" />-->
-                        </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="15dp">
 
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/quiz_bg" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="38dp"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:text="@string/enter_your_college"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@color/cobalt_blue" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp"
-                                android:fontFamily="@font/gilroy_medium"
-                                android:text="@string/enter_your_college"
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="40dp"
+                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,0)}"
+                    android:background="@drawable/bg_white_5"
+                    android:backgroundTint="@color/dim_white"
+                    android:hint="@string/enter_your_college"
+                    android:imeOptions="actionNext"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="15dp"
+                    android:singleLine="true"
+                    android:textColor="@color/black" />
+            </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="110dp"
+                app:cardCornerRadius="15dp"
+                android:layout_margin="15dp">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_white_10"
-                                android:backgroundTint="@color/dim_grey"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_gravity="center">
-                                <Spinner
-                                    android:id="@+id/sp_college"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="35dp"
-                                    android:fontFamily="@font/gilroy_reguler"
-                                    android:dropDownSelector="@color/black"
-                                    android:textSize="14sp"
-                                    android:hint="@string/select_year_pass"
-                                    android:background="@drawable/bg_white_5"
-                                    android:backgroundTint="@color/dim_white"
-                                    />
-                                <AutoCompleteTextView
-                                    android:visibility="gone"
-                                    android:id="@+id/et_collegeName"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="35dp"
-                                    android:fontFamily="@font/gilroy_reguler"
-                                    android:layout_gravity="center_vertical"
-                                    android:background="@drawable/bg_white_5"
-                                    android:backgroundTint="@color/dim_white"
-                                    android:hint="@string/enter_your_college"
-                                    android:imeOptions="actionDone"
-                                    android:inputType="textPersonName"
-                                    android:paddingHorizontal="15dp"
-                                    android:singleLine="true"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/quiz_bg" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="38dp"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:text="@string/select_id_proof"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:background="#0047AB"
-                                android:src="@color/cobalt_blue" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp"
-                                android:fontFamily="@font/gilroy_medium"
-                                android:text="@string/enter_mobile"
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
-                            <!--<LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_white_10"
-                                android:backgroundTint="@color/dim_grey"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_gravity="center">
-
-                                <Spinner
-                                    android:id="@+id/sp_course"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="35dp"
-                                    android:backgroundTint="@color/black"
-                                    android:dropDownSelector="@color/black"
-
-                                    />
-                            </LinearLayout>-->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_white_10"
-                                android:backgroundTint="@color/dim_grey"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_gravity="center"
-                                android:orientation="horizontal">
-                                <EditText
-                                    android:id="@+id/et_mobileNo"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="35dp"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/gilroy_reguler"
-                                    android:layout_gravity="center_vertical"
-                                    android:background="@drawable/bg_white_5"
-                                    android:backgroundTint="@color/dim_white"
-                                    android:hint="@string/enter_mobile"
-                                    android:imeOptions="actionDone"
-                                    android:inputType="number"
-                                    android:paddingHorizontal="15dp"
-                                    android:singleLine="true"
-                                    android:textSize="14sp"
-                                    android:maxLength="13"
-                                    android:textColor="@color/black"
-                                    android:enabled="@{viewModel.isOtpSent ? false : true}"
-                                    />
-                                <com.google.android.material.imageview.ShapeableImageView
-                                    android:layout_width="36dp"
-                                    android:layout_height="wrap_content"
-                                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
-                                    android:src="@drawable/ic_baseline_done_24"
-                                    android:scaleType="fitXY"
-                                    android:adjustViewBounds="true"
-                                    android:background="@color/white"
-                                    android:layout_gravity="center_vertical"
-                                    android:padding="8dp"
-                                    android:onClick="@{()->viewModel.authenticatePhone()}"
-                                    />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:visibility="@{viewModel.isOtpSent ? View.VISIBLE : View.GONE}">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:background="#0047AB"
-                                android:src="@color/cobalt_blue" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp"
-                                android:fontFamily="@font/gilroy_medium"
-                                android:text="@string/enter_otp"
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_white_10"
-                                android:backgroundTint="@color/dim_grey"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_gravity="center">
-                                <EditText
-                                    android:id="@+id/et_otp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="35dp"
-                                    android:fontFamily="@font/gilroy_reguler"
-                                    android:layout_gravity="center_vertical"
-                                    android:background="@drawable/bg_white_5"
-                                    android:backgroundTint="@color/dim_white"
-                                    android:hint="@string/enter_otp"
-                                    android:imeOptions="actionDone"
-                                    android:inputType="number"
-                                    android:paddingHorizontal="15dp"
-                                    android:singleLine="true"
-                                    android:textSize="14sp"
-                                    android:maxLength="13"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp"
-                            app:cardCornerRadius="15dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@color/cobalt_blue" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="start"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginLeft="20dp"
-                                android:fontFamily="@font/gilroy_medium"
-                                android:text="@string/enter_referral_code"
-                                android:textColor="@color/white"
-                                android:textSize="14sp" />
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/bg_white_10"
-                                android:backgroundTint="@color/dim_grey"
-                                android:layout_marginLeft="10dp"
-                                android:layout_marginTop="10dp"
-                                android:layout_marginRight="10dp"
-                                android:layout_gravity="center">
-                                <EditText
-                                    android:id="@+id/et_referral"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="35dp"
-                                    android:fontFamily="@font/gilroy_reguler"
-                                    android:layout_gravity="center_vertical"
-                                    android:background="@drawable/bg_white_5"
-                                    android:backgroundTint="@color/dim_white"
-                                    android:hint="@string/enter_referral_code"
-                                    android:imeOptions="actionDone"
-                                    android:inputType="textPersonName"
-                                    android:paddingHorizontal="15dp"
-                                    android:singleLine="true"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/black" />
-                            </LinearLayout>
-                        </androidx.cardview.widget.CardView>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:orientation="horizontal">
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="110dp"
-                                app:cardCornerRadius="15dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:src="@color/cobalt_blue"
-                                    android:layout_gravity="center"/>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-                                        android:layout_marginTop="15dp"
-                                        android:fontFamily="@font/gilroy_medium"
-                                        android:text="@string/select_id_proof"
-                                        android:textColor="@color/white"
-                                        android:textSize="14sp"/>
-                                    <RelativeLayout
-                                        android:id="@+id/rlt_image"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center"
-
-                                        android:layout_marginTop="5dp">
-
-                                        <ImageView
-                                            android:id="@+id/iv_idProof"
-                                            android:layout_width="60dp"
-                                            android:layout_height="60dp"
-                                            android:backgroundTint="@color/white"
-                                            android:background="@drawable/ic_profile_user" />
-                                    </RelativeLayout>
-                                </LinearLayout>
-
-                            </androidx.cardview.widget.CardView>
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="match_parent"
-                                android:layout_height="110dp"
-                                app:cardCornerRadius="15dp"
-                                android:layout_marginLeft="20dp"
-                                android:layout_weight="1">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:scaleType="centerCrop"
-                                    android:src="@color/cobalt_blue"
-                                    android:layout_gravity="center"/>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:layout_gravity="center"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_marginRight="10dp">
-                                    <!--<TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="start"
-                                        android:layout_marginTop="15dp"
-                                        android:fontFamily="@font/gilroy_medium"
-                                        android:text="@string/select_dob"
-                                        android:textColor="@color/white"
-                                        android:textSize="14sp"
-                                        android:layout_marginLeft="10dp"
-                                        android:layout_marginRight="10dp"/>-->
-                                    <LinearLayout
-                                        android:id="@+id/btn_Pick"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:layout_gravity="center"
-                                        android:orientation="vertical">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="@string/select_dob"
-                                            android:textColor="@color/white"
-                                            android:textSize="14sp"
-                                            android:layout_gravity="center"/>
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:orientation="horizontal"
-                                            android:gravity="center"
-                                            android:layout_marginTop="10dp">
-                                            <ImageView
-                                                android:layout_width="30dp"
-                                                android:layout_height="30dp"
-                                                android:src="@drawable/calendar"
-                                                app:tint="@color/white"/>
-                                            <TextView
-                                                android:id="@+id/txt_Date"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_centerHorizontal="true"
-                                                android:text="@string/date_format"
-                                                android:textColor="@color/white"
-                                                android:textSize="14sp"
-                                                android:layout_marginLeft="10dp"/>
-                                        </LinearLayout>
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </androidx.cardview.widget.CardView>
-                        </LinearLayout>
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            app:cardCornerRadius="10dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@color/cobalt_blue"
-                                android:layout_gravity="center"/>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:orientation="horizontal"
-                                android:gravity="center">
-                                <CheckBox
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="20dp"
-                                    android:backgroundTint="@color/white"
-                                    android:checked="true"
-                                    />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textColor="@color/white"
-                                    android:fontFamily="@font/gilroy_medium"
-                                    android:text="@string/terms_conditions"/>
-                            </LinearLayout>
-
-                        </androidx.cardview.widget.CardView>
-
-                        <Button
-                            android:layout_width="175dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/bg_white_50"
-                            android:backgroundTint="@color/black"
-                            android:fontFamily="@font/gilroy_bold"
-                            android:layout_gravity="center"
-                            android:onClick="@{()->viewModel.submitProfile()}"
-                            android:paddingVertical="10dp"
-                            android:text="@string/submit"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:layout_marginBottom="10dp"/>
-                    </LinearLayout>
-
-                </ScrollView>
-
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginTop="35dp"
+                    android:layout_marginLeft="38dp"
+                    android:background="@drawable/ic_profile_user"/>
+            </androidx.cardview.widget.CardView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terms_conditions"/>
             </LinearLayout>
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/card_more_coin"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                app:cardCornerRadius="10dp"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginTop="10dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cat_bg"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:text="@string/submit_userinfo"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+            </androidx.cardview.widget.CardView>
+        </LinearLayout>
+
         <include
-            layout="@layout/loader"
-            app:isLoading="@{viewModel.isLoading}" />
-    </RelativeLayout>
+            android:id="@+id/nav_drawer"
+            layout="@layout/item_drawer"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
