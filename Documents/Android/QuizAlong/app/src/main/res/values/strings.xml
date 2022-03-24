@@ -60,7 +60,15 @@
     <string name="ok_start">Ok, Start</string>
     <string name="you_earned">You Earned</string>
     <string name="next">Next</string>
-
+    <string name="enter_your_college">Enter your college name</string>
+    <string name="select_id_proof">Select ID Proof</string>
+    <string name="terms_conditions">Accept Terms and Conditions</string>
+    <string name="select_courses">Select courses</string>
+    <string name="select_year_pass">Select year of passing</string>
+    <string name="submit_userinfo">Submit</string>
+    <string name="quiz_with_twist">Quiz With Twist</string>
+    <string name="upcoming_quiz">Upcoming Quiz</string>
+    <string name="past_quiz">Past Quiz</string>
     <!--    Facebook Login Credential-->
     <string name="facebook_app_id">471250374008711</string>
     <string name="fb_login_protocol_scheme">fb471250374008711</string>

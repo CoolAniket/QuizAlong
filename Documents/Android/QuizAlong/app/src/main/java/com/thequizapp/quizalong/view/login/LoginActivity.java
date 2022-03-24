@@ -100,6 +100,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e(">>> ",requestCode+" "+resultCode+" "+data);
         faceBookLoginManager.callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK && requestCode == RC_SIGN_IN) {
