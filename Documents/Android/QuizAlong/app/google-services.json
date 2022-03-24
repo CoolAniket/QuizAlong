@@ -14,6 +14,7 @@
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
           "client_id": "22065327434-qp4hfchj75elrimjokrmv5mglc38k9tq.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -22,6 +23,8 @@
           }
         },
         {
+=======
+>>>>>>> b43a3ba (Added additional info page)
           "client_id": "22065327434-rmh9ahtu96qctkg9gfakj1qungg9q68l.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
