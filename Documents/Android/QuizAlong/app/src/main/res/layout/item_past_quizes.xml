@@ -63,6 +63,10 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="10dp"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
@@ -99,7 +103,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TIME :- 9:00 PM Today"
+                    android:text="TIME :- 7:00 PM Yesterday"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -122,13 +126,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="FREE"
+                        android:text="Start Now ->"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:layout_gravity="center"/>
                 </LinearLayout>
-                <LinearLayout
+                <!--<LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -142,7 +146,7 @@
                         android:textColor="@color/white"
                         android:textSize="15sp"
                         android:layout_marginRight="10dp"/>
-                </LinearLayout>
+                </LinearLayout>-->
             </LinearLayout>
         </LinearLayout>
 

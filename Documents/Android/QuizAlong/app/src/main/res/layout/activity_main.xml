@@ -26,12 +26,12 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="24dp"
-                android:background="@color/purple" />
+                android:background="@color/cobalt_blue" />
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?actionBarSize"
-                android:background="@color/purple"
+                android:background="@color/cobalt_blue"
                 app:contentInsetStart="0dp">
 
                 <ImageView
@@ -109,7 +109,7 @@
                         android:layout_width="22dp"
                         android:layout_height="22dp"
                         android:src="@drawable/ic_home"
-                        android:tint="@{viewModel.selectedMenu == 0 ? @color/purple : @color/dark_grey }" />
+                        android:tint="@{viewModel.selectedMenu == 0 ? @color/cobalt_blue : @color/dark_grey }" />
 
                     <TextView
                         android:id="@+id/tv_home"
@@ -136,7 +136,7 @@
                         android:layout_width="18dp"
                         android:layout_height="18dp"
                         android:src="@drawable/ic_categories"
-                        android:tint="@{viewModel.selectedMenu == 1 ? @color/purple : @color/dark_grey }" />
+                        android:tint="@{viewModel.selectedMenu == 1 ? @color/cobalt_blue : @color/dark_grey }" />
 
                     <TextView
                         android:id="@+id/tv_cat"
@@ -163,7 +163,7 @@
                         android:layout_width="23dp"
                         android:layout_height="23dp"
                         android:src="@drawable/ic_profile_user"
-                        android:tint="@{viewModel.selectedMenu == 2 ? @color/purple : @color/dark_grey }" />
+                        android:tint="@{viewModel.selectedMenu == 2 ? @color/cobalt_blue : @color/dark_grey }" />
 
                     <TextView
                         android:id="@+id/tv_profile"

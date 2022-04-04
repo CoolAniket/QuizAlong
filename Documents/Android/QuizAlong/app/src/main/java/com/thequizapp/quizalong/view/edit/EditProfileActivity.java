@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
 
 import androidx.annotation.NonNull;
@@ -33,6 +34,7 @@ public class EditProfileActivity extends BaseActivity {
     private static final int PERMISSION_REQUEST_CODE = 100;
     ActivityEditProfileBinding binding;
     EditProfileViewModel viewModel;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,6 +91,7 @@ public class EditProfileActivity extends BaseActivity {
             }
         });
         binding.tvCancel.setOnClickListener(v -> onBackPressed());
+        Log.e("PPPP ",""+viewModel.getUser());
     }
 
     @Override

@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.model.user.CurrentUser;
+import com.thequizapp.quizalong.model.user.RegisterUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.HashMap;

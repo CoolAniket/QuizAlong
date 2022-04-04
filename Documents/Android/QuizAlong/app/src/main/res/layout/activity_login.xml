@@ -19,7 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/bg_app" />
+            android:src="@drawable/bg_app"
+            app:tint="@color/cobalt_blue"/>
 
         <LinearLayout
             android:layout_width="match_parent"

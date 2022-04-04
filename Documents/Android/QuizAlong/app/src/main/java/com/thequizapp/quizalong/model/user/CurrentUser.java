@@ -82,6 +82,21 @@ public class CurrentUser {
         @SerializedName("refer_code")
         private String referCode;
 
+        @SerializedName("course_id")
+        private String courseId;
+
+        @SerializedName("year_id")
+        private String yearId;
+
+        @SerializedName("college")
+        private String college;
+
+        @SerializedName("proof")
+        private String proof;
+
+        @SerializedName("dob")
+        private String dob;
+
         public Object getImage() {
             return image;
         }
@@ -160,6 +175,116 @@ public class CurrentUser {
 
         public void setReferCode(String referCode) {
             this.referCode = referCode;
+        }
+
+        public String getCourseId() {
+            return courseId;
+        }
+
+        public void setCourseId(String courseId) {
+            this.courseId = courseId;
+        }
+
+        public String getYearId() {
+            return yearId;
+        }
+
+        public void setYearId(String yearId) {
+            this.yearId = yearId;
+        }
+
+        public String getCollege() {
+            return college;
+        }
+
+        public void setCollege(String college) {
+            this.college = college;
+        }
+
+        public String getProof() {
+            return proof;
+        }
+
+        public void setProof(String proof) {
+            this.proof = proof;
+        }
+
+        public String getDob() {
+            return dob;
+        }
+
+        public void setDob(String dob) {
+            this.dob = dob;
+        }
+    }
+
+    public static class Course{
+        @SerializedName("key")
+        private int key;
+
+        @SerializedName("value")
+        private String value;
+
+        @SerializedName("image")
+        private String image;
+
+        @SerializedName("year")
+        private ArrayList<Year> year;
+
+        public int getKey() {
+            return key;
+        }
+
+        public void setKey(int key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String value) {
+            this.image = image;
+        }
+
+        public ArrayList<Year> getYear() {
+            return year;
+        }
+
+        public void setYear(ArrayList<Year> year) {
+            this.year = year;
+        }
+    }
+
+    public static class Year{
+        @SerializedName("key")
+        private int key;
+
+        @SerializedName("value")
+        private String value;
+
+        public int getKey() {
+            return key;
+        }
+
+        public void setKey(int key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
         }
     }
 

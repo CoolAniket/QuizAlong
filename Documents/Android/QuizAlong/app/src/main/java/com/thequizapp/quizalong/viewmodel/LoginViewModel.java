@@ -1,5 +1,7 @@
 package com.thequizapp.quizalong.viewmodel;
 
+import android.util.Log;
+
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -8,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.model.user.CurrentUser;
+import com.thequizapp.quizalong.model.user.RegisterUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.HashMap;
@@ -100,6 +103,7 @@ public class LoginViewModel extends ViewModel {
                 .unsubscribeOn(Schedulers.io())
                 .doOnTerminate(() -> isLoading.set(false))
                 .subscribe((user, throwable) -> {
+                    Log.e(">>>> +",""+user+".."+throwable);
                     if (user != null) {
                         onSuccess.setValue(user);
                     } else if (throwable != null) {

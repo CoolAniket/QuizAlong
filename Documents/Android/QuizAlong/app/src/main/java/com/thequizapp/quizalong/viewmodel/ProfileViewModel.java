@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.model.user.CurrentUser;
+import com.thequizapp.quizalong.model.user.RegisterUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.concurrent.ThreadLocalRandom;

@@ -35,4 +35,9 @@
         <item name="android:windowSoftInputMode">adjustPan</item>
 
     </style>
+
+    <!-- Theme.AppCompat.Light.Dialog -->
+    <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/cobalt_blue</item>
+    </style>
 </resources>
