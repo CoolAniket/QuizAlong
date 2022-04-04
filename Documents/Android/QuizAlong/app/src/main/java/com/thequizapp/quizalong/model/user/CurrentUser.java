@@ -3,7 +3,6 @@ package com.thequizapp.quizalong.model.user;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class CurrentUser {
 
@@ -24,9 +23,6 @@ public class CurrentUser {
 
     @SerializedName("course")
     public ArrayList<Course> course;
-
-    @SerializedName("colleges")
-    public ArrayList<College> colleges;
 
     public String getMessage() {
         return message;
@@ -76,52 +72,44 @@ public class CurrentUser {
         this.course = course;
     }
 
-    public ArrayList<College> getColleges() {
-        return colleges;
-    }
-
-
-    public void setColleges(ArrayList<College> colleges) {
-        this.colleges = colleges;
-    }
-
     public static class User {
 
         @SerializedName("image")
         private Object image;
 
         @SerializedName("fullname")
-        private String fullName;
+        private String fullname;
 
         @SerializedName("wallet")
         private int wallet;
 
-        @SerializedName("total_plays")
-        private int totalPlays;
+//        @SerializedName("total_plays")
+//        private int totalPlays;
 
-        @SerializedName("updated_at")
-        private String updatedAt;
+//        @SerializedName("updated_at")
+//        private String updatedAt;
 
         @SerializedName("identity")
         private String identity;
 
-        @SerializedName("total_points")
-        private int totalPoints;
+//        @SerializedName("total_points")
+//        private int totalPoints;
 
-        @SerializedName("created_at")
-        private String createdAt;
+//        @SerializedName("created_at")
+//        private String createdAt;
 
-        @SerializedName("id")
-        private int id;
+//        @SerializedName("user_id")
+        @SerializedName(value="name", alternate={"user_id", "id"})
+        private int user_id;
 
-        @SerializedName("refer_code")
-        private String referCode;
+        @SerializedName("refercode")
+        private String refercode;
 
-        @SerializedName("course_id")
-        private String courseId;
+        @SerializedName("course")
+        private String course;
 
-        @SerializedName("year_id")
-        private String yearId;
+        @SerializedName("year")
+        private String year;
 
         @SerializedName("college")
         private String college;
@@ -132,7 +120,7 @@ public class CurrentUser {
         @SerializedName("dob")
         private String dob;
 
-        @SerializedName("mobile_no")
+        @SerializedName("mobileno")
         private String mobileNo;
 
         @SerializedName("password")
@@ -149,12 +137,12 @@ public class CurrentUser {
             this.image = image;
         }
 
-        public String getFullName() {
-            return fullName;
+        public String getFullname() {
+            return fullname;
         }
 
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
+        public void setFullname(String fullname) {
+            this.fullname = fullname;
         }
 
         public int getWallet() {
@@ -165,21 +153,6 @@ public class CurrentUser {
             this.wallet = wallet;
         }
 
-        public int getTotalPlays() {
-            return totalPlays;
-        }
-
-        public void setTotalPlays(int totalPlays) {
-            this.totalPlays = totalPlays;
-        }
-
-        public String getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(String updatedAt) {
-            this.updatedAt = updatedAt;
-        }
 
         public String getIdentity() {
             return identity;
@@ -189,52 +162,36 @@ public class CurrentUser {
             this.identity = identity;
         }
 
-        public int getTotalPoints() {
-            return totalPoints;
+        public int getUser_id() {
+            return user_id;
         }
 
-        public void setTotalPoints(int totalPoints) {
-            this.totalPoints = totalPoints;
+        public void setUser_id(int user_id) {
+            this.user_id = user_id;
         }
 
-        public String getCreatedAt() {
-            return createdAt;
+        public String getRefercode() {
+            return refercode;
         }
 
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
+        public void setRefercode(String refercode) {
+            this.refercode = refercode;
         }
 
-        public int getId() {
-            return id;
+        public String getCourse() {
+            return course;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setCourse(String course) {
+            this.course = course;
         }
 
-        public String getReferCode() {
-            return referCode;
+        public String getYear() {
+            return year;
         }
 
-        public void setReferCode(String referCode) {
-            this.referCode = referCode;
-        }
-
-        public String getCourseId() {
-            return courseId;
-        }
-
-        public void setCourseId(String courseId) {
-            this.courseId = courseId;
-        }
-
-        public String getYearId() {
-            return yearId;
-        }
-
-        public void setYearId(String yearId) {
-            this.yearId = yearId;
+        public void setYear(String year) {
+            this.year = year;
         }
 
         public String getCollege() {
@@ -340,48 +297,4 @@ public class CurrentUser {
         }
     }
 
-    public class College {
-
-        @SerializedName("id")
-        private Integer id;
-        @SerializedName("name")
-        private String name;
-        @SerializedName("created_at")
-        private Object createdAt;
-        @SerializedName("updated_at")
-        private Object updatedAt;
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public Object getCreatedAt() {
-            return createdAt;
-        }
-
-        public void setCreatedAt(Object createdAt) {
-            this.createdAt = createdAt;
-        }
-
-        public Object getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(Object updatedAt) {
-            this.updatedAt = updatedAt;
-        }
-
-    }
 }

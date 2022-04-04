@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="purple_200">#9943C3</color>
-    <!--<color name="purple">#9717CC</color>-->
-    <color name="purple">#AAD8EB</color>
-    <color name="cobalt_blue">#83D1F2</color>
+    <color name="purple">#9717CC</color>
+    <color name="cobalt_blue">#AAD8EB</color>
     <color name="purple_700">#9717CC</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
@@ -12,7 +11,6 @@
     <color name="dim_white">#A9FFFFFF</color>
     <color name="dark_grey">#363636</color>
     <color name="red">#FF0202</color>
-    <color name="green">#008000</color>
     <color name="dim_purple">#F4D5FF</color>
     <color name="white_30">#4FFFFFFF</color>
     <color name="dim_grey">#DFDFDF</color>

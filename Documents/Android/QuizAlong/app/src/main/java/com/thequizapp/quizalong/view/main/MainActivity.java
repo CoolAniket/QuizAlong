@@ -9,32 +9,23 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.gms.tasks.OnCanceledListener;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.adapter.MainViewPagerAdapter;
 import com.thequizapp.quizalong.databinding.ActivityMainBinding;
-import com.thequizapp.quizalong.utils.CustomDialogBuilder;
+import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
 import com.thequizapp.quizalong.view.notification.NotificationActivity;
 import com.thequizapp.quizalong.view.playhistory.PlayHistoryActivity;
-import com.thequizapp.quizalong.view.quizes.MyQuizActivity;
 import com.thequizapp.quizalong.view.redeem.HistoryRedeemRequestActivity;
 import com.thequizapp.quizalong.view.web.WebViewActivity;
 import com.thequizapp.quizalong.viewmodel.MainViewModel;
-
-import java.io.IOException;
 
 public class  MainActivity extends BaseActivity {
     ActivityMainBinding binding;
@@ -53,29 +44,10 @@ public class  MainActivity extends BaseActivity {
     }
 
     private void initView() {
-        //viewModel.setUser(new SessionManager(this).getUser());
+        viewModel.setUser(new SessionManager(this).getUser());
         lastView = binding.ivHome;
         setSelect(0);
         initViewPager();
-
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-                if (!task.isSuccessful()) {
-                    Log.e("FCM....", "Fetching FCM registration token failed", task.getException());
-                    return;
-                }
-
-                // Get new FCM registration token
-                String token = task.getResult();
-
-                // Log and toast
-                //String msg = getString(R.string.app_name, token);
-                Log.d("FCM....", token);
-                //Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
-
-            }
-        });
     }
 
     private void initViewPager() {
@@ -102,7 +74,6 @@ public class  MainActivity extends BaseActivity {
 
     private void initObserve() {
         viewModel.getMutableSelectedMenu().observe(this, this::setSelect);
-        viewModel.getCategoryHelpDialog().observe(this, this::openCategoryHelpDialog);
     }
 
     private void initListener() {
@@ -114,13 +85,9 @@ public class  MainActivity extends BaseActivity {
         binding.navDrawer.lytLeaderBoard.setOnClickListener(v -> startActivity(new Intent(this, LeaderBoardActivity.class)));
         binding.navDrawer.lytPlayHistory.setOnClickListener(v -> startActivity(new Intent(this, PlayHistoryActivity.class)));
         binding.navDrawer.lytRedeemRequest.setOnClickListener(v -> startActivity(new Intent(this, HistoryRedeemRequestActivity.class)));
-        binding.navDrawer.lytMyQuiz.setOnClickListener(v -> startActivity(new Intent(this, MyQuizActivity.class)));
         binding.navDrawer.lytUpdate.setOnClickListener(v -> startActivity(new Intent(this, NotificationActivity.class)));
         binding.navDrawer.lytPrivacy.setOnClickListener(v -> startActivity(new Intent(this, WebViewActivity.class).putExtra("type", 0)));
         binding.navDrawer.lytTerms.setOnClickListener(v -> startActivity(new Intent(this, WebViewActivity.class).putExtra("type", 1)));
-    }
-    private void openCategoryHelpDialog(Integer integer) {
-        new CustomDialogBuilder(this).showCategoryHelpDialog();
     }
 
     private void setSelect(int position) {

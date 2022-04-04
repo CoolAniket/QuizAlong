@@ -14,7 +14,6 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemCategoiesBinding;
 import com.thequizapp.quizalong.model.home.HomePage;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -84,12 +83,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         /*return categories.size();*/
     }
 
-    /*public void updateData(List<HomePage.CategoriesItem> categories) {
-        this.categories.addAll(categories);
-        notifyDataSetChanged();
-    }*/
-
-    public void updateData(List<TwistQuizPage.Quize> categories) {
+    public void updateData(List<HomePage.CategoriesItem> categories) {
         this.categories.addAll(categories);
         notifyDataSetChanged();
     }
@@ -134,7 +128,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
         public void setModel(int position) {
-            /*if(categories.size() > 0) {
+            if(categories.size() > 0) {
                 if (categories.get(position) instanceof HomePage.CategoriesItem) {
                     HomePage.CategoriesItem categoriesItem = (HomePage.CategoriesItem) categories.get(position);
                     binding.tvTitle.setTransitionName("hero" + position);
@@ -148,7 +142,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
                     binding.setModel(categoriesItem);
                 }
-            }*/
+            }
         }
     }
 }

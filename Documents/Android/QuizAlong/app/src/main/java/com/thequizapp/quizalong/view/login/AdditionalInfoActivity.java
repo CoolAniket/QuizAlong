@@ -41,7 +41,6 @@ import com.thequizapp.quizalong.viewmodel.AdditionalInfoViewModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 
 public class AdditionalInfoActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     private static final int RESULT_LOAD_IMAGE = 101;
@@ -51,24 +50,8 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
     SessionManager sessionManager;
     private ArrayList<String> courses;
     private ArrayList<String> years;
-    private ArrayList<String> colleges;
     int day, month, year, hour, minute;
     int myday, myMonth, myYear, myHour, myMinute;
-
-    int maxYear,maxMonth,maxDay,minYear,minMonth,minDay;
-    private static final String[] COLLEGES = new String[] {
-            "HBT, Dr.R.N.Cooper Medical College",
-            "Grant Medical College",
-            "Seth G.S. Medical College",
-            "Topiwala Medical College",
-            "Lokmanya Tilak Medical College",
-            "K.J. Somaiya Medical College",
-            "Terna Medical College",
-            "Rajiv Gandhi Medical College",
-            "Vedanta Medical College",
-            "MGM Medical College",
-            "Dr DY Patil Medical College"
-    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,7 +60,6 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         sessionManager = new SessionManager(this);
         courses = new ArrayList<String>();
         years = new ArrayList<String>();
-        colleges = new ArrayList<String>();
         initData();
         initObserve();
         initListener();
@@ -101,7 +83,6 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
             sessionManager.saveAdditionalDetails(isSuccess.toString());
-            //startActivity(new Intent(this, MainActivity.class));
             startActivity(new Intent(this, CourseSelectionActivity.class));
             finishAffinity();
         });
@@ -119,7 +100,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
-        //Log.e("AAAAAA ",""+viewModel.getUser().getCourse());
+        Log.e("AAAAAA ",""+viewModel.getUser().getCourse());
         /*Log.e("AAAAAA ",""+viewModel.getUser().getCourse().get(0).getValue());
         Log.e("CCCC ",""+viewModel.getUser().getCourse().get(0).getYear().size());
         Log.e("CCCC ",""+viewModel.getUser().getCourse().get(0).getYear().get(0).getValue());*/
@@ -133,23 +114,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
                 year = calendar.get(Calendar.YEAR);
                 month = calendar.get(Calendar.MONTH);
                 day = calendar.get(Calendar.DAY_OF_MONTH);
-
-                /*maxYear = year - 7;
-                maxMonth = month;
-                maxDay = day;
-
-                minYear = year - 18;
-                minMonth = month;
-                minDay = day;*/
-                Date today = new Date();
-                Calendar c = Calendar.getInstance();
-                c.setTime(today);
-                c.add( Calendar.YEAR, -18 ); // Subtract 6 months
-                long minDate = c.getTime().getTime() ;// Twice!
-
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionalInfoActivity.this, R.style.DialogTheme,AdditionalInfoActivity.this,year, month,day);
-                datePickerDialog.getDatePicker().setMaxDate(minDate);
-                //datePickerDialog.getDatePicker().setMinDate(minDate);
                 datePickerDialog.show();
             }
         });
@@ -165,57 +130,6 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
 
             public void onTextChanged(CharSequence s, int start, int before, int count){}
-        });
-
-        binding.etMobileNo.addTextChangedListener(new TextWatcher()
-        {
-            @Override
-            public void afterTextChanged(Editable mEdit)
-            {
-                viewModel.setMobileNo(mEdit.toString());
-            }
-
-            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
-
-            public void onTextChanged(CharSequence s, int start, int before, int count){}
-        });
-
-        binding.etOtp.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void afterTextChanged(Editable editable)
-            {
-                viewModel.setOtpMobile(editable.toString());
-                if (editable.toString().trim().length() == 4) {
-                    viewModel.verifyOTPPhone();
-                }
-            }
-
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-        });
-
-        binding.etReferral.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                viewModel.setReferralCode(editable.toString());
-            }
         });
     }
 
@@ -234,17 +148,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
         Log.e("KKKK ",""+courses);
 
-        colleges.add("Select college name");
-        for(int k=0;k<viewModel.getUser().getColleges().size();k++){
-            try {
-                //Getting json object
-                colleges.add(viewModel.getUser().getColleges().get(k).getName());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        years.add("Current official year");
+        years.add("Select Year");
         for(int j=0;j<viewModel.getUser().getCourse().get(0).getYear().size();j++){
             try {
                 //Getting json object
@@ -256,10 +160,18 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         Log.e("CCCC ",""+years);
 
         //Setting adapter to show the items in the spinner
-        /*binding.spCourse.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, courses));
+        binding.spCourse.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, courses));
         binding.spCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String[] paymentMethods = getResources().getStringArray(R.array.payment);
+//                if (position != 0) {
+//                    viewModel.setPaymentMethod(paymentMethods[position]);
+//                } else {
+//                    viewModel.setPaymentMethod(null);
+//                }
+                Log.e(".... ",""+position);
+                //Log.e(".... ",""+viewModel.getUser().getCourse().get(position-1).getKey());
                 if (position != 0) {
                     viewModel.setCourseName(""+viewModel.getUser().getCourse().get(position-1).getKey());
                 } else {
@@ -269,27 +181,10 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });*/
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, COLLEGES);
-        binding.etCollegeName.setAdapter(adapter);
-        binding.spCollege.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, colleges));
-        binding.spCollege.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-                if (position != 0) {
-                    viewModel.setCollegeName(""+viewModel.getUser().getColleges().get(position).getName());
-                } else {
-                    viewModel.setCollegeName(null);
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-
+//
             }
         });
+
         binding.spYear.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, years));
         binding.spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -310,9 +205,12 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
+//
             }
         });
 
+//        viewModel.setDob("13/07/1989");
+//        viewModel.setCollegeName("Test debug college");
     }
 
     @Override
@@ -365,6 +263,4 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
 
     }
-
-
 }

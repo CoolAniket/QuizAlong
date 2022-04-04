@@ -8,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -17,23 +20,17 @@ import com.google.android.material.snackbar.Snackbar;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ActivityLoginBinding;
 import com.thequizapp.quizalong.databinding.ItemForgotPassBinding;
-import com.thequizapp.quizalong.databinding.ItemSetPasswordBinding;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.loginmaneger.FaceBookLoginManager;
 import com.thequizapp.quizalong.utils.loginmaneger.GoogleLoginManager;
 import com.thequizapp.quizalong.view.BaseActivity;
-import com.thequizapp.quizalong.view.home.CourseSelectionActivity;
 import com.thequizapp.quizalong.view.main.MainActivity;
 import com.thequizapp.quizalong.viewmodel.ForgotPasswordViewModel;
 import com.thequizapp.quizalong.viewmodel.LoginViewModel;
-import com.thequizapp.quizalong.viewmodel.SetPasswordViewModel;
 
 import org.json.JSONException;
 
 import java.util.HashMap;
-
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
 
 public class LoginActivity extends BaseActivity {
     ActivityLoginBinding binding;
@@ -65,52 +62,15 @@ public class LoginActivity extends BaseActivity {
             }
         });
         viewModel.getOnSuccess().observe(this, user -> {
-            Log.e("....",""+user.getAdditional_info());
-
             sessionManager.saveUser(user);
-
+            Log.e("....",""+user);
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
             /*startActivity(new Intent(this, MainActivity.class));
             finishAffinity();*/
-            Log.e("sessionManager ",""+sessionManager.getUser().getAdditional_info());
-            if(sessionManager.getUser().getAdditional_info() == 1) {
-                startActivity(new Intent(this, AdditionalInfoActivity.class));
-            }else {
-                if(sessionManager.getUser().getUser_categories() >= 6) {
-                    startActivity(new Intent(this, MainActivity.class));
-                }else
-                {
-                    startActivity(new Intent(this, CourseSelectionActivity.class));
-                }
 
-                startActivity(new Intent(this, CourseSelectionActivity.class));
-            }
+            startActivity(new Intent(this, AdditionalInfoActivity.class));
             finishAffinity();
         });
-
-        viewModel.getNoRecord().observe(this, email ->{
-            Log.e("NoRecord...",""+email);
-            /*if(email){*/
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
-                ItemSetPasswordBinding setPasswordBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.item_set_password, null, false);
-                SetPasswordViewModel setPasswordViewModel = new ViewModelProvider(this).get(SetPasswordViewModel.class);
-                setPasswordViewModel.getToast().observe(this, s -> Toast.makeText(this, s, Toast.LENGTH_SHORT).show());
-                setPasswordViewModel.getOnSuccess().observe(this, isSuccess -> bottomSheetDialog.dismiss());
-                setPasswordViewModel.setEmail(email);
-                setPasswordViewModel.getOnSuccess().observe(this, user -> {
-                    Toast.makeText(this, getResources().getString(R.string.sign_up_successfully), Toast.LENGTH_LONG).show();
-                    //onBackPressed();
-                });
-                setPasswordBinding.edtEmail.setText(email);
-                setPasswordBinding.ivClose.setOnClickListener(v1 -> bottomSheetDialog.dismiss());
-                setPasswordBinding.setViewModel(setPasswordViewModel);
-
-                bottomSheetDialog.setContentView(setPasswordBinding.getRoot());
-                bottomSheetDialog.show();
-
-            /*}*/
-        });
-
     }
 
     private void initListener() {
@@ -132,9 +92,6 @@ public class LoginActivity extends BaseActivity {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("fullname", jsonObject.getString("name"));
                 hashMap.put("identity", jsonObject.getString("id"));
-                hashMap.put("password", "");
-                hashMap.put("social_login", "1");
-                hashMap.put("firebase_auth", "0");
                 viewModel.getIsLoading().set(true);
                 viewModel.registerUser(hashMap);
             } catch (JSONException | NullPointerException e) {
@@ -165,9 +122,6 @@ public class LoginActivity extends BaseActivity {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("fullname", account.getDisplayName());
                 hashMap.put("identity", account.getEmail());
-                hashMap.put("password", "");
-                hashMap.put("social_login", "1");
-                hashMap.put("firebase_auth", "0");
                 viewModel.getIsLoading().set(true);
                 viewModel.registerUser(hashMap);
             }

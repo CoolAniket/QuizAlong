@@ -17,7 +17,6 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemPastQuizesBinding;
 import com.thequizapp.quizalong.model.home.HomePage;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +32,6 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     public void setQuizes(List<Object> quizes) {
         this.quizes = quizes;
     }
-
-
 
     @NonNull
     @Override
@@ -77,11 +74,11 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
     @Override
     public int getItemCount() {
-        /*return 3;*/
-        return quizes.size();
+        return 3;
+        /*return quizes.size();*/
     }
 
-    public void updateData(List<TwistQuizPage.Quize> quizes) {
+    public void updateData(List<HomePage.QuizesItem> quizes) {
         this.quizes.addAll(quizes);
         notifyDataSetChanged();
     }
@@ -117,7 +114,7 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public interface OnItemClicks {
-        void onClick(TwistQuizPage.Quize quizesItem);
+        void onClick(HomePage.QuizesItem quizesItem);
     }
 
     public class PopularQuizesViewHolder extends RecyclerView.ViewHolder {
@@ -131,8 +128,8 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
 
         public void setModel(int position) {
             if(quizes.size() > 0) {
-                if (quizes.get(position) instanceof TwistQuizPage.Quize) {
-                    TwistQuizPage.Quize quizesItem = (TwistQuizPage.Quize) quizes.get(position);
+                if (quizes.get(position) instanceof HomePage.QuizesItem) {
+                    HomePage.QuizesItem quizesItem = (HomePage.QuizesItem) quizes.get(position);
                     binding.getRoot().setOnClickListener(v -> onItemClicks.onClick(quizesItem));
                     binding.setModel(quizesItem);
 

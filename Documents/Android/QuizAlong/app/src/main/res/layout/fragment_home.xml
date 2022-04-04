@@ -77,9 +77,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    app:adapter="@{viewModel.twistQuizesAdapter}"
+                    app:adapter="@{viewModel.homeCategoriesAdapter}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_box_quiz" />
+                    tools:listitem="@layout/item_categoies" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -111,8 +111,8 @@
                     android:id="@+id/rv_popular"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:adapter="@{viewModel.upcomingQuizesAdapter}"
+                    android:orientation="horizontal"
+                    app:adapter="@{viewModel.quizesAdapter}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="3"
                     tools:listitem="@layout/item_popular_quizes" />
@@ -146,7 +146,7 @@
                     android:id="@+id/rv_past"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal"
+                    android:orientation="vertical"
                     app:adapter="@{viewModel.pastQuizesAdapter}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     tools:itemCount="10"
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-            app:SpinKit_Color="@color/cobalt_blue" />
+            app:SpinKit_Color="@color/purple" />
 
 
     </RelativeLayout>

@@ -24,7 +24,6 @@ public class LoginViewModel extends ViewModel {
     private MutableLiveData<String> toast = new MutableLiveData<>();
     private ObservableBoolean isLoading = new ObservableBoolean(false);
     private MutableLiveData<CurrentUser> onSuccess = new MutableLiveData<>();
-    private MutableLiveData<String> noRecord = new MutableLiveData<>();
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private String email;
     private String password;
@@ -53,14 +52,6 @@ public class LoginViewModel extends ViewModel {
         this.onSuccess = onSuccess;
     }
 
-    public MutableLiveData<String> getNoRecord() {
-        return noRecord;
-    }
-
-    public void setNoRecord(MutableLiveData<String> noRecord) {
-        this.noRecord = noRecord;
-    }
-
     public void afterTextChanged(CharSequence charSequence, int type) {
         if (type == 0) {
             email = charSequence.toString();
@@ -71,11 +62,11 @@ public class LoginViewModel extends ViewModel {
 
     public void onLoginClick() {
         if (email == null || email.isEmpty()) {
-            toast.setValue("Please enter email");
+            toast.setValue("Please enter email...!");
             return;
         }
         if (password == null || password.isEmpty()) {
-            toast.setValue("Please enter password");
+            toast.setValue("Please enter password...!");
             return;
         }
         isLoading.set(true);
@@ -83,32 +74,21 @@ public class LoginViewModel extends ViewModel {
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         FirebaseUser user = auth.getCurrentUser();
-
                         if (user != null) {
                             if (!user.isEmailVerified()) {
                                 isLoading.set(false);
-                                toast.setValue("Please verify email first");
+                                toast.setValue("Please verify email first...!");
                             } else {
                                 HashMap<String, String> hashMap = new HashMap<>();
                                 hashMap.put("fullname", email.split("@")[0]);
                                 hashMap.put("identity", email);
-                                hashMap.put("password", password);
-                                hashMap.put("social_login", "0");
-                                hashMap.put("firebase_auth", "1");
                                 registerUser(hashMap);
                             }
                         }
                     } else {
-                        Log.e("Login......",""+task.getException().getLocalizedMessage());
                         if (task.getException() != null) {
-                            if(task.getException().getLocalizedMessage().contains("There is no user record corresponding to this identifier. The user may have been deleted.")){
-                                noRecord.setValue(email);
-                                isLoading.set(false);
-                                toast.setValue(task.getException().getLocalizedMessage());
-                            }else {
-                                isLoading.set(false);
-                                toast.setValue(task.getException().getLocalizedMessage());
-                            }
+                            isLoading.set(false);
+                            toast.setValue(task.getException().getLocalizedMessage());
                         }
                     }
 
@@ -123,20 +103,12 @@ public class LoginViewModel extends ViewModel {
                 .unsubscribeOn(Schedulers.io())
                 .doOnTerminate(() -> isLoading.set(false))
                 .subscribe((user, throwable) -> {
-                    Log.e(">>>> +",""+ user.isStatus()+".."+throwable);
-
+                    Log.e(">>>> +",""+user+".."+throwable);
                     if (user != null) {
-                        if(user.isStatus()) {
-                            Log.e(">>>> +",""+ user+".."+throwable);
-                            onSuccess.setValue(user);
-                        }else {
-                            toast.setValue(user.getMessage());
-                        }
-
+                        onSuccess.setValue(user);
                     } else if (throwable != null) {
                         toast.setValue(throwable.getLocalizedMessage());
                     }
-
                 }));
     }
 

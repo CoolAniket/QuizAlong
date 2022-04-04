@@ -32,6 +32,7 @@ public class AdditionalInfoViewModel extends ViewModel {
     private MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
     private MutableLiveData<String> toast = new MutableLiveData<>();
     private ObservableBoolean isOtpSent = new ObservableBoolean(false);
+    private ObservableBoolean isOtpVerified = new ObservableBoolean(false);
 
 
     private CurrentUser user;
@@ -98,6 +99,10 @@ public class AdditionalInfoViewModel extends ViewModel {
         return isOtpSent;
     }
 
+    public ObservableBoolean getIsOtpVerified() {
+        return isOtpVerified;
+    }
+
     public String getDob() {
         return dob;
     }
@@ -144,7 +149,7 @@ public class AdditionalInfoViewModel extends ViewModel {
 
     public void authenticatePhone() {
         if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
-            toast.setValue("Please enter a valid mobile number");
+            toast.setValue("Please enter a valid mobile number...!");
             return;
         }
         HashMap<String, String> hashMap = new HashMap<>();
@@ -193,10 +198,14 @@ public class AdditionalInfoViewModel extends ViewModel {
                         .doOnTerminate(() -> isLoading.set(false))
                         .subscribe((restResponse, throwable) -> {
                             if (restResponse != null) {
-                                if (restResponse.isStatus())
+                                if (restResponse.isStatus()) {
+                                    isOtpVerified.set(true);
                                     setMobileAuthenticated(true);
-                                else
-                                    toast.setValue("Incorrect OTP. Please try again");
+                                    toast.setValue("OTP verified successfully.");
+                                }
+                                else {
+                                    toast.setValue("Incorrect OTP. Please try again.");
+                                }
                             } else {
                                 toast.setValue(throwable.getLocalizedMessage());
                             }
@@ -206,30 +215,29 @@ public class AdditionalInfoViewModel extends ViewModel {
     }
     public void submitProfile() {
         if (collegeName == null || collegeName.isEmpty()) {
-            toast.setValue("Please enter college name");
+            toast.setValue("Please enter college name...!");
             return;
         }
         //Log.d("MMMMM ",""+isValidMobile(mobileNo));
         if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
-            toast.setValue("Please enter mobile number");
+            toast.setValue("Please enter mobile number...!");
             return;
         }
         if (!mobileAuthenticated) {
-            toast.setValue("Please authenticate mobile number");
+            toast.setValue("Please authenticate mobile number...!");
             return;
         }
         if (year == null || year.isEmpty()) {
-            toast.setValue("Please select year");
+            toast.setValue("Please select year...!");
             return;
         }
-        /*if (courseName == null || courseName.isEmpty()) {
+        if (courseName == null || courseName.isEmpty()) {
             toast.setValue("Please select course...!");
             return;
-        }*/
+        }
         HashMap<String, RequestBody> hashMap = new HashMap<>();
         hashMap.put("user_id", toRequestBody(Global.userId.get()));
-        /*hashMap.put("course_id", toRequestBody(getCourseName()));*/
-        hashMap.put("course_id", toRequestBody("1"));
+        hashMap.put("course_id", toRequestBody(getCourseName()));
         hashMap.put("year_id", toRequestBody(getYear()));
         hashMap.put("college", toRequestBody(getCollegeName()));
         hashMap.put("dob", toRequestBody(getDob()));
@@ -244,7 +252,7 @@ public class AdditionalInfoViewModel extends ViewModel {
             body = MultipartBody.Part.createFormData("proof", file.getName(), requestFile);
         }
 
-        Log.e("MMMM ",""+getMobileNo());
+        Log.e("MMMM ",""+hashMap);
         disposable.add(
                 Global.initRetrofit()
                         .additionDetails(BuildConfig.APIKEY, hashMap, body)

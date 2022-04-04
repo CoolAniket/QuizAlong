@@ -12,6 +12,7 @@ public final class Const {
     public static final String USER_VERIFY_OTP = "user/verifyotp";
     public static final String QUIZ_HOMEPAGE = "quiz/homepage";
     public static final String QUIZ_ALLCATEGORIES = "quiz/allcategories/{course_id}/{user_id}";
+    public static final String PAYMENT_TRANSACTION_HISTORY = "payment/getTransactionHistory/{user_id}";
     public static final String PAYMENT_RZP_ORDER_ID = "payment/getRzpOrderId/{amount}";
     public static final String PAYMENT_ADD_PAYMENT_DATA = "payment/addpaymentdata";
     public static final String QUIZ_USER_CATEGORIES = "quiz/usercategories";
@@ -26,7 +27,6 @@ public final class Const {
     public static final String QUIZ_ADD_GAME_DATA_PAST= "leaderboard/addGameDataPast";
     public static final String QUIZ_QUESTIONS_OF_QUIZ = "quiz/questionsOfQuiz/{quiz_id}";
     public static final String QUIZ_ANS_LIVE = "quiz/quizAnsLive/{quiz_id}/{user_id}";
-    public static final String QUIZ_ANS_PAST = "quiz/quizAnsPast/{quiz_id}/{user_id}";
     public static final String USER_ADD_POINTS_TO_WALLET = "user/addPointsToWallet";
     public static final String USER_INCREASE_PLAY = "user/increasePlay";
     public static final String APP_SETTINGS = "app/settings";
@@ -58,6 +58,7 @@ public final class Const {
     //SharedPreference
     public static final String USER = "user";
     public static final String USER_ADDITION_DETAILS = "user_details";
+    public static final String USER_COURSE_SELECTION = "course_selection";
     public static final String APPLICATION_ID = BuildConfig.APPLICATION_ID;
     public static final String STATUS = "status";
     public static final int POST_TYPE = 0;
@@ -67,6 +68,7 @@ public final class Const {
     public static final int AD_CUSTOM_TYPE = 3;
     public static final int COURSE_TYPE_MEDICINE = 1;
     public static final String CATEGORY_ID = "category_id";
+    public static final String QUIZ_TYPE = "quiz_type";
 
     Const() {
 
