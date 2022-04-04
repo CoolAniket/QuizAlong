@@ -1,5 +1,9 @@
 package com.thequizapp.quizalong.adapter;
 
+import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
+import static com.thequizapp.quizalong.api.Const.AD_TYPE;
+import static com.thequizapp.quizalong.api.Const.POST_TYPE;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,17 +15,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.ads.NativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
-import com.thequizapp.quizalong.databinding.ItemPopularQuizesBinding;
+import com.thequizapp.quizalong.databinding.ItemPastQuizesBinding;
 import com.thequizapp.quizalong.model.home.HomePage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
-import static com.thequizapp.quizalong.api.Const.AD_TYPE;
-import static com.thequizapp.quizalong.api.Const.POST_TYPE;
-
-public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Object> quizes = new ArrayList<>();
     private OnItemClicks onItemClicks;
 
@@ -50,7 +50,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             return new AdHolder(view);
 
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_popular_quizes, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_past_quizes, parent, false);
             return new PopularQuizesViewHolder(view);
         }
     }
@@ -118,7 +118,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     public class PopularQuizesViewHolder extends RecyclerView.ViewHolder {
-        ItemPopularQuizesBinding binding;
+        ItemPastQuizesBinding binding;
 
         public PopularQuizesViewHolder(@NonNull View itemView) {
             super(itemView);

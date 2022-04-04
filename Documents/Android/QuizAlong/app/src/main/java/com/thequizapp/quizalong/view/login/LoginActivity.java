@@ -41,6 +41,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e("Inside login view ","");
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
         sessionManager = new SessionManager(this);
@@ -62,8 +63,12 @@ public class LoginActivity extends BaseActivity {
         });
         viewModel.getOnSuccess().observe(this, user -> {
             sessionManager.saveUser(user);
+            Log.e("....",""+user);
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(this, MainActivity.class));
+            /*startActivity(new Intent(this, MainActivity.class));
+            finishAffinity();*/
+
+            startActivity(new Intent(this, AdditionalInfoActivity.class));
             finishAffinity();
         });
     }
@@ -112,6 +117,7 @@ public class LoginActivity extends BaseActivity {
     public void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
+            Log.e(">>>> 1",""+account.getDisplayName());
             if (account != null) {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("fullname", account.getDisplayName());

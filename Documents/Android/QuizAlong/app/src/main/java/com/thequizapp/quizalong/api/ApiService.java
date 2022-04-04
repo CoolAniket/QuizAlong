@@ -10,6 +10,7 @@ import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
 import com.thequizapp.quizalong.model.settings.Settings;
 import com.thequizapp.quizalong.model.user.CurrentUser;
+import com.thequizapp.quizalong.model.user.RegisterUser;
 
 import java.util.HashMap;
 
@@ -29,7 +30,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(Const.USER_REGISTER)
     Single<CurrentUser> registerUser(@Header(Const.API_KEY) String apiKey,
-                                     @FieldMap HashMap<String, String> hashMap);
+                                      @FieldMap HashMap<String, String> hashMap);
 
     @POST(Const.QUIZ_HOMEPAGE)
     Single<HomePage> getHomePage(@Header(Const.API_KEY) String apiKey);
@@ -72,6 +73,12 @@ public interface ApiService {
     @Multipart
     @POST(Const.USER_EDIT_PROFILE)
     Single<RestResponse> editProfile(@Header(Const.API_KEY) String apiKey,
+                                     @PartMap HashMap<String, RequestBody> requestBodyHashMap,
+                                     @Part MultipartBody.Part profileImage);
+
+    @Multipart
+    @POST(Const.ADDITIONAL_DETAILS)
+    Single<RestResponse> additionDetails(@Header(Const.API_KEY) String apiKey,
                                      @PartMap HashMap<String, RequestBody> requestBodyHashMap,
                                      @Part MultipartBody.Part profileImage);
 

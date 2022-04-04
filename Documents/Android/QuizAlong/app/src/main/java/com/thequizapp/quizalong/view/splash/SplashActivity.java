@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.thequizapp.quizalong.BuildConfig;
@@ -11,6 +12,7 @@ import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.utils.Global;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
 import com.thequizapp.quizalong.view.main.MainActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -37,15 +39,25 @@ public class SplashActivity extends BaseActivity {
                             if (settings != null) {
                                 sessionManager.saveSettings(settings);
                             }
+                            Log.e("MMMM ",""+sessionManager.getAdditionalDetails());
                             new Handler(Looper.getMainLooper()).postDelayed(() -> {
+                                /*Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
+                                startActivity(new Intent(this, MainActivity.class));*/
+                                //startActivity(new Intent(this, WelcomeActivity.class));
                                 if (sessionManager.getUser() == null) {
+
                                     startActivity(new Intent(this, WelcomeActivity.class));
-                                } else {
+                                }
+                                else if(sessionManager.getAdditionalDetails() == null){
+                                    Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
+                                    startActivity(new Intent(this, AdditionalInfoActivity.class));
+                                }
+                                else {
                                     Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
                                     startActivity(new Intent(this, MainActivity.class));
                                 }
                                 finishAffinity();
-                            }, 1000);
+                            }, 100);
                         })
         );
 

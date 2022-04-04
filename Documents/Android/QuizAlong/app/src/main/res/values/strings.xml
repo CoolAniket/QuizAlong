@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">QuizAlong</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="lifelines">LifeLines</string>
+    <string name="click_to_apply">CLICK TO APPLY</string>
     <string name="by_retrytech">By Retrytech</string>
     <string name="quizbox_is_the_app_where_you_can_nplay_pre_made_quiz_and_increase_your_nknowledge_playing_and_winning_the_quiz_nyou_also_get_rewarded_points_which_you_ncan_redeem_then">QuizBox is the app where you can \n play pre-made quiz and increase your \n knowledge.Playing and winning the quiz, \n you also get rewarded points which you \n can redeem then.</string>
     <string name="enjoy_and_have_fun">Enjoy and have fun…!</string>
@@ -21,9 +22,12 @@
     <string name="home">Home</string>
     <string name="categories">Categories</string>
     <string name="profile">Profile</string>
-    <string name="start_playing_and_earn_rewards">Start playing and earn rewards..</string>
+    <string name="start_playing_and_earn_rewards">Lets start Learning and Earning !</string>
+    <string name="hello_name">Hello Dr Parth</string>
     <string name="check_quizes">Check Quizes</string>
     <string name="popular_quizes">Popular Quizes</string>
+    <string name="upcoming_quizes">Upcoming Quizes</string>
+    <string name="past_quizes">Past Quizes</string>
     <string name="points">Points</string>
     <string name="questions">Questions</string>
     <string name="leaderboard">Leaderboard</string>
@@ -36,6 +40,8 @@
     <string name="quizes_played">Quizes Played</string>
     <string name="points_earned">Points Earned</string>
     <string name="wallet">Wallet</string>
+    <string name="skip">SKIP</string>
+    <string name="skip_the_question">Skip the question</string>
     <string name="more_coins">More Coins</string>
     <string name="redeem">Redeem</string>
     <string name="refer_amp_earn"><![CDATA[Refer & Earn]]></string>
@@ -62,6 +68,8 @@
     <string name="next">Next</string>
     <string name="enter_your_college">Enter your college name</string>
     <string name="select_id_proof">Select ID Proof</string>
+    <string name="select_dob">Select Date Of Birth</string>
+    <string name="date_format">DD/MM/YYY</string>
     <string name="terms_conditions">Accept Terms and Conditions</string>
     <string name="select_courses">Select courses</string>
     <string name="select_year_pass">Select year of passing</string>
@@ -69,6 +77,7 @@
     <string name="quiz_with_twist">Quiz With Twist</string>
     <string name="upcoming_quiz">Upcoming Quiz</string>
     <string name="past_quiz">Past Quiz</string>
+    <string name="additional_info">Additional Info</string>
     <!--    Facebook Login Credential-->
     <string name="facebook_app_id">471250374008711</string>
     <string name="fb_login_protocol_scheme">fb471250374008711</string>

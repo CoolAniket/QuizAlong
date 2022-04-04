@@ -27,7 +27,7 @@ import com.thequizapp.quizalong.view.redeem.HistoryRedeemRequestActivity;
 import com.thequizapp.quizalong.view.web.WebViewActivity;
 import com.thequizapp.quizalong.viewmodel.MainViewModel;
 
-public class MainActivity extends BaseActivity {
+public class  MainActivity extends BaseActivity {
     ActivityMainBinding binding;
     MainViewModel viewModel;
     private ImageView lastView;

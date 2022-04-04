@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.model.settings.Settings;
 import com.thequizapp.quizalong.model.user.CurrentUser;
+import com.thequizapp.quizalong.model.user.RegisterUser;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -49,6 +50,19 @@ public class SessionManager {
         String userString = pref.getString(Const.USER, "");
         if (!userString.isEmpty()) {
             return new Gson().fromJson(userString, CurrentUser.class);
+        }
+        return null;
+    }
+
+    public void saveAdditionalDetails(String val) {
+        editor.putString(Const.USER_ADDITION_DETAILS, val);
+        editor.apply();
+    }
+
+    public String getAdditionalDetails() {
+        String userString = pref.getString(Const.USER_ADDITION_DETAILS, "");
+        if (!userString.isEmpty()) {
+            return userString;
         }
         return null;
     }

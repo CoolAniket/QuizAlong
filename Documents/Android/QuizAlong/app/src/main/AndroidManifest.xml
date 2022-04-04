@@ -29,6 +29,7 @@
         <activity android:name="com.thequizapp.quizalong.view.login.RegisterActivity" />
         <activity android:name="com.thequizapp.quizalong.view.login.LoginActivity" />
         <activity android:name="com.thequizapp.quizalong.view.splash.WelcomeActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.login.AdditionalInfoActivity" />
         <activity android:name="com.thequizapp.quizalong.view.BaseActivity" />
         <activity android:name="com.thequizapp.quizalong.view.splash.SplashActivity">
             <intent-filter>

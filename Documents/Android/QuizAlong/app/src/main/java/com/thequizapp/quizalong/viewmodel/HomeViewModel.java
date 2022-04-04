@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.adapter.HomeCategoriesAdapter;
+import com.thequizapp.quizalong.adapter.PastQuizesAdapter;
 import com.thequizapp.quizalong.adapter.QuizesAdapter;
 import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
@@ -19,6 +20,7 @@ public class HomeViewModel extends ViewModel {
     private MutableLiveData<CurrentUser> user = new MutableLiveData<>();
     private HomeCategoriesAdapter homeCategoriesAdapter = new HomeCategoriesAdapter();
     private QuizesAdapter quizesAdapter = new QuizesAdapter();
+    private PastQuizesAdapter pastQuizesAdapter = new PastQuizesAdapter();
     private CompositeDisposable disposable = new CompositeDisposable();
 
     public ObservableBoolean getIsLoading() {
@@ -51,6 +53,14 @@ public class HomeViewModel extends ViewModel {
 
     public void setQuizesAdapter(QuizesAdapter quizesAdapter) {
         this.quizesAdapter = quizesAdapter;
+    }
+
+    public void setPastQuizesAdapter(PastQuizesAdapter pastQuizesAdapter) {
+        this.pastQuizesAdapter = pastQuizesAdapter;
+    }
+
+    public PastQuizesAdapter getPastQuizesAdapter() {
+        return pastQuizesAdapter;
     }
 
     public void getHomeData() {

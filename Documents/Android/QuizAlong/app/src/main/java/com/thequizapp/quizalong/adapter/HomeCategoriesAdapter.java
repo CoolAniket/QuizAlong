@@ -66,9 +66,9 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             HomeCategoriesViewHolder viewHolder = (HomeCategoriesViewHolder) holder;
             viewHolder.setModel(position);
         } else if (holder instanceof UnifiedNativeAdViewHolder) {
-            UnifiedNativeAdViewHolder viewHolder = (UnifiedNativeAdViewHolder) holder;
+            /*UnifiedNativeAdViewHolder viewHolder = (UnifiedNativeAdViewHolder) holder;
             UnifiedNativeAd nativeAd = (UnifiedNativeAd) categories.get(position);
-            viewHolder.populateNativeAdView(nativeAd, ((UnifiedNativeAdViewHolder) holder).getAdView());
+            viewHolder.populateNativeAdView(nativeAd, ((UnifiedNativeAdViewHolder) holder).getAdView());*/
         } else if (holder instanceof AdHolder) {
             AdHolder adHolder = (AdHolder) holder;
             adHolder.adChoicesContainer.removeAllViews();
@@ -79,7 +79,8 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        return categories.size();
+        return 3;
+        /*return categories.size();*/
     }
 
     public void updateData(List<HomePage.CategoriesItem> categories) {
@@ -103,13 +104,14 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemViewType(int position) {
-        if (categories.get(position) instanceof UnifiedNativeAd) {
+        /*if (categories.get(position) instanceof UnifiedNativeAd) {
             return AD_TYPE;
         } else if (categories.get(position) instanceof NativeAd) {
             return AD_FB_TYPE;
         } else {
             return POST_TYPE;
-        }
+        }*/
+        return POST_TYPE;
     }
 
 
@@ -126,18 +128,20 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
         public void setModel(int position) {
-            if (categories.get(position) instanceof HomePage.CategoriesItem) {
-                HomePage.CategoriesItem categoriesItem = (HomePage.CategoriesItem) categories.get(position);
-                binding.tvTitle.setTransitionName("hero" + position);
-                binding.ivIcon.setTransitionName("hero1" + position);
-                binding.btnCheck.setOnClickListener(v -> {
-                    Pair<View, String>[] pairs = new Pair[2];
-                    pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                    pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
-                    onItemClick.onClick(pairs, categoriesItem);
-                });
-                binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
-                binding.setModel(categoriesItem);
+            if(categories.size() > 0) {
+                if (categories.get(position) instanceof HomePage.CategoriesItem) {
+                    HomePage.CategoriesItem categoriesItem = (HomePage.CategoriesItem) categories.get(position);
+                    binding.tvTitle.setTransitionName("hero" + position);
+                    binding.ivIcon.setTransitionName("hero1" + position);
+                    binding.btnCheck.setOnClickListener(v -> {
+                        Pair<View, String>[] pairs = new Pair[2];
+                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        onItemClick.onClick(pairs, categoriesItem);
+                    });
+                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
+                    binding.setModel(categoriesItem);
+                }
             }
         }
     }

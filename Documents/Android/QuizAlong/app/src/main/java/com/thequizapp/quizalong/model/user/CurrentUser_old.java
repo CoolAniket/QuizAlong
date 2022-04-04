@@ -2,9 +2,7 @@ package com.thequizapp.quizalong.model.user;
 
 import com.google.gson.annotations.SerializedName;
 
-import java.util.ArrayList;
-
-public class CurrentUser {
+public class CurrentUser_old {
 
     @SerializedName("message")
     private String message;
@@ -14,9 +12,6 @@ public class CurrentUser {
 
     @SerializedName("status")
     private boolean status;
-
-    @SerializedName("course")
-    public ArrayList<Course> course;
 
     public String getMessage() {
         return message;
@@ -42,15 +37,29 @@ public class CurrentUser {
         this.status = status;
     }
 
-    public ArrayList<Course> getCourse() {
-        return course;
-    }
-
-    public void setCourse(ArrayList<Course> course) {
-        this.course = course;
-    }
-
     public static class User {
+        @SerializedName("full_name")
+        private String full_name;
+        @SerializedName("total_points")
+        private float total_points;
+        @SerializedName("total_plays")
+        private float total_plays;
+        @SerializedName("refer_code")
+        private String refer_code;
+        @SerializedName("updated_at")
+        private String updated_at;
+        @SerializedName("created_at")
+        private String created_at;
+        @SerializedName("course_id")
+        private String course_id = null;
+        @SerializedName("year_id")
+        private String year_id = null;
+        @SerializedName("college")
+        private String college = null;
+        @SerializedName("proof")
+        private String proof = null;
+        @SerializedName("dob")
+        private String dob = null;
 
         @SerializedName("image")
         private Object image;
@@ -81,21 +90,6 @@ public class CurrentUser {
 
         @SerializedName("refer_code")
         private String referCode;
-
-        @SerializedName("course_id")
-        private String courseId;
-
-        @SerializedName("year_id")
-        private String yearId;
-
-        @SerializedName("college")
-        private String college;
-
-        @SerializedName("proof")
-        private String proof;
-
-        @SerializedName("dob")
-        private String dob;
 
         public Object getImage() {
             return image;
@@ -177,114 +171,92 @@ public class CurrentUser {
             this.referCode = referCode;
         }
 
-        public String getCourseId() {
-            return courseId;
+        public String getFull_name() {
+            return full_name;
         }
 
-        public void setCourseId(String courseId) {
-            this.courseId = courseId;
+        public float getTotal_points() {
+            return total_points;
         }
 
-        public String getYearId() {
-            return yearId;
+        public float getTotal_plays() {
+            return total_plays;
         }
 
-        public void setYearId(String yearId) {
-            this.yearId = yearId;
+        public String getRefer_code() {
+            return refer_code;
+        }
+
+        public String getUpdated_at() {
+            return updated_at;
+        }
+
+        public String getCreated_at() {
+            return created_at;
+        }
+
+        public String getCourse_id() {
+            return course_id;
+        }
+
+        public String getYear_id() {
+            return year_id;
         }
 
         public String getCollege() {
             return college;
         }
 
-        public void setCollege(String college) {
-            this.college = college;
-        }
-
         public String getProof() {
             return proof;
-        }
-
-        public void setProof(String proof) {
-            this.proof = proof;
         }
 
         public String getDob() {
             return dob;
         }
 
+        public void setFull_name(String full_name) {
+            this.full_name = full_name;
+        }
+
+        public void setTotal_points(float total_points) {
+            this.total_points = total_points;
+        }
+
+        public void setTotal_plays(float total_plays) {
+            this.total_plays = total_plays;
+        }
+
+        public void setRefer_code(String refer_code) {
+            this.refer_code = refer_code;
+        }
+
+        public void setUpdated_at(String updated_at) {
+            this.updated_at = updated_at;
+        }
+
+        public void setCreated_at(String created_at) {
+            this.created_at = created_at;
+        }
+
+        public void setCourse_id(String course_id) {
+            this.course_id = course_id;
+        }
+
+        public void setYear_id(String year_id) {
+            this.year_id = year_id;
+        }
+
+        public void setCollege(String college) {
+            this.college = college;
+        }
+
+        public void setProof(String proof) {
+            this.proof = proof;
+        }
+
         public void setDob(String dob) {
             this.dob = dob;
-        }
-    }
-
-    public static class Course{
-        @SerializedName("key")
-        private int key;
-
-        @SerializedName("value")
-        private String value;
-
-        @SerializedName("image")
-        private String image;
-
-        @SerializedName("year")
-        private ArrayList<Year> year;
-
-        public int getKey() {
-            return key;
-        }
-
-        public void setKey(int key) {
-            this.key = key;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
-        }
-
-        public String getImage() {
-            return image;
-        }
-
-        public void setImage(String value) {
-            this.image = image;
-        }
-
-        public ArrayList<Year> getYear() {
-            return year;
-        }
-
-        public void setYear(ArrayList<Year> year) {
-            this.year = year;
-        }
-    }
-
-    public static class Year{
-        @SerializedName("key")
-        private int key;
-
-        @SerializedName("value")
-        private String value;
-
-        public int getKey() {
-            return key;
-        }
-
-        public void setKey(int key) {
-            this.key = key;
-        }
-
-        public String getValue() {
-            return value;
-        }
-
-        public void setValue(String value) {
-            this.value = value;
         }
     }
 }
