@@ -1,2 +1,2 @@
-# QuizBox
+# QuizAlong
 

@@ -2,6 +2,8 @@ package com.thequizapp.quizalong.model.user;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class CurrentUser {
 
     @SerializedName("message")
@@ -12,6 +14,9 @@ public class CurrentUser {
 
     @SerializedName("status")
     private boolean status;
+
+    @SerializedName("course")
+    public ArrayList<Course> course;
 
     public String getMessage() {
         return message;
@@ -35,6 +40,14 @@ public class CurrentUser {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public ArrayList<Course> getCourse() {
+        return course;
+    }
+
+    public void setCourse(ArrayList<Course> course) {
+        this.course = course;
     }
 
     public static class User {
@@ -147,6 +160,65 @@ public class CurrentUser {
 
         public void setReferCode(String referCode) {
             this.referCode = referCode;
+        }
+    }
+
+    public static class Course{
+        @SerializedName("key")
+        private int key;
+
+        @SerializedName("value")
+        private String value;
+
+        @SerializedName("year")
+        private ArrayList<Year> year;
+
+        public int getKey() {
+            return key;
+        }
+
+        public void setKey(int key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public ArrayList<Year> getYear() {
+            return year;
+        }
+
+        public void setYear(ArrayList<Year> year) {
+            this.year = year;
+        }
+    }
+
+    public static class Year{
+        @SerializedName("key")
+        private int key;
+
+        @SerializedName("value")
+        private String value;
+
+        public int getKey() {
+            return key;
+        }
+
+        public void setKey(int key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
         }
     }
 }

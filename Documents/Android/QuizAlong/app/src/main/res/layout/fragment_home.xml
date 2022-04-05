@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/gilroy_bold"
-                        android:text="@string/categories"
+                        android:text="@string/quiz_with_twist"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
@@ -80,7 +80,7 @@
                     android:orientation="horizontal"
                     app:adapter="@{viewModel.homeCategoriesAdapter}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_categoies" />
+                    tools:listitem="@layout/item_box_quiz" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/gilroy_bold"
-                        android:text="@string/popular_quizes"
+                        android:text="@string/upcoming_quiz"
                         android:textAllCaps="true"
                         android:textColor="@color/black"
                         android:textSize="20sp" />

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.adapter.LeaderBoardAdapter;
 import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
+import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.ArrayList;
@@ -23,6 +24,9 @@ public class LeaderBoardViewModel extends ViewModel {
     private MutableLiveData<LeaderBoard.QuizesItem> firstUser = new MutableLiveData<>();
     private MutableLiveData<LeaderBoard.QuizesItem> secondUser = new MutableLiveData<>();
     private MutableLiveData<LeaderBoard.QuizesItem> thirdUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoard.QuizesItem> myUser = new MutableLiveData<>();
+    private MutableLiveData<String> myUserPosition = new MutableLiveData<>();
+    private CurrentUser user;
 
     public LeaderBoardAdapter getLeaderBoardAdapter() {
         return leaderBoardAdapter;
@@ -30,6 +34,21 @@ public class LeaderBoardViewModel extends ViewModel {
 
     public void setLeaderBoardAdapter(LeaderBoardAdapter leaderBoardAdapter) {
         this.leaderBoardAdapter = leaderBoardAdapter;
+    }
+
+    public CurrentUser getUser() {
+        return user;
+    }
+
+    public void setUser(CurrentUser user) {
+        this.user = user;
+        LeaderBoard.QuizesItem quizesItem = new LeaderBoard.QuizesItem();
+        quizesItem.setFullName(user.getUser().getFullName());
+        quizesItem.setIdentity(user.getUser().getIdentity());
+//        quizesItem.setImage(user.getUser().getImage().toString());
+//        quizesItem.setTotalPoints(user.getUser().getTotalPoints());
+        myUser.postValue(quizesItem);
+        myUserPosition.postValue("0");
     }
 
     public ObservableBoolean getIsLoading() {
@@ -64,6 +83,23 @@ public class LeaderBoardViewModel extends ViewModel {
         this.thirdUser = thirdUser;
     }
 
+    public MutableLiveData<LeaderBoard.QuizesItem> getMyUser() {
+        return myUser;
+    }
+
+    public void setMyUser(MutableLiveData<LeaderBoard.QuizesItem> myUser) {
+        this.myUser = myUser;
+    }
+
+    public MutableLiveData<String> getMyUserPosition() {
+        return myUserPosition;
+    }
+
+    public void setMyUserPosition(MutableLiveData<String> myUserPosition) {
+        this.myUserPosition = myUserPosition;
+    }
+
+
     public void getLeaderBoard() {
         disposable.add(Global.initRetrofit().getLeaderBoard(BuildConfig.APIKEY)
                 .subscribeOn(Schedulers.io())
@@ -84,7 +120,12 @@ public class LeaderBoardViewModel extends ViewModel {
                         }
                         List<LeaderBoard.QuizesItem> newList = new ArrayList<>();
                         for (int i = 3; i < leaderBoard.getQuizes().size(); i++) {
-                            newList.add(leaderBoard.getQuizes().get(i));
+                            LeaderBoard.QuizesItem quizesItem = leaderBoard.getQuizes().get(i);
+                            myUserPosition.setValue(""+i);
+                            if (quizesItem.getIdentity().equals(user.getUser().getIdentity())) {
+                                myUser.setValue(quizesItem);
+                            }
+                            newList.add(quizesItem);
                         }
                         leaderBoardAdapter.updateData(newList);
                     } else if (throwable != null) {

@@ -11,7 +11,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ActivityQuizListBinding;
-import com.thequizapp.quizalong.model.categories.Categories;
+import com.thequizapp.quizalong.model.categories.CategoriesResponse;
 import com.thequizapp.quizalong.utils.ads.MultipleCustomNativeAds;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
 import com.thequizapp.quizalong.view.BaseActivity;
@@ -27,8 +27,8 @@ public class QuizListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_quiz_list);
         viewModel = new ViewModelProvider(this).get(QuizListViewModel.class);
-        binding.tvTitle.setTransitionName(getIntent().getStringExtra("name"));
-        binding.ivLogo.setTransitionName(getIntent().getStringExtra("logo"));
+//        binding.tvTitle.setTransitionName(getIntent().getStringExtra("name"));
+//        binding.ivLogo.setTransitionName(getIntent().getStringExtra("logo"));
         initView();
         initListener();
         loadNativeAds();
@@ -37,7 +37,7 @@ public class QuizListActivity extends BaseActivity {
 
     private void initView() {
         String catStr = getIntent().getStringExtra("data");
-        viewModel.setCategoriesItem(new Gson().fromJson(catStr, Categories.CategoriesItem.class));
+        viewModel.setCategoriesItem(new Gson().fromJson(catStr, CategoriesResponse.Category.class));
         viewModel.getQuizesByCatId();
     }
 

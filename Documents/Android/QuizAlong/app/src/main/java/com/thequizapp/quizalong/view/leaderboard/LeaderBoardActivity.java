@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ActivityLeaderBoardBinding;
+import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.BannerAds;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.viewmodel.LeaderBoardViewModel;
@@ -27,6 +28,7 @@ public class LeaderBoardActivity extends BaseActivity {
     }
 
     private void initView() {
+        viewModel.setUser(new SessionManager(this).getUser());
         viewModel.getLeaderBoard();
         new BannerAds(this, binding.bannerAds);
     }
@@ -35,6 +37,8 @@ public class LeaderBoardActivity extends BaseActivity {
         viewModel.getFirstUser().observe(this, quizesItem -> binding.setFirstUser(quizesItem));
         viewModel.getSecondUser().observe(this, quizesItem -> binding.setSecondUser(quizesItem));
         viewModel.getThirdUser().observe(this, quizesItem -> binding.setThirdUser(quizesItem));
+        viewModel.getMyUser().observe(this, quizesItem -> binding.setMyUser(quizesItem));
+        viewModel.getMyUserPosition().observe(this, position -> binding.setMyUserPosition(position));
     }
 
     private void initListener() {
