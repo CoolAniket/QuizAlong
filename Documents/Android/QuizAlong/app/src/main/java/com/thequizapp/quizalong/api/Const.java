@@ -14,6 +14,7 @@ public final class Const {
     public static final String QUIZ_ALLCATEGORIES = "quiz/allcategories/{course_id}/{user_id}";
     public static final String QUIZ_USER_CATEGORIES = "quiz/usercategories";
     public static final String QUIZ_USER_CATEGORIES_BULK = "quiz/usercategoriesbulk";
+    public static final String QUIZ_TWIST = "quiz/twistQuiz";
     public static final String USER_GET_USER_PROFILE = "user/getUserProfile";
     public static final String QUIZ_QUIZBYCATEGORY = "quiz/quizbycategory";
     public static final String QUIZ_QUESTIONS_OF_QUIZ = "quiz/questionsOfQuiz";
