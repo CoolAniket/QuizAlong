@@ -7,10 +7,12 @@ public final class Const {
     public static final String ITEM_BASE_URL = "https://quizalong.in/public/storage/";
     //Api End Point
     public static final String USER_REGISTER = "user/register";
+    public static final String ADDITIONAL_DETAILS = "user/additionDetails";
     public static final String QUIZ_HOMEPAGE = "quiz/homepage";
     public static final String QUIZ_ALLCATEGORIES = "quiz/allcategories/{course_id}/{user_id}";
     public static final String QUIZ_USER_CATEGORIES = "quiz/usercategories";
     public static final String QUIZ_USER_CATEGORIES_BULK = "quiz/usercategoriesbulk";
+    public static final String QUIZ_TWIST = "quiz/twistQuiz";
     public static final String USER_GET_USER_PROFILE = "user/getUserProfile";
     public static final String QUIZ_QUIZBYCATEGORY = "quiz/quizbycategory";
     public static final String QUIZ_QUESTIONS_OF_QUIZ = "quiz/questionsOfQuiz";
@@ -39,6 +41,7 @@ public final class Const {
     public static final String PROFILE_IMAGE = "profileImage";
     //SharedPreference
     public static final String USER = "user";
+    public static final String USER_ADDITION_DETAILS = "user_details";
     public static final String APPLICATION_ID = BuildConfig.APPLICATION_ID;
     public static final String STATUS = "status";
     public static final int POST_TYPE = 0;

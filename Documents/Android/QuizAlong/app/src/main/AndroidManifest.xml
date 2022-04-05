@@ -31,6 +31,8 @@
         <activity android:name=".view.login.RegisterActivity" />
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.splash.WelcomeActivity" />
+        <activity android:name=".view.login.AdditionalInfoActivity" />
+
         <activity android:name=".view.BaseActivity" />
         <activity android:name=".view.splash.SplashActivity">
              <intent-filter>

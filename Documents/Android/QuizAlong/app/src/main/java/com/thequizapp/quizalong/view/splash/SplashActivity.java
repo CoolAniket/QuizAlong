@@ -57,7 +57,7 @@ public class SplashActivity extends BaseActivity {
                                     startActivity(new Intent(this, MainActivity.class));
                                 }
                                 finishAffinity();
-                            }, 100);
+                            }, 1000);
                         })
         );
 
