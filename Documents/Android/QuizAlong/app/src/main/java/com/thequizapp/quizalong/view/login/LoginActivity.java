@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
-import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.common.api.ApiException;
@@ -24,13 +21,16 @@ import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.loginmaneger.FaceBookLoginManager;
 import com.thequizapp.quizalong.utils.loginmaneger.GoogleLoginManager;
 import com.thequizapp.quizalong.view.BaseActivity;
-import com.thequizapp.quizalong.view.main.MainActivity;
+import com.thequizapp.quizalong.view.home.CourseSelectionActivity;
 import com.thequizapp.quizalong.viewmodel.ForgotPasswordViewModel;
 import com.thequizapp.quizalong.viewmodel.LoginViewModel;
 
 import org.json.JSONException;
 
 import java.util.HashMap;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 public class LoginActivity extends BaseActivity {
     ActivityLoginBinding binding;
@@ -69,6 +69,8 @@ public class LoginActivity extends BaseActivity {
             finishAffinity();*/
 
             startActivity(new Intent(this, AdditionalInfoActivity.class));
+//            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, CourseSelectionActivity.class));
             finishAffinity();
         });
     }

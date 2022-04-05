@@ -15,12 +15,6 @@ public class CurrentUser {
     @SerializedName("status")
     private boolean status;
 
-    @SerializedName("additional_info")
-    private int additional_info;
-
-    @SerializedName("user_categories")
-    private int user_categories;
-
     @SerializedName("course")
     public ArrayList<Course> course;
 
@@ -48,22 +42,6 @@ public class CurrentUser {
         this.status = status;
     }
 
-    public int getAdditional_info() {
-        return additional_info;
-    }
-
-    public void setAdditional_info(int additional_info) {
-        this.additional_info = additional_info;
-    }
-
-    public int getUser_categories() {
-        return user_categories;
-    }
-
-    public void setUser_categories(int user_categories) {
-        this.user_categories = user_categories;
-    }
-
     public ArrayList<Course> getCourse() {
         return course;
     }
@@ -77,39 +55,38 @@ public class CurrentUser {
         @SerializedName("image")
         private Object image;
 
-        @SerializedName("fullname")
-        private String fullname;
+        @SerializedName("full_name")
+        private String fullName;
 
         @SerializedName("wallet")
         private int wallet;
 
-//        @SerializedName("total_plays")
-//        private int totalPlays;
+        @SerializedName("total_plays")
+        private int totalPlays;
 
-//        @SerializedName("updated_at")
-//        private String updatedAt;
+        @SerializedName("updated_at")
+        private String updatedAt;
 
         @SerializedName("identity")
         private String identity;
 
-//        @SerializedName("total_points")
-//        private int totalPoints;
+        @SerializedName("total_points")
+        private int totalPoints;
 
-//        @SerializedName("created_at")
-//        private String createdAt;
+        @SerializedName("created_at")
+        private String createdAt;
 
-//        @SerializedName("user_id")
-        @SerializedName(value="name", alternate={"user_id", "id"})
-        private int user_id;
+        @SerializedName("id")
+        private int id;
 
-        @SerializedName("refercode")
-        private String refercode;
+        @SerializedName("refer_code")
+        private String referCode;
 
-        @SerializedName("course")
-        private String course;
+        @SerializedName("course_id")
+        private String courseId;
 
-        @SerializedName("year")
-        private String year;
+        @SerializedName("year_id")
+        private String yearId;
 
         @SerializedName("college")
         private String college;
@@ -120,15 +97,6 @@ public class CurrentUser {
         @SerializedName("dob")
         private String dob;
 
-        @SerializedName("mobileno")
-        private String mobileNo;
-
-        @SerializedName("password")
-        private String password;
-
-        @SerializedName("otp")
-        private String otp;
-
         public Object getImage() {
             return image;
         }
@@ -137,12 +105,12 @@ public class CurrentUser {
             this.image = image;
         }
 
-        public String getFullname() {
-            return fullname;
+        public String getFullName() {
+            return fullName;
         }
 
-        public void setFullname(String fullname) {
-            this.fullname = fullname;
+        public void setFullName(String fullName) {
+            this.fullName = fullName;
         }
 
         public int getWallet() {
@@ -153,6 +121,21 @@ public class CurrentUser {
             this.wallet = wallet;
         }
 
+        public int getTotalPlays() {
+            return totalPlays;
+        }
+
+        public void setTotalPlays(int totalPlays) {
+            this.totalPlays = totalPlays;
+        }
+
+        public String getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(String updatedAt) {
+            this.updatedAt = updatedAt;
+        }
 
         public String getIdentity() {
             return identity;
@@ -162,36 +145,52 @@ public class CurrentUser {
             this.identity = identity;
         }
 
-        public int getUser_id() {
-            return user_id;
+        public int getTotalPoints() {
+            return totalPoints;
         }
 
-        public void setUser_id(int user_id) {
-            this.user_id = user_id;
+        public void setTotalPoints(int totalPoints) {
+            this.totalPoints = totalPoints;
         }
 
-        public String getRefercode() {
-            return refercode;
+        public String getCreatedAt() {
+            return createdAt;
         }
 
-        public void setRefercode(String refercode) {
-            this.refercode = refercode;
+        public void setCreatedAt(String createdAt) {
+            this.createdAt = createdAt;
         }
 
-        public String getCourse() {
-            return course;
+        public int getId() {
+            return id;
         }
 
-        public void setCourse(String course) {
-            this.course = course;
+        public void setId(int id) {
+            this.id = id;
         }
 
-        public String getYear() {
-            return year;
+        public String getReferCode() {
+            return referCode;
         }
 
-        public void setYear(String year) {
-            this.year = year;
+        public void setReferCode(String referCode) {
+            this.referCode = referCode;
+        }
+
+        public String getCourseId() {
+            return courseId;
+        }
+
+        public void setCourseId(String courseId) {
+            this.courseId = courseId;
+        }
+
+        public String getYearId() {
+            return yearId;
+        }
+
+        public void setYearId(String yearId) {
+            this.yearId = yearId;
         }
 
         public String getCollege() {
@@ -216,14 +215,6 @@ public class CurrentUser {
 
         public void setDob(String dob) {
             this.dob = dob;
-        }
-
-        public String getMobileNo() {
-            return mobileNo;
-        }
-
-        public void setMobileNo(String mobileNo) {
-            this.mobileNo = mobileNo;
         }
     }
 
@@ -297,4 +288,62 @@ public class CurrentUser {
         }
     }
 
+    public static class Course{
+        @SerializedName("key")
+        private int key;
+
+        @SerializedName("value")
+        private String value;
+
+        @SerializedName("year")
+        private ArrayList<Year> year;
+
+        public int getKey() {
+            return key;
+        }
+
+        public void setKey(int key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+
+        public ArrayList<Year> getYear() {
+            return year;
+        }
+
+        public void setYear(ArrayList<Year> year) {
+            this.year = year;
+        }
+    }
+
+    public static class Year{
+        @SerializedName("key")
+        private int key;
+
+        @SerializedName("value")
+        private String value;
+
+        public int getKey() {
+            return key;
+        }
+
+        public void setKey(int key) {
+            this.key = key;
+        }
+
+        public String getValue() {
+            return value;
+        }
+
+        public void setValue(String value) {
+            this.value = value;
+        }
+    }
 }

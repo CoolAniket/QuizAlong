@@ -83,10 +83,11 @@
       <!-- Main: 545361686831488 ,   fb545361686831488    0a2adf4f80faf6d03d644544fcd24220  -->
     <string name="facebook_app_id">298923915695806</string>
     <string name="fb_login_protocol_scheme">fb298923915695806</string>
-    <string name="facebook_client_token">c223f1a055cf4ae81bfef9becc67de85</string>
+    <string name="facebook_client_token">c223f1a0ds    cxx 55cf4ae81bfef9becc67de85</string>
 
     <string name="sign_up_successfully">Check your email for verification</string>
-    <string name="log_in_successfully">Log In successfully...!</string>
+    <string name="log_in_successfully">Log In successfully…!</string>
+    <string name="cat_add_successfully">Categories added successfully…!</string>
     <string name="correct_answer_is">Correct answer is</string>
     <string name="silver_player">Silver Player</string>
     <string name="pro_player">Pro Player</string>
@@ -102,7 +103,9 @@
     <string name="facebook_interstial">---</string>
     <string name="facebook_native">---</string>
     <string name="fbbanner" />
-
+    <string name="quiz_with_twist">Quiz With Twist</string>
+    <string name="upcoming_quiz">Upcoming Quiz</string>
+    <string name="choose_text">Choose 2 or more categories</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

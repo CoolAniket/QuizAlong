@@ -12,11 +12,30 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/ThemeQuizBox"
         android:usesCleartextTraffic="true">
-        <activity android:name=".view.web.WebViewActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.web.WebViewActivity"></activity>
+        <activity android:name="com.thequizapp.quizalong.view.edit.EditProfileActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.quiz.QuizActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.redeem.HistoryRedeemRequestActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.quizes.QuizListActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.notification.NotificationActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.redeem.RedeemRequestActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.playhistory.PlayHistoryActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.main.MainActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.login.RegisterActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.login.LoginActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.splash.WelcomeActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.login.AdditionalInfoActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.BaseActivity" />
+        <activity android:name="com.thequizapp.quizalong.view.splash.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+        <activity android:name=".view.web.WebViewActivity"></activity>
         <activity android:name=".view.edit.EditProfileActivity" />
         <activity android:name=".view.quiz.QuizActivity" />
         <activity android:name=".view.redeem.HistoryRedeemRequestActivity" />
@@ -25,25 +44,21 @@
         <activity android:name=".view.redeem.RedeemRequestActivity" />
         <activity android:name=".view.playhistory.PlayHistoryActivity" />
         <activity android:name=".view.leaderboard.LeaderBoardActivity" />
-        <activity android:name=".view.main.MainActivity" />
+        <activity android:name=".view.main.MainActivity"/>
+        <activity android:name=".view.home.CourseSelectionActivity"></activity>
         <activity android:name=".view.login.RegisterActivity" />
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.splash.WelcomeActivity" />
-        <activity android:name=".view.login.AdditionalInfoActivity" />
         <activity android:name=".view.BaseActivity" />
         <activity android:name=".view.splash.SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
-        <activity android:name=".view.payment.TransactionHistoryActivity" />
-        <activity android:name=".view.faqs.FAQActivity" />
-        <activity android:name=".view.results.ShowQuizAnswersActivity" />
-        <activity android:name=".view.payment.PaymentActivity"/>
-        <activity android:name=".view.home.CourseSelectionActivity" />
-        <activity android:name=".view.quizes.MyQuizActivity" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -63,25 +78,14 @@
         <activity
             android:name="com.facebook.ads.AudienceNetworkActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
+
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />
 
-        <receiver
-            android:name=".receivers.GameStartReceiver"
-            android:enabled="true"
-            android:exported="true" />
-        <service
-            android:name=".services.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}"

@@ -2,21 +2,15 @@ package com.thequizapp.quizalong.api;
 //testing dev branch
 import com.thequizapp.quizalong.model.categories.CategoriesResponse;
 import com.thequizapp.quizalong.model.home.HomePage;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
 import com.thequizapp.quizalong.model.notification.Notifications;
-import com.thequizapp.quizalong.model.payment.TransactionResponse;
-import com.thequizapp.quizalong.model.questions.NewQuestions;
-import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
-import com.thequizapp.quizalong.model.payment.OrderResponse;
 import com.thequizapp.quizalong.model.questions.Questions;
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
-import com.thequizapp.quizalong.model.results.ShowResultsRequest;
 import com.thequizapp.quizalong.model.settings.Settings;
 import com.thequizapp.quizalong.model.user.CurrentUser;
-import com.thequizapp.quizalong.view.results.ShowQuizAnswersActivity;
+import com.thequizapp.quizalong.model.user.RegisterUser;
 
 import java.util.HashMap;
 
@@ -33,6 +27,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @FormUrlEncoded
@@ -43,37 +38,10 @@ public interface ApiService {
     @POST(Const.QUIZ_HOMEPAGE)
     Single<HomePage> getHomePage(@Header(Const.API_KEY) String apiKey);
 
-    @GET(Const.QUIZ_TWIST)
-    Single<TwistQuizPage> getTwistQuizPage(@Header(Const.API_KEY) String apiKey,
-                                           @Path(Const.USER_ID) int userId);
-
-    @GET(Const.QUIZ_UPCOMING)
-    Single<TwistQuizPage> getUpcomingQuizPage(@Header(Const.API_KEY) String apiKey,
-                                              @Path(Const.USER_ID) int userId);
-
-    @GET(Const.QUIZ_PAST)
-    Single<TwistQuizPage> getPastQuizPage(@Header(Const.API_KEY) String apiKey,
-                                          @Path(Const.USER_ID) int userId);
-
     @GET(Const.QUIZ_ALLCATEGORIES)
     Single<CategoriesResponse> getAllCategories(@Header(Const.API_KEY) String apiKey,
                                                 @Path(Const.COURSE_ID) int course_id,
                                                 @Path(Const.USER_ID) int userId);
-    @GET(Const.QUIZ_MY_QUIZ)
-    Single<QuizByCatId> getMyQuizes(@Header(Const.API_KEY) String apiKey,
-                                                @Path(Const.USER_ID) int userId);
-
-    @GET(Const.PAYMENT_RZP_ORDER_ID)
-    Single<OrderResponse> getRzpOrderId(@Header(Const.API_KEY) String apiKey,
-                                        @Path(Const.AMOUNT) int amount);
-
-    @GET(Const.PAYMENT_TRANSACTION_HISTORY)
-    Single<TransactionResponse> getTransactionHistory(@Header(Const.API_KEY) String apiKey,
-                                                      @Path(Const.USER_ID) int userId);
-    @FormUrlEncoded
-    @POST(Const.PAYMENT_ADD_PAYMENT_DATA)
-    Single<RestResponse> addPaymentData(@Header(Const.API_KEY) String apiKey,
-                                                @FieldMap HashMap<String, String> requestBodyHashMap);
     @FormUrlEncoded
     @POST(Const.QUIZ_USER_CATEGORIES)
     Single<RestResponse> saveUserCategory(@Header(Const.API_KEY) String apiKey,
@@ -84,20 +52,11 @@ public interface ApiService {
     Single<RestResponse> saveUserCategoriesBulk(@Header(Const.API_KEY) String apiKey,
                                                 @FieldMap HashMap<String, Integer> requestBodyHashMap);
 
-    @FormUrlEncoded
-    @POST(Const.USER_SEND_OTP)
-    Single<RestResponse> sentOTPonMobile(@Header(Const.API_KEY) String apiKey,
-                                                @FieldMap HashMap<String, String> requestBodyHashMap);
-    @FormUrlEncoded
-    @POST(Const.USER_VERIFY_OTP)
-    Single<RestResponse> verifyOTPonMobile(@Header(Const.API_KEY) String apiKey,
-                                                @FieldMap HashMap<String, String> requestBodyHashMap);
-
 
     @FormUrlEncoded
     @POST(Const.USER_GET_USER_PROFILE)
     Single<CurrentUser> getUserProfile(@Header(Const.API_KEY) String apiKey,
-                                       @Field(Const.USERID) String userId);
+                                       @Field(Const.USER_ID) String userId);
 
     @FormUrlEncoded
     @POST(Const.QUIZ_QUIZBYCATEGORY)
@@ -105,23 +64,9 @@ public interface ApiService {
                                        @Field(Const.CATID) String userId);
 
     @FormUrlEncoded
-    @POST(Const.QUIZ_ADD_GAME_DATA_LIVE)
-    Single<AddDataLiveResponse> addGameDataLive(@Header(Const.API_KEY) String apiKey,
-                                                @FieldMap HashMap<String, String> hashMap);
-
-    @FormUrlEncoded
-    @POST(Const.QUIZ_ADD_GAME_DATA_PAST)
-    Single<AddDataLiveResponse> addGameDataPast(@Header(Const.API_KEY) String apiKey,
-                                                @FieldMap HashMap<String, String> hashMap);
-
-    @GET(Const.QUIZ_QUESTIONS_OF_QUIZ)
-    Single<NewQuestions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,
-                                              @Path(Const.QUIZ_ID_NEW) String quizId);
-
-    @GET(Const.QUIZ_ANS_LIVE)
-    Single<ShowResultsRequest> getQuizAnsLive(@Header(Const.API_KEY) String apiKey,
-                                              @Path(Const.QUIZ_ID_NEW) String quizId,
-                                              @Path(Const.USER_ID) String userId);
+    @POST(Const.QUIZ_QUESTIONS_OF_QUIZ)
+    Single<Questions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,
+                                           @Field(Const.QUIZ_ID) String userId);
 
     @FormUrlEncoded
     @POST(Const.USER_ADD_POINTS_TO_WALLET)
