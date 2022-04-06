@@ -71,6 +71,7 @@ public class LoginActivity extends BaseActivity {
             startActivity(new Intent(this, AdditionalInfoActivity.class));
 //            startActivity(new Intent(this, MainActivity.class));
             startActivity(new Intent(this, CourseSelectionActivity.class));
+            startActivity(new Intent(this, AdditionalInfoActivity.class));
             finishAffinity();
         });
     }

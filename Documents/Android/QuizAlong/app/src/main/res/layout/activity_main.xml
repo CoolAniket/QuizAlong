@@ -39,7 +39,7 @@
                     android:layout_width="105dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/quiz_along_logo"
+                    android:src="@drawable/quizbox_logo"
                     android:transitionName="logo"
                     android:visibility="@{viewModel.selectedMenu == 0 ? View.VISIBLE : View.GONE}" />
 
@@ -69,16 +69,15 @@
                     android:src="@drawable/nav_icon"
                     app:tint="@color/white" />
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="end"
-                    android:layout_margin="5dp"
-                    android:padding="4dp"
-                    android:src="@drawable/ic_help__24"
-                    android:visibility="@{viewModel.selectedMenu == 1 ? View.VISIBLE : View.GONE}"
-                    android:onClick="@{()->viewModel.onCategoryHelp()}"
-                    />
+<!--                <ImageView-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_margin="5dp"-->
+<!--                    android:background="@drawable/ic_profile_user"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:visibility="@{viewModel.selectedMenu == 0 ? View.VISIBLE : View.GONE}"-->
+<!--                    app:circle_crop="@{viewModel.user.user.image}" />-->
             </androidx.appcompat.widget.Toolbar>
 
             <androidx.viewpager.widget.ViewPager

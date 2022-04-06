@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-            app:SpinKit_Color="@color/purple" />
+            app:SpinKit_Color="@color/cobalt_blue" />
 
 
     </RelativeLayout>
