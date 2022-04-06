@@ -8,9 +8,9 @@
 
         <import type="android.view.View" />
 
-        <variable
-            name="viewModel"
-            type="com.thequizapp.quizalong.viewmodel.NotificationViewModel" />
+<!--        <variable-->
+<!--            name="viewModel"-->
+<!--            type="com.thequizapp.quizalong.viewmodel.NotificationViewModel" />-->
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,6 +18,17 @@
         android:layout_height="match_parent"
         tools:context=".view.payment.PaymentActivity">
 
+
+        <Button
+            android:id="@+id/start_payment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Initiate Payment"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
