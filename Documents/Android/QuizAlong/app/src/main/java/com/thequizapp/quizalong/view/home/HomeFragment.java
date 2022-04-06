@@ -57,15 +57,31 @@ public class HomeFragment extends Fragment {
     }
 
     private void initListener() {
-        viewModel.getHomeCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {
+        /*viewModel.getHomeCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {
             Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
             intent.putExtra("name", (String) pairs[0].second);
             intent.putExtra("logo", (String) pairs[1].second);
             intent.putExtra("data", new Gson().toJson(categoriesItem));
             ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
             startActivity(intent, activityOptions.toBundle());
+        });*/
+        viewModel.getTwistQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
+            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
+            intent.putExtra("name", (String) pairs[0].second);
+            intent.putExtra("logo", (String) pairs[1].second);
+            intent.putExtra("data", new Gson().toJson(quizesItem));
+            ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
+            startActivity(intent, activityOptions.toBundle());
         });
-        viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
+        viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
+            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
+            intent.putExtra("name", (String) pairs[0].second);
+            //intent.putExtra("logo", (String) pairs[1].second);
+            intent.putExtra("data", new Gson().toJson(quizesItem));
+            ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
+            startActivity(intent, activityOptions.toBundle());
+        });
+        /*viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
             if (rewardAds != null && quizesItem.getIsPermium() == 1) {
                 rewardAds.setOnRewarded(() -> startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))));
@@ -75,12 +91,12 @@ public class HomeFragment extends Fragment {
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem)));
             }
-        });
+        });*/
     }
 
     private void loadNativeAds() {
         rewardAds = new RewardAds(getActivity());
-        new MultipleCustomNativeAds(getActivity(), (adsData, position) -> {
+        /*new MultipleCustomNativeAds(getActivity(), (adsData, position) -> {
             if (viewModel.getQuizesAdapter() != null) {
                 if (adsData instanceof UnifiedNativeAd) {
                     viewModel.getQuizesAdapter().addNewAds(position, (UnifiedNativeAd) adsData);
@@ -90,8 +106,9 @@ public class HomeFragment extends Fragment {
                 return position < viewModel.getQuizesAdapter().getQuizes().size();
             }
             return true;
-        }, 4);
-        new MultipleCustomNativeAds(getActivity(), (adsData, position) -> {
+        }, 4);*/
+
+        /*new MultipleCustomNativeAds(getActivity(), (adsData, position) -> {
             if (viewModel.getHomeCategoriesAdapter() != null) {
                 if (adsData instanceof UnifiedNativeAd) {
                     viewModel.getHomeCategoriesAdapter().addNewAds(position, (UnifiedNativeAd) adsData);
@@ -101,6 +118,6 @@ public class HomeFragment extends Fragment {
                 return position < viewModel.getHomeCategoriesAdapter().getCategories().size();
             }
             return true;
-        }, 3);
+        }, 3);*/
     }
 }

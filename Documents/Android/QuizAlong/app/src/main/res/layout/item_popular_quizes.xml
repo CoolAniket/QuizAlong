@@ -10,7 +10,7 @@
 
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.home.HomePage.QuizesItem" />
+            type="com.thequizapp.quizalong.model.home.TwistQuizPage.Quize" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -37,13 +37,20 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="50%"
+                    android:text="@{model.totalTime.toString()}"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_gravity="center"
-
                     android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_gravity="center" />
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -65,48 +72,90 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:layout_height="30dp"
+                android:orientation="horizontal">
                 <TextView
+                    android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="SURGERY QUIZ :- GENERAL SURGERY"
+                    android:text="@{model.title.toString()}"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
-
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.description.toString()}"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="10dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10 Questions 5 minutes"
+                    android:text="@{model.questions.toString()}"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Questions"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.totalTime.toString()}"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="minutes"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="30dp">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TIME :- 9:00 PM Today"
+                    android:text="TIME :- "
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
-
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{model.totalTime.toString()}"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:layout_gravity="center"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,6 +163,7 @@
                 android:layout_marginTop="0dp"
                 >
                 <LinearLayout
+                    android:id="@+id/btn_check"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"

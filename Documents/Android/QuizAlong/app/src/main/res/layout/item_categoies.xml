@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.home.HomePage.CategoriesItem" />
+            type="com.thequizapp.quizalong.model.home.TwistQuizPage.Quize" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -25,15 +25,24 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="30dp">
+            <!--android:text="@{model.winPercent}"-->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50%"
+                android:text="@{model.winPercent.toString()}"
                 android:textStyle="bold"
                 android:textColor="@color/white"
                 android:textSize="15sp"
                 android:layout_gravity="center"
-
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_gravity="center"
                 android:layout_marginLeft="10dp"/>
             <ImageView
                 android:layout_width="20dp"
@@ -65,7 +74,7 @@
             android:layout_marginTop="40dp"
             android:orientation="vertical"
             >
-
+            <!--app:normal_image="@{model.image}"-->
             <ImageView
                 android:id="@+id/iv_icon"
                 android:layout_width="110dp"
@@ -73,7 +82,7 @@
                 android:layout_gravity="center"
                 app:normal_image="@{model.image}"
                 android:src="@drawable/dummy" />
-
+            <!--android:text="@{model.title}"-->
             <TextView
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
@@ -82,11 +91,11 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/gilroy_bold"
                 android:maxLines="2"
-                android:text="surgery quiz"
                 android:textAllCaps="true"
                 android:textColor="@color/white"
                 android:textSize="18sp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:text="@{model.title}"/>
             <!--android:text="@{model.name}"-->
             <!--<TextView
                 android:layout_width="wrap_content"
@@ -128,7 +137,16 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Time : 7 pm"
+                        android:text="Time :"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_gravity="center"/>
+                    <!--android:text="@{model.startTime}"-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{model.startTime}"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="15sp"
@@ -140,10 +158,19 @@
                     android:layout_weight="60"
                     android:gravity="center"
                     android:background="@drawable/my_custom_background">
+                    <!--android:text="@{model.totalTime}"-->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="5 min"
+                        android:text="@{model.totalTime.toString()}"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_marginRight="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Min"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="15sp"

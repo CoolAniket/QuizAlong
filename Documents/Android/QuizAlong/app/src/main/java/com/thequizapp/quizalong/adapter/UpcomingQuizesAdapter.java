@@ -1,5 +1,10 @@
 package com.thequizapp.quizalong.adapter;
 
+import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
+import static com.thequizapp.quizalong.api.Const.AD_TYPE;
+import static com.thequizapp.quizalong.api.Const.POST_TYPE;
+
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +18,13 @@ import com.facebook.ads.NativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemCategoiesBinding;
-import com.thequizapp.quizalong.model.home.HomePage;
+import com.thequizapp.quizalong.databinding.ItemPopularQuizesBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
-import static com.thequizapp.quizalong.api.Const.AD_TYPE;
-import static com.thequizapp.quizalong.api.Const.POST_TYPE;
-
-public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Object> categories = new ArrayList<>();
 
     public List<Object> getCategories() {
@@ -56,15 +57,15 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             return new AdHolder(view);
 
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_categoies, parent, false);
-            return new HomeCategoriesViewHolder(view);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_popular_quizes, parent, false);
+            return new UpcomingQuizViewHolder(view);
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        if (holder instanceof HomeCategoriesViewHolder) {
-            HomeCategoriesViewHolder viewHolder = (HomeCategoriesViewHolder) holder;
+        if (holder instanceof UpcomingQuizViewHolder) {
+            UpcomingQuizViewHolder viewHolder = (UpcomingQuizViewHolder) holder;
             viewHolder.setModel(position);
         } else if (holder instanceof UnifiedNativeAdViewHolder) {
             /*UnifiedNativeAdViewHolder viewHolder = (UnifiedNativeAdViewHolder) holder;
@@ -80,8 +81,9 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        return 3;
-        /*return categories.size();*/
+        /*return 3;*/
+        Log.e("twistQuiz",""+categories.size());
+        return categories.size();
     }
 
     /*public void updateData(List<HomePage.CategoriesItem> categories) {
@@ -122,33 +124,33 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
     public interface OnItemClick {
-        void onClick(Pair[] pair, HomePage.CategoriesItem categoriesItem);
+        void onClick(Pair[] pair, TwistQuizPage.Quize categoriesItem);
     }
 
-    public class HomeCategoriesViewHolder extends RecyclerView.ViewHolder {
-        ItemCategoiesBinding binding;
+    public class UpcomingQuizViewHolder extends RecyclerView.ViewHolder {
+        ItemPopularQuizesBinding binding;
 
-        public HomeCategoriesViewHolder(@NonNull View itemView) {
+        public UpcomingQuizViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
         }
 
         public void setModel(int position) {
-            /*if(categories.size() > 0) {
-                if (categories.get(position) instanceof HomePage.CategoriesItem) {
-                    HomePage.CategoriesItem categoriesItem = (HomePage.CategoriesItem) categories.get(position);
+            if(categories.size() > 0) {
+                if (categories.get(position) instanceof TwistQuizPage.Quize) {
+                    TwistQuizPage.Quize categoriesItem = (TwistQuizPage.Quize) categories.get(position);
                     binding.tvTitle.setTransitionName("hero" + position);
-                    binding.ivIcon.setTransitionName("hero1" + position);
+                    /*binding.ivIcon.setTransitionName("hero1" + position);*/
                     binding.btnCheck.setOnClickListener(v -> {
-                        Pair<View, String>[] pairs = new Pair[2];
+                        Pair<View, String>[] pairs = new Pair[1];
                         pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        /*pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());*/
                         onItemClick.onClick(pairs, categoriesItem);
                     });
                     binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
                     binding.setModel(categoriesItem);
                 }
-            }*/
+            }
         }
     }
 }

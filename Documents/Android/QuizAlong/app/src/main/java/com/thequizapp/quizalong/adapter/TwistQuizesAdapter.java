@@ -1,5 +1,10 @@
 package com.thequizapp.quizalong.adapter;
 
+import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
+import static com.thequizapp.quizalong.api.Const.AD_TYPE;
+import static com.thequizapp.quizalong.api.Const.POST_TYPE;
+
+import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +24,7 @@ import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
-import static com.thequizapp.quizalong.api.Const.AD_TYPE;
-import static com.thequizapp.quizalong.api.Const.POST_TYPE;
-
-public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Object> categories = new ArrayList<>();
 
     public List<Object> getCategories() {
@@ -80,8 +81,9 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        return 3;
-        /*return categories.size();*/
+        /*return 3;*/
+        Log.e("upcomingQuiz",""+categories.size());
+        return categories.size();
     }
 
     /*public void updateData(List<HomePage.CategoriesItem> categories) {
@@ -122,7 +124,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
     public interface OnItemClick {
-        void onClick(Pair[] pair, HomePage.CategoriesItem categoriesItem);
+        void onClick(Pair[] pair, TwistQuizPage.Quize categoriesItem);
     }
 
     public class HomeCategoriesViewHolder extends RecyclerView.ViewHolder {
@@ -134,9 +136,9 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         }
 
         public void setModel(int position) {
-            /*if(categories.size() > 0) {
-                if (categories.get(position) instanceof HomePage.CategoriesItem) {
-                    HomePage.CategoriesItem categoriesItem = (HomePage.CategoriesItem) categories.get(position);
+            if(categories.size() > 0) {
+                if (categories.get(position) instanceof TwistQuizPage.Quize) {
+                    TwistQuizPage.Quize categoriesItem = (TwistQuizPage.Quize) categories.get(position);
                     binding.tvTitle.setTransitionName("hero" + position);
                     binding.ivIcon.setTransitionName("hero1" + position);
                     binding.btnCheck.setOnClickListener(v -> {
@@ -148,7 +150,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
                     binding.setModel(categoriesItem);
                 }
-            }*/
+            }
         }
     }
 }
