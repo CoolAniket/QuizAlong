@@ -23,6 +23,10 @@
             android:enabled="true"
             android:exported="true" />
 
+        <activity
+            android:name=".view.payment.PaymentActivity"
+            android:exported="false" />
+        <activity android:name=".view.web.WebViewActivity" />
         <activity android:name=".view.edit.EditProfileActivity" />
         <activity android:name=".view.quiz.QuizActivity" />
         <activity android:name=".view.redeem.HistoryRedeemRequestActivity" />
