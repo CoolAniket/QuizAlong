@@ -56,7 +56,7 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(Const.USER_GET_USER_PROFILE)
     Single<CurrentUser> getUserProfile(@Header(Const.API_KEY) String apiKey,
-                                       @Field(Const.USER_ID) String userId);
+                                       @Field(Const.USERID) String userId);
 
     @FormUrlEncoded
     @POST(Const.QUIZ_QUIZBYCATEGORY)

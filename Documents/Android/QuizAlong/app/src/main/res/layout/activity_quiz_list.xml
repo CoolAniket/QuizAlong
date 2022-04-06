@@ -21,12 +21,12 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="25dp"
-            android:background="@color/purple" />
+            android:background="@color/cobalt_blue" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
-            android:background="@color/purple"
+            android:background="@color/cobalt_blue"
             android:orientation="horizontal">
 
             <ImageView
