@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.home.HomePage.CategoriesItem" />
+            type="com.thequizapp.quizalong.model.home.TwistQuizPage.Quize" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,11 +26,92 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitXY"
+            android:background="@color/cobalt_blue"/>
+        <!--android:src="@drawable/cat_bg"-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp">
+            <!--android:text="@{model.winPercent}"-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{model.winPercent.toString()}"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="%"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"/>
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:src="@drawable/cat_bg"/>
+                android:layout_height="wrap_content"
+                android:text="20 \u20B9"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="10dp"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white"
+            android:layout_marginTop="30dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            >
+            <!--app:normal_image="@{model.image}"-->
+            <ImageView
+                android:id="@+id/iv_icon"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_gravity="center"
+                app:normal_image="@{model.image}"
+                android:src="@drawable/dummy" />
+            <!--android:text="@{model.title}"-->
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/gilroy_bold"
+                android:maxLines="2"
+                android:textAllCaps="true"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:text="@{model.title}"/>
+            <!--android:text="@{model.name}"-->
+            <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/gilroy_medium"
+                android:maxLines="3"
+                android:text="@{model.description}"
+                android:textColor="@color/white"
+                android:textSize="14sp" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,6 +144,57 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="10dp"/>
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="40"
+                    android:gravity="center"
+                    android:background="@drawable/my_custom_background">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Time :"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_gravity="center"/>
+                    <!--android:text="@{model.startTime}"-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{model.startTime}"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="60"
+                    android:gravity="center"
+                    android:background="@drawable/my_custom_background">
+                    <!--android:text="@{model.totalTime}"-->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{model.totalTime.toString()}"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_marginRight="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Min"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="15sp"
+                        android:layout_marginRight="10dp"/>
+                </LinearLayout>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"

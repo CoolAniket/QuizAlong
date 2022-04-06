@@ -19,7 +19,6 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemCategoiesBinding;
 import com.thequizapp.quizalong.databinding.ItemPopularQuizesBinding;
-import com.thequizapp.quizalong.databinding.ItemUpcomingQuizesBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
             return new AdHolder(view);
 
         } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_upcoming_quizes, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_popular_quizes, parent, false);
             return new UpcomingQuizViewHolder(view);
         }
     }
@@ -129,7 +128,7 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     public class UpcomingQuizViewHolder extends RecyclerView.ViewHolder {
-        ItemUpcomingQuizesBinding binding;
+        ItemPopularQuizesBinding binding;
 
         public UpcomingQuizViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -148,14 +147,7 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         /*pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());*/
                         onItemClick.onClick(pairs, categoriesItem);
                     });
-                    binding.btnPay.setOnClickListener(v -> {
-                        Pair<View, String>[] pairs = new Pair[3];
-                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                        pairs[1] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                        pairs[2] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                        onItemClick.onClick(pairs, categoriesItem);
-                    });
-//                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
+                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
                     binding.setModel(categoriesItem);
                 }
             }

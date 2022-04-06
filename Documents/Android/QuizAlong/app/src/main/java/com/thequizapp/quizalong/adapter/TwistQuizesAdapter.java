@@ -44,9 +44,22 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if (viewType == AD_TYPE) {
+            View unifiedNativeLayoutView = LayoutInflater.from(
+                    parent.getContext()).inflate(R.layout.admob_cateroies,
+                    parent, false);
+            return new UnifiedNativeAdViewHolder(unifiedNativeLayoutView);
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_categoies, parent, false);
-        return new HomeCategoriesViewHolder(view);
+        } else if (viewType == AD_FB_TYPE) {
+
+            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+            View view = inflater.inflate(R.layout.fb_categories, parent, false);
+            return new AdHolder(view);
+
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_categoies, parent, false);
+            return new HomeCategoriesViewHolder(view);
+        }
     }
 
     @Override
@@ -54,6 +67,15 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (holder instanceof HomeCategoriesViewHolder) {
             HomeCategoriesViewHolder viewHolder = (HomeCategoriesViewHolder) holder;
             viewHolder.setModel(position);
+        } else if (holder instanceof UnifiedNativeAdViewHolder) {
+            /*UnifiedNativeAdViewHolder viewHolder = (UnifiedNativeAdViewHolder) holder;
+            UnifiedNativeAd nativeAd = (UnifiedNativeAd) categories.get(position);
+            viewHolder.populateNativeAdView(nativeAd, ((UnifiedNativeAdViewHolder) holder).getAdView());*/
+        } else if (holder instanceof AdHolder) {
+            AdHolder adHolder = (AdHolder) holder;
+            adHolder.adChoicesContainer.removeAllViews();
+            NativeAd ad = (NativeAd) categories.get(position);
+            adHolder.showAds(ad);
         }
     }
 
@@ -64,6 +86,10 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         return categories.size();
     }
 
+    /*public void updateData(List<HomePage.CategoriesItem> categories) {
+        this.categories.addAll(categories);
+        notifyDataSetChanged();
+    }*/
 
     public void updateData(List<TwistQuizPage.Quize> categories) {
         this.categories.addAll(categories);
@@ -86,6 +112,13 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public int getItemViewType(int position) {
+        /*if (categories.get(position) instanceof UnifiedNativeAd) {
+            return AD_TYPE;
+        } else if (categories.get(position) instanceof NativeAd) {
+            return AD_FB_TYPE;
+        } else {
+            return POST_TYPE;
+        }*/
         return POST_TYPE;
     }
 
@@ -114,14 +147,7 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
                         onItemClick.onClick(pairs, categoriesItem);
                     });
-                    binding.btnPay.setOnClickListener(v -> {
-                        Pair<View, String>[] pairs = new Pair[3];
-                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
-                        pairs[2] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
-                        onItemClick.onClick(pairs, categoriesItem);
-                    });
-//                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
+                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
                     binding.setModel(categoriesItem);
                 }
             }

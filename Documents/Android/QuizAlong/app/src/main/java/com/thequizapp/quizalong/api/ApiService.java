@@ -2,6 +2,7 @@ package com.thequizapp.quizalong.api;
 //testing dev branch
 import com.thequizapp.quizalong.model.categories.CategoriesResponse;
 import com.thequizapp.quizalong.model.home.HomePage;
+import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
 import com.thequizapp.quizalong.model.notification.Notifications;
 import com.thequizapp.quizalong.model.questions.Questions;
@@ -37,6 +38,15 @@ public interface ApiService {
 
     @POST(Const.QUIZ_HOMEPAGE)
     Single<HomePage> getHomePage(@Header(Const.API_KEY) String apiKey);
+
+    @GET(Const.QUIZ_TWIST)
+    Single<TwistQuizPage> getTwistQuizPage(@Header(Const.API_KEY) String apiKey);
+
+    @GET(Const.QUIZ_UPCOMING)
+    Single<TwistQuizPage> getUpcomingQuizPage(@Header(Const.API_KEY) String apiKey);
+
+    @GET(Const.QUIZ_PAST)
+    Single<TwistQuizPage> getPastQuizPage(@Header(Const.API_KEY) String apiKey);
 
     @GET(Const.QUIZ_ALLCATEGORIES)
     Single<CategoriesResponse> getAllCategories(@Header(Const.API_KEY) String apiKey,
