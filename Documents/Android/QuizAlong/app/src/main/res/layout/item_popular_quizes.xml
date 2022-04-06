@@ -16,7 +16,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="0dp"
+        app:cardCornerRadius="20dp"
         android:layout_margin="10dp"
         app:cardUseCompatPadding="true">
 
@@ -24,8 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-             android:background="@color/cobalt_blue"/>
-        <!--android:src="@drawable/quiz_bg"-->
+            android:src="@drawable/quiz_bg"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -320,7 +319,7 @@
                         android:layout_marginRight="10dp"/>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>-->
+
     </androidx.cardview.widget.CardView>
 </layout>

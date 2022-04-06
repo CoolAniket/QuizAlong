@@ -127,8 +127,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         }
 
         public void setModel(int position) {
-
-            /*if(quizes.size() > 0) {
+            /*if(quizes.size() > position) {
                 if (quizes.get(position) instanceof HomePage.QuizesItem) {
                     HomePage.QuizesItem quizesItem = (HomePage.QuizesItem) quizes.get(position);
                     binding.getRoot().setOnClickListener(v -> onItemClicks.onClick(quizesItem));

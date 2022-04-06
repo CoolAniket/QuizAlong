@@ -30,6 +30,7 @@ public final class Const {
     public static final String API_KEY = "apiKey";
     //Field
     public static final String USER_ID = "user_id";
+    public static final String USERID = "userId";
     public static final String COURSE_ID = "course_id";
     public static final String CATID = "catid";
     public static final String QUIZ_ID = "quizId";
