@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".view.home.CourseSelectionActivity">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.thequizapp.quizalong.viewmodel.CourseSelectionViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/cat_bg"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:background="@color/cobalt_blue" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="@color/cobalt_blue"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="15dp"
+                    android:background="@drawable/bg_oval"
+                    android:backgroundTint="@color/white"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:text="@string/choose_text"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:layout_marginStart="5dp"
+                    android:textSize="20sp"
+                    android:layout_toRightOf="@id/iv_back"/>
+
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_cat"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:adapter="@{viewModel.categoriesAdapter}"
+                app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                app:spanCount="3"
+                tools:listitem="@layout/item_cat_categoies_selection" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="30dp"
+                android:background="@drawable/bg_white_5"
+                android:backgroundTint="#2B2424"
+                android:fontFamily="@font/gilroy_bold"
+                android:onClick="@{()->viewModel.saveCategories()}"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
+        </LinearLayout>
+        <include
+            layout="@layout/loader"
+            app:isLoading="@{viewModel.isLoading}" />
+    </RelativeLayout>
+
+</layout>

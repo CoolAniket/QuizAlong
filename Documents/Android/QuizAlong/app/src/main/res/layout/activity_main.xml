@@ -69,15 +69,15 @@
                     android:src="@drawable/nav_icon"
                     app:tint="@color/white" />
 
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_gravity="end"
-                    android:layout_margin="5dp"
-                    android:background="@drawable/ic_profile_user"
-                    android:backgroundTint="@color/white"
-                    android:visibility="@{viewModel.selectedMenu == 0 ? View.VISIBLE : View.GONE}"
-                    app:circle_crop="@{viewModel.user.user.image}" />
+<!--                <ImageView-->
+<!--                    android:layout_width="40dp"-->
+<!--                    android:layout_height="40dp"-->
+<!--                    android:layout_gravity="end"-->
+<!--                    android:layout_margin="5dp"-->
+<!--                    android:background="@drawable/ic_profile_user"-->
+<!--                    android:backgroundTint="@color/white"-->
+<!--                    android:visibility="@{viewModel.selectedMenu == 0 ? View.VISIBLE : View.GONE}"-->
+<!--                    app:circle_crop="@{viewModel.user.user.image}" />-->
             </androidx.appcompat.widget.Toolbar>
 
             <androidx.viewpager.widget.ViewPager
@@ -117,7 +117,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gilroy_light"
                         android:text="@string/home"
-                        android:textColor="@{viewModel.selectedMenu == 0 ? @color/purple : @color/dark_grey }"
+                        android:textColor="@{viewModel.selectedMenu == 0 ? @color/cobalt_blue : @color/dark_grey }"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -133,8 +133,8 @@
 
                     <ImageView
                         android:id="@+id/iv_cat"
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:src="@drawable/ic_categories"
                         android:tint="@{viewModel.selectedMenu == 1 ? @color/cobalt_blue : @color/dark_grey }" />
 
@@ -144,7 +144,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gilroy_light"
                         android:text="@string/categories"
-                        android:textColor="@{viewModel.selectedMenu == 1 ? @color/purple : @color/dark_grey }"
+                        android:textColor="@{viewModel.selectedMenu == 1 ? @color/cobalt_blue : @color/dark_grey }"
                         android:textSize="13sp" />
                 </LinearLayout>
 
@@ -171,7 +171,7 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gilroy_light"
                         android:text="@string/profile"
-                        android:textColor="@{viewModel.selectedMenu == 2 ? @color/purple : @color/dark_grey }"
+                        android:textColor="@{viewModel.selectedMenu == 2 ? @color/cobalt_blue : @color/dark_grey }"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>

@@ -1,6 +1,6 @@
 package com.thequizapp.quizalong.api;
 //testing dev branch
-import com.thequizapp.quizalong.model.categories.Categories;
+import com.thequizapp.quizalong.model.categories.CategoriesResponse;
 import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
 import com.thequizapp.quizalong.model.notification.Notifications;
@@ -20,11 +20,14 @@ import okhttp3.RequestBody;
 import retrofit2.http.Field;
 import retrofit2.http.FieldMap;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ApiService {
     @FormUrlEncoded
@@ -35,13 +38,25 @@ public interface ApiService {
     @POST(Const.QUIZ_HOMEPAGE)
     Single<HomePage> getHomePage(@Header(Const.API_KEY) String apiKey);
 
-    @POST(Const.QUIZ_ALLCATEGORIES)
-    Single<Categories> getAllCategories(@Header(Const.API_KEY) String apiKey);
+    @GET(Const.QUIZ_ALLCATEGORIES)
+    Single<CategoriesResponse> getAllCategories(@Header(Const.API_KEY) String apiKey,
+                                                @Path(Const.COURSE_ID) int course_id,
+                                                @Path(Const.USER_ID) int userId);
+    @FormUrlEncoded
+    @POST(Const.QUIZ_USER_CATEGORIES)
+    Single<RestResponse> saveUserCategory(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, Integer> requestBodyHashMap);
+
+    @FormUrlEncoded
+    @POST(Const.QUIZ_USER_CATEGORIES_BULK)
+    Single<RestResponse> saveUserCategoriesBulk(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, Integer> requestBodyHashMap);
+
 
     @FormUrlEncoded
     @POST(Const.USER_GET_USER_PROFILE)
     Single<CurrentUser> getUserProfile(@Header(Const.API_KEY) String apiKey,
-                                       @Field(Const.USER_ID) String userId);
+                                       @Field(Const.USERID) String userId);
 
     @FormUrlEncoded
     @POST(Const.QUIZ_QUIZBYCATEGORY)

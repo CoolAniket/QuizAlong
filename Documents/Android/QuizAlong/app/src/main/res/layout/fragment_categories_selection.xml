@@ -7,22 +7,23 @@
 
         <variable
             name="viewModel"
-            type="com.thequizapp.quizalong.viewmodel.CategoriesViewModel" />
+            type="com.thequizapp.quizalong.viewmodel.CategoriesSelectionViewModel" />
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.home.CategoriesFragment">
+        tools:context=".view.home.CategoriesFragment"
+        android:background="@drawable/cat_bg">
 
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_cat"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:adapter="@{viewModel.categoriesAdapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:orientation="vertical"
-            tools:listitem="@layout/item_year" />
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="3"
+            tools:listitem="@layout/item_cat_categoies_selection" />
     </LinearLayout>
 </layout>

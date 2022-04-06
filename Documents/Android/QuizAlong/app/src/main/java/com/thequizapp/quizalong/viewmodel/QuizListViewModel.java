@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.adapter.QuizesAdapter;
-import com.thequizapp.quizalong.model.categories.Categories;
+import com.thequizapp.quizalong.model.categories.CategoriesResponse;
 import com.thequizapp.quizalong.utils.Global;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -14,16 +14,16 @@ import io.reactivex.schedulers.Schedulers;
 
 public class QuizListViewModel extends ViewModel {
     private final CompositeDisposable disposable = new CompositeDisposable();
-    private Categories.CategoriesItem categoriesItem;
+    private CategoriesResponse.Category categoriesItem;
     private QuizesAdapter quizesAdapter = new QuizesAdapter();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
     private ObservableBoolean isEmpty = new ObservableBoolean(false);
 
-    public Categories.CategoriesItem getCategoriesItem() {
+    public CategoriesResponse.Category getCategoriesItem() {
         return categoriesItem;
     }
 
-    public void setCategoriesItem(Categories.CategoriesItem categoriesItem) {
+    public void setCategoriesItem(CategoriesResponse.Category categoriesItem) {
         this.categoriesItem = categoriesItem;
     }
 
@@ -52,7 +52,7 @@ public class QuizListViewModel extends ViewModel {
     }
 
     public void getQuizesByCatId() {
-        disposable.add(Global.initRetrofit().getQuizByCatId(BuildConfig.APIKEY, String.valueOf(categoriesItem.getId()))
+        disposable.add(Global.initRetrofit().getQuizByCatId(BuildConfig.APIKEY, String.valueOf(categoriesItem.getKey()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

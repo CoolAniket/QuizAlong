@@ -79,7 +79,7 @@
                     android:orientation="horizontal"
                     app:adapter="@{viewModel.homeCategoriesAdapter}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_categoies" />
+                    tools:listitem="@layout/item_box_quiz" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -161,7 +161,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-            app:SpinKit_Color="@color/purple" />
+            app:SpinKit_Color="@color/cobalt_blue" />
 
 
     </RelativeLayout>
