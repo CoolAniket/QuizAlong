@@ -63,6 +63,7 @@ public class CourseSelectionViewModel extends ViewModel {
     public void saveCategories(){
         if (categoriesAdapter.getSelectedCategories().size() < 2) {
             toast.setValue("Select min 2 categories");
+            return;
         }
         HashMap<String, Integer> hashMap = new HashMap<>();
         Integer[] selectedCats = categoriesAdapter.getSelectedCategories().toArray(new Integer[0]);

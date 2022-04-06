@@ -63,8 +63,7 @@ public class LoginActivity extends BaseActivity {
         viewModel.getOnSuccess().observe(this, user -> {
             sessionManager.saveUser(user);
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
-//            startActivity(new Intent(this, MainActivity.class));
-            startActivity(new Intent(this, CourseSelectionActivity.class));
+            startActivity(new Intent(this, AdditionalInfoActivity.class));
             finishAffinity();
         });
     }

@@ -94,7 +94,7 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:src="@drawable/bg_oval"
-                        app:tint="@color/purple" />
+                        app:tint="@color/cobalt_blue" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}"
-            app:SpinKit_Color="@color/purple" />
+            app:SpinKit_Color="@color/cobalt_blue" />
 
 
     </RelativeLayout>

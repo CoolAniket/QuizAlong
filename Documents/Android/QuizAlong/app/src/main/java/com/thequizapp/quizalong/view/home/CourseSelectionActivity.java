@@ -13,6 +13,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityCourseSelectionBinding;
+import com.thequizapp.quizalong.utils.Global;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.main.MainActivity;
@@ -31,7 +32,9 @@ public class CourseSelectionActivity extends BaseActivity {
     }
 
     private void initListener() {
-        viewModel.getCourseData(Const.COURSE_TYPE_MEDICINE, new SessionManager(this).getUser().getUser().getId());
+        Global.userId.set(String.valueOf(new SessionManager(this).getUser().getUser().getId()));
+
+        viewModel.getCourseData(Const.COURSE_TYPE_MEDICINE, Integer.parseInt(Global.userId.get()));
 //        viewModel.getCourseData(Const.COURSE_TYPE_MEDICINE, 35);
 
         viewModel.getIsSuccess().observe(this, isSuccess -> {

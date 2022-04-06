@@ -48,8 +48,8 @@
                     android:background="@drawable/ic_profile_user"
                     android:padding="1dp"
                     android:transitionName="@string/profile"
-                     />
-                <!--app:circle_crop='@{viewModel.user.user.image}'-->
+                    app:circle_crop='@{viewModel.user.user.image}' />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -62,19 +62,18 @@
                     <ImageView
                         android:layout_width="15dp"
                         android:layout_height="15dp"
-
+                        app:user_level="@{viewModel.user.user.totalPoints}"
                         android:src="@drawable/ic_star" />
-                    <!--app:user_level="@{viewModel.user.user.total_points}"-->
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/gilroy_bold"
-
+                        app:user_player="@{viewModel.user.user.totalPoints}"
                         android:textAllCaps="true"
                         android:textColor="@color/white"
                         android:textSize="12sp" />
-                    <!--app:user_player="@{viewModel.user.user.total_points}"-->
                 </LinearLayout>
 
                 <TextView
@@ -82,10 +81,10 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/gilroy_bold"
-
+                    android:text="@{viewModel.user.user.fullName}"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
-                <!--android:text="@{viewModel.user.user.full_name}"-->
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -102,11 +101,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/gilroy_bold"
-
+                            android:text='@{Global.prettyCount(viewModel.user.user.totalPlays)}'
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
-                        <!--android:text='@{Global.prettyCount(viewModel.user.user.total_plays)}'-->
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -126,11 +125,11 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/gilroy_bold"
-
+                            android:text="@{Global.prettyCount(viewModel.user.user.totalPoints)}"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="18sp" />
-                        <!--android:text="@{Global.prettyCount(viewModel.user.user.total_points)}"-->
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -190,11 +189,11 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/gilroy_bold"
-
+                                android:text='@{""+viewModel.user.user.wallet}'
                                 android:textAllCaps="true"
                                 android:textColor="@color/white"
                                 android:textSize="30sp" />
-                            <!--android:text='@{""+viewModel.user.user.wallet}'-->
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -265,10 +264,10 @@
                     android:layout_marginVertical="5dp"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/gilroy_reguler"
-
+                    android:text='@{"$1 = "+viewModel.currentPrice+" Points"}'
                     android:textColor="@color/black"
                     android:textSize="12sp" />
-                <!--android:text='@{"$1 = "+viewModel.currentPrice+" Points"}'-->
+
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
@@ -330,11 +329,11 @@
                                 android:paddingHorizontal="20dp"
                                 android:paddingTop="5dp"
                                 android:paddingBottom="5dp"
-
+                                android:text="@{viewModel.user.user.referCode}"
                                 android:textAllCaps="true"
                                 android:textColor="@color/white"
                                 android:textSize="16sp" />
-                            <!--android:text="@{viewModel.user.user.refer_code}"-->
+
                             <ImageView
                                 android:id="@+id/iv_copy"
                                 android:layout_width="30dp"

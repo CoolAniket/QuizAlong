@@ -34,6 +34,7 @@ import com.thequizapp.quizalong.databinding.ActivityAdditionalInfoBinding;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.compressimage.Compressor;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.home.CourseSelectionActivity;
 import com.thequizapp.quizalong.view.main.MainActivity;
 import com.thequizapp.quizalong.viewmodel.AdditionalInfoViewModel;
 
@@ -82,7 +83,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
             sessionManager.saveAdditionalDetails(isSuccess.toString());
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, CourseSelectionActivity.class));
             finishAffinity();
         });
     }
