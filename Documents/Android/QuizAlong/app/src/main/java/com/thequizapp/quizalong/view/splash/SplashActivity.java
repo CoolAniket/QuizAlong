@@ -1,5 +1,6 @@
 package com.thequizapp.quizalong.view.splash;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +14,7 @@ import com.thequizapp.quizalong.utils.Global;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
+import com.thequizapp.quizalong.view.login.LoginActivity;
 import com.thequizapp.quizalong.view.main.MainActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -46,7 +48,10 @@ public class SplashActivity extends BaseActivity {
                                 //startActivity(new Intent(this, WelcomeActivity.class));
                                 if (sessionManager.getUser() == null) {
 
-                                    startActivity(new Intent(this, WelcomeActivity.class));
+                                    //startActivity(new Intent(this, WelcomeActivity.class));
+                                    Intent intent = new Intent(this, LoginActivity.class);
+                                    //ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, pair);
+                                    startActivity(intent);
                                 }
                                 else if(sessionManager.getAdditionalDetails() == null){
                                     Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));

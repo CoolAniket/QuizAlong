@@ -63,7 +63,7 @@ public class CustomDialogBuilder {
 
     }
 
-    public void showLifeLineDialog(boolean isUseDoubleDeep, boolean isUseFiftyFifty, OnLifeLineListener onLifeLineListener) {
+    public void showLifeLineDialog(boolean isUseDoubleDeep, boolean isUseFiftyFifty, boolean isUseSkip, OnLifeLineListener onLifeLineListener) {
         //usedLifeLine 0 = Double Dip, 1 = Fifty Fifty
 
         if (mContext == null)
@@ -75,6 +75,9 @@ public class CustomDialogBuilder {
         if (isUseFiftyFifty) {
             binding.ivFiftyDisable.setVisibility(View.VISIBLE);
         }
+        if (isUseSkip) {
+            binding.ivSkipDisable.setVisibility(View.VISIBLE);
+        }
         binding.cardDoubleDip.setOnClickListener(v -> {
             mBuilder.dismiss();
             onLifeLineListener.onDoubleDipClick();
@@ -82,6 +85,10 @@ public class CustomDialogBuilder {
         binding.cardFiftyFifty.setOnClickListener(v -> {
             mBuilder.dismiss();
             onLifeLineListener.onFiftyFiftyClick();
+        });
+        binding.cardSkip.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onLifeLineListener.onSkipClick();
         });
         binding.tvCancel.setOnClickListener(v -> {
             mBuilder.dismiss();
@@ -179,6 +186,8 @@ public class CustomDialogBuilder {
         void onDoubleDipClick();
 
         void onFiftyFiftyClick();
+
+        void onSkipClick();
 
         void onDismissClick();
     }

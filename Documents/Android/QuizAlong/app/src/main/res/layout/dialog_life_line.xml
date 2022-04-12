@@ -49,7 +49,8 @@
                 android:layout_width="165dp"
                 android:layout_height="165dp"
                 android:layout_marginBottom="20dp"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="20dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -105,10 +106,77 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/card_skip"
+                android:layout_width="165dp"
+                android:layout_height="165dp"
+                android:layout_marginBottom="20dp"
+                app:cardCornerRadius="20dp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/bg_gredient_5" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <!--<TextView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_oval_border"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:gravity="center"
+                        android:text="x2"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />-->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:gravity="center"
+                        android:src="@drawable/fast_forward"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="@string/skip"
+                        android:textAllCaps="true"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:gravity="center"
+                        android:text="@string/skip_the_question"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/iv_skip_disable"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_gredient_5"
+                    android:backgroundTint="@color/black_55"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:visibility="gone" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
                 android:id="@+id/card_fifty_fifty"
                 android:layout_width="165dp"
                 android:layout_height="165dp"
-                app:cardCornerRadius="20dp">
+                app:cardCornerRadius="20dp"
+                android:visibility="gone">
 
                 <ImageView
                     android:layout_width="match_parent"

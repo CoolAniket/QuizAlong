@@ -44,7 +44,7 @@ public class  MainActivity extends BaseActivity {
     }
 
     private void initView() {
-        viewModel.setUser(new SessionManager(this).getUser());
+        //viewModel.setUser(new SessionManager(this).getUser());
         lastView = binding.ivHome;
         setSelect(0);
         initViewPager();

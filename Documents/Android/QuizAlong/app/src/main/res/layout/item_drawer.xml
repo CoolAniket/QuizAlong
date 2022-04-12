@@ -43,7 +43,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:background="@drawable/bg_oval"
-                android:backgroundTint="@color/purple"
+                android:backgroundTint="@color/cobalt_blue"
                 android:padding="8dp"
                 android:src="@drawable/ic_bar_chart"
                 app:tint="@color/white" />
@@ -105,7 +105,8 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:padding="2dp"
-                android:src="@drawable/ic_dollar_symbol" />
+                android:src="@drawable/ic_dollar_symbol"
+                app:tint="@color/cobalt_blue" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -134,6 +135,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:padding="2dp"
+                app:tint="@color/cobalt_blue"
                 android:src="@drawable/ic_notification" />
 
             <TextView
@@ -163,6 +165,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:padding="2dp"
+                app:tint="@color/cobalt_blue"
                 android:src="@drawable/ic_privacy" />
 
             <TextView
@@ -192,6 +195,7 @@
                 android:layout_width="28dp"
                 android:layout_height="28dp"
                 android:padding="2dp"
+                app:tint="@color/cobalt_blue"
                 android:src="@drawable/ic_term_of_use" />
 
             <TextView

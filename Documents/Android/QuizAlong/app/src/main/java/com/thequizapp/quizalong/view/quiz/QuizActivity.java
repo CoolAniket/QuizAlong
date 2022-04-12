@@ -10,11 +10,13 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,12 +27,14 @@ import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
 import com.thequizapp.quizalong.model.home.HomePage;
+import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.BannerAds;
 import com.thequizapp.quizalong.utils.ads.InterstitialAds;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
 import com.thequizapp.quizalong.viewmodel.QuizViewModel;
 
 import java.io.File;
@@ -44,7 +48,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
     Handler handler = new Handler(Looper.getMainLooper());
     private InterstitialAds interstitialAds;
     private RewardAds rewardAds;
-
+    private CountDownTimer cTimer = null;
+    private CountDownTimer lTimer = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +63,10 @@ public class QuizActivity extends BaseActivity implements Runnable {
     }
 
     private void initData() {
+
         sessionManager = new SessionManager(this);
-        viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
+        //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
+        viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.Quize.class));
         viewModel.getQuestionsByQuizId();
     }
 
@@ -68,7 +75,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
         interstitialAds = new InterstitialAds(QuizActivity.this);
 
         rewardAds = new RewardAds(QuizActivity.this);
-        if (viewModel.getQuizesItem().getType() != 0) {
+        /*if (viewModel.getQuizesItem().getType() != 0) {
 
             new CustomDialogBuilder(this).showQuizTypeDialog(viewModel.getQuizesItem().getType() == 1, new CustomDialogBuilder.OnQuitTypeListener() {
                 @Override
@@ -84,21 +91,58 @@ public class QuizActivity extends BaseActivity implements Runnable {
                     }
                 }
             });
-        }
+        }*/
     }
 
     private void startCountDown() {
+
         handler.removeCallbacks(this);
-        if (viewModel.getQuizesItem().getType() == 1) {
+        /*if (viewModel.getQuizesItem().getType() == 1) {
             viewModel.getRapidFireDuration().set(sessionManager.getRapidFireTime());
             handler.postDelayed(this, 1000);
+        }*/
+
+        if (viewModel.getIsLobby().get()) {
+            if (cTimer != null)
+                cTimer.cancel();
+            cTimer = new CountDownTimer(30000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    Log.e("seconds remaining: ", "" + millisUntilFinished / 1000);
+                    viewModel.getTimeRemaining().set((int) (millisUntilFinished / 1000));
+                }
+
+                public void onFinish() {
+                    Log.e("omFinish ", "");
+                    addScore(true);
+                }
+            };
+            cTimer.start();
         }
     }
 
+    private void startLobbyTimer(){
+        if (viewModel.getIsInfo().get()) {
+            if (lTimer != null)
+                lTimer.cancel();
+            lTimer = new CountDownTimer(10000, 1000) {
+                public void onTick(long millisUntilFinished) {
+                    Log.e("l seconds remaining: ", "" + millisUntilFinished / 1000);
+                    viewModel.getLobbyTimeRemaining().set((int) (millisUntilFinished / 1000));
+                }
+
+                public void onFinish() {
+                    Log.e("lobby omFinish ", "");
+                    viewModel.getIsLobby().set(true);
+                    startCountDown();
+                }
+            };
+            lTimer.start();
+        }
+    }
     private void initListener() {
         binding.ivLifeLine.setOnClickListener(v -> {
             if (!viewModel.isUseLifeLineInCurrentQue()) {
-                new CustomDialogBuilder(this).showLifeLineDialog(viewModel.isUseDoubleDeep(), viewModel.isUseFiftyFifty(), new CustomDialogBuilder.OnLifeLineListener() {
+                new CustomDialogBuilder(this).showLifeLineDialog(viewModel.isUseDoubleDeep(), viewModel.isUseFiftyFifty(), viewModel.isUseSkip(), new CustomDialogBuilder.OnLifeLineListener() {
                     @Override
                     public void onDoubleDipClick() {
                         handler.postDelayed(QuizActivity.this, 1000);
@@ -114,6 +158,13 @@ public class QuizActivity extends BaseActivity implements Runnable {
                     }
 
                     @Override
+                    public void onSkipClick() {
+                        handler.postDelayed(QuizActivity.this, 1000);
+                        viewModel.setUseSkip(true);
+                        viewModel.skipQuestion();
+                    }
+
+                    @Override
                     public void onDismissClick() {
                         handler.postDelayed(QuizActivity.this, 1000);
                     }
@@ -124,6 +175,11 @@ public class QuizActivity extends BaseActivity implements Runnable {
         });
         binding.tvCompleted.setOnClickListener(v -> onBackPressed());
         binding.tvExit.setOnClickListener(v -> onBackPressed());
+        binding.tvCancel.setOnClickListener(v -> onBackPressed());
+        binding.btnGo.setOnClickListener(v -> {
+            viewModel.getIsInfo().set(true);
+            startLobbyTimer();
+        });
         binding.lyt2X.setOnClickListener(v -> {
             rewardAds.setOnRewarded(() -> {
                 viewModel.getTotalScore().set(viewModel.getTotalScore().get() * 2);
@@ -211,16 +267,26 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
     private void initObserve() {
         viewModel.getCurrentQuestions().observe(this, questionsItem -> {
-            viewModel.setAnswerList(questionsItem.getAnswerList());
+            viewModel.setAnswerList(questionsItem.getOptions());
             binding.setQuestion(questionsItem);
             binding.setAnswerList(viewModel.getAnswerList());
+
         });
-        viewModel.getIsAnswer().observe(this, this::showResultDialog);
+        //viewModel.getIsAnswer().observe(this, this::showResultDialog);
+
+        viewModel.getAnswerVal().observe(this, this::showResultDialog);
+
+        viewModel.getOnSuccess().observe(this, AddDataResponse -> {
+
+            Log.e("....",""+AddDataResponse);
+            Toast.makeText(this, getResources().getString(R.string.live_data_successfully), Toast.LENGTH_SHORT).show();
+            viewModel.getIsComplete().set(true);
+        });
     }
 
-    private void showResultDialog(Boolean isAnswerRight) {
-
-        MediaPlayer mediaPlayer = MediaPlayer.create(this, isAnswerRight ? R.raw.true_ : R.raw.false_);
+    /*private void showResultDialog(Boolean isAnswerRight) {*/
+        private void showResultDialog(String answer) {
+        /*MediaPlayer mediaPlayer = MediaPlayer.create(this, isAnswerRight ? R.raw.true_ : R.raw.false_);
         mediaPlayer.start();
         if (viewModel.getCurrentQuestions().getValue() != null) {
             viewModel.setUseLifeLineInCurrentQue(false);
@@ -246,18 +312,27 @@ public class QuizActivity extends BaseActivity implements Runnable {
                                                 addScore();
                                             }
                                     ).start());
-        }
+        }*/
+        Log.e(">>> ",answer);
+            cTimer.cancel();
+        viewModel.setUseLifeLineInCurrentQue(false);
+        handler.removeCallbacks(this);
+
+        addScore(false);
     }
 
-    private void addScore() {
+    private void addScore(boolean isTimerOff) {
+
+        Log.e("???? ",viewModel.getCurrentPosition().get()+""+viewModel.getAnswerVal().getValue());
         if (viewModel.getQuestionsList().size() > viewModel.getCurrentPosition().get()) {
+            viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff);
             viewModel.getCurrentQuestions().setValue(viewModel.getQuestionsList().get(viewModel.getCurrentPosition().get()));
             viewModel.getCurrentPosition().set(viewModel.getCurrentPosition().get() + 1);
             startCountDown();
         } else {
             handler.removeCallbacks(this);
             viewModel.getIsComplete().set(true);
-
+            viewModel.callAddGameDataLiveApi();
         }
         binding.rtlMain.setRotationY(-90);
         binding.rtlMain.animate().withLayer()
@@ -284,8 +359,16 @@ public class QuizActivity extends BaseActivity implements Runnable {
             if (interstitialAds != null) {
                 interstitialAds.showAds();
             }
+            if(cTimer != null)
+                cTimer.cancel();
+            if(lTimer != null)
+                lTimer.cancel();
             super.onBackPressed();
         } else {
+            if(cTimer != null)
+                cTimer.cancel();
+            if(lTimer != null)
+                lTimer.cancel();
             handler.removeCallbacks(this);
             new CustomDialogBuilder(this).
                     showSimpleDialog(R.drawable.ic_warning,

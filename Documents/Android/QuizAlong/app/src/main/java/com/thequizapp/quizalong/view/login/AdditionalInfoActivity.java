@@ -41,6 +41,7 @@ import com.thequizapp.quizalong.viewmodel.AdditionalInfoViewModel;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 public class AdditionalInfoActivity extends BaseActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener{
     private static final int RESULT_LOAD_IMAGE = 101;
@@ -52,6 +53,9 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
     private ArrayList<String> years;
     int day, month, year, hour, minute;
     int myday, myMonth, myYear, myHour, myMinute;
+
+    int maxYear,maxMonth,maxDay,minYear,minMonth,minDay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +105,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
-        Log.e("AAAAAA ",""+viewModel.getUser().getCourse());
+        //Log.e("AAAAAA ",""+viewModel.getUser().getCourse());
         /*Log.e("AAAAAA ",""+viewModel.getUser().getCourse().get(0).getValue());
         Log.e("CCCC ",""+viewModel.getUser().getCourse().get(0).getYear().size());
         Log.e("CCCC ",""+viewModel.getUser().getCourse().get(0).getYear().get(0).getValue());*/
@@ -115,7 +119,23 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
                 year = calendar.get(Calendar.YEAR);
                 month = calendar.get(Calendar.MONTH);
                 day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                /*maxYear = year - 7;
+                maxMonth = month;
+                maxDay = day;
+
+                minYear = year - 18;
+                minMonth = month;
+                minDay = day;*/
+                Date today = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(today);
+                c.add( Calendar.YEAR, -18 ); // Subtract 6 months
+                long minDate = c.getTime().getTime() ;// Twice!
+
                 DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionalInfoActivity.this, R.style.DialogTheme,AdditionalInfoActivity.this,year, month,day);
+                datePickerDialog.getDatePicker().setMaxDate(minDate);
+                //datePickerDialog.getDatePicker().setMinDate(minDate);
                 datePickerDialog.show();
             }
         });
@@ -126,6 +146,19 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
             public void afterTextChanged(Editable mEdit)
             {
                 viewModel.setCollegeName(mEdit.toString());
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after){}
+
+            public void onTextChanged(CharSequence s, int start, int before, int count){}
+        });
+
+        binding.etMobileNo.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void afterTextChanged(Editable mEdit)
+            {
+                viewModel.setMobileNo(mEdit.toString());
             }
 
             public void beforeTextChanged(CharSequence s, int start, int count, int after){}
@@ -161,18 +194,10 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         Log.e("CCCC ",""+years);
 
         //Setting adapter to show the items in the spinner
-        binding.spCourse.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, courses));
+        /*binding.spCourse.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, courses));
         binding.spCourse.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String[] paymentMethods = getResources().getStringArray(R.array.payment);
-//                if (position != 0) {
-//                    viewModel.setPaymentMethod(paymentMethods[position]);
-//                } else {
-//                    viewModel.setPaymentMethod(null);
-//                }
-                Log.e(".... ",""+position);
-                //Log.e(".... ",""+viewModel.getUser().getCourse().get(position-1).getKey());
                 if (position != 0) {
                     viewModel.setCourseName(""+viewModel.getUser().getCourse().get(position-1).getKey());
                 } else {
@@ -182,9 +207,8 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//
             }
-        });
+        });*/
 
         binding.spYear.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, years));
         binding.spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -264,4 +288,6 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
     public void onTimeSet(TimePicker timePicker, int i, int i1) {
 
     }
+
+
 }

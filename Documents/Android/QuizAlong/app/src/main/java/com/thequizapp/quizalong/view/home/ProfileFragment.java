@@ -65,10 +65,10 @@ public class ProfileFragment extends Fragment {
             if (sessionManager.getGameSettings() != null) {
                 viewModel.setCurrentPrice(sessionManager.getGameSettings().getCoinsToUsd());
             }
-            viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+            /*viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
                 binding.setViewModel(viewModel);
                 sessionManager.saveUser(user);
-            });
+            });*/
         }
     }
 

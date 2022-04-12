@@ -5,7 +5,9 @@ import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
 import com.thequizapp.quizalong.model.notification.Notifications;
+import com.thequizapp.quizalong.model.questions.NewQuestions;
 import com.thequizapp.quizalong.model.questions.Questions;
+import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
@@ -74,9 +76,14 @@ public interface ApiService {
                                        @Field(Const.CATID) String userId);
 
     @FormUrlEncoded
-    @POST(Const.QUIZ_QUESTIONS_OF_QUIZ)
-    Single<Questions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,
-                                           @Field(Const.QUIZ_ID) String userId);
+    @POST(Const.QUIZ_ADD_GAME_DATA_LIVE)
+    Single<AddDataLiveResponse> addGameDataLive(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, String> hashMap);
+
+
+    @GET(Const.QUIZ_QUESTIONS_OF_QUIZ)
+    Single<NewQuestions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,
+                                              @Path(Const.QUIZ_ID_NEW) String quizId);
 
     @FormUrlEncoded
     @POST(Const.USER_ADD_POINTS_TO_WALLET)

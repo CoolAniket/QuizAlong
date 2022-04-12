@@ -33,6 +33,7 @@ public class AdditionalInfoViewModel extends ViewModel {
 
     private String courseName;
     private String collegeName;
+    private String mobileNo;
     private String year;
     private String profileUri;
     private String dob;
@@ -59,6 +60,14 @@ public class AdditionalInfoViewModel extends ViewModel {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public String getMobileNo() {
+        return mobileNo;
+    }
+
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
     }
 
     public String getDob() {
@@ -102,17 +111,22 @@ public class AdditionalInfoViewModel extends ViewModel {
             toast.setValue("Please enter college name...!");
             return;
         }
+        if (mobileNo == null || mobileNo.isEmpty()) {
+            toast.setValue("Please enter mobile number...!");
+            return;
+        }
         if (year == null || year.isEmpty()) {
             toast.setValue("Please select year...!");
             return;
         }
-        if (courseName == null || courseName.isEmpty()) {
+        /*if (courseName == null || courseName.isEmpty()) {
             toast.setValue("Please select course...!");
             return;
-        }
+        }*/
         HashMap<String, RequestBody> hashMap = new HashMap<>();
         hashMap.put("user_id", toRequestBody(Global.userId.get()));
-        hashMap.put("course_id", toRequestBody(getCourseName()));
+        /*hashMap.put("course_id", toRequestBody(getCourseName()));*/
+        hashMap.put("course_id", toRequestBody("1"));
         hashMap.put("year_id", toRequestBody(getYear()));
         hashMap.put("college", toRequestBody(getCollegeName()));
         hashMap.put("dob", toRequestBody(getDob()));

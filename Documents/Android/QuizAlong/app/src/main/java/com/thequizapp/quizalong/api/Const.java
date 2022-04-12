@@ -17,7 +17,9 @@ public final class Const {
     public static final String QUIZ_PAST= "quiz/pastQuiz";
     public static final String USER_GET_USER_PROFILE = "user/getUserProfile";
     public static final String QUIZ_QUIZBYCATEGORY = "quiz/quizbycategory";
-    public static final String QUIZ_QUESTIONS_OF_QUIZ = "quiz/questionsOfQuiz";
+    public static final String QUIZ_ADD_GAME_DATA_LIVE= "leaderboard/addGameDataLive";
+    public static final String QUIZ_ADD_GAME_DATA_PAST= "leaderboard/addGameDataPast";
+    public static final String QUIZ_QUESTIONS_OF_QUIZ = "quiz/questionsOfQuiz/{quiz_id}";
     public static final String USER_ADD_POINTS_TO_WALLET = "user/addPointsToWallet";
     public static final String USER_INCREASE_PLAY = "user/increasePlay";
     public static final String APP_SETTINGS = "app/settings";
@@ -34,6 +36,7 @@ public final class Const {
     public static final String COURSE_ID = "course_id";
     public static final String CATID = "catid";
     public static final String QUIZ_ID = "quizId";
+    public static final String QUIZ_ID_NEW = "quiz_id";
     public static final String POINTS = "points";
     public static final String PLATFORM = "platform";
     public static final String AMOUNT = "amount";

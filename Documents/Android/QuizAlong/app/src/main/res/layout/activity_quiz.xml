@@ -14,7 +14,7 @@
 
         <variable
             name="question"
-            type="com.thequizapp.quizalong.model.questions.Questions.QuestionsItem" />
+            type="com.thequizapp.quizalong.model.questions.NewQuestions.Question" />
 
         <variable
             name="answerList"
@@ -44,7 +44,7 @@
             android:layout_marginTop="50dp"
             android:orientation="vertical"
             android:visibility="@{viewModel.isLoading || viewModel.isComplete ? View.GONE : View.VISIBLE}"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
 
             <TextView
@@ -54,7 +54,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/gilroy_bold"
                 android:singleLine="true"
-                android:text="@{viewModel.quizesItem.title}"
+                android:text="@{viewModel.twistQuizesItem.title.toString()}"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -83,7 +83,7 @@
                             android:gravity="center"
                             android:padding="1dp"
                             android:singleLine="true"
-                            android:text='@{""+viewModel.quizesItem.questionsCount}'
+                            android:text='@{""+viewModel.twistQuizesItem.questions.toString()}'
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
@@ -107,7 +107,7 @@
                             android:gravity="center"
                             android:padding="1dp"
                             android:singleLine="true"
-                            android:text='@{""+viewModel.quizesItem.totalPoints}'
+                            android:text='@{""+viewModel.twistQuizesItem.totalTime.toString()}'
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
@@ -119,7 +119,7 @@
                             android:gravity="center"
                             android:padding="1dp"
                             android:singleLine="true"
-                            android:text="@string/points"
+                            android:text="@string/mins"
                             android:textColor="@color/white" />
                     </LinearLayout>
 
@@ -139,7 +139,7 @@
                             android:gravity="center"
                             android:paddingHorizontal="15dp"
                             android:paddingVertical="4.5dp"
-                            android:text="@{viewModel.quizesItem.category.name}"
+                            android:text="@{viewModel.twistQuizesItem.title}"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="11sp" />
@@ -171,6 +171,45 @@
                                 android:textColor="@color/black"
                                 android:textSize="11sp" />
                         </LinearLayout>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{viewModel.twistQuizesItem.winPercent.toString()}"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:layout_gravity="center"
+                            android:layout_marginLeft="10dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="%"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:layout_gravity="center"/>
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/trophy"
+                            android:layout_marginLeft="10dp"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="2 X \u20B9"
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="13sp"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="10dp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -223,7 +262,8 @@
                                 android:layout_gravity="end"
                                 android:background="@drawable/bg_top_right_bottom_left_20"
                                 android:gravity="center"
-                                android:orientation="vertical">
+                                android:orientation="vertical"
+                                android:visibility="visible">
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -231,16 +271,17 @@
                                     android:fontFamily="@font/gilroy_bold"
                                     android:text='@{""+viewModel.totalScore}'
                                     android:textColor="@color/white"
-                                    android:textSize="16sp" />
+                                    android:textSize="16sp"
+                                    android:visibility="gone"/>
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/gilroy_medium"
-                                    android:text="@string/total_score"
+                                    android:text="FREE/25/50"
                                     android:textAllCaps="true"
                                     android:textColor="@color/white"
-                                    android:textSize="11sp" />
+                                    android:textSize="14sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -276,17 +317,24 @@
                                 android:paddingHorizontal="10dp"
                                 android:paddingVertical="3dp">
 
-                                <ImageView
+                                <!--<ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_coin" />
+                                    android:src="@drawable/ic_coin" />-->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="5dp"
+                                    android:fontFamily="@font/gilroy_bold"
+                                    android:text='Countdown :- '
+                                    android:textColor="@color/white" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginStart="5dp"
                                     android:fontFamily="@font/gilroy_bold"
-                                    android:text='@{question.reward+" Points"}'
+                                    android:text="@{String.valueOf(viewModel.timeRemaining)}"
                                     android:textColor="@color/white" />
                             </LinearLayout>
                         </RelativeLayout>
@@ -531,7 +579,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="@{viewModel.isComplete ? View.VISIBLE : View.GONE}"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/lyt_ss"
@@ -600,7 +648,7 @@
                             android:ellipsize="end"
                             android:fontFamily="@font/gilroy_bold"
                             android:singleLine="true"
-                            android:text="@{viewModel.quizesItem.title}"
+                            android:text="@{viewModel.twistQuizesItem.title}"
                             android:textColor="@color/white"
                             android:textSize="20sp" />
 
@@ -618,7 +666,7 @@
                                 android:gravity="center"
                                 android:padding="1dp"
                                 android:singleLine="true"
-                                android:text='@{""+viewModel.quizesItem.questionsCount}'
+                                android:text='@{""+viewModel.twistQuizesItem.questions.toString()}'
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
 
@@ -644,7 +692,7 @@
                                 android:gravity="center"
                                 android:padding="1dp"
                                 android:singleLine="true"
-                                android:text='@{""+viewModel.quizesItem.totalPoints}'
+                                android:text='@{""+viewModel.twistQuizesItem.totalTime}'
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
 
@@ -656,7 +704,7 @@
                                 android:gravity="center"
                                 android:padding="1dp"
                                 android:singleLine="true"
-                                android:text="@string/points"
+                                android:text="@string/mins"
                                 android:textColor="@color/white"
                                 android:textSize="15sp" />
                         </LinearLayout>
@@ -676,12 +724,12 @@
                                 android:gravity="center"
                                 android:paddingHorizontal="15dp"
                                 android:paddingVertical="4.5dp"
-                                android:text="@{viewModel.quizesItem.category.name}"
+                                android:text="@{viewModel.twistQuizesItem.description}"
                                 android:textAllCaps="true"
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
 
-                            <LinearLayout
+                            <!--<LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="10dp"
@@ -704,7 +752,7 @@
                                     android:textAllCaps="true"
                                     android:textColor="@color/black"
                                     android:textSize="11sp" />
-                            </LinearLayout>
+                            </LinearLayout>-->
                         </LinearLayout>
 
                         <LinearLayout
@@ -722,10 +770,10 @@
                                 android:paddingHorizontal="15dp"
                                 android:paddingVertical="2dp"
                                 android:singleLine="true"
-                                android:text='@{""+viewModel.totalScore}'
+                                android:text="20"
                                 android:textColor="@color/white"
                                 android:textSize="22sp" />
-
+                            <!--android:text='@{""+viewModel.totalScore}'-->
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -815,6 +863,330 @@
                 android:textColor="@color/white"
                 android:textSize="16sp" />
         </LinearLayout>
+
+        <RelativeLayout
+            tools:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{!viewModel.isLobby ? View.VISIBLE : View.GONE}">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_app" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                tools:visibility="visible">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:text="@string/lobby"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:layout_gravity="center"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="5dp"
+                    android:gravity="center">
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/bg_oval"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:singleLine="true"
+                        android:text='@{""+viewModel.twistQuizesItem.questions.toString()}'
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:singleLine="true"
+                        android:text="@string/questions"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/bg_oval"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:singleLine="true"
+                        android:text='@{""+viewModel.twistQuizesItem.totalTime.toString()}'
+                        android:textColor="@color/white"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_semi_bold"
+                        android:gravity="center"
+                        android:padding="1dp"
+                        android:singleLine="true"
+                        android:text="@string/mins"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{viewModel.twistQuizesItem.winPercent.toString()}"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/trophy"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 X \u20B9"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_white_5"
+                        android:backgroundTint="@color/dim_white"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="4.5dp"
+                        android:text="@{viewModel.twistQuizesItem.title}"
+                        android:textAllCaps="true"
+                        android:textColor="@color/black"
+                        android:textSize="11sp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:background="@drawable/bg_white_5"
+                        android:backgroundTint="@color/dim_white"
+                        android:gravity="center"
+                        android:paddingHorizontal="15dp"
+                        android:paddingVertical="4.5dp"
+                        android:visibility="@{viewModel.quizesItem.type == 0 ? View.GONE : View.VISIBLE }">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/gilroy_medium"
+                            android:singleLine="true"
+                            android:text="@{viewModel.quizesItem.getTypeInString()}"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/gilroy_semi_bold"
+                    android:text="@string/quiz_shall"
+                    android:textColor="@color/white"
+                    android:textSize="20dp"
+                    android:layout_gravity="center"/>
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:background="@drawable/bg_oval"
+                    android:fontFamily="@font/gilroy_semi_bold"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:padding="1dp"
+                    android:singleLine="true"
+                    android:text='@{"00 :"+viewModel.lobbyTimeRemaining}'
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="60dp"
+                    android:background="@color/cobalt_blue"
+                    app:cardCornerRadius="10dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@color/cobalt_blue" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:text="Did you know?"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:text='# "SKIP" Lifeline helps you to pass question on correct'
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:layout_marginTop="30dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textAlignment="center"/>
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            tools:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{!viewModel.isInfo ? View.VISIBLE : View.GONE}">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/bg_app" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/timer" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:text="@string/correct_fast"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/gilroy_semi_bold"
+                    android:text="@string/remember"
+                    android:textColor="@color/white"
+                    android:textSize="20dp" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_go"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="60dp"
+                    android:background="@color/cobalt_blue"
+                    app:cardCornerRadius="10dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@color/cobalt_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="Let's GO"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/tv_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="@string/cancel"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+        </RelativeLayout>
 
         <FrameLayout
             android:id="@+id/banner_ads"
