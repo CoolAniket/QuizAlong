@@ -44,7 +44,6 @@ public class QuizViewModel extends ViewModel {
     private List<String> answerList = new ArrayList<>();
     private List<NewQuestions.Question> questionsList = new ArrayList<>();
     private MutableLiveData<Boolean> isAnswer = new MutableLiveData<>();
-    private MutableLiveData<Boolean> isSkipAnswer = new MutableLiveData<>();
     private MutableLiveData<String> answerVal = new MutableLiveData<>();
     private ObservableInt currentPosition = new ObservableInt(0);
     private ObservableBoolean isComplete = new ObservableBoolean(false);
@@ -63,22 +62,12 @@ public class QuizViewModel extends ViewModel {
     }
     private ObservableInt timeRemaining = new ObservableInt(0);
     private ObservableInt lobbyTimeRemaining = new ObservableInt(0);
-    private MutableLiveData<String> lobbyTime = new MutableLiveData<>();
-
     public ObservableInt getTimeRemaining() {
         return timeRemaining;
     }
 
     public void setTimeRemaining(ObservableInt timeRemaining) {
         this.timeRemaining = timeRemaining;
-    }
-
-    public MutableLiveData<String> getLobbyTime() {
-        return lobbyTime;
-    }
-
-    public void setLobbyTime(MutableLiveData<String> lobbyTime) {
-        this.lobbyTime = lobbyTime;
     }
 
     public ObservableInt getLobbyTimeRemaining() {
@@ -145,22 +134,8 @@ public class QuizViewModel extends ViewModel {
     }
 
     public void onAnswerClick(int selectAnswerNum) {
-        Log.e("selectAnswerNum ","..."+selectAnswerNum+" "+isAnswer.getValue());
-        if (currentQuestions.getValue() != null ) {
-            //rapidFireDuration.set(0);
-            resetQuestion();
-            if(selectAnswerNum == 0){
-                firstAnswerVisibility.set(View.VISIBLE);
-
-            }else if(selectAnswerNum == 1){
-                secondAnswerVisibility.set(View.VISIBLE);
-
-            }else if(selectAnswerNum == 2){
-                thirdAnswerVisibility.set(View.VISIBLE);
-
-            }else {
-                fourthAnswerVisibility.set(View.VISIBLE);
-            }
+        if (currentQuestions.getValue() != null) {
+            rapidFireDuration.set(0);
             NewQuestions.Question questionsItem = currentQuestions.getValue();
             String answer = answerList.get(selectAnswerNum);
             isAnswer.setValue(true);
@@ -189,79 +164,39 @@ public class QuizViewModel extends ViewModel {
         }
 
     }
-    public void createGameHashMap(int pos, boolean isTimerOff, String skip) {
+    public void createGameHashMap(int pos, boolean isTimerOff) {
         if(isTimerOff) {
-            Log.e("Hash", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
+            Log.e(">>>> ", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
             hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-            hashMap.put("selected_ans[" + (pos - 1) + "]", "");
+            hashMap.put("selected_ans[" + (pos - 1) + "]", "--");
             hashMap.put("time_taken[" + (pos - 1) + "]", "0");
         }else{
-            Log.e("Hash.....",skip);
-            if (skip == "skip") {
-                hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-                hashMap.put("selected_ans[" + (pos - 1) + "]", "skip");
-                hashMap.put("time_taken[" + (pos - 1) + "]", "0");
-            }else {
-                Log.e("Hash", String.valueOf(getTimeRemaining().get()));
-                hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-                hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
-                hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining().get()));
-            }
-
+            Log.e(">>>> ", String.valueOf(getTimeRemaining()));
+            hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
+            hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
+            hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining()));
         }
     }
     /*public void callAddGameDataLiveApi(HashMap<String, Integer> hashMap) {*/
-        public void callAddGameDataLiveApi(String quizType) {
-            Log.e("::: ",""+Global.userId.get()+" "+getTwistQuizesItem().getQuizId());
-        hashMap.put("user_id", Global.userId.get());
+        public void callAddGameDataLiveApi() {
+        hashMap.put("user_id", String.valueOf(Global.userId.get()));
         hashMap.put("quiz_id", String.valueOf(getTwistQuizesItem().getQuizId()));
-
-            Log.e("::: map ",hashMap.size()+""+hashMap.get(""));
-            Log.e("::: quizType ",quizType);
-            if(quizType == "past"){
-                disposable.add(Global.initRetrofit().addGameDataPast(BuildConfig.APIKEY, hashMap)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .unsubscribeOn(Schedulers.io())
-                        .doOnTerminate(() -> isLoading.set(false))
-                        .subscribe((addDataLiveResponse, throwable) -> {
-                            Log.e(">>>> past", "" + addDataLiveResponse + ".." + throwable);
-                            if (addDataLiveResponse != null) {
-                                onSuccess.setValue(addDataLiveResponse);
-                            } else if (throwable != null) {
-                                toast.setValue(throwable.getLocalizedMessage());
-                            }
-                        }));
-            }else {
-                disposable.add(Global.initRetrofit().addGameDataLive(BuildConfig.APIKEY, hashMap)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .unsubscribeOn(Schedulers.io())
-                        .doOnTerminate(() -> isLoading.set(false))
-                        .subscribe((addDataLiveResponse, throwable) -> {
-                            Log.e(">>>> live", "" + addDataLiveResponse + ".." + throwable);
-                            if (addDataLiveResponse != null) {
-                                onSuccess.setValue(addDataLiveResponse);
-                            } else if (throwable != null) {
-                                toast.setValue(throwable.getLocalizedMessage());
-                            }
-                        }));
-            }
+        disposable.add(Global.initRetrofit().addGameDataLive(BuildConfig.APIKEY, hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .doOnTerminate(() -> isLoading.set(false))
+                .subscribe((addDataLiveResponse, throwable) -> {
+                    Log.e(">>>> +",""+addDataLiveResponse+".."+throwable);
+                    if (addDataLiveResponse != null) {
+                        onSuccess.setValue(addDataLiveResponse);
+                    } else if (throwable != null) {
+                        toast.setValue(throwable.getLocalizedMessage());
+                    }
+                }));
     }
     public void skipQuestion() {
-        //isSkipAnswer.setValue(true);
-        firstAnswerVisibility.set(View.VISIBLE);
-        secondAnswerVisibility.set(View.VISIBLE);
-        thirdAnswerVisibility.set(View.VISIBLE);
-        fourthAnswerVisibility.set(View.VISIBLE);
-    }
-
-    public void resetQuestion() {
-        //isSkipAnswer.setValue(true);
-        firstAnswerVisibility.set(View.GONE);
-        secondAnswerVisibility.set(View.GONE);
-        thirdAnswerVisibility.set(View.GONE);
-        fourthAnswerVisibility.set(View.GONE);
+        isAnswer.setValue(true);
     }
 
     public void hide2WrongAnswer() {
@@ -433,14 +368,6 @@ public class QuizViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getIsAnswer() {
         return isAnswer;
-    }
-
-    public void setIsSkipAnswer(MutableLiveData<Boolean> isSkipAnswer) {
-        this.isSkipAnswer = isSkipAnswer;
-    }
-
-    public MutableLiveData<Boolean> getIsSkipAnswer() {
-        return isSkipAnswer;
     }
 
     public void setIsAnswer(MutableLiveData<Boolean> isAnswer) {

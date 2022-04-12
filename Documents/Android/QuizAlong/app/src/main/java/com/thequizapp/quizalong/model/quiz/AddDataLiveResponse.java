@@ -7,21 +7,17 @@ import java.util.List;
 
 public class AddDataLiveResponse {
 
-    @SerializedName("quizes")
-    private List<HomePage.QuizesItem> quizes;
-
+    @SerializedName("status")
+    private Boolean status;
     @SerializedName("message")
     private String message;
 
-    @SerializedName("status")
-    private boolean status;
-
-    public List<HomePage.QuizesItem> getQuizes() {
-        return quizes;
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setQuizes(List<HomePage.QuizesItem> quizes) {
-        this.quizes = quizes;
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public String getMessage() {
@@ -30,14 +26,6 @@ public class AddDataLiveResponse {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 
 

@@ -62,7 +62,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="20 \u20B9"
+                    android:text="2 X \u20B9"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"

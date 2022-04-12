@@ -11,9 +11,7 @@
         <variable
             name="viewModel"
             type="com.thequizapp.quizalong.viewmodel.QuizViewModel" />
-        <variable
-            name="lobbyTime"
-            type="String" />
+
         <variable
             name="question"
             type="com.thequizapp.quizalong.model.questions.NewQuestions.Question" />
@@ -141,7 +139,7 @@
                             android:gravity="center"
                             android:paddingHorizontal="15dp"
                             android:paddingVertical="4.5dp"
-                            android:text="@{viewModel.twistQuizesItem.description}"
+                            android:text="@{viewModel.twistQuizesItem.title}"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="11sp" />
@@ -155,13 +153,12 @@
                             android:gravity="center"
                             android:paddingHorizontal="15dp"
                             android:paddingVertical="4.5dp"
-                            android:visibility="gone"
-                            >
+                            android:visibility="@{viewModel.quizesItem.type == 0 ? View.GONE : View.VISIBLE }">
 
-<!--                            <ImageView-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />-->
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -204,20 +201,15 @@
                             android:layout_gravity="center"/>
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="2 X "
+                            android:text="2 X \u20B9"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="30dp"/>
-                        <ImageView
-                            android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/ic_coin"
-                            android:layout_gravity="center"/>
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginRight="10dp"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -407,7 +399,7 @@
                                 android:text='@{""+viewModel.rapidFireDuration}'
                                 android:textColor="@color/white"
                                 android:textSize="14sp"
-                                android:visibility="gone"/>
+                                android:visibility="@{viewModel.quizesItem.type == 1 ? View.VISIBLE : View.GONE}" />
                         </RelativeLayout>
 
                         <androidx.cardview.widget.CardView
@@ -421,12 +413,10 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="10dp"
-                                android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/checked : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />
+                                android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -434,7 +424,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(0)}"
-                                android:textColor="@color/black"
+                                android:textColor="@{viewModel.trueAnswerPosition == 0 ? @color/white : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
                                 android:textSize="16sp"
                                 tools:text="@tools:sample/date/ddmmyy"
                                 tools:textColor="@color/dim_white" />
@@ -460,12 +450,10 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="10dp"
-                                android:src="@{viewModel.trueAnswerPosition == 1 ? @drawable/checked : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @drawable/checked : @drawable/bg_white) }" />
+                                android:src="@{viewModel.trueAnswerPosition == 1 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @drawable/false_bg : @drawable/bg_white) }" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -473,7 +461,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(1)}"
-                                android:textColor="@color/black"
+                                android:textColor="@{viewModel.trueAnswerPosition == 1 ? @color/white : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @color/white : @color/black)}"
                                 android:textSize="16sp" />
 
 
@@ -499,12 +487,10 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="10dp"
-                                android:src="@{viewModel.trueAnswerPosition == 2 ? @drawable/checked : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />
+                                android:src="@{viewModel.trueAnswerPosition == 2 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
 
 
                             <TextView
@@ -513,7 +499,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(2)}"
-                                android:textColor="@color/black"
+                                android:textColor="@{viewModel.trueAnswerPosition == 2 ? @color/white : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -539,14 +525,10 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:scaleType="centerCrop"
-                                android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/checked : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }"
-                                android:layout_gravity="center_vertical|right"
-                                android:layout_marginRight="10dp"
-                                />
-                                <!--android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/tick : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/tick : @drawable/bg_white) }" />-->
+                                android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -554,7 +536,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(3)}"
-                                android:textColor="@color/black"
+                                android:textColor="@{viewModel.trueAnswerPosition == 3 ? @color/white : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
                                 android:textSize="16sp" />
 
 
@@ -610,12 +592,13 @@
                 <ImageView
                     android:layout_width="180dp"
                     android:layout_height="85dp"
-                    android:src="@drawable/quiz_along_logo" />
+                    android:src="@drawable/quizbox_logo" />
 
                 <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:src="@drawable/flag"/>
+                    android:src="@drawable/ic_finish_flag"
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -628,7 +611,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
+                    android:layout_height="220dp"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     app:cardCornerRadius="20dp">
@@ -678,7 +661,7 @@
                                 android:layout_width="30dp"
                                 android:layout_height="30dp"
                                 android:background="@drawable/bg_oval"
-                                android:backgroundTint="@color/cobalt_blue"
+                                android:backgroundTint="@color/purple"
                                 android:fontFamily="@font/gilroy_semi_bold"
                                 android:gravity="center"
                                 android:padding="1dp"
@@ -704,7 +687,7 @@
                                 android:layout_height="30dp"
                                 android:layout_marginStart="5dp"
                                 android:background="@drawable/bg_oval"
-                                android:backgroundTint="@color/cobalt_blue"
+                                android:backgroundTint="@color/purple"
                                 android:fontFamily="@font/gilroy_semi_bold"
                                 android:gravity="center"
                                 android:padding="1dp"
@@ -758,7 +741,7 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_flame" />
+                                    android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -776,8 +759,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:gravity="center_vertical"
-                            android:visibility="gone">
+                            android:gravity="center_vertical">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -823,8 +805,7 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="8dp"
-                    android:visibility="gone">
+                    android:paddingVertical="8dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -870,64 +851,6 @@
                 </LinearLayout>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp">
-                <LinearLayout
-                    android:id="@+id/lyt_show_leaderboard"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/bg_white_50"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingVertical="8dp">
-
-                    <!--<ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_share"
-                        app:tint="@color/purple" />-->
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/gilroy_bold"
-                        android:text="Leaderboard"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/lyt_show_result"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/bg_white_50"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="10dp"
-                    android:paddingVertical="8dp">
-
-                    <!--<ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_share"
-                        app:tint="@color/purple" />-->
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/gilroy_bold"
-                        android:text="Show Results"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
-
 
             <TextView
                 android:id="@+id/tv_completed"
@@ -961,11 +884,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/gilroy_bold"
                     android:text="@string/lobby"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="20dp"
                     android:layout_gravity="center"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1053,18 +976,13 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2 X "
+                        android:text="2 X \u20B9"
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="30dp"/>
-                    <ImageView
-                        android:layout_width="18dp"
-                        android:layout_height="18dp"
-                        android:scaleType="centerCrop"
-                        android:src="@drawable/ic_coin"
-                        android:layout_gravity="center"/>
+                        android:layout_marginLeft="30dp"
+                        android:layout_marginRight="10dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1096,12 +1014,12 @@
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="4.5dp"
->
+                        android:visibility="@{viewModel.quizesItem.type == 0 ? View.GONE : View.VISIBLE }">
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@drawable/ic_flame" />
+                            android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -1127,7 +1045,6 @@
                     android:textSize="20dp"
                     android:layout_gravity="center"/>
                 <TextView
-                    android:id="@+id/tv_lobby_time"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@drawable/bg_oval"
@@ -1136,12 +1053,12 @@
                     android:gravity="center"
                     android:padding="1dp"
                     android:singleLine="true"
-                    android:text="00:00:00"
+                    android:text='@{"00 :"+viewModel.lobbyTimeRemaining}'
                     android:textColor="@color/white"
                     android:textSize="16sp" />
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="150dp"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="60dp"
@@ -1165,10 +1082,8 @@
                             android:fontFamily="@font/gilroy_bold"
                             android:text="Did you know?"
                             android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:layout_marginTop="10dp"/>
+                            android:textSize="20sp" />
                         <TextView
-                            android:id="@+id/tv_tip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/gilroy_bold"
@@ -1178,8 +1093,7 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:textAlignment="center"
-                            android:layout_marginBottom="10dp"/>
+                            android:textAlignment="center"/>
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -1227,7 +1141,6 @@
                     android:fontFamily="@font/gilroy_semi_bold"
                     android:text="@string/remember"
                     android:textColor="@color/white"
-                    android:textAlignment="center"
                     android:textSize="20dp" />
 
                 <androidx.cardview.widget.CardView

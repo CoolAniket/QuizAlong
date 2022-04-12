@@ -15,7 +15,7 @@
         android:layout_margin="5dp">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="192dp"
+            android:layout_width="200dp"
             android:layout_height="0dp"
             app:cardCornerRadius="20dp"
             android:layout_margin="10dp"
@@ -135,10 +135,18 @@
                     android:text="50%"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:layout_gravity="center"
 
                     android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="%"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:textSize="13sp"
+                    android:layout_gravity="center"/>
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
@@ -150,10 +158,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="20 \u20B9"
+                    android:text="2 X \u20B9"
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="10dp"/>
@@ -286,7 +294,7 @@
                             android:text="Time : 7 pm"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15sp"
+                            android:textSize="11sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
                     <LinearLayout
@@ -339,7 +347,7 @@
                             android:text="@{model.totalTime.toString()}"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15sp"
+                            android:textSize="11sp"
                             android:layout_marginRight="10dp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -437,7 +445,7 @@
                             android:text="5 min"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15sp"
+                            android:textSize="11sp"
                             android:layout_marginRight="10dp"/>
                     </LinearLayout>
                 </LinearLayout>
@@ -459,7 +467,7 @@
                             android:text="FREE"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
                     <LinearLayout
@@ -474,7 +482,7 @@
                             android:text="PAY"
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:layout_marginRight="10dp"/>
                     </LinearLayout>
                 </LinearLayout>

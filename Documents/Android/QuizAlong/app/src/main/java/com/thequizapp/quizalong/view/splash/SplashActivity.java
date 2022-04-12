@@ -1,5 +1,6 @@
 package com.thequizapp.quizalong.view.splash;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;

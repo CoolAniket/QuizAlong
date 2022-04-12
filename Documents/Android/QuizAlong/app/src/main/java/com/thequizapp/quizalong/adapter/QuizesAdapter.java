@@ -136,7 +136,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     binding.setModel(quizesItem);
 
                 }
-            }*/
+            }
         }
     }
 }

@@ -70,16 +70,20 @@ public class HomeFragment extends Fragment {
             intent.putExtra("name", (String) pairs[0].second);
             intent.putExtra("logo", (String) pairs[1].second);
             intent.putExtra("data", new Gson().toJson(quizesItem));
-            ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
-            startActivity(intent, activityOptions.toBundle());
+            /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
+            startActivity(intent, activityOptions.toBundle());*/
+            startActivity(new Intent(getActivity(), QuizActivity.class)
+                    .putExtra("data", new Gson().toJson(quizesItem)));
         });
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
             Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
             intent.putExtra("name", (String) pairs[0].second);
             //intent.putExtra("logo", (String) pairs[1].second);
             intent.putExtra("data", new Gson().toJson(quizesItem));
-            ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
-            startActivity(intent, activityOptions.toBundle());
+            /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
+            startActivity(intent, activityOptions.toBundle());*/
+            startActivity(new Intent(getActivity(), QuizActivity.class)
+                    .putExtra("data", new Gson().toJson(quizesItem)));
         });
         /*viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
             if (rewardAds != null && quizesItem.getIsPermium() == 1) {
