@@ -166,21 +166,24 @@ public class QuizViewModel extends ViewModel {
     }
     public void createGameHashMap(int pos, boolean isTimerOff) {
         if(isTimerOff) {
-            Log.e(">>>> ", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
+            Log.e("Hash", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
             hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
             hashMap.put("selected_ans[" + (pos - 1) + "]", "--");
             hashMap.put("time_taken[" + (pos - 1) + "]", "0");
         }else{
-            Log.e(">>>> ", String.valueOf(getTimeRemaining()));
+            Log.e("Hash", String.valueOf(getTimeRemaining().get()));
             hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
             hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
-            hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining()));
+            hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining().get()));
         }
     }
     /*public void callAddGameDataLiveApi(HashMap<String, Integer> hashMap) {*/
         public void callAddGameDataLiveApi() {
-        hashMap.put("user_id", String.valueOf(Global.userId.get()));
+            Log.e("::: ",""+Global.userId.get()+" "+getTwistQuizesItem().getQuizId());
+        hashMap.put("user_id", Global.userId.get());
         hashMap.put("quiz_id", String.valueOf(getTwistQuizesItem().getQuizId()));
+
+            Log.e("::: map ",hashMap.size()+""+hashMap.get(""));
         disposable.add(Global.initRetrofit().addGameDataLive(BuildConfig.APIKEY, hashMap)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -313,7 +313,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
                                             }
                                     ).start());
         }*/
-        Log.e(">>> ",answer);
+        //Log.e(">>> ",answer);
+        if(cTimer != null)
             cTimer.cancel();
         viewModel.setUseLifeLineInCurrentQue(false);
         handler.removeCallbacks(this);
@@ -322,10 +323,10 @@ public class QuizActivity extends BaseActivity implements Runnable {
     }
 
     private void addScore(boolean isTimerOff) {
-
+        viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff);
         Log.e("???? ",viewModel.getCurrentPosition().get()+""+viewModel.getAnswerVal().getValue());
         if (viewModel.getQuestionsList().size() > viewModel.getCurrentPosition().get()) {
-            viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff);
+
             viewModel.getCurrentQuestions().setValue(viewModel.getQuestionsList().get(viewModel.getCurrentPosition().get()));
             viewModel.getCurrentPosition().set(viewModel.getCurrentPosition().get() + 1);
             startCountDown();
