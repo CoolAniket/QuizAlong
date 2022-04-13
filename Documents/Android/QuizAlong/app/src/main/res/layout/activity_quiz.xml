@@ -11,7 +11,9 @@
         <variable
             name="viewModel"
             type="com.thequizapp.quizalong.viewmodel.QuizViewModel" />
-
+        <variable
+            name="lobbyTime"
+            type="String" />
         <variable
             name="question"
             type="com.thequizapp.quizalong.model.questions.NewQuestions.Question" />
@@ -1045,6 +1047,7 @@
                     android:textSize="20dp"
                     android:layout_gravity="center"/>
                 <TextView
+                    android:id="@+id/tv_lobby_time"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:background="@drawable/bg_oval"
@@ -1053,7 +1056,7 @@
                     android:gravity="center"
                     android:padding="1dp"
                     android:singleLine="true"
-                    android:text='@{"00 :"+viewModel.lobbyTimeRemaining}'
+                    android:text="00:00:00"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
                 <androidx.cardview.widget.CardView

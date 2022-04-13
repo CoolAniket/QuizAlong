@@ -36,6 +36,11 @@
                 <action android:name="android.intent.action.MAIN" />
 
         <activity android:name=".view.web.WebViewActivity"></activity>
+        <receiver
+            android:name=".receivers.GameStartReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
         <activity android:name=".view.edit.EditProfileActivity" />
         <activity android:name=".view.quiz.QuizActivity" />
         <activity android:name=".view.redeem.HistoryRedeemRequestActivity" />
@@ -44,23 +49,20 @@
         <activity android:name=".view.redeem.RedeemRequestActivity" />
         <activity android:name=".view.playhistory.PlayHistoryActivity" />
         <activity android:name=".view.leaderboard.LeaderBoardActivity" />
-        <activity android:name=".view.main.MainActivity"/>
-        <activity android:name=".view.home.CourseSelectionActivity"></activity>
+        <activity android:name=".view.main.MainActivity" />
+        <activity android:name=".view.home.CourseSelectionActivity" />
         <activity android:name=".view.login.RegisterActivity" />
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.splash.WelcomeActivity" />
         <activity android:name=".view.login.AdditionalInfoActivity" />
-
         <activity android:name=".view.BaseActivity" />
         <activity android:name=".view.splash.SplashActivity">
-             <intent-filter>
-             <action android:name="android.intent.action.MAIN" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-
-             <category android:name="android.intent.category.LAUNCHER" />
-             </intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
-
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
@@ -80,10 +82,10 @@
         <activity
             android:name="com.facebook.ads.AudienceNetworkActivity"
             android:configChanges="keyboardHidden|orientation|screenSize" />
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />
