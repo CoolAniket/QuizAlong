@@ -1,6 +1,9 @@
 package com.thequizapp.quizalong.view.quiz;
 
 import android.Manifest;
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -16,6 +19,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -23,11 +27,13 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
 import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.receivers.GameStartReceiver;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.BannerAds;
@@ -40,6 +46,13 @@ import com.thequizapp.quizalong.viewmodel.QuizViewModel;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class QuizActivity extends BaseActivity implements Runnable {
     ActivityQuizBinding binding;
@@ -59,6 +72,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
         initView();
         initObserve();
         initListener();
+        //initReceiver();
         binding.setViewModel(viewModel);
     }
 
@@ -68,6 +82,34 @@ public class QuizActivity extends BaseActivity implements Runnable {
         //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
         viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.Quize.class));
         viewModel.getQuestionsByQuizId();
+    }
+
+    private void initReceiver() {
+
+        Intent myIntent = new Intent(getBaseContext(),
+                GameStartReceiver.class);
+
+        PendingIntent pendingIntent
+                = PendingIntent.getBroadcast(getBaseContext(),
+                0, myIntent, 0);
+
+        AlarmManager alarmManager
+                = (AlarmManager) getSystemService(ALARM_SERVICE);
+
+        Calendar calNow = Calendar.getInstance();
+        Calendar calSet = (Calendar) calNow.clone();
+
+        calSet.set(Calendar.HOUR_OF_DAY, 20);
+        calSet.set(Calendar.MINUTE, 37);
+        calSet.set(Calendar.SECOND, 0);
+        calSet.set(Calendar.MILLISECOND, 0);
+
+        if(calSet.compareTo(calNow) <= 0){
+            //Today Set time passed, count to tomorrow
+            calSet.add(Calendar.DATE, 1);
+        }
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, calSet.getTimeInMillis(), pendingIntent);
     }
 
     private void initView() {
@@ -121,23 +163,57 @@ public class QuizActivity extends BaseActivity implements Runnable {
     }
 
     private void startLobbyTimer(){
-        if (viewModel.getIsInfo().get()) {
-            if (lTimer != null)
-                lTimer.cancel();
-            lTimer = new CountDownTimer(10000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    Log.e("l seconds remaining: ", "" + millisUntilFinished / 1000);
-                    viewModel.getLobbyTimeRemaining().set((int) (millisUntilFinished / 1000));
-                }
 
-                public void onFinish() {
-                    Log.e("lobby omFinish ", "");
-                    viewModel.getIsLobby().set(true);
-                    startCountDown();
-                }
-            };
-            lTimer.start();
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
+            String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+            Date startDate = simpleDateFormat.parse(currentTime);
+            Date endDate = null;
+            endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
+
+            long difference = endDate.getTime() - startDate.getTime();
+            if(difference<0)
+            {
+                Date dateMax = simpleDateFormat.parse("24:00");
+                Date dateMin = simpleDateFormat.parse("00:00");
+                difference=(dateMax.getTime() -startDate.getTime() )+(endDate.getTime()-dateMin.getTime());
+            }
+            int days = (int) (difference / (1000*60*60*24));
+            int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
+            int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
+            Log.e("log_tag","Hours: "+hours+", Mins: "+min+" currentTime "+currentTime+" difference "+difference);
+            if (viewModel.getIsInfo().get()) {
+                if (lTimer != null)
+                    lTimer.cancel();
+                lTimer = new CountDownTimer(difference, 1000) {
+                    public void onTick(long millisUntilFinished) {
+
+                        NumberFormat f = new DecimalFormat("00");
+                        long hour = (millisUntilFinished / 3600000) % 24;
+                        long min = (millisUntilFinished / 60000) % 60;
+                        long sec = (millisUntilFinished / 1000) % 60;
+                        Log.e("l seconds remaining: ", "" + f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
+                        String val= f.format(hour) + ":" + f.format(min) + ":" + f.format(sec);
+                        viewModel.getLobbyTime().setValue(val);
+
+                        //viewModel.getLobbyTimeRemaining().set((int) (millisUntilFinished / 1000));
+                        //viewModel.getLobbyTimeRemaining().set(f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
+                    }
+
+                    public void onFinish() {
+                        Log.e("lobby omFinish ", "");
+                        viewModel.getLobbyTime().setValue("00:00:00");
+                        viewModel.getIsLobby().set(true);
+                        startCountDown();
+                    }
+                };
+                lTimer.start();
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
+
+
     }
     private void initListener() {
         binding.ivLifeLine.setOnClickListener(v -> {
@@ -281,6 +357,10 @@ public class QuizActivity extends BaseActivity implements Runnable {
             Log.e("....",""+AddDataResponse);
             Toast.makeText(this, getResources().getString(R.string.live_data_successfully), Toast.LENGTH_SHORT).show();
             viewModel.getIsComplete().set(true);
+        });
+
+        viewModel.getLobbyTime().observe(this, timeString -> {
+            binding.tvLobbyTime.setText(timeString);
         });
     }
 

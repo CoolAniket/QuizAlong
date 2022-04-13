@@ -62,12 +62,22 @@ public class QuizViewModel extends ViewModel {
     }
     private ObservableInt timeRemaining = new ObservableInt(0);
     private ObservableInt lobbyTimeRemaining = new ObservableInt(0);
+    private MutableLiveData<String> lobbyTime = new MutableLiveData<>();
+
     public ObservableInt getTimeRemaining() {
         return timeRemaining;
     }
 
     public void setTimeRemaining(ObservableInt timeRemaining) {
         this.timeRemaining = timeRemaining;
+    }
+
+    public MutableLiveData<String> getLobbyTime() {
+        return lobbyTime;
+    }
+
+    public void setLobbyTime(MutableLiveData<String> lobbyTime) {
+        this.lobbyTime = lobbyTime;
     }
 
     public ObservableInt getLobbyTimeRemaining() {
