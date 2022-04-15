@@ -51,9 +51,11 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Random;
 
 public class QuizActivity extends BaseActivity implements Runnable {
     ActivityQuizBinding binding;
@@ -64,6 +66,19 @@ public class QuizActivity extends BaseActivity implements Runnable {
     private RewardAds rewardAds;
     private CountDownTimer cTimer = null;
     private CountDownTimer lTimer = null;
+    private static final String[] TIPS = new String[] {
+            "You can increase your chance of winning significantly if you play in a group of 2 or more.",
+            "SKIP lifeline helps you to directly pass the question as correct.",
+            "SKIP lifeline can only be used once per quiz.",
+            "You and your referred friend can 1 earn “SKIP” lifeline with every 1 successful referral.",
+            "You can always change your interested categories under categories section on home page.",
+            "Usually its not a good idea to select options like Always do, Never possible.",
+            "Excluding wrong answers can definitely help your narrow down your options.",
+            "All the quiz answers are backed by latest guidelines and involved practical case scanerios.",
+            "Grand quizes happpens over weekends having grand winnings of upto 1000 coins in one quiz.",
+            "MGM Medical College",
+            "You can always plan your quizes ahead by looking at upcoming quizzes of your subject"
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +98,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
         //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
         viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.Quize.class));
         viewModel.getQuestionsByQuizId();
+        Random r=new Random();
+        int randomNumber=r.nextInt(TIPS.length);
+        binding.tvTip.setText(TIPS[randomNumber]);
     }
 
     private void initReceiver() {

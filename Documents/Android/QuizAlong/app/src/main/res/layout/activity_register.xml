@@ -75,29 +75,7 @@
                     android:paddingHorizontal="15dp"
                     android:singleLine="true"
                     android:textColor="@color/black" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:text="@string/enter_mobile"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,1)}"
-                    android:background="@drawable/bg_white_5"
-                    android:backgroundTint="@color/dim_white"
-                    android:fontFamily="@font/gilroy_reguler"
-                    android:imeOptions="actionNext"
-                    android:inputType="number"
-                    android:paddingHorizontal="15dp"
-                    android:singleLine="true"
-                    android:textColor="@color/black" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -113,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,2)}"
+                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,1)}"
                     android:background="@drawable/bg_white_5"
                     android:backgroundTint="@color/dim_white"
                     android:fontFamily="@font/gilroy_reguler"
@@ -137,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,3)}"
+                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,2)}"
                     android:background="@drawable/bg_white_5"
                     android:backgroundTint="@color/dim_white"
                     android:fontFamily="@font/gilroy_reguler"
@@ -161,7 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
                     android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,4)}"
+                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,3)}"
                     android:background="@drawable/bg_white_5"
                     android:backgroundTint="@color/dim_white"
                     android:fontFamily="@font/gilroy_reguler"
@@ -171,7 +149,7 @@
                     android:singleLine="true"
                     android:textColor="@color/black" />
 
-                <TextView
+                <!--<TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="start"
@@ -193,7 +171,7 @@
                     android:inputType="text"
                     android:paddingHorizontal="15dp"
                     android:singleLine="true"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/black" />-->
 
 
                 <Button
