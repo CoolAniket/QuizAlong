@@ -59,8 +59,7 @@ public class UpcomingQuizFragment extends Fragment {
         viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
 
             startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra("quiz_type","upcoming"));
+                        .putExtra("data", new Gson().toJson(quizesItem)));
         });
 
         viewModel.getToast().observe(this, toastMsg -> {

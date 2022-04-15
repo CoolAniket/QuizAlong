@@ -7,6 +7,8 @@ import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
 import com.thequizapp.quizalong.model.notification.Notifications;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
+import com.thequizapp.quizalong.model.payment.OrderResponse;
+import com.thequizapp.quizalong.model.questions.Questions;
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
@@ -56,6 +58,10 @@ public interface ApiService {
     Single<CategoriesResponse> getAllCategories(@Header(Const.API_KEY) String apiKey,
                                                 @Path(Const.COURSE_ID) int course_id,
                                                 @Path(Const.USER_ID) int userId);
+
+    @GET(Const.PAYMENT_RZP_ORDER_ID)
+    Single<OrderResponse> getRzpOrderId(@Header(Const.API_KEY) String apiKey,
+                                        @Path(Const.AMOUNT) int amount);
     @FormUrlEncoded
     @POST(Const.QUIZ_USER_CATEGORIES)
     Single<RestResponse> saveUserCategory(@Header(Const.API_KEY) String apiKey,
