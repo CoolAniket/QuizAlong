@@ -22,6 +22,7 @@ import com.thequizapp.quizalong.utils.loginmaneger.FaceBookLoginManager;
 import com.thequizapp.quizalong.utils.loginmaneger.GoogleLoginManager;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.home.CourseSelectionActivity;
+import com.thequizapp.quizalong.view.main.MainActivity;
 import com.thequizapp.quizalong.viewmodel.ForgotPasswordViewModel;
 import com.thequizapp.quizalong.viewmodel.LoginViewModel;
 
@@ -72,6 +73,11 @@ public class LoginActivity extends BaseActivity {
 //            startActivity(new Intent(this, MainActivity.class));
             startActivity(new Intent(this, CourseSelectionActivity.class));
             startActivity(new Intent(this, AdditionalInfoActivity.class));
+            if(sessionManager.getUser().getAdditional_info() == 1) {
+                startActivity(new Intent(this, AdditionalInfoActivity.class));
+            }else {
+                startActivity(new Intent(this, MainActivity.class));
+            }
             finishAffinity();
         });
     }

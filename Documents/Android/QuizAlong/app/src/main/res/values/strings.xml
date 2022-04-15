@@ -18,6 +18,7 @@
     <string name="enter_full_name">Enter Full Name</string>
     <string name="re_type_password">Re-type Password</string>
     <string name="referral_code">Referral Code (optional)</string>
+    <string name="enter_referral_code">Enter Referral Code (optional)</string>
     <string name="register">Register</string>
     <string name="home">Home</string>
     <string name="categories">Categories</string>

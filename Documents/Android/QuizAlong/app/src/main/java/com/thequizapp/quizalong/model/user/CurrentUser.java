@@ -15,6 +15,9 @@ public class CurrentUser {
     @SerializedName("status")
     private boolean status;
 
+    @SerializedName("additional_info")
+    private int additional_info;
+
     @SerializedName("course")
     public ArrayList<Course> course;
 
@@ -40,6 +43,14 @@ public class CurrentUser {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public int getAdditional_info() {
+        return additional_info;
+    }
+
+    public void setAdditional_info(int additional_info) {
+        this.additional_info = additional_info;
     }
 
     public ArrayList<Course> getCourse() {

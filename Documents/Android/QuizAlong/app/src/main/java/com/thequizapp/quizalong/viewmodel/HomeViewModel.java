@@ -104,7 +104,8 @@ public class HomeViewModel extends ViewModel {
                         //
                     }
                 }));*/
-        disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY)
+        Log.e("Idddddd. ",""+getUser().getValue().getUser().getId());
+        disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -122,7 +123,7 @@ public class HomeViewModel extends ViewModel {
                     }
                 }));
 
-        disposable.add(Global.initRetrofit().getUpcomingQuizPage(BuildConfig.APIKEY)
+        disposable.add(Global.initRetrofit().getUpcomingQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -139,7 +140,7 @@ public class HomeViewModel extends ViewModel {
                         //
                     }
                 }));
-        disposable.add(Global.initRetrofit().getPastQuizPage(BuildConfig.APIKEY)
+        disposable.add(Global.initRetrofit().getPastQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getId())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

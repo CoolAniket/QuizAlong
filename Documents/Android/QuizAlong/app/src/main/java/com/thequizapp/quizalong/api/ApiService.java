@@ -41,13 +41,16 @@ public interface ApiService {
     Single<HomePage> getHomePage(@Header(Const.API_KEY) String apiKey);
 
     @GET(Const.QUIZ_TWIST)
-    Single<TwistQuizPage> getTwistQuizPage(@Header(Const.API_KEY) String apiKey);
+    Single<TwistQuizPage> getTwistQuizPage(@Header(Const.API_KEY) String apiKey,
+                                           @Path(Const.USER_ID) int userId);
 
     @GET(Const.QUIZ_UPCOMING)
-    Single<TwistQuizPage> getUpcomingQuizPage(@Header(Const.API_KEY) String apiKey);
+    Single<TwistQuizPage> getUpcomingQuizPage(@Header(Const.API_KEY) String apiKey,
+                                              @Path(Const.USER_ID) int userId);
 
     @GET(Const.QUIZ_PAST)
-    Single<TwistQuizPage> getPastQuizPage(@Header(Const.API_KEY) String apiKey);
+    Single<TwistQuizPage> getPastQuizPage(@Header(Const.API_KEY) String apiKey,
+                                          @Path(Const.USER_ID) int userId);
 
     @GET(Const.QUIZ_ALLCATEGORIES)
     Single<CategoriesResponse> getAllCategories(@Header(Const.API_KEY) String apiKey,
