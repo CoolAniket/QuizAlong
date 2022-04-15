@@ -16,10 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeQuizBox"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.results.ShowQuizAnswersActivity"/>
+
         <receiver
             android:name=".receivers.GameStartReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".view.edit.EditProfileActivity" />
         <activity android:name=".view.quiz.QuizActivity" />

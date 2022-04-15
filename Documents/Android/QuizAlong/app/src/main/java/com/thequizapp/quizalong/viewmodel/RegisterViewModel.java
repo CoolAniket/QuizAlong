@@ -25,6 +25,7 @@ public class RegisterViewModel extends ViewModel {
     private ObservableBoolean isLoading = new ObservableBoolean(false);
     private CompositeDisposable disposable = new CompositeDisposable();
     private String fullName;
+    private String mobileNo;
     private String email;
     private String password;
     private String reTypePassword;
@@ -37,15 +38,18 @@ public class RegisterViewModel extends ViewModel {
                 fullName = charSequence.toString();
                 break;
             case 1:
-                email = charSequence.toString();
+                mobileNo = charSequence.toString();
                 break;
             case 2:
-                password = charSequence.toString();
+                email = charSequence.toString();
                 break;
             case 3:
-                reTypePassword = charSequence.toString();
+                password = charSequence.toString();
                 break;
             case 4:
+                reTypePassword = charSequence.toString();
+                break;
+            case 5:
                 referralCode = charSequence.toString();
                 break;
             default:
@@ -64,6 +68,10 @@ public class RegisterViewModel extends ViewModel {
         }
         if (!isEmailValid(email)) {
             toast.setValue("Please enter valid email...!");
+            return;
+        }
+        if (!isValidMobile(mobileNo)) {
+            toast.setValue("Please enter valid mobile no...!");
             return;
         }
         if (password == null || password.isEmpty()) {
@@ -117,6 +125,10 @@ public class RegisterViewModel extends ViewModel {
         Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
+    }
+
+    private boolean isValidMobile(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
     }
 
     public void registerUser(HashMap<String, String> hashMap) {

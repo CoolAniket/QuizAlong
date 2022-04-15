@@ -16,6 +16,8 @@ import com.thequizapp.quizalong.utils.Global;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -111,7 +113,7 @@ public class AdditionalInfoViewModel extends ViewModel {
             toast.setValue("Please enter college name...!");
             return;
         }
-        if (mobileNo == null || mobileNo.isEmpty()) {
+        if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
             toast.setValue("Please enter mobile number...!");
             return;
         }
@@ -155,6 +157,16 @@ public class AdditionalInfoViewModel extends ViewModel {
                             }
                         })
         );
+    }
+    public boolean isEmailValid(String email) {
+        String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+        Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+
+    private boolean isValidMobile(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
     }
 
     public RequestBody toRequestBody(String value) {

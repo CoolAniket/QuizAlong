@@ -6,14 +6,14 @@ import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
 import com.thequizapp.quizalong.model.notification.Notifications;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
-import com.thequizapp.quizalong.model.questions.Questions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
+import com.thequizapp.quizalong.model.results.ShowResultsRequest;
 import com.thequizapp.quizalong.model.settings.Settings;
 import com.thequizapp.quizalong.model.user.CurrentUser;
-import com.thequizapp.quizalong.model.user.RegisterUser;
+import com.thequizapp.quizalong.view.results.ShowQuizAnswersActivity;
 
 import java.util.HashMap;
 
@@ -30,7 +30,6 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
-import retrofit2.http.Query;
 
 public interface ApiService {
     @FormUrlEncoded
@@ -84,6 +83,11 @@ public interface ApiService {
     @GET(Const.QUIZ_QUESTIONS_OF_QUIZ)
     Single<NewQuestions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,
                                               @Path(Const.QUIZ_ID_NEW) String quizId);
+
+    @GET(Const.QUIZ_ANS_LIVE)
+    Single<ShowResultsRequest> getQuizAnsLive(@Header(Const.API_KEY) String apiKey,
+                                              @Path(Const.QUIZ_ID_NEW) String quizId,
+                                              @Path(Const.USER_ID) String userId);
 
     @FormUrlEncoded
     @POST(Const.USER_ADD_POINTS_TO_WALLET)

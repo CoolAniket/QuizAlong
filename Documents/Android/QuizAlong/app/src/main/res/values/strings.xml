@@ -79,15 +79,15 @@
     <string name="terms_conditions">Accept Terms and Conditions</string>
     <string name="select_courses">Select courses</string>
     <string name="enter_mobile">Enter Mobile Number</string>
-    <string name="select_year_pass">Select year of passing</string>
+    <string name="select_year_pass">Select current official year</string>
     <string name="submit_userinfo">Submit</string>
     <string name="quiz_with_twist">Quiz With Twist</string>
     <string name="upcoming_quiz">Upcoming Quiz</string>
     <string name="past_quiz">Past Quiz</string>
     <string name="additional_info">Additional Info</string>
     <!--    Facebook Login Credential-->
-      <!-- Test: 298923915695806 -->
-      <!-- Main: 545361686831488 ,   fb545361686831488    0a2adf4f80faf6d03d644544fcd24220  -->
+    <!-- Test: 298923915695806 -->
+    <!-- Main: 545361686831488 ,   fb545361686831488    0a2adf4f80faf6d03d644544fcd24220  -->
     <string name="facebook_app_id">298923915695806</string>
     <string name="fb_login_protocol_scheme">fb298923915695806</string>
     <string name="facebook_client_token">c223f1a0ds    cxx 55cf4ae81bfef9becc67de85</string>

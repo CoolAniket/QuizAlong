@@ -41,6 +41,7 @@ import com.thequizapp.quizalong.utils.ads.InterstitialAds;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
+import com.thequizapp.quizalong.view.results.ShowQuizAnswersActivity;
 import com.thequizapp.quizalong.viewmodel.QuizViewModel;
 
 import java.io.File;
@@ -163,13 +164,16 @@ public class QuizActivity extends BaseActivity implements Runnable {
     }
 
     private void startLobbyTimer(){
-
+        /*For direct start uncomment below lines*/
+        /*viewModel.getIsLobby().set(true);
+        startCountDown();*/
         try {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
             String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
             Date startDate = simpleDateFormat.parse(currentTime);
             Date endDate = null;
             endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
+            //endDate = simpleDateFormat.parse("21:09");
 
             long difference = endDate.getTime() - startDate.getTime();
             if(difference<0)
@@ -181,7 +185,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
             int days = (int) (difference / (1000*60*60*24));
             int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
             int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
-            Log.e("log_tag","Hours: "+hours+", Mins: "+min+" currentTime "+currentTime+" difference "+difference);
+            //Log.e("log_tag","Hours: "+hours+", Mins: "+min+" currentTime "+currentTime+" difference "+difference);
             if (viewModel.getIsInfo().get()) {
                 if (lTimer != null)
                     lTimer.cancel();
@@ -192,7 +196,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
                         long hour = (millisUntilFinished / 3600000) % 24;
                         long min = (millisUntilFinished / 60000) % 60;
                         long sec = (millisUntilFinished / 1000) % 60;
-                        Log.e("l seconds remaining: ", "" + f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
+                        //Log.e("l seconds remaining: ", "" + f.format(hour) + ":" + f.format(min) + ":" + f.format(sec));
                         String val= f.format(hour) + ":" + f.format(min) + ":" + f.format(sec);
                         viewModel.getLobbyTime().setValue(val);
 
@@ -203,6 +207,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
                     public void onFinish() {
                         Log.e("lobby omFinish ", "");
                         viewModel.getLobbyTime().setValue("00:00:00");
+                        /*For direct start comment below lines*/
                         viewModel.getIsLobby().set(true);
                         startCountDown();
                     }
@@ -273,6 +278,10 @@ public class QuizActivity extends BaseActivity implements Runnable {
             } else {
                 saveBitMap(this, binding.lytSs);
             }
+        });
+        binding.lytShowResult.setOnClickListener(v ->{
+            startActivity(new Intent(this, ShowQuizAnswersActivity.class).
+                    putExtra("quizId", String.valueOf(viewModel.getTwistQuizesItem().getQuizId())));
         });
     }
 
