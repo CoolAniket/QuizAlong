@@ -38,20 +38,17 @@ public class RegisterViewModel extends ViewModel {
                 fullName = charSequence.toString();
                 break;
             case 1:
-                mobileNo = charSequence.toString();
-                break;
-            case 2:
                 email = charSequence.toString();
                 break;
-            case 3:
+            case 2:
                 password = charSequence.toString();
                 break;
-            case 4:
+            case 3:
                 reTypePassword = charSequence.toString();
                 break;
-            case 5:
+            /*case 4:
                 referralCode = charSequence.toString();
-                break;
+                break;*/
             default:
                 break;
         }

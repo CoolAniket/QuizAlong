@@ -203,15 +203,20 @@
                             android:layout_gravity="center"/>
 
                         <TextView
-                            android:layout_width="match_parent"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2 X \u20B9"
+                            android:text="2 X "
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="30dp"
-                            android:layout_marginRight="10dp"/>
+                            android:layout_marginLeft="30dp"/>
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_coin"
+                            android:layout_gravity="center"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -925,7 +930,7 @@
         </LinearLayout>
 
         <RelativeLayout
-            tools:visibility="gone"
+            tools:visibility="visible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{!viewModel.isLobby ? View.VISIBLE : View.GONE}">
@@ -944,11 +949,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:fontFamily="@font/gilroy_bold"
                     android:text="@string/lobby"
                     android:textColor="@color/white"
-                    android:textSize="20dp"
+                    android:textSize="25dp"
                     android:layout_gravity="center"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1036,13 +1041,18 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2 X \u20B9"
+                        android:text="2 X "
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="10dp"/>
+                        android:layout_marginLeft="30dp"/>
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_coin"
+                        android:layout_gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -1119,7 +1129,7 @@
                     android:textSize="16sp" />
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="60dp"
                     android:layout_marginTop="15dp"
                     android:layout_marginRight="60dp"
@@ -1143,8 +1153,10 @@
                             android:fontFamily="@font/gilroy_bold"
                             android:text="Did you know?"
                             android:textColor="@color/white"
-                            android:textSize="20sp" />
+                            android:textSize="20sp"
+                            android:layout_marginTop="10dp"/>
                         <TextView
+                            android:id="@+id/tv_tip"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/gilroy_bold"
@@ -1154,7 +1166,8 @@
                             android:layout_marginTop="30dp"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:textAlignment="center"/>
+                            android:textAlignment="center"
+                            android:layout_marginBottom="10dp"/>
                     </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
@@ -1202,6 +1215,7 @@
                     android:fontFamily="@font/gilroy_semi_bold"
                     android:text="@string/remember"
                     android:textColor="@color/white"
+                    android:textAlignment="center"
                     android:textSize="20dp" />
 
                 <androidx.cardview.widget.CardView
