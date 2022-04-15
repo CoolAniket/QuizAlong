@@ -174,17 +174,25 @@ public class QuizViewModel extends ViewModel {
         }
 
     }
-    public void createGameHashMap(int pos, boolean isTimerOff) {
+    public void createGameHashMap(int pos, boolean isTimerOff, String skip) {
         if(isTimerOff) {
             Log.e("Hash", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
             hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-            hashMap.put("selected_ans[" + (pos - 1) + "]", "--");
+            hashMap.put("selected_ans[" + (pos - 1) + "]", "");
             hashMap.put("time_taken[" + (pos - 1) + "]", "0");
         }else{
-            Log.e("Hash", String.valueOf(getTimeRemaining().get()));
-            hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-            hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
-            hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining().get()));
+            Log.e("Hash.....",skip);
+            if (skip == "skip") {
+                hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
+                hashMap.put("selected_ans[" + (pos - 1) + "]", "skip");
+                hashMap.put("time_taken[" + (pos - 1) + "]", "0");
+            }else {
+                Log.e("Hash", String.valueOf(getTimeRemaining().get()));
+                hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
+                hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
+                hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining().get()));
+            }
+
         }
     }
     /*public void callAddGameDataLiveApi(HashMap<String, Integer> hashMap) {*/

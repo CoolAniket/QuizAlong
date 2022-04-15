@@ -174,7 +174,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
                 public void onFinish() {
                     Log.e("omFinish ", "");
-                    addScore(true);
+                    addScore(true,"");
                 }
             };
             cTimer.start();
@@ -375,7 +375,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
             binding.setAnswerList(viewModel.getAnswerList());
 
         });
-        //viewModel.getIsAnswer().observe(this, this::showResultDialog);
+        viewModel.getIsAnswer().observe(this, this::addSkipScore);
 
         viewModel.getAnswerVal().observe(this, this::showResultDialog);
 
@@ -426,11 +426,16 @@ public class QuizActivity extends BaseActivity implements Runnable {
         viewModel.setUseLifeLineInCurrentQue(false);
         handler.removeCallbacks(this);
 
-        addScore(false);
+        addScore(false,"");
     }
 
-    private void addScore(boolean isTimerOff) {
-        viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff);
+    private void addSkipScore(Boolean isAnswerRight) {
+        addScore(false,"skip");
+        Log.e(">>> ","Skip Called ");
+    }
+
+    private void addScore(boolean isTimerOff,String skipVal) {
+        viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff,skipVal);
         Log.e("???? ",viewModel.getCurrentPosition().get()+""+viewModel.getAnswerVal().getValue());
         if (viewModel.getQuestionsList().size() > viewModel.getCurrentPosition().get()) {
 
