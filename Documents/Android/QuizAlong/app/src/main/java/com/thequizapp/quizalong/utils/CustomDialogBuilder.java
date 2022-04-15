@@ -15,6 +15,7 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.razorpay.Checkout;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.DialogAnswerResultBinding;
 import com.thequizapp.quizalong.databinding.DialogLifeLineBinding;
@@ -140,6 +141,8 @@ public class CustomDialogBuilder {
             mBuilder.dismiss();
             SessionManager sessionManager = new SessionManager(mContext);
             sessionManager.clear();
+            // RazorPar clear data
+            Checkout.clearUserData(mContext.getApplicationContext());
             mContext.startActivity(new Intent(mContext, SplashActivity.class));
         });
         binding.tvCancel.setOnClickListener(v -> mBuilder.dismiss());

@@ -113,6 +113,7 @@
     <string name="facebook_native">---</string>
     <string name="fbbanner" />
     <string name="choose_text">Choose 2 or more categories</string>
+    <string name="razor_pay_test_key">rzp_test_RDLFlV1Kg8XmCo</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

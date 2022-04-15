@@ -2,21 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.notification.NotificationActivity">
+    tools:context=".view.payment.PaymentActivity">
 
     <data>
 
         <import type="android.view.View" />
 
-<!--        <variable-->
-<!--            name="viewModel"-->
-<!--            type="com.thequizapp.quizalong.viewmodel.NotificationViewModel" />-->
+        <variable
+            name="viewModel"
+            type="com.thequizapp.quizalong.viewmodel.PaymentViewModel" />
 
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".view.payment.PaymentActivity">
+        android:layout_height="match_parent">
 
 
         <Button
@@ -29,6 +28,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             />
+
+        <TextView
+            android:id="@+id/text_output"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/start_payment" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

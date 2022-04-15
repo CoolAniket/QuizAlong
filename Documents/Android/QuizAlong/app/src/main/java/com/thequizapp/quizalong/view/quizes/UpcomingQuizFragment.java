@@ -1,4 +1,4 @@
-package com.thequizapp.quizalong.view.home;
+package com.thequizapp.quizalong.view.quizes;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -15,9 +15,14 @@ import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.FragmentCategoriesBinding;
+import com.thequizapp.quizalong.databinding.FragmentUpcomingQuizBinding;
+import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.utils.SessionManager;
-import com.thequizapp.quizalong.view.quizes.QuizListActivity;
+import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.viewmodel.CategoriesViewModel;
+import com.thequizapp.quizalong.viewmodel.UpcomingQuizViewModel;
+
+import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -25,37 +30,37 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-public class CategoriesFragment extends Fragment {
+public class UpcomingQuizFragment extends Fragment {
 
 
-    FragmentCategoriesBinding binding;
-    CategoriesViewModel viewModel;
+    private final List<HomePage.QuizesItem> upcomingQuizes;
+    FragmentUpcomingQuizBinding binding;
+    UpcomingQuizViewModel viewModel;
 
-    public CategoriesFragment() {
-        Log.d("CategoriesFragment", "");
+
+
+    public UpcomingQuizFragment(List<HomePage.QuizesItem> quizData) {
+        Log.d("UpcomingQuizFragment", "");
+        upcomingQuizes = quizData;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_categories, container, false);
-        viewModel = new ViewModelProvider(this).get(CategoriesViewModel.class);
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_upcoming_quiz, container, false);
+        viewModel = new ViewModelProvider(this).get(UpcomingQuizViewModel.class);
         initListener();
         binding.setViewModel(viewModel);
         return binding.getRoot();
     }
 
     private void initListener() {
-        /*viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getId());
-        viewModel.setFavouriteCheck();
-        viewModel.getCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {
-            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-            intent.putExtra("name", (String) pairs[0].second);
-            intent.putExtra("logo", (String) pairs[1].second);
-            intent.putExtra("data", new Gson().toJson(categoriesItem));
-            ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
-            startActivity(intent, activityOptions.toBundle());
-        });*/
+        viewModel.updateQuizData(upcomingQuizes);
+        viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
+
+            startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
+                        .putExtra("data", new Gson().toJson(quizesItem)));
+        });
 
         viewModel.getToast().observe(this, toastMsg -> {
             if (toastMsg != null && !toastMsg.isEmpty()) {

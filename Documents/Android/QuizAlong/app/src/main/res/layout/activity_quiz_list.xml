@@ -64,17 +64,33 @@
 
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_quizes"
+
+
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:visibility="@{viewModel.isLoading || viewModel.isEmpty ? View.GONE : View.VISIBLE}"
-            app:adapter="@{viewModel.quizesAdapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="10"
-            tools:listitem="@layout/item_popular_quizes"
-            tools:visibility="gone" />
+            tools:layout_editor_absoluteX="8dp" >
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/upcoming_quiz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/upcoming_quiz"/>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/past_quiz"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/past_quiz"/>
+            </com.google.android.material.tabs.TabLayout>
+        </androidx.viewpager.widget.ViewPager>
+
+
 
 
         <RelativeLayout
@@ -92,19 +108,6 @@
         </RelativeLayout>
 
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="@{viewModel.isEmpty ? View.VISIBLE : View.GONE}">
 
-            <com.airbnb.lottie.LottieAnimationView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                app:lottie_autoPlay="true"
-                app:lottie_loop="true"
-                app:lottie_rawRes="@raw/no_data" />
-
-        </RelativeLayout>
     </LinearLayout>
 </layout>

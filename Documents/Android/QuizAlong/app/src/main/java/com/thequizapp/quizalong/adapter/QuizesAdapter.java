@@ -24,6 +24,13 @@ import static com.thequizapp.quizalong.api.Const.POST_TYPE;
 public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<Object> quizes = new ArrayList<>();
     private OnItemClicks onItemClicks;
+    private boolean showAll = false;
+
+    public QuizesAdapter() {
+    }
+    public QuizesAdapter(boolean showAll) {
+        this.showAll = showAll;
+    }
 
     public List<Object> getQuizes() {
         return quizes;
@@ -74,8 +81,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return 3;
-        /*return quizes.size();*/
+        return showAll ? quizes.size(): 3;
     }
 
     public void updateData(List<HomePage.QuizesItem> quizes) {
@@ -95,6 +101,9 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             quizes.add(index, nextNativeAd);
             notifyItemInserted(index);
         }
+    }
+    public void setFullLength(boolean showAll) {
+        this.showAll = showAll;
     }
 
     @Override
