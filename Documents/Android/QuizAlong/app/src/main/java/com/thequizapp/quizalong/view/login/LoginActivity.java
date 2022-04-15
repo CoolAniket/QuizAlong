@@ -22,6 +22,7 @@ import com.thequizapp.quizalong.utils.loginmaneger.FaceBookLoginManager;
 import com.thequizapp.quizalong.utils.loginmaneger.GoogleLoginManager;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.home.CourseSelectionActivity;
+import com.thequizapp.quizalong.view.main.MainActivity;
 import com.thequizapp.quizalong.viewmodel.ForgotPasswordViewModel;
 import com.thequizapp.quizalong.viewmodel.LoginViewModel;
 
@@ -67,8 +68,11 @@ public class LoginActivity extends BaseActivity {
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
             /*startActivity(new Intent(this, MainActivity.class));
             finishAffinity();*/
-
-            startActivity(new Intent(this, AdditionalInfoActivity.class));
+            if(sessionManager.getUser().getAdditional_info() == 1) {
+                startActivity(new Intent(this, AdditionalInfoActivity.class));
+            }else {
+                startActivity(new Intent(this, MainActivity.class));
+            }
             finishAffinity();
         });
     }

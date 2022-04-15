@@ -133,6 +133,7 @@ public class AdditionalInfoViewModel extends ViewModel {
         hashMap.put("year_id", toRequestBody(getYear()));
         hashMap.put("college", toRequestBody(getCollegeName()));
         hashMap.put("dob", toRequestBody(getDob()));
+        hashMap.put("mobile_no", toRequestBody(getMobileNo()));
         MultipartBody.Part body = null;
         if (profileUri != null && !profileUri.isEmpty()) {
             File file = new File(profileUri);
@@ -142,7 +143,7 @@ public class AdditionalInfoViewModel extends ViewModel {
             body = MultipartBody.Part.createFormData("proof", file.getName(), requestFile);
         }
 
-        Log.e("MMMM ",""+hashMap);
+        Log.e("MMMM ",""+getMobileNo());
         disposable.add(
                 Global.initRetrofit()
                         .additionDetails(BuildConfig.APIKEY, hashMap, body)

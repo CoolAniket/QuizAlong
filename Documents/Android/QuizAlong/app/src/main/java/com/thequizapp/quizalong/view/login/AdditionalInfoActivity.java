@@ -244,12 +244,9 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//
             }
         });
 
-//        viewModel.setDob("13/07/1989");
-//        viewModel.setCollegeName("Test debug college");
     }
 
     @Override
