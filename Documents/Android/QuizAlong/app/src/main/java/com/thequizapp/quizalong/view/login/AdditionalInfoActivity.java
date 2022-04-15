@@ -165,7 +165,19 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });
     }
-
+    private static final String[] COUNTRIES = new String[] {
+            "HBT, Dr.R.N.Cooper Medical College",
+            "Grant Medical College",
+            "Seth G.S. Medical College",
+            "Topiwala Medical College",
+            "Lokmanya Tilak Medical College",
+            "K.J. Somaiya Medical College",
+            "Terna Medical College",
+            "Rajiv Gandhi Medical College",
+            "Vedanta Medical College",
+            "MGM Medical College",
+            "Dr DY Patil Medical College"
+    };
     private void getStudents(){
         //Traversing through all the items in the json array
         courses.add("Select Course");
@@ -181,7 +193,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
         Log.e("KKKK ",""+courses);
 
-        years.add("Select Year");
+        years.add("Current official year");
         for(int j=0;j<viewModel.getUser().getCourse().get(0).getYear().size();j++){
             try {
                 //Getting json object
@@ -208,7 +220,9 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
             public void onNothingSelected(AdapterView<?> parent) {
             }
         });*/
-
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, COUNTRIES);
+        binding.etCollegeName.setAdapter(adapter);
         binding.spYear.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, years));
         binding.spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

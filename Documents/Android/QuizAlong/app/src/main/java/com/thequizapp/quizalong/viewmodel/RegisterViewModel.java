@@ -38,17 +38,20 @@ public class RegisterViewModel extends ViewModel {
                 fullName = charSequence.toString();
                 break;
             case 1:
-                email = charSequence.toString();
+                mobileNo = charSequence.toString();
                 break;
             case 2:
-                password = charSequence.toString();
+                email = charSequence.toString();
                 break;
             case 3:
+                password = charSequence.toString();
+                break;
+            case 4:
                 reTypePassword = charSequence.toString();
                 break;
-            /*case 4:
+            case 5:
                 referralCode = charSequence.toString();
-                break;*/
+                break;
             default:
                 break;
         }
@@ -56,27 +59,27 @@ public class RegisterViewModel extends ViewModel {
 
     public void onRegisterClick() {
         if (fullName == null || fullName.isEmpty()) {
-            toast.setValue("Please enter fullName.");
+            toast.setValue("Please enter fullName...!");
             return;
         }
         if (email == null || email.isEmpty()) {
-            toast.setValue("Please enter email");
+            toast.setValue("Please enter email...!");
             return;
         }
         if (!isEmailValid(email)) {
-            toast.setValue("Please enter valid email");
+            toast.setValue("Please enter valid email...!");
             return;
         }
-        /*if (!isValidMobile(mobileNo)) {
+        if (!isValidMobile(mobileNo)) {
             toast.setValue("Please enter valid mobile no...!");
             return;
-        }*/
+        }
         if (password == null || password.isEmpty()) {
-            toast.setValue("Please enter password");
+            toast.setValue("Please enter password...!");
             return;
         }
         if (reTypePassword == null || reTypePassword.isEmpty()) {
-            toast.setValue("Please enter confirm password");
+            toast.setValue("Please enter confirm password...!");
             return;
         }
         if (!reTypePassword.equals(password)) {
@@ -99,9 +102,6 @@ public class RegisterViewModel extends ViewModel {
                                         HashMap<String, String> hashMap = new HashMap<>();
                                         hashMap.put("fullname", fullName);
                                         hashMap.put("identity", email);
-                                        hashMap.put("password", password);
-                                        hashMap.put("social_login", "0");
-                                        hashMap.put("firebase_auth", "1");
                                         if (referralCode != null && !referralCode.isEmpty()) {
                                             hashMap.put("refercode", referralCode);
                                         }
@@ -127,16 +127,10 @@ public class RegisterViewModel extends ViewModel {
         return matcher.matches();
     }
 
-    /*private boolean isValidMobile(String phone) {
-        return android.util.Patterns.PHONE.matcher(phone).matches();
-    }*/
-
     private boolean isValidMobile(String phone) {
-        if(!Pattern.matches("[a-zA-Z]+", phone)) {
-            return phone.length() > 6 && phone.length() <= 10;
-        }
-        return false;
+        return android.util.Patterns.PHONE.matcher(phone).matches();
     }
+
     public void registerUser(HashMap<String, String> hashMap) {
         disposable.add(Global.initRetrofit().registerUser(BuildConfig.APIKEY, hashMap)
                 .subscribeOn(Schedulers.io())

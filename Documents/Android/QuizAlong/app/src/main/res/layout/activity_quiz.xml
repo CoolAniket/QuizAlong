@@ -46,7 +46,7 @@
             android:layout_marginTop="50dp"
             android:orientation="vertical"
             android:visibility="@{viewModel.isLoading || viewModel.isComplete ? View.GONE : View.VISIBLE}"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
 
             <TextView
@@ -581,7 +581,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="@{viewModel.isComplete ? View.VISIBLE : View.GONE}"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
             <LinearLayout
                 android:id="@+id/lyt_ss"
@@ -853,6 +853,64 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:id="@+id/lyt_show_leaderboard"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_white_50"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingVertical="8dp">
+
+                    <!--<ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_share"
+                        app:tint="@color/purple" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="Leaderboard"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyt_show_result"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/bg_white_50"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="10dp"
+                    android:paddingVertical="8dp">
+
+                    <!--<ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_share"
+                        app:tint="@color/purple" />-->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="Show Results"
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
 
             <TextView
                 android:id="@+id/tv_completed"

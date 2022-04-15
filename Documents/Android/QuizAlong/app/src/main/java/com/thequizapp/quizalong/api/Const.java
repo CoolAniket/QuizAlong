@@ -22,6 +22,7 @@ public final class Const {
     public static final String QUIZ_ADD_GAME_DATA_LIVE= "leaderboard/addGameDataLive";
     public static final String QUIZ_ADD_GAME_DATA_PAST= "leaderboard/addGameDataPast";
     public static final String QUIZ_QUESTIONS_OF_QUIZ = "quiz/questionsOfQuiz/{quiz_id}";
+    public static final String QUIZ_ANS_LIVE = "quiz/quizAnsLive/{quiz_id}/{user_id}";
     public static final String USER_ADD_POINTS_TO_WALLET = "user/addPointsToWallet";
     public static final String USER_INCREASE_PLAY = "user/increasePlay";
     public static final String APP_SETTINGS = "app/settings";

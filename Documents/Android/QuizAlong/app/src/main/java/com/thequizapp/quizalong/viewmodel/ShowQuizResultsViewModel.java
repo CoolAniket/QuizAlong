@@ -77,48 +77,26 @@ public class ShowQuizResultsViewModel extends ViewModel {
         return showQuestionAnsAdapter;
     }
 
-    public void getQuizResults(String quizId, String type) {
-        Log.e("ShowResult... "," "+quizId+" "+Global.userId.get()+" type "+type);
-
-        if(type.contains("past")){
-            disposable.add(Global.initRetrofit().getQuizAnsPast(BuildConfig.APIKEY, quizId, Global.userId.get())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .unsubscribeOn(Schedulers.io())
-                    .doOnTerminate(() -> isLoading.set(false))
-                    .subscribe((ShowResult, throwable) -> {
-                        Log.e("ShowResult...","past "+ShowResult+" "+throwable);
-                        if (ShowResult != null) {
-                            onSuccess.setValue(ShowResult);
-                            //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
-                            showQuestionAnsAdapter.updateData(ShowResult);
+    public void getQuizResults(String quizId) {
+        Log.e("ShowResult... "," "+quizId+" "+Global.userId.get());
+        disposable.add(Global.initRetrofit().getQuizAnsLive(BuildConfig.APIKEY, quizId, Global.userId.get())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .doOnTerminate(() -> isLoading.set(false))
+                .subscribe((ShowResult, throwable) -> {
+                    Log.e("ShowResult...",""+ShowResult+" "+throwable);
+                    if (ShowResult != null) {
+                        onSuccess.setValue(ShowResult);
+                        //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
+                        showQuestionAnsAdapter.updateData(ShowResult);
                         /*String str = "1"+"/"+ShowResult.getQuestions().size();
                         getPaginationVal().setValue(str);*/
-                            this.setUser(ShowResult);
-                        } else if (throwable != null) {
-                            toast.setValue(throwable.getLocalizedMessage());
-                        }
-                    }));
-        }else{
-            disposable.add(Global.initRetrofit().getQuizAnsLive(BuildConfig.APIKEY, quizId, Global.userId.get())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .unsubscribeOn(Schedulers.io())
-                    .doOnTerminate(() -> isLoading.set(false))
-                    .subscribe((ShowResult, throwable) -> {
-                        Log.e("ShowResult...",""+ShowResult+" "+throwable);
-                        if (ShowResult != null) {
-                            onSuccess.setValue(ShowResult);
-                            //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
-                            showQuestionAnsAdapter.updateData(ShowResult);
-                        /*String str = "1"+"/"+ShowResult.getQuestions().size();
-                        getPaginationVal().setValue(str);*/
-                            this.setUser(ShowResult);
-                        } else if (throwable != null) {
-                            toast.setValue(throwable.getLocalizedMessage());
-                        }
-                    }));
-        }
+                        this.setUser(ShowResult);
+                    } else if (throwable != null) {
+                        toast.setValue(throwable.getLocalizedMessage());
+                    }
+                }));
     }
 
     @Override

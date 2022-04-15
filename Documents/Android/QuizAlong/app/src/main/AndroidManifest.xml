@@ -36,10 +36,12 @@
                 <action android:name="android.intent.action.MAIN" />
 
         <activity android:name=".view.web.WebViewActivity"></activity>
+        <activity android:name=".view.results.ShowQuizAnswersActivity"/>
+
         <receiver
             android:name=".receivers.GameStartReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".view.edit.EditProfileActivity" />
         <activity android:name=".view.quiz.QuizActivity" />
