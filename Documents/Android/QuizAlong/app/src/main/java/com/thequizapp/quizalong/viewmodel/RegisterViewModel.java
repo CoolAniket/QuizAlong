@@ -127,10 +127,16 @@ public class RegisterViewModel extends ViewModel {
         return matcher.matches();
     }
 
-    private boolean isValidMobile(String phone) {
+    /*private boolean isValidMobile(String phone) {
         return android.util.Patterns.PHONE.matcher(phone).matches();
-    }
+    }*/
 
+    private boolean isValidMobile(String phone) {
+        if(!Pattern.matches("[a-zA-Z]+", phone)) {
+            return phone.length() > 6 && phone.length() <= 10;
+        }
+        return false;
+    }
     public void registerUser(HashMap<String, String> hashMap) {
         disposable.add(Global.initRetrofit().registerUser(BuildConfig.APIKEY, hashMap)
                 .subscribeOn(Schedulers.io())

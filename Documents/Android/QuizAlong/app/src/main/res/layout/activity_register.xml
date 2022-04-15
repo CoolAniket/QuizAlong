@@ -94,7 +94,7 @@
                     android:backgroundTint="@color/dim_white"
                     android:fontFamily="@font/gilroy_reguler"
                     android:imeOptions="actionNext"
-                    android:inputType="textPersonName"
+                    android:inputType="number"
                     android:paddingHorizontal="15dp"
                     android:singleLine="true"
                     android:textColor="@color/black" />

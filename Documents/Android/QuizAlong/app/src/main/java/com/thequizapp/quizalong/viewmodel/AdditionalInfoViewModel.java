@@ -113,6 +113,7 @@ public class AdditionalInfoViewModel extends ViewModel {
             toast.setValue("Please enter college name...!");
             return;
         }
+        //Log.d("MMMMM ",""+isValidMobile(mobileNo));
         if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
             toast.setValue("Please enter mobile number...!");
             return;
@@ -165,8 +166,15 @@ public class AdditionalInfoViewModel extends ViewModel {
         return matcher.matches();
     }
 
-    private boolean isValidMobile(String phone) {
+    /*private boolean isValidMobile(String phone) {
         return android.util.Patterns.PHONE.matcher(phone).matches();
+    }*/
+
+    private boolean isValidMobile(String phone) {
+        if(!Pattern.matches("[a-zA-Z]+", phone)) {
+            return phone.length() > 6 && phone.length() <= 10;
+        }
+        return false;
     }
 
     public RequestBody toRequestBody(String value) {

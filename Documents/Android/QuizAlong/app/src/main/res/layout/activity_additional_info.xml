@@ -126,7 +126,7 @@
                             android:backgroundTint="@color/dim_white"
                             android:hint="@string/enter_mobile"
                             android:imeOptions="actionDone"
-                            android:inputType="textEmailAddress"
+                            android:inputType="number"
                             android:paddingHorizontal="15dp"
                             android:singleLine="true"
                             android:textSize="14sp"
