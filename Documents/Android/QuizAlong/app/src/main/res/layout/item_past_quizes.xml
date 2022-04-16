@@ -41,12 +41,14 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="%"
+                    android:fontFamily="@font/gilroy_medium"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -66,6 +68,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="13sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="30dp"/>
                 <ImageView
@@ -89,6 +92,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
@@ -99,6 +103,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
@@ -114,6 +119,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
                 <TextView
@@ -123,6 +129,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
                 <TextView
@@ -132,6 +139,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
                 <TextView
@@ -141,6 +149,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
             </LinearLayout>
@@ -151,10 +160,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TIME :- "
+                    android:text="Time :- "
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
                 <TextView
@@ -164,6 +174,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"/>
             </LinearLayout>
             <LinearLayout
@@ -176,7 +187,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:background="@drawable/my_custom_background">
+                    android:background="@drawable/border_top_background">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -184,6 +195,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="15sp"
+                        android:fontFamily="@font/gilroy_bold"
                         android:layout_gravity="center"/>
                 </LinearLayout>
                 <!--<LinearLayout
