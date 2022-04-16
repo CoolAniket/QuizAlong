@@ -39,6 +39,7 @@ public class AdditionalInfoViewModel extends ViewModel {
     private String year;
     private String profileUri;
     private String dob;
+    private String referralCode;
 
     public String getCourseName() {
         return courseName;
@@ -78,6 +79,14 @@ public class AdditionalInfoViewModel extends ViewModel {
 
     public void setDob(String dob) {
         this.dob = dob;
+    }
+
+    public String getReferralCode() {
+        return referralCode;
+    }
+
+    public void setReferralCode(String referralCode) {
+        this.referralCode = referralCode;
     }
 
     public ObservableBoolean getIsLoading() {
@@ -134,6 +143,7 @@ public class AdditionalInfoViewModel extends ViewModel {
         hashMap.put("college", toRequestBody(getCollegeName()));
         hashMap.put("dob", toRequestBody(getDob()));
         hashMap.put("mobile_no", toRequestBody(getMobileNo()));
+        hashMap.put("refercode", toRequestBody(getReferralCode()));
         MultipartBody.Part body = null;
         if (profileUri != null && !profileUri.isEmpty()) {
             File file = new File(profileUri);

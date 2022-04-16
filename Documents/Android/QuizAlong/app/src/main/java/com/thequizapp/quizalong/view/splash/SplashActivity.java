@@ -55,7 +55,8 @@ public class SplashActivity extends BaseActivity {
                                 }
                                 else if(sessionManager.getAdditionalDetails() == null){
                                     Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
-                                    Log.e("11111 ",""+sessionManager.getUser().getAdditional_info());
+                                    //Log.e("11111 ",""+sessionManager.getUser().getAdditional_info());
+                                    //startActivity(new Intent(this, AdditionalInfoActivity.class));
                                     if(sessionManager.getUser().getAdditional_info() == 1) {
                                         startActivity(new Intent(this, AdditionalInfoActivity.class));
                                     }else {
