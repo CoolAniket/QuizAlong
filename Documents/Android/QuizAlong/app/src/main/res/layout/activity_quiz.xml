@@ -1083,12 +1083,12 @@
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="4.5dp"
-                        android:visibility="@{viewModel.quizesItem.type == 0 ? View.GONE : View.VISIBLE }">
+>
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
+                            android:src="@drawable/ic_flame" />
 
                         <TextView
                             android:layout_width="wrap_content"

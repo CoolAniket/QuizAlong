@@ -31,6 +31,10 @@ public class PastQuizViewModel extends ViewModel {
         return toast;
     }
 
+    public void setQuizesAdapter(QuizesAdapter quizesAdapter) {
+        this.quizesAdapter = quizesAdapter;
+    }
+
     public QuizesAdapter getQuizesAdapter() {
         return quizesAdapter;
     }

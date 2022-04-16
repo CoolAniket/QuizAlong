@@ -30,7 +30,6 @@
     <string name="upcoming_quizes">Upcoming Quizes</string>
     <string name="past_quizes">Past Quizes</string>
     <string name="points">Points</string>
-    <string name="mins">mins</string>
     <string name="questions">Questions</string>
     <string name="leaderboard">Leaderboard</string>
     <string name="play_history">Play History</string>
@@ -114,6 +113,7 @@
     <string name="fbbanner" />
     <string name="choose_text">Choose 2 or more categories</string>
     <string name="razor_pay_test_key">rzp_test_RDLFlV1Kg8XmCo</string>
+    <string name="mins">mins</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

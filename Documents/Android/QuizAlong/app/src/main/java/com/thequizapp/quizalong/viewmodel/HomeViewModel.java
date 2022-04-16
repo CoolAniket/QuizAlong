@@ -7,9 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.thequizapp.quizalong.BuildConfig;
-import com.thequizapp.quizalong.adapter.HomeCategoriesAdapter;
 import com.thequizapp.quizalong.adapter.PastQuizesAdapter;
-import com.thequizapp.quizalong.adapter.QuizesAdapter;
 import com.thequizapp.quizalong.adapter.TwistQuizesAdapter;
 import com.thequizapp.quizalong.adapter.UpcomingQuizesAdapter;
 import com.thequizapp.quizalong.model.user.CurrentUser;

@@ -86,7 +86,7 @@
                     android:id="@+id/tv_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{model.title.toString()}"
+                    android:text="@{model.title}"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"

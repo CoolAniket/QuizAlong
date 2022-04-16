@@ -13,15 +13,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.home.CategoriesFragment">
+        tools:context=".view.quizes.UpcomingQuizFragment"
+        android:orientation="vertical">
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_quizes"
+            android:id="@+id/rv_upcoming_quizes"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:visibility="@{viewModel.isLoading || viewModel.isEmpty ? View.GONE : View.VISIBLE}"
+            android:visibility="@{viewModel.isEmpty ? View.GONE : View.VISIBLE}"
             app:adapter="@{viewModel.quizesAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:itemCount="10"
