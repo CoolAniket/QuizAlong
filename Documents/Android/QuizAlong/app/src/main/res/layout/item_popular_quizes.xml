@@ -50,6 +50,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center" />
                 <ImageView
                     android:layout_width="20dp"
@@ -60,15 +61,21 @@
                     android:layout_gravity="center"/>
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="20 \u20B9"
+                    android:text="2 X "
                     android:textStyle="bold"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="13sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginLeft="30dp"/>
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_coin"
+                    android:layout_gravity="center"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,13 +89,14 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-
+                    android:fontFamily="@font/gilroy_medium"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -103,7 +111,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:fontFamily="@font/gilroy_medium"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -117,6 +125,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
                 <TextView
@@ -136,6 +145,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
             </LinearLayout>
@@ -145,16 +155,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="TIME :- "
+                    android:text="Time :- "
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
+                    android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:fontFamily="@font/gilroy_medium"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -163,8 +174,8 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_marginTop="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
                 >
                 <LinearLayout
                     android:id="@+id/btn_check"
@@ -180,6 +191,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="15sp"
+                        android:fontFamily="@font/gilroy_bold"
                         android:layout_gravity="center"/>
                 </LinearLayout>
                 <LinearLayout
@@ -187,7 +199,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:background="@drawable/my_custom_background">
+                    android:background="@drawable/border_top_background">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -195,6 +207,7 @@
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="15sp"
+                        android:fontFamily="@font/gilroy_bold"
                         android:layout_marginRight="10dp"/>
                 </LinearLayout>
             </LinearLayout>
