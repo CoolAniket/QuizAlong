@@ -72,6 +72,15 @@ public interface ApiService {
     Single<RestResponse> saveUserCategoriesBulk(@Header(Const.API_KEY) String apiKey,
                                                 @FieldMap HashMap<String, Integer> requestBodyHashMap);
 
+    @FormUrlEncoded
+    @POST(Const.USER_SEND_OTP)
+    Single<RestResponse> sentOTPonMobile(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, String> requestBodyHashMap);
+    @FormUrlEncoded
+    @POST(Const.USER_VERIFY_OTP)
+    Single<RestResponse> verifyOTPonMobile(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, String> requestBodyHashMap);
+
 
     @FormUrlEncoded
     @POST(Const.USER_GET_USER_PROFILE)

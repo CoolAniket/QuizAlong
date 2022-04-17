@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.razorpay.Checkout;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.DialogAnswerResultBinding;
+import com.thequizapp.quizalong.databinding.DialogCategoryHelpBinding;
 import com.thequizapp.quizalong.databinding.DialogLifeLineBinding;
 import com.thequizapp.quizalong.databinding.DialogRapidFireBinding;
 import com.thequizapp.quizalong.databinding.DialogSimpleBinding;
@@ -56,6 +57,19 @@ public class CustomDialogBuilder {
         }
         binding.lyrNext.setOnClickListener(v -> {
             onAnswerDismissListener.onDismiss();
+            mBuilder.dismiss();
+        });
+        mBuilder.setContentView(binding.getRoot());
+        mBuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        mBuilder.show();
+
+    }
+
+    public void showCategoryHelpDialog() {
+        if (mContext == null)
+            return;
+        DialogCategoryHelpBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_category_help, null, false);
+        binding.lyrNext.setOnClickListener(v -> {
             mBuilder.dismiss();
         });
         mBuilder.setContentView(binding.getRoot());

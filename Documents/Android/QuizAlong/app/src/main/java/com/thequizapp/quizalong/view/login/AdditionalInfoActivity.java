@@ -176,6 +176,44 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
             public void onTextChanged(CharSequence s, int start, int before, int count){}
         });
+
+        binding.etOtp.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void afterTextChanged(Editable editable)
+            {
+                viewModel.setOtpMobile(editable.toString());
+                if (editable.toString().trim().length() == 4) {
+                    viewModel.verifyOTPPhone();
+                }
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+        });
+
+        binding.etReferral.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                viewModel.setReferralCode(editable.toString());
+            }
+        });
     }
 
     private void getStudents(){

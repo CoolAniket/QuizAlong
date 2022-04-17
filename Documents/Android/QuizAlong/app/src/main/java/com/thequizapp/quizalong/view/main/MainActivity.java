@@ -18,7 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.adapter.MainViewPagerAdapter;
 import com.thequizapp.quizalong.databinding.ActivityMainBinding;
-import com.thequizapp.quizalong.utils.SessionManager;
+import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
 import com.thequizapp.quizalong.view.notification.NotificationActivity;
@@ -74,6 +74,7 @@ public class  MainActivity extends BaseActivity {
 
     private void initObserve() {
         viewModel.getMutableSelectedMenu().observe(this, this::setSelect);
+        viewModel.getCategoryHelpDialog().observe(this, this::openCategoryHelpDialog);
     }
 
     private void initListener() {
@@ -88,6 +89,9 @@ public class  MainActivity extends BaseActivity {
         binding.navDrawer.lytUpdate.setOnClickListener(v -> startActivity(new Intent(this, NotificationActivity.class)));
         binding.navDrawer.lytPrivacy.setOnClickListener(v -> startActivity(new Intent(this, WebViewActivity.class).putExtra("type", 0)));
         binding.navDrawer.lytTerms.setOnClickListener(v -> startActivity(new Intent(this, WebViewActivity.class).putExtra("type", 1)));
+    }
+    private void openCategoryHelpDialog(Integer integer) {
+        new CustomDialogBuilder(this).showCategoryHelpDialog();
     }
 
     private void setSelect(int position) {
