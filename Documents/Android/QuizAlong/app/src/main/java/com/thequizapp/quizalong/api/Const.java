@@ -8,6 +8,8 @@ public final class Const {
     //Api End Point
     public static final String USER_REGISTER = "user/register";
     public static final String ADDITIONAL_DETAILS = "user/additionDetails";
+    public static final String USER_SEND_OTP = "user/sendotp";
+    public static final String USER_VERIFY_OTP = "user/verifyotp";
     public static final String QUIZ_HOMEPAGE = "quiz/homepage";
     public static final String QUIZ_ALLCATEGORIES = "quiz/allcategories/{course_id}/{user_id}";
     public static final String PAYMENT_RZP_ORDER_ID = "payment/getRzpOrderId/{amount}";

@@ -227,16 +227,84 @@
                                 android:layout_marginLeft="10dp"
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="10dp"
-                                android:layout_gravity="center">
+                                android:layout_gravity="center"
+                                android:orientation="horizontal">
                                 <EditText
                                     android:id="@+id/et_mobileNo"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="35dp"
+                                    android:layout_weight="1"
+                                    android:fontFamily="@font/gilroy_reguler"
+                                    android:layout_gravity="center_vertical"
+                                    android:background="@drawable/bg_white_5"
+                                    android:backgroundTint="@color/dim_white"
+                                    android:hint="@string/enter_mobile"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:paddingHorizontal="15dp"
+                                    android:singleLine="true"
+                                    android:textSize="14sp"
+                                    android:maxLength="13"
+                                    android:textColor="@color/black"
+                                    android:enabled="@{viewModel.isOtpSent ? false : true}"
+                                    />
+                                <com.google.android.material.imageview.ShapeableImageView
+                                    android:layout_width="36dp"
+                                    android:layout_height="wrap_content"
+                                    app:shapeAppearanceOverlay="@style/roundedImageViewRounded"
+                                    android:src="@drawable/ic_baseline_done_24"
+                                    android:scaleType="fitXY"
+                                    android:adjustViewBounds="true"
+                                    android:background="@color/white"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="8dp"
+                                    android:onClick="@{()->viewModel.authenticatePhone()}"
+                                    />
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="90dp"
+                            app:cardCornerRadius="15dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:visibility="@{viewModel.isOtpSent ? View.VISIBLE : View.GONE}">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:background="#0047AB"
+                                android:src="@color/cobalt_blue" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="start"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginLeft="20dp"
+                                android:fontFamily="@font/gilroy_medium"
+                                android:text="@string/enter_otp"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/bg_white_10"
+                                android:backgroundTint="@color/dim_grey"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginRight="10dp"
+                                android:layout_gravity="center">
+                                <EditText
+                                    android:id="@+id/et_otp"
                                     android:layout_width="match_parent"
                                     android:layout_height="35dp"
                                     android:fontFamily="@font/gilroy_reguler"
                                     android:layout_gravity="center_vertical"
                                     android:background="@drawable/bg_white_5"
                                     android:backgroundTint="@color/dim_white"
-                                    android:hint="@string/enter_mobile"
+                                    android:hint="@string/enter_otp"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:paddingHorizontal="15dp"

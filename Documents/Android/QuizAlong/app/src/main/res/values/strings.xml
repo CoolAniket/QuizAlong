@@ -68,7 +68,7 @@
     <string name="last_name">Last Name</string>
     <string name="double_dip">Double Dip</string>
     <string name="fifty_fifty">Fifty Fifty</string>
-    <string name="this_quiz_is_rapid_fire_nwhere_you_have_to_answer_nall_the_questions_within_nspecific_time_limit_or_nthat_answer_will_be_counted_nas_false_automatically">This Quiz is Rapid Fire ,\nwhere you have to answer\nall the questions within\nspecific time limit or\nthat answer will be counted\nas false automatically !</string>
+    <string name="quiz_rapid_fire_text">This Quiz is Rapid Fire ,\nwhere you have to answer\nall the questions within\nspecific time limit or\nthat answer will be counted\nas false automatically !</string>
     <string name="ok_start">Ok, Start</string>
     <string name="you_earned">You Earned</string>
     <string name="next">Next</string>
@@ -79,6 +79,7 @@
     <string name="terms_conditions">Accept Terms and Conditions</string>
     <string name="select_courses">Select courses</string>
     <string name="enter_mobile">Enter Mobile Number</string>
+    <string name="enter_otp">Enter OTP</string>
     <string name="select_year_pass">Select current official year</string>
     <string name="submit_userinfo">Submit</string>
     <string name="quiz_with_twist">Quiz With Twist</string>
@@ -114,6 +115,8 @@
     <string name="choose_text">Choose 2 or more categories</string>
     <string name="razor_pay_test_key">rzp_test_RDLFlV1Kg8XmCo</string>
     <string name="mins">mins</string>
+    <string name="category_help_text">\u25CF You can always change your favourite category using \"\u002A\" feature on top right corner of each category</string>
+    <string name="minimum_2_favourite">\u25CF Minimum 2 favourite categories are required</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>
