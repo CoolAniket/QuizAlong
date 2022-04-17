@@ -82,6 +82,10 @@ public interface ApiService {
     Single<AddDataLiveResponse> addGameDataLive(@Header(Const.API_KEY) String apiKey,
                                                 @FieldMap HashMap<String, String> hashMap);
 
+    @FormUrlEncoded
+    @POST(Const.QUIZ_ADD_GAME_DATA_PAST)
+    Single<AddDataLiveResponse> addGameDataPast(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, String> hashMap);
 
     @GET(Const.QUIZ_QUESTIONS_OF_QUIZ)
     Single<NewQuestions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,

@@ -276,8 +276,22 @@ public class QuizActivity extends BaseActivity implements Runnable {
         binding.tvExit.setOnClickListener(v -> onBackPressed());
         binding.tvCancel.setOnClickListener(v -> onBackPressed());
         binding.btnGo.setOnClickListener(v -> {
-            viewModel.getIsInfo().set(true);
-            startLobbyTimer();
+
+            Log.e(">.... ",getIntent().getStringExtra("quiz_type"));
+            if(getIntent().getStringExtra("quiz_type").toString() == "past"){
+                viewModel.getIsInfo().set(true);
+                /*startLobbyTimer();*/
+                viewModel.getIsLobby().set(true);
+                startCountDown();
+
+            }else
+            {
+                viewModel.getIsInfo().set(true);
+                startLobbyTimer();
+                /*viewModel.getIsLobby().set(true);
+                startCountDown();*/
+            }
+
         });
         binding.lyt2X.setOnClickListener(v -> {
             rewardAds.setOnRewarded(() -> {
@@ -445,7 +459,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
         } else {
             handler.removeCallbacks(this);
             viewModel.getIsComplete().set(true);
-            viewModel.callAddGameDataLiveApi();
+            viewModel.callAddGameDataLiveApi(getIntent().getStringExtra("quiz_type"));
         }
         binding.rtlMain.setRotationY(-90);
         binding.rtlMain.animate().withLayer()

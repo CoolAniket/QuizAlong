@@ -73,7 +73,8 @@ public class HomeFragment extends Fragment {
             /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
             startActivity(intent, activityOptions.toBundle());*/
             startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem)));
+                    .putExtra("data", new Gson().toJson(quizesItem))
+                    .putExtra("quiz_type","twist"));
         });
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
             Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
@@ -83,19 +84,14 @@ public class HomeFragment extends Fragment {
             /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
             startActivity(intent, activityOptions.toBundle());*/
             startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem)));
+                    .putExtra("data", new Gson().toJson(quizesItem))
+                    .putExtra("quiz_type","upcoming"));
         });
-        /*viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
-            if (rewardAds != null && quizesItem.getIsPermium() == 1) {
-                rewardAds.setOnRewarded(() -> startActivity(new Intent(getActivity(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem))));
-                rewardAds.showAds();
-                rewardAds = new RewardAds(getActivity());
-            } else {
-                startActivity(new Intent(getActivity(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem)));
-            }
-        });*/
+        viewModel.getPastQuizesAdapter().setOnItemClicks(quizesItem -> {
+            startActivity(new Intent(getActivity(), QuizActivity.class)
+                    .putExtra("data", new Gson().toJson(quizesItem))
+                    .putExtra("quiz_type","past"));
+        });
     }
 
     private void loadNativeAds() {

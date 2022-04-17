@@ -34,6 +34,8 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         this.quizes = quizes;
     }
 
+
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

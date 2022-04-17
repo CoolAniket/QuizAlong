@@ -929,7 +929,7 @@
         </LinearLayout>
 
         <RelativeLayout
-            tools:visibility="visible"
+            tools:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{!viewModel.isLobby ? View.VISIBLE : View.GONE}">
