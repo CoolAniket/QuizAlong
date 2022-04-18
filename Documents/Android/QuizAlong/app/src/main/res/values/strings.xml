@@ -114,9 +114,11 @@
     <string name="fbbanner" />
     <string name="choose_text">Choose 2 or more categories</string>
     <string name="razor_pay_test_key">rzp_test_RDLFlV1Kg8XmCo</string>
+    <string name="razor_pay_test_key2">rzp_test_Kl1o35vLhCFxCW</string>
     <string name="mins">mins</string>
     <string name="category_help_text">\u25CF You can always change your favourite category using \"\u002A\" feature on top right corner of each category</string>
     <string name="minimum_2_favourite">\u25CF Minimum 2 favourite categories are required</string>
+    <string name="my_quiz">My Quiz</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

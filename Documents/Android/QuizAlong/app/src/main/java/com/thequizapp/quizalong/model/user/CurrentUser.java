@@ -108,6 +108,15 @@ public class CurrentUser {
         @SerializedName("dob")
         private String dob;
 
+        @SerializedName("mobile_no")
+        private String mobileNo;
+
+        @SerializedName("password")
+        private String password;
+
+        @SerializedName("otp")
+        private String otp;
+
         public Object getImage() {
             return image;
         }
@@ -226,6 +235,14 @@ public class CurrentUser {
 
         public void setDob(String dob) {
             this.dob = dob;
+        }
+
+        public String getMobileNo() {
+            return mobileNo;
+        }
+
+        public void setMobileNo(String mobileNo) {
+            this.mobileNo = mobileNo;
         }
     }
 

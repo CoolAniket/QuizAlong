@@ -30,7 +30,7 @@
                 android:transitionName="logo"
                 android:layout_width="190dp"
                 android:layout_height="100dp"
-                android:src="@drawable/quizbox_logo" />
+                android:src="@drawable/quiz_along_logo" />
 
             <ImageView
                 android:layout_width="wrap_content"

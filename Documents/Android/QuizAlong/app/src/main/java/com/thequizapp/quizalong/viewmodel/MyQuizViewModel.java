@@ -13,9 +13,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class QuizListViewModel extends ViewModel {
+public class MyQuizViewModel extends ViewModel {
     private final CompositeDisposable disposable = new CompositeDisposable();
-    private CategoriesResponse.Category categoriesItem;
     private ObservableBoolean isLoading = new ObservableBoolean(true);
     private MutableLiveData<QuizByCatId> upcomingQuizes = new MutableLiveData<>();
     private MutableLiveData<Integer> mutableSelectedMenu = new MutableLiveData<>();
@@ -23,13 +22,6 @@ public class QuizListViewModel extends ViewModel {
 
 
 
-    public CategoriesResponse.Category getCategoriesItem() {
-        return categoriesItem;
-    }
-
-    public void setCategoriesItem(CategoriesResponse.Category categoriesItem) {
-        this.categoriesItem = categoriesItem;
-    }
 
     public MutableLiveData<QuizByCatId> getUpcomingQuizes() {
         return upcomingQuizes;
@@ -44,8 +36,8 @@ public class QuizListViewModel extends ViewModel {
         this.isLoading = isLoading;
     }
 
-    public void getQuizesByCatId() {
-        disposable.add(Global.initRetrofit().getQuizByCatId(BuildConfig.APIKEY, String.valueOf(categoriesItem.getKey()))
+    public void getMyQuizes() {
+        disposable.add(Global.initRetrofit().getMyQuizes(BuildConfig.APIKEY, Integer.parseInt(Global.userId.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

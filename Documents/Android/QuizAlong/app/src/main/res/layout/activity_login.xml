@@ -35,7 +35,7 @@
                 android:layout_width="210dp"
                 android:layout_height="70dp"
                 android:paddingHorizontal="10dp"
-                android:src="@drawable/quizbox_logo"
+                android:src="@drawable/quiz_along_logo"
                 android:transitionName="logo" />
 
             <TextView

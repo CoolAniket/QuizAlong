@@ -93,14 +93,6 @@ public class ProfileFragment extends Fragment {
             startActivity(new Intent(getActivity(), EditProfileActivity.class), activityOptions.toBundle());
         });
         binding.lytLogOut.setOnClickListener(v -> new CustomDialogBuilder(getActivity()).showLogOutDialog());
-        binding.cardMoreCoin.setOnClickListener(v -> {
-            rewardAds.setOnRewarded(() -> {
-                Toast.makeText(getActivity(), "Reward add your wallet...", Toast.LENGTH_SHORT).show();
-                viewModel.addRewardedPoints();
-                rewardAds = new RewardAds(getActivity());
-            });
-            rewardAds.showAds();
-        });
         binding.ivCopy.setOnClickListener(v -> {
             if (getActivity() != null) {
                 ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
