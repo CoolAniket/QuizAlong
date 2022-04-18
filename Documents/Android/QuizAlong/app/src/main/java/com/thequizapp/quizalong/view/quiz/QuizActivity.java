@@ -283,7 +283,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
         binding.btnGo.setOnClickListener(v -> {
 
             Log.e(">.... ",getIntent().getStringExtra("quiz_type"));
-            if(getIntent().getStringExtra("quiz_type").toString() == "past"){
+            if(getIntent().getStringExtra("quiz_type").contains("past")){
+                Log.e(">.... inside ",getIntent().getStringExtra("quiz_type"));
                 viewModel.getIsInfo().set(true);
                 /*startLobbyTimer();*/
                 viewModel.getIsLobby().set(true);
