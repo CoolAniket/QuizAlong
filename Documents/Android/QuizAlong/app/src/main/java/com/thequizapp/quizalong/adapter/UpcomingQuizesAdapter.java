@@ -148,7 +148,14 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                         /*pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());*/
                         onItemClick.onClick(pairs, categoriesItem);
                     });
-                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
+                    binding.btnPay.setOnClickListener(v -> {
+                        Pair<View, String>[] pairs = new Pair[3];
+                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        pairs[1] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        pairs[2] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        onItemClick.onClick(pairs, categoriesItem);
+                    });
+//                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());
                     binding.setModel(categoriesItem);
                 }
             }

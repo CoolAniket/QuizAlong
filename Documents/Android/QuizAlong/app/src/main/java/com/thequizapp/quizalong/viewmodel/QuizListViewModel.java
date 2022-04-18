@@ -16,14 +16,11 @@ import io.reactivex.schedulers.Schedulers;
 public class QuizListViewModel extends ViewModel {
     private final CompositeDisposable disposable = new CompositeDisposable();
     private CategoriesResponse.Category categoriesItem;
-//    private QuizesAdapter quizesAdapter = new QuizesAdapter();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
     private MutableLiveData<QuizByCatId> upcomingQuizes = new MutableLiveData<>();
-//    private ObservableBoolean isEmpty = new ObservableBoolean(false);
     private MutableLiveData<Integer> mutableSelectedMenu = new MutableLiveData<>();
     private ObservableInt selectedMenu = new ObservableInt(0);
-//    private QuizByCatId upcomingQuizes;
-//    private List<HomePage.QuizesItem> pastQuizes;
+
 
 
     public CategoriesResponse.Category getCategoriesItem() {
@@ -38,13 +35,6 @@ public class QuizListViewModel extends ViewModel {
         return upcomingQuizes;
     }
 
-    //    public QuizesAdapter getQuizesAdapter() {
-//        return quizesAdapter;
-//    }
-//
-//    public void setQuizesAdapter(QuizesAdapter quizesAdapter) {
-//        this.quizesAdapter = quizesAdapter;
-//    }
 
     public ObservableBoolean getIsLoading() {
         return isLoading;
@@ -53,14 +43,6 @@ public class QuizListViewModel extends ViewModel {
     public void setIsLoading(ObservableBoolean isLoading) {
         this.isLoading = isLoading;
     }
-
-//    public ObservableBoolean getIsEmpty() {
-//        return isEmpty;
-//    }
-//
-//    public void setIsEmpty(ObservableBoolean isEmpty) {
-//        this.isEmpty = isEmpty;
-//    }
 
     public void getQuizesByCatId() {
         disposable.add(Global.initRetrofit().getQuizByCatId(BuildConfig.APIKEY, String.valueOf(categoriesItem.getKey()))

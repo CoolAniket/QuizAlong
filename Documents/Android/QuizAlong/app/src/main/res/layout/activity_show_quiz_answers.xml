@@ -32,7 +32,7 @@
             <ImageView
                 android:layout_width="180dp"
                 android:layout_height="85dp"
-                android:src="@drawable/quizbox_logo"
+                android:src="@drawable/quiz_along_logo"
                 android:layout_gravity="center"
                 android:layout_marginTop="30dp"/>
             <LinearLayout

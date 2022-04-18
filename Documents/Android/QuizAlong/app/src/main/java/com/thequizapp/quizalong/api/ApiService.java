@@ -58,10 +58,17 @@ public interface ApiService {
     Single<CategoriesResponse> getAllCategories(@Header(Const.API_KEY) String apiKey,
                                                 @Path(Const.COURSE_ID) int course_id,
                                                 @Path(Const.USER_ID) int userId);
+    @GET(Const.QUIZ_MY_QUIZ)
+    Single<QuizByCatId> getMyQuizes(@Header(Const.API_KEY) String apiKey,
+                                                @Path(Const.USER_ID) int userId);
 
     @GET(Const.PAYMENT_RZP_ORDER_ID)
     Single<OrderResponse> getRzpOrderId(@Header(Const.API_KEY) String apiKey,
                                         @Path(Const.AMOUNT) int amount);
+    @FormUrlEncoded
+    @POST(Const.PAYMENT_ADD_PAYMENT_DATA)
+    Single<RestResponse> addPaymentData(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, String> requestBodyHashMap);
     @FormUrlEncoded
     @POST(Const.QUIZ_USER_CATEGORIES)
     Single<RestResponse> saveUserCategory(@Header(Const.API_KEY) String apiKey,
