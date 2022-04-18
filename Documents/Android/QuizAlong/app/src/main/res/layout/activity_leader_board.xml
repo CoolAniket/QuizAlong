@@ -110,7 +110,7 @@
                         android:layout_width="110dp"
                         android:layout_height="110dp"
                         android:background="@drawable/ic_profile_user"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/cobalt_blue"
                         android:padding="12dp"
                         app:circle_crop="@{secondUser.image}" />
 
@@ -144,7 +144,7 @@
                         android:layout_width="125dp"
                         android:layout_height="125dp"
                         android:background="@drawable/ic_profile_user"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/cobalt_blue"
                         android:padding="10dp"
                         app:circle_crop="@{firstUser.image}" />
 
@@ -187,7 +187,7 @@
                         android:layout_width="85dp"
                         android:layout_height="85dp"
                         android:background="@drawable/ic_profile_user"
-                        android:backgroundTint="@color/purple_200"
+                        android:backgroundTint="@color/cobalt_blue"
                         android:padding="8dp"
                         app:circle_crop="@{thirdUser.image}" />
 
@@ -213,7 +213,7 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
-                app:cardBackgroundColor="@color/dim_purple"
+                app:cardBackgroundColor="@color/cobalt_blue"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp"
                 app:cardUseCompatPadding="true"
@@ -268,7 +268,6 @@
                 android:id="@+id/rv_leader_board"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginTop="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical"
                 android:paddingHorizontal="10dp"

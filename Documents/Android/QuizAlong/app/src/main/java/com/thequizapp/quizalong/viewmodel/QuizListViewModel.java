@@ -1,13 +1,14 @@
 package com.thequizapp.quizalong.viewmodel;
 
-import androidx.databinding.ObservableBoolean;
-import androidx.lifecycle.ViewModel;
-
 import com.thequizapp.quizalong.BuildConfig;
-import com.thequizapp.quizalong.adapter.QuizesAdapter;
 import com.thequizapp.quizalong.model.categories.CategoriesResponse;
+import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.utils.Global;
 
+import androidx.databinding.ObservableBoolean;
+import androidx.databinding.ObservableInt;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -15,9 +16,12 @@ import io.reactivex.schedulers.Schedulers;
 public class QuizListViewModel extends ViewModel {
     private final CompositeDisposable disposable = new CompositeDisposable();
     private CategoriesResponse.Category categoriesItem;
-    private QuizesAdapter quizesAdapter = new QuizesAdapter();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
-    private ObservableBoolean isEmpty = new ObservableBoolean(false);
+    private MutableLiveData<QuizByCatId> upcomingQuizes = new MutableLiveData<>();
+    private MutableLiveData<Integer> mutableSelectedMenu = new MutableLiveData<>();
+    private ObservableInt selectedMenu = new ObservableInt(0);
+
+
 
     public CategoriesResponse.Category getCategoriesItem() {
         return categoriesItem;
@@ -27,13 +31,10 @@ public class QuizListViewModel extends ViewModel {
         this.categoriesItem = categoriesItem;
     }
 
-    public QuizesAdapter getQuizesAdapter() {
-        return quizesAdapter;
+    public MutableLiveData<QuizByCatId> getUpcomingQuizes() {
+        return upcomingQuizes;
     }
 
-    public void setQuizesAdapter(QuizesAdapter quizesAdapter) {
-        this.quizesAdapter = quizesAdapter;
-    }
 
     public ObservableBoolean getIsLoading() {
         return isLoading;
@@ -41,14 +42,6 @@ public class QuizListViewModel extends ViewModel {
 
     public void setIsLoading(ObservableBoolean isLoading) {
         this.isLoading = isLoading;
-    }
-
-    public ObservableBoolean getIsEmpty() {
-        return isEmpty;
-    }
-
-    public void setIsEmpty(ObservableBoolean isEmpty) {
-        this.isEmpty = isEmpty;
     }
 
     public void getQuizesByCatId() {
@@ -59,9 +52,9 @@ public class QuizListViewModel extends ViewModel {
                 .doOnSubscribe(disposable1 -> isLoading.set(true))
                 .doOnTerminate(() -> isLoading.set(false))
                 .subscribe((quizByCatId, throwable) -> {
-                    if (quizByCatId != null && quizByCatId.getQuizes() != null) {
-                        isEmpty.set(quizByCatId.getQuizes().isEmpty());
-                        quizesAdapter.updateData(quizByCatId.getQuizes());
+                    if (quizByCatId != null && quizByCatId.getPastQuizes() != null && quizByCatId.getUpcomingQuizes() != null) {
+//                        isEmpty.set(quizByCatId.getPastQuizes().isEmpty());
+                        upcomingQuizes.postValue(quizByCatId);
                     }
                 }));
     }

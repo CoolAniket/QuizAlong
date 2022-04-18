@@ -211,27 +211,6 @@
                         android:layout_weight="1"
                         android:orientation="vertical">
 
-                        <androidx.cardview.widget.CardView
-                            android:id="@+id/card_more_coin"
-                            android:layout_width="match_parent"
-                            android:layout_height="45dp"
-                            app:cardCornerRadius="10dp">
-
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:scaleType="centerCrop"
-                                android:src="@drawable/cat_bg" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:fontFamily="@font/gilroy_medium"
-                                android:text="@string/more_coins"
-                                android:textColor="@color/white"
-                                android:textSize="16sp" />
-                        </androidx.cardview.widget.CardView>
 
                         <View
                             android:layout_width="match_parent"
@@ -264,7 +243,7 @@
                     android:layout_marginVertical="5dp"
                     android:layout_marginStart="10dp"
                     android:fontFamily="@font/gilroy_reguler"
-                    android:text='@{"$1 = "+viewModel.currentPrice+" Points"}'
+                    android:text=''
                     android:textColor="@color/black"
                     android:textSize="12sp" />
 

@@ -25,7 +25,7 @@
             android:layout_width="120dp"
             android:layout_height="65dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/quizbox_logo" />
+            android:src="@drawable/quiz_along_logo" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -59,7 +59,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_reguler"
                 android:gravity="center"
-                android:text="@string/this_quiz_is_rapid_fire_nwhere_you_have_to_answer_nall_the_questions_within_nspecific_time_limit_or_nthat_answer_will_be_counted_nas_false_automatically"
+                android:text="@string/quiz_rapid_fire_text"
                 android:textColor="@color/black"
                 android:textSize="15sp" />
 

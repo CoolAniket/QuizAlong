@@ -31,6 +31,9 @@ android {
     }
     buildFeatures.dataBinding = true
 }
+repositories {
+    mavenCentral()
+}
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 dependencies {
@@ -92,4 +95,7 @@ dependencies {
     //Ads
     implementation 'com.google.android.gms:play-services-ads:19.7.0'
     implementation 'com.facebook.android:audience-network-sdk:5.11.0'
+
+    //Razor pay
+    implementation 'com.razorpay:checkout:1.6.18'
 }

@@ -28,7 +28,7 @@
                 android:layout_height="150dp"
                 android:layout_centerInParent="true"
                 android:padding="25dp"
-                android:src="@drawable/quizbox_logo" />
+                android:src="@drawable/quiz_along_logo" />
         </RelativeLayout>
 
         <LinearLayout
@@ -114,6 +114,36 @@
                 android:layout_marginStart="10dp"
                 android:fontFamily="@font/gilroy_medium"
                 android:text="@string/redeem_requests"
+                android:textColor="@color/black"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.3dp"
+            android:background="@color/dark_grey" />
+
+        <LinearLayout
+            android:id="@+id/lyt_my_quiz"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:paddingVertical="15dp"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:padding="2dp"
+                android:src="@drawable/ic_profile_user_tint"
+                app:tint="@color/cobalt_blue" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/gilroy_medium"
+                android:text="@string/my_quiz"
                 android:textColor="@color/black"
                 android:textSize="18sp" />
         </LinearLayout>

@@ -12,7 +12,7 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:requestLegacyExternalStorage="true"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/ThemeQuizBox"
         android:usesCleartextTraffic="true">
@@ -23,6 +23,10 @@
             android:enabled="true"
             android:exported="true" />
 
+        <activity
+            android:name=".view.payment.PaymentActivity"
+            android:exported="false" />
+        <activity android:name=".view.web.WebViewActivity" />
         <activity android:name=".view.edit.EditProfileActivity" />
         <activity android:name=".view.quiz.QuizActivity" />
         <activity android:name=".view.redeem.HistoryRedeemRequestActivity" />
@@ -37,6 +41,7 @@
         <activity android:name=".view.login.LoginActivity" />
         <activity android:name=".view.splash.WelcomeActivity" />
         <activity android:name=".view.login.AdditionalInfoActivity" />
+        <activity android:name=".view.quizes.MyQuizActivity" />
         <activity android:name=".view.BaseActivity" />
         <activity android:name=".view.splash.SplashActivity">
             <intent-filter>

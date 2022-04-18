@@ -17,9 +17,12 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.FragmentHomeBinding;
+import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.MultipleCustomNativeAds;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
+import com.thequizapp.quizalong.view.payment.PaymentActivity;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.view.quizes.QuizListActivity;
 import com.thequizapp.quizalong.viewmodel.HomeViewModel;
@@ -66,31 +69,62 @@ public class HomeFragment extends Fragment {
             startActivity(intent, activityOptions.toBundle());
         });*/
         viewModel.getTwistQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
-            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-            intent.putExtra("name", (String) pairs[0].second);
-            intent.putExtra("logo", (String) pairs[1].second);
-            intent.putExtra("data", new Gson().toJson(quizesItem));
+            if (pairs.length == 3) {
+                startPaymentProcess(quizesItem);
+//                startActivity(new Intent(getActivity(), PaymentActivity.class)
+//                        .putExtra("data", new Gson().toJson(quizesItem)));
+            } else {
+                Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
+                intent.putExtra("name", (String) pairs[0].second);
+                intent.putExtra("logo", (String) pairs[1].second);
+                intent.putExtra("data", new Gson().toJson(quizesItem));
             /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
             startActivity(intent, activityOptions.toBundle());*/
-            startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra("quiz_type","twist"));
+                startActivity(new Intent(getActivity(), QuizActivity.class)
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("quiz_type","twist"));
+            }
         });
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
-            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-            intent.putExtra("name", (String) pairs[0].second);
-            //intent.putExtra("logo", (String) pairs[1].second);
-            intent.putExtra("data", new Gson().toJson(quizesItem));
-            /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
-            startActivity(intent, activityOptions.toBundle());*/
-            startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra("quiz_type","upcoming"));
+            if (pairs.length == 3) {
+                startPaymentProcess(quizesItem);
+//                startActivity(new Intent(getActivity(), PaymentActivity.class)
+//                        .putExtra("data", new Gson().toJson(quizesItem)));
+            } else {
+                Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
+                intent.putExtra("name", (String) pairs[0].second);
+                //intent.putExtra("logo", (String) pairs[1].second);
+                intent.putExtra("data", new Gson().toJson(quizesItem));
+                startActivity(new Intent(getActivity(), QuizActivity.class)
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("quiz_type","upcoming"));
+            }
         });
-        viewModel.getPastQuizesAdapter().setOnItemClicks(quizesItem -> {
+
+        viewModel.getPastQuizesAdapter().setOnItemClicks((quizesItem) -> {
+            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
+            //intent.putExtra("name", (String) pairs[0].second);
+            //intent.putExtra("logo", (String) pairs[1].second);
+            //intent.putExtra("data", new Gson().toJson(quizesItem));
             startActivity(new Intent(getActivity(), QuizActivity.class)
                     .putExtra("data", new Gson().toJson(quizesItem))
                     .putExtra("quiz_type","past"));
+        });
+    }
+
+    private void startPaymentProcess(TwistQuizPage.Quize quizesItem) {
+        new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(new CustomDialogBuilder.OnPaymentAmountSelectListener() {
+            @Override
+            public void onAmountClick(int amount) {
+                startActivity(new Intent(getActivity(), PaymentActivity.class)
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("amount", amount));
+            }
+
+            @Override
+            public void onDismissClick() {
+
+            }
         });
     }
 

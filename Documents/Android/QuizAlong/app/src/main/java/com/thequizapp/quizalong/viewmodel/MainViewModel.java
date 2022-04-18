@@ -9,6 +9,7 @@ import com.thequizapp.quizalong.model.user.CurrentUser;
 public class MainViewModel extends ViewModel {
     public boolean isBack = false;
     private MutableLiveData<Integer> mutableSelectedMenu = new MutableLiveData<>();
+    private MutableLiveData<Integer> categoryHelpDialog = new MutableLiveData<>();
     private ObservableInt selectedMenu = new ObservableInt(0);
     private CurrentUser user;
 
@@ -18,6 +19,10 @@ public class MainViewModel extends ViewModel {
 
     public void setMutableSelectedMenu(MutableLiveData<Integer> mutableSelectedMenu) {
         this.mutableSelectedMenu = mutableSelectedMenu;
+    }
+
+    public MutableLiveData<Integer> getCategoryHelpDialog() {
+        return categoryHelpDialog;
     }
 
     public ObservableInt getSelectedMenu() {
@@ -39,5 +44,8 @@ public class MainViewModel extends ViewModel {
     public void onClickMenu(int selectedPosition) {
         selectedMenu.set(selectedPosition);
         mutableSelectedMenu.setValue(selectedPosition);
+    }
+    public void onCategoryHelp() {
+        categoryHelpDialog.postValue(1);
     }
 }

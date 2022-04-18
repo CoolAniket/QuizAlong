@@ -24,7 +24,7 @@
             android:layout_width="120dp"
             android:layout_height="65dp"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/quizbox_logo" />
+            android:src="@drawable/quiz_along_logo" />
 
         <LinearLayout
             android:layout_width="wrap_content"

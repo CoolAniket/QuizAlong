@@ -15,9 +15,12 @@ import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.razorpay.Checkout;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.DialogAnswerResultBinding;
+import com.thequizapp.quizalong.databinding.DialogCategoryHelpBinding;
 import com.thequizapp.quizalong.databinding.DialogLifeLineBinding;
+import com.thequizapp.quizalong.databinding.DialogPaymentAmountBinding;
 import com.thequizapp.quizalong.databinding.DialogRapidFireBinding;
 import com.thequizapp.quizalong.databinding.DialogSimpleBinding;
 import com.thequizapp.quizalong.view.splash.SplashActivity;
@@ -55,6 +58,19 @@ public class CustomDialogBuilder {
         }
         binding.lyrNext.setOnClickListener(v -> {
             onAnswerDismissListener.onDismiss();
+            mBuilder.dismiss();
+        });
+        mBuilder.setContentView(binding.getRoot());
+        mBuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        mBuilder.show();
+
+    }
+
+    public void showCategoryHelpDialog() {
+        if (mContext == null)
+            return;
+        DialogCategoryHelpBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_category_help, null, false);
+        binding.lyrNext.setOnClickListener(v -> {
             mBuilder.dismiss();
         });
         mBuilder.setContentView(binding.getRoot());
@@ -121,6 +137,28 @@ public class CustomDialogBuilder {
         mBuilder.show();
     }
 
+    public void showPaymentAmountDialog(OnPaymentAmountSelectListener onDismissListener) {
+        if (mContext == null)
+            return;
+        DialogPaymentAmountBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_payment_amount, null, false);
+
+        binding.btn50.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onAmountClick(50);
+        });
+        binding.btn100.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onAmountClick(100);
+        });
+        binding.tvCancel.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onDismissClick();
+        });
+        mBuilder.setContentView(binding.getRoot());
+        mBuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        mBuilder.show();
+    }
+
     public void showLogOutDialog() {
         if (mContext == null)
             return;
@@ -140,6 +178,8 @@ public class CustomDialogBuilder {
             mBuilder.dismiss();
             SessionManager sessionManager = new SessionManager(mContext);
             sessionManager.clear();
+            // RazorPar clear data
+            Checkout.clearUserData(mContext.getApplicationContext());
             mContext.startActivity(new Intent(mContext, SplashActivity.class));
         });
         binding.tvCancel.setOnClickListener(v -> mBuilder.dismiss());
@@ -196,5 +236,12 @@ public class CustomDialogBuilder {
         void onCancelDismiss();
 
         void onStartDismiss();
+    }
+
+    public interface OnPaymentAmountSelectListener {
+
+        void onAmountClick(int amount);
+
+        void onDismissClick();
     }
 }

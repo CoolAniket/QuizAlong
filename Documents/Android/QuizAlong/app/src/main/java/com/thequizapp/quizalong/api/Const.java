@@ -8,8 +8,12 @@ public final class Const {
     //Api End Point
     public static final String USER_REGISTER = "user/register";
     public static final String ADDITIONAL_DETAILS = "user/additionDetails";
+    public static final String USER_SEND_OTP = "user/sendotp";
+    public static final String USER_VERIFY_OTP = "user/verifyotp";
     public static final String QUIZ_HOMEPAGE = "quiz/homepage";
     public static final String QUIZ_ALLCATEGORIES = "quiz/allcategories/{course_id}/{user_id}";
+    public static final String PAYMENT_RZP_ORDER_ID = "payment/getRzpOrderId/{amount}";
+    public static final String PAYMENT_ADD_PAYMENT_DATA = "payment/addpaymentdata";
     public static final String QUIZ_USER_CATEGORIES = "quiz/usercategories";
     public static final String QUIZ_USER_CATEGORIES_BULK = "quiz/usercategoriesbulk";
     public static final String QUIZ_TWIST = "quiz/twistQuiz/{user_id}";
@@ -17,6 +21,7 @@ public final class Const {
     public static final String QUIZ_PAST= "quiz/pastQuiz/{user_id}";
     public static final String USER_GET_USER_PROFILE = "user/getUserProfile";
     public static final String QUIZ_QUIZBYCATEGORY = "quiz/quizbycategory";
+    public static final String QUIZ_MY_QUIZ = "quiz/myquiz/{user_id}";
     public static final String QUIZ_ADD_GAME_DATA_LIVE= "leaderboard/addGameDataLive";
     public static final String QUIZ_ADD_GAME_DATA_PAST= "leaderboard/addGameDataPast";
     public static final String QUIZ_QUESTIONS_OF_QUIZ = "quiz/questionsOfQuiz/{quiz_id}";
@@ -41,6 +46,9 @@ public final class Const {
     public static final String POINTS = "points";
     public static final String PLATFORM = "platform";
     public static final String AMOUNT = "amount";
+    public static final String SIGNATURE = "signature";
+    public static final String PAYMENT_ID = "payment_id";
+    public static final String ORDER_ID = "order_id";
     public static final String PAYMENT_METHOD = "payment_method";
     public static final String ACCOUNT = "account";
     public static final String START = "start";

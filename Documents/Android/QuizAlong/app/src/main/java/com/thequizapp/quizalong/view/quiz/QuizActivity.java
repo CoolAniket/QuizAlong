@@ -139,6 +139,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
         /*if (viewModel.getQuizesItem().getType() != 0) {
 
             new CustomDialogBuilder(this).showQuizTypeDialog(viewModel.getQuizesItem().getType() == 1, new CustomDialogBuilder.OnQuitTypeListener() {
+        if (viewModel.getQuizesItem().getType() != null) {
+            new CustomDialogBuilder(this).showQuizTypeDialog(true, new CustomDialogBuilder.OnQuitTypeListener() {
                 @Override
                 public void onCancelDismiss() {
                     finish();
@@ -146,10 +148,10 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
                 @Override
                 public void onStartDismiss() {
-                    if (viewModel.getQuizesItem().getType() == 1) {
+//                    if (viewModel.getQuizesItem().getType() == 1) {
                         startCountDown();
 
-                    }
+//                    }
                 }
             });
         }*/
@@ -179,6 +181,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
             };
             cTimer.start();
         }
+        viewModel.getRapidFireDuration().set(sessionManager.getRapidFireTime());
+        handler.postDelayed(this, 1000);
+
     }
 
     private void startLobbyTimer(){
@@ -426,9 +431,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
                                                 if (isAnswerRight != null && isAnswerRight) {
                                                     viewModel.getTotalScore().set(viewModel.getTotalScore().get() + viewModel.getCurrentQuestions().getValue().getReward());
                                                 } else {
-                                                    if (viewModel.getQuizesItem().getType() == 2) {
-                                                        viewModel.getTotalScore().set(viewModel.getTotalScore().get() - (viewModel.getCurrentQuestions().getValue().getReward() * 2));
-                                                    }
+//                                                    if (viewModel.getQuizesItem().getType() == 2) {
+//                                                        viewModel.getTotalScore().set(viewModel.getTotalScore().get() - (viewModel.getCurrentQuestions().getValue().getReward() * 2));
+//                                                    }
                                                 }
                                                 addScore();
                                             }

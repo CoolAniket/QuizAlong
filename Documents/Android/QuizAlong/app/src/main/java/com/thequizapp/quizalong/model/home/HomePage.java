@@ -218,7 +218,22 @@ public class HomePage {
         private String title;
 
         @SerializedName("type")
-        private int type;
+        private String type;
+
+        @SerializedName("description")
+        private String description;
+
+        @SerializedName("system_time")
+        private String systemTime;
+
+        @SerializedName("start_time")
+        private String startTime;
+
+        @SerializedName("total_time")
+        private int totalTime;
+
+        @SerializedName("questions")
+        private int questions;
 
         @SerializedName("category")
         private Category category;
@@ -298,17 +313,56 @@ public class HomePage {
             this.title = title;
         }
 
-        public int getType() {
+        public String getDescription() {
+            return description;
+        }
+
+        public void setDescription(String description) {
+            this.description = description;
+        }
+
+        public String getType() {
             return type;
         }
 
-        public void setType(int type) {
+        public void setType(String type) {
             this.type = type;
         }
 
         public String getTypeInString() {
-            if (type == 0) return "";
-            return type == 1 ? "Rapidfire" : "Negative Marking";
+            return type;
+        }
+
+        public int getQuestions() {
+            return questions;
+        }
+
+        public void setQuestions(int questions) {
+            this.questions = questions;
+        }
+
+        public String getSystemTime() {
+            return systemTime;
+        }
+
+        public void setSystemTime(String systemTime) {
+            this.systemTime = systemTime;
+        }
+
+        public String getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(String startTime) {
+            this.startTime = startTime;
+        }
+
+        public int getTotalTime() {
+            return totalTime;
+        }
+
+        public void setTotalTime(int totalTime) {
+            this.totalTime = totalTime;
         }
 
         public Category getCategory() {
