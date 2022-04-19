@@ -41,7 +41,7 @@ public class RegisterActivity extends BaseActivity {
             }
         });
         viewModel.getOnSuccess().observe(this, user -> {
-            Toast.makeText(this, getResources().getString(R.string.sign_up_successfully), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getResources().getString(R.string.sign_up_successfully), Toast.LENGTH_LONG).show();
             onBackPressed();
         });
     }

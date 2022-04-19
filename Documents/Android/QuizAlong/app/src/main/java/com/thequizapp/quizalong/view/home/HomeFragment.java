@@ -3,6 +3,7 @@ package com.thequizapp.quizalong.view.home;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class HomeFragment extends Fragment {
             SessionManager sessionManager = new SessionManager(getActivity());
             viewModel.getUser().setValue(sessionManager.getUser());
         }
+        Log.e("Home... ",viewModel.getUser().getValue().getUser().getFullName()+"");
         viewModel.getHomeData();
     }
 

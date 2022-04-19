@@ -66,7 +66,7 @@ public class CurrentUser {
         @SerializedName("image")
         private Object image;
 
-        @SerializedName("full_name")
+        @SerializedName("fullname")
         private String fullName;
 
         @SerializedName("wallet")

@@ -67,10 +67,10 @@ public class RegisterViewModel extends ViewModel {
             toast.setValue("Please enter valid email...!");
             return;
         }
-        if (!isValidMobile(mobileNo)) {
+        /*if (!isValidMobile(mobileNo)) {
             toast.setValue("Please enter valid mobile no...!");
             return;
-        }
+        }*/
         if (password == null || password.isEmpty()) {
             toast.setValue("Please enter password...!");
             return;
@@ -99,6 +99,9 @@ public class RegisterViewModel extends ViewModel {
                                         HashMap<String, String> hashMap = new HashMap<>();
                                         hashMap.put("fullname", fullName);
                                         hashMap.put("identity", email);
+                                        hashMap.put("password", password);
+                                        hashMap.put("social_login", "0");
+                                        hashMap.put("firebase_auth", "1");
                                         if (referralCode != null && !referralCode.isEmpty()) {
                                             hashMap.put("refercode", referralCode);
                                         }

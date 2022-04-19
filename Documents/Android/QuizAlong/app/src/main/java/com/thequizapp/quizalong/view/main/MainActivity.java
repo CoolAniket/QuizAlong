@@ -57,24 +57,6 @@ public class  MainActivity extends BaseActivity {
         lastView = binding.ivHome;
         setSelect(0);
         initViewPager();
-        Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                        /*while(true) {
-                            sleep(1000);
-                            handler.post(this);
-                        }*/
-                    String str = FirebaseInstanceId.getInstance().getToken("22065327434","FCM");
-                    Log.e("FCM..... ",""+str);
-                } catch (IOException e) {
-                    Log.e("FCM..... ",""+e);
-                    e.printStackTrace();
-                }
-            }
-        };
-
-        thread.start();
 
         FirebaseMessaging.getInstance().getToken().addOnCompleteListener(new OnCompleteListener<String>() {
             @Override
@@ -90,7 +72,7 @@ public class  MainActivity extends BaseActivity {
                 // Log and toast
                 //String msg = getString(R.string.app_name, token);
                 Log.d("FCM....", token);
-                Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
 
             }
         });
