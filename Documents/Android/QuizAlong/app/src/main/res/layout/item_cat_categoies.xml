@@ -64,28 +64,26 @@
                 <Button
                     android:id="@+id/btn_check"
                     android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
                     android:background="@drawable/bg_white_10"
                     android:backgroundTint="@color/black"
                     android:fontFamily="@font/gilroy_bold"
                     android:gravity="center"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="10dp"
                     android:text="@string/check_quizes"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="12sp" />
             </LinearLayout>
             <CheckBox
                 android:id="@+id/chk_favourite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:minWidth="0dp"
+                android:minHeight="0dp"
                 android:button="@drawable/check"
                 android:layout_gravity="end"
-                android:gravity="center"
-                android:padding="10dp"
-                android:layout_marginEnd="-10dp"
+                android:layout_margin="10dp"
                 android:text=""
                 android:checked="@{model.star == 1}"
                 />

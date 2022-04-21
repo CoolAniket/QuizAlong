@@ -42,7 +42,7 @@
 <!--                android:layout_marginTop="15dp"-->
 <!--                android:src="@drawable/correct" />-->
 
-            <TextView
+            <com.thequizapp.quizalong.view.custom.TextViewWithImages
                 android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
