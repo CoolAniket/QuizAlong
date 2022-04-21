@@ -80,27 +80,9 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("data", new Gson().toJson(quizesItem));
             /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
             startActivity(intent, activityOptions.toBundle());*/
-            startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra("quiz_type","twist"));
-        });
-        viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
-            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-            intent.putExtra("name", (String) pairs[0].second);
-            //intent.putExtra("logo", (String) pairs[1].second);
-            intent.putExtra("data", new Gson().toJson(quizesItem));
-            /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
-            startActivity(intent, activityOptions.toBundle());*/
-            startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra("quiz_type","upcoming"));
-        });
-        viewModel.getPastQuizesAdapter().setOnItemClicks(quizesItem -> {
-            startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra("quiz_type","past"));
                 startActivity(new Intent(getActivity(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem)));
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("quiz_type","twist"));
             }
         });
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
@@ -114,8 +96,19 @@ public class HomeFragment extends Fragment {
                 //intent.putExtra("logo", (String) pairs[1].second);
                 intent.putExtra("data", new Gson().toJson(quizesItem));
                 startActivity(new Intent(getActivity(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem)));
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("quiz_type","upcoming"));
             }
+        });
+
+        viewModel.getPastQuizesAdapter().setOnItemClicks((quizesItem) -> {
+            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
+            //intent.putExtra("name", (String) pairs[0].second);
+            //intent.putExtra("logo", (String) pairs[1].second);
+            //intent.putExtra("data", new Gson().toJson(quizesItem));
+            startActivity(new Intent(getActivity(), QuizActivity.class)
+                    .putExtra("data", new Gson().toJson(quizesItem))
+                    .putExtra("quiz_type","past"));
         });
     }
 

@@ -35,37 +35,29 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-        <activity android:name=".view.web.WebViewActivity"></activity>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <activity android:name=".view.results.ShowQuizAnswersActivity"/>
 
         <receiver
             android:name=".receivers.GameStartReceiver"
             android:enabled="true"
             android:exported="true" />
-
-        <activity android:name=".view.edit.EditProfileActivity" />
-        <activity android:name=".view.quiz.QuizActivity" />
-        <activity android:name=".view.redeem.HistoryRedeemRequestActivity" />
-        <activity android:name=".view.quizes.QuizListActivity" />
-        <activity android:name=".view.notification.NotificationActivity" />
-        <activity android:name=".view.redeem.RedeemRequestActivity" />
-        <activity android:name=".view.playhistory.PlayHistoryActivity" />
-        <activity android:name=".view.leaderboard.LeaderBoardActivity" />
-        <activity android:name=".view.main.MainActivity" />
-        <activity android:name=".view.home.CourseSelectionActivity" />
-        <activity android:name=".view.login.RegisterActivity" />
-        <activity android:name=".view.login.LoginActivity" />
-        <activity android:name=".view.splash.WelcomeActivity" />
-        <activity android:name=".view.login.AdditionalInfoActivity" />
-        <activity android:name=".view.quizes.MyQuizActivity" />
-        <activity android:name=".view.BaseActivity" />
-        <activity android:name=".view.splash.SplashActivity">
+        <service
+            android:name=".services.MyFirebaseMessagingService"
+            android:exported="false">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
-        </activity>
+        </service>
+        <activity
+            android:name=".view.payment.PaymentActivity"
+            android:exported="false" />
+        <activity android:name=".view.home.CourseSelectionActivity" />
+        <activity android:name=".view.quizes.MyQuizActivity" />
+
         <activity
             android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
