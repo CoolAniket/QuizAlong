@@ -101,7 +101,7 @@ public class HomeFragment extends Fragment {
     }
 
     private void startPaymentProcess(TwistQuizPage.Quize quizesItem) {
-        new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(new CustomDialogBuilder.OnPaymentAmountSelectListener() {
+        new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(quizesItem.getEntry(), new CustomDialogBuilder.OnPaymentAmountSelectListener() {
             @Override
             public void onAmountClick(int amount) {
                 startActivity(new Intent(getActivity(), PaymentActivity.class)

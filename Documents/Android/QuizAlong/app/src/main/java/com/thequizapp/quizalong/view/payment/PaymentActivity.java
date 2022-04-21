@@ -106,7 +106,7 @@ public class PaymentActivity extends BaseActivity implements PaymentResultWithDa
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("order_id", orderId);//from response of step 3.
             options.put("currency", "INR");
-            options.put("amount", "100" );
+            options.put("amount", viewModel.getAmount() );
             JSONObject preFill = new JSONObject();
             preFill.put("email", user.getIdentity());
             preFill.put("contact", user.getMobileNo());

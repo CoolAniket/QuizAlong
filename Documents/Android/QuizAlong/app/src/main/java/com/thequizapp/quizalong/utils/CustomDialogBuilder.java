@@ -25,6 +25,8 @@ import com.thequizapp.quizalong.databinding.DialogRapidFireBinding;
 import com.thequizapp.quizalong.databinding.DialogSimpleBinding;
 import com.thequizapp.quizalong.view.splash.SplashActivity;
 
+import java.util.List;
+
 public class CustomDialogBuilder {
     private final Context mContext;
     private Dialog mBuilder = null;
@@ -137,18 +139,20 @@ public class CustomDialogBuilder {
         mBuilder.show();
     }
 
-    public void showPaymentAmountDialog(OnPaymentAmountSelectListener onDismissListener) {
+    public void showPaymentAmountDialog(List<Integer> entry, OnPaymentAmountSelectListener onDismissListener) {
         if (mContext == null)
             return;
         DialogPaymentAmountBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_payment_amount, null, false);
 
+        binding.btn50.setText("INR "+entry.get(1));
         binding.btn50.setOnClickListener(v -> {
             mBuilder.dismiss();
-            onDismissListener.onAmountClick(50);
+            onDismissListener.onAmountClick(entry.get(1));
         });
+        binding.btn100.setText("INR "+entry.get(2));
         binding.btn100.setOnClickListener(v -> {
             mBuilder.dismiss();
-            onDismissListener.onAmountClick(100);
+            onDismissListener.onAmountClick(entry.get(2));
         });
         binding.tvCancel.setOnClickListener(v -> {
             mBuilder.dismiss();
