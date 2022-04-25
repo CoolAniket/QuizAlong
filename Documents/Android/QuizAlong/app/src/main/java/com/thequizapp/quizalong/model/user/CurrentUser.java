@@ -18,6 +18,9 @@ public class CurrentUser {
     @SerializedName("additional_info")
     private int additional_info;
 
+    @SerializedName("user_categories")
+    private int user_categories;
+
     @SerializedName("course")
     public ArrayList<Course> course;
 
@@ -53,6 +56,14 @@ public class CurrentUser {
         this.additional_info = additional_info;
     }
 
+    public int getUser_categories() {
+        return user_categories;
+    }
+
+    public void setUser_categories(int user_categories) {
+        this.user_categories = user_categories;
+    }
+
     public ArrayList<Course> getCourse() {
         return course;
     }
@@ -66,38 +77,39 @@ public class CurrentUser {
         @SerializedName("image")
         private Object image;
 
-        @SerializedName("full_name")
-        private String fullName;
+        @SerializedName("fullname")
+        private String fullname;
 
         @SerializedName("wallet")
         private int wallet;
 
-        @SerializedName("total_plays")
-        private int totalPlays;
+//        @SerializedName("total_plays")
+//        private int totalPlays;
 
-        @SerializedName("updated_at")
-        private String updatedAt;
+//        @SerializedName("updated_at")
+//        private String updatedAt;
 
         @SerializedName("identity")
         private String identity;
 
-        @SerializedName("total_points")
-        private int totalPoints;
+//        @SerializedName("total_points")
+//        private int totalPoints;
 
-        @SerializedName("created_at")
-        private String createdAt;
+//        @SerializedName("created_at")
+//        private String createdAt;
 
-        @SerializedName("id")
-        private int id;
+//        @SerializedName("user_id")
+        @SerializedName(value="name", alternate={"user_id", "id"})
+        private int user_id;
 
-        @SerializedName("refer_code")
-        private String referCode;
+        @SerializedName("refercode")
+        private String refercode;
 
-        @SerializedName("course_id")
-        private String courseId;
+        @SerializedName("course")
+        private String course;
 
-        @SerializedName("year_id")
-        private String yearId;
+        @SerializedName("year")
+        private String year;
 
         @SerializedName("college")
         private String college;
@@ -108,7 +120,7 @@ public class CurrentUser {
         @SerializedName("dob")
         private String dob;
 
-        @SerializedName("mobile_no")
+        @SerializedName("mobileno")
         private String mobileNo;
 
         @SerializedName("password")
@@ -125,12 +137,12 @@ public class CurrentUser {
             this.image = image;
         }
 
-        public String getFullName() {
-            return fullName;
+        public String getFullname() {
+            return fullname;
         }
 
-        public void setFullName(String fullName) {
-            this.fullName = fullName;
+        public void setFullname(String fullname) {
+            this.fullname = fullname;
         }
 
         public int getWallet() {
@@ -141,21 +153,6 @@ public class CurrentUser {
             this.wallet = wallet;
         }
 
-        public int getTotalPlays() {
-            return totalPlays;
-        }
-
-        public void setTotalPlays(int totalPlays) {
-            this.totalPlays = totalPlays;
-        }
-
-        public String getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(String updatedAt) {
-            this.updatedAt = updatedAt;
-        }
 
         public String getIdentity() {
             return identity;
@@ -165,52 +162,36 @@ public class CurrentUser {
             this.identity = identity;
         }
 
-        public int getTotalPoints() {
-            return totalPoints;
+        public int getUser_id() {
+            return user_id;
         }
 
-        public void setTotalPoints(int totalPoints) {
-            this.totalPoints = totalPoints;
+        public void setUser_id(int user_id) {
+            this.user_id = user_id;
         }
 
-        public String getCreatedAt() {
-            return createdAt;
+        public String getRefercode() {
+            return refercode;
         }
 
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
+        public void setRefercode(String refercode) {
+            this.refercode = refercode;
         }
 
-        public int getId() {
-            return id;
+        public String getCourse() {
+            return course;
         }
 
-        public void setId(int id) {
-            this.id = id;
+        public void setCourse(String course) {
+            this.course = course;
         }
 
-        public String getReferCode() {
-            return referCode;
+        public String getYear() {
+            return year;
         }
 
-        public void setReferCode(String referCode) {
-            this.referCode = referCode;
-        }
-
-        public String getCourseId() {
-            return courseId;
-        }
-
-        public void setCourseId(String courseId) {
-            this.courseId = courseId;
-        }
-
-        public String getYearId() {
-            return yearId;
-        }
-
-        public void setYearId(String yearId) {
-            this.yearId = yearId;
+        public void setYear(String year) {
+            this.year = year;
         }
 
         public String getCollege() {

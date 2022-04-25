@@ -104,8 +104,8 @@ public class HomeViewModel extends ViewModel {
                         //
                     }
                 }));*/
-        Log.e("Idddddd. ",""+getUser().getValue().getUser().getId());
-        disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getId())
+        Log.e("Idddddd. ",""+getUser().getValue().getUser().getUser_id());
+        disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getUser_id())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -114,7 +114,6 @@ public class HomeViewModel extends ViewModel {
                 .subscribe((twistQuiz, throwable) -> {
                     Log.e("twistQuiz ",""+throwable);
                     if (twistQuiz != null) {
-
                         if (twistQuiz.getQuizes() != null && !twistQuiz.getQuizes().isEmpty()) {
                             twistQuizesAdapter.updateData(twistQuiz.getQuizes());
                         }
@@ -123,7 +122,7 @@ public class HomeViewModel extends ViewModel {
                     }
                 }));
 
-        disposable.add(Global.initRetrofit().getUpcomingQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getId())
+        disposable.add(Global.initRetrofit().getUpcomingQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getUser_id())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -140,7 +139,7 @@ public class HomeViewModel extends ViewModel {
                         //
                     }
                 }));
-        disposable.add(Global.initRetrofit().getPastQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getId())
+        disposable.add(Global.initRetrofit().getPastQuizPage(BuildConfig.APIKEY,getUser().getValue().getUser().getUser_id())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

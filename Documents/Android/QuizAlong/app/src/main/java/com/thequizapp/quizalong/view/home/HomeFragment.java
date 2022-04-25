@@ -1,8 +1,8 @@
 package com.thequizapp.quizalong.view.home;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +12,13 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.facebook.ads.NativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
+import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.FragmentHomeBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.SessionManager;
-import com.thequizapp.quizalong.utils.ads.MultipleCustomNativeAds;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
 import com.thequizapp.quizalong.view.payment.PaymentActivity;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
@@ -56,6 +54,7 @@ public class HomeFragment extends Fragment {
             SessionManager sessionManager = new SessionManager(getActivity());
             viewModel.getUser().setValue(sessionManager.getUser());
         }
+        Log.e("Home... ",viewModel.getUser().getValue().getUser().getFullname()+"");
         viewModel.getHomeData();
     }
 
@@ -82,7 +81,7 @@ public class HomeFragment extends Fragment {
             startActivity(intent, activityOptions.toBundle());*/
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
-                        .putExtra("quiz_type","twist"));
+                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.TWIST));
             }
         });
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
@@ -97,7 +96,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("data", new Gson().toJson(quizesItem));
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
-                        .putExtra("quiz_type","upcoming"));
+                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
             }
         });
 
@@ -108,11 +107,11 @@ public class HomeFragment extends Fragment {
             //intent.putExtra("data", new Gson().toJson(quizesItem));
             startActivity(new Intent(getActivity(), QuizActivity.class)
                     .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra("quiz_type","past"));
+                    .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
         });
     }
 
-    private void startPaymentProcess(TwistQuizPage.Quize quizesItem) {
+    private void startPaymentProcess(TwistQuizPage.QuizItem quizesItem) {
         new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(new CustomDialogBuilder.OnPaymentAmountSelectListener() {
             @Override
             public void onAmountClick(int amount) {

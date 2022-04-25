@@ -50,38 +50,38 @@
                     android:transitionName="@string/profile"
                     app:circle_crop='@{viewModel.user.user.image}' />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/bg_gredient_5"
-                    android:gravity="center"
-                    android:paddingHorizontal="15dp"
-                    android:paddingVertical="4dp">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    android:background="@drawable/bg_gredient_5"-->
+<!--                    android:gravity="center"-->
+<!--                    android:paddingHorizontal="15dp"-->
+<!--                    android:paddingVertical="4dp">-->
 
-                    <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
-                        app:user_level="@{viewModel.user.user.totalPoints}"
-                        android:src="@drawable/ic_star" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="15dp"-->
+<!--                        android:layout_height="15dp"-->
+<!--                        app:user_level="@{viewModel.user.user.totalPoints}"-->
+<!--                        android:src="@drawable/ic_star" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/gilroy_bold"
-                        app:user_player="@{viewModel.user.user.totalPoints}"
-                        android:textAllCaps="true"
-                        android:textColor="@color/white"
-                        android:textSize="12sp" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        android:fontFamily="@font/gilroy_bold"-->
+<!--                        app:user_player="@{viewModel.user.user.totalPoints}"-->
+<!--                        android:textAllCaps="true"-->
+<!--                        android:textColor="@color/white"-->
+<!--                        android:textSize="12sp" />-->
+<!--                </LinearLayout>-->
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/gilroy_bold"
-                    android:text="@{viewModel.user.user.fullName}"
+                    android:text="@{viewModel.user.user.fullname}"
                     android:textColor="@color/black"
                     android:textSize="18sp" />
 
@@ -91,52 +91,52 @@
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="vertical">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/gilroy_bold"
-                            android:text='@{Global.prettyCount(viewModel.user.user.totalPlays)}'
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/gilroy_bold"-->
+<!--                            android:text='@{Global.prettyCount(viewModel.user.user.totalPlays)}'-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="18sp" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/gilroy_medium"
-                            android:text="@string/quizes_played"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/gilroy_medium"-->
+<!--                            android:text="@string/quizes_played"-->
+<!--                            android:textColor="@color/black" />-->
+<!--                    </LinearLayout>-->
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:gravity="center"
-                        android:orientation="vertical">
+<!--                    <LinearLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="15dp"-->
+<!--                        android:gravity="center"-->
+<!--                        android:orientation="vertical">-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/gilroy_bold"
-                            android:text="@{Global.prettyCount(viewModel.user.user.totalPoints)}"
-                            android:textAllCaps="true"
-                            android:textColor="@color/black"
-                            android:textSize="18sp" />
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/gilroy_bold"-->
+<!--                            android:text="@{Global.prettyCount(viewModel.user.user.totalPoints)}"-->
+<!--                            android:textAllCaps="true"-->
+<!--                            android:textColor="@color/black"-->
+<!--                            android:textSize="18sp" />-->
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/gilroy_medium"
-                            android:text="@string/points_earned"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
+<!--                        <TextView-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:fontFamily="@font/gilroy_medium"-->
+<!--                            android:text="@string/points_earned"-->
+<!--                            android:textColor="@color/black" />-->
+<!--                    </LinearLayout>-->
 
                 </LinearLayout>
 
@@ -308,7 +308,7 @@
                                 android:paddingHorizontal="20dp"
                                 android:paddingTop="5dp"
                                 android:paddingBottom="5dp"
-                                android:text="@{viewModel.user.user.referCode}"
+                                android:text="@{viewModel.user.user.refercode}"
                                 android:textAllCaps="true"
                                 android:textColor="@color/white"
                                 android:textSize="16sp" />

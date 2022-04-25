@@ -2,6 +2,7 @@ package com.thequizapp.quizalong.model.quiz;
 
 import com.google.gson.annotations.SerializedName;
 import com.thequizapp.quizalong.model.home.HomePage;
+import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class QuizByCatId {
     @SerializedName("upcoming_quizes")
     private List<HomePage.QuizesItem> upcomingQuizes;
     @SerializedName("past_quizes")
-    private List<HomePage.QuizesItem> pastQuizes;
+    private List<TwistQuizPage.QuizItem> pastQuizes;
 
     @SerializedName("message")
     private String message;
@@ -21,14 +22,6 @@ public class QuizByCatId {
     @SerializedName("status")
     private boolean status;
 
-
-//    public List<HomePage.QuizesItem> getQuizes() {
-//        return quizes;
-//    }
-//
-//    public void setQuizes(List<HomePage.QuizesItem> quizes) {
-//        this.quizes = quizes;
-//    }
 
     public List<HomePage.QuizesItem> getUpcomingQuizes() {
         return upcomingQuizes;
@@ -38,11 +31,11 @@ public class QuizByCatId {
         this.upcomingQuizes = upcomingQuizes;
     }
 
-    public List<HomePage.QuizesItem> getPastQuizes() {
+    public List<TwistQuizPage.QuizItem> getPastQuizes() {
         return pastQuizes;
     }
 
-    public void setPastQuizes(List<HomePage.QuizesItem> pastQuizes) {
+    public void setPastQuizes(List<TwistQuizPage.QuizItem> pastQuizes) {
         this.pastQuizes = pastQuizes;
     }
 

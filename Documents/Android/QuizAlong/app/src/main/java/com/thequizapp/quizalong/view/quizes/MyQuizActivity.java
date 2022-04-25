@@ -11,6 +11,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
+import com.thequizapp.quizalong.adapter.MyQuizViewPagerAdapter;
 import com.thequizapp.quizalong.adapter.QuizListViewPagerAdapter;
 import com.thequizapp.quizalong.databinding.ActivityMyQuizBinding;
 import com.thequizapp.quizalong.databinding.ActivityQuizListBinding;
@@ -46,7 +47,7 @@ public class MyQuizActivity extends AppCompatActivity {
 
     private void initListener() {
         viewModel.getUpcomingQuizes().observe(this, quizByCatId -> {
-            QuizListViewPagerAdapter mainViewPagerAdapter = new QuizListViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+            MyQuizViewPagerAdapter mainViewPagerAdapter = new MyQuizViewPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
 
             mainViewPagerAdapter.setQuizListData(quizByCatId);
             binding.viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {

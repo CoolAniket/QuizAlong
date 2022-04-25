@@ -32,6 +32,7 @@ public class AdditionalInfoViewModel extends ViewModel {
     private MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
     private MutableLiveData<String> toast = new MutableLiveData<>();
     private ObservableBoolean isOtpSent = new ObservableBoolean(false);
+    private ObservableBoolean isOtpVerified = new ObservableBoolean(false);
 
 
     private CurrentUser user;
@@ -95,6 +96,10 @@ public class AdditionalInfoViewModel extends ViewModel {
 
     public ObservableBoolean getIsOtpSent() {
         return isOtpSent;
+    }
+
+    public ObservableBoolean getIsOtpVerified() {
+        return isOtpVerified;
     }
 
     public String getDob() {
@@ -184,10 +189,13 @@ public class AdditionalInfoViewModel extends ViewModel {
                         .doOnTerminate(() -> isLoading.set(false))
                         .subscribe((restResponse, throwable) -> {
                             if (restResponse != null) {
-                                if (restResponse.isStatus())
+                                if (restResponse.isStatus()) {
+                                    isOtpVerified.set(true);
                                     setMobileAuthenticated(true);
+                                    toast.setValue("OTP verified successfully.");
+                                }
                                 else
-                                    toast.setValue("Incorrect OTP. Please try again...!");
+                                    toast.setValue("Incorrect OTP. Please try again.");
                             } else {
                                 toast.setValue(throwable.getLocalizedMessage());
                             }

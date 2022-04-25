@@ -190,80 +190,38 @@ public class HomePage {
 
     public static class QuizesItem {
 
-        @SerializedName("total_plays")
-        private int totalPlays;
-
-        @SerializedName("updated_at")
-        private Object updatedAt;
-
-        @SerializedName("is_permium")
-        private int isPermium;
-
         @SerializedName("total_points")
         private int totalPoints;
-
         @SerializedName("cat_id")
         private int catId;
-
-        @SerializedName("created_at")
-        private Object createdAt;
-
-        @SerializedName("questions_count")
-        private int questionsCount;
-
-        @SerializedName("id")
-        private int id;
-
-        @SerializedName("title")
-        private String title;
-
-        @SerializedName("type")
-        private String type;
-
-        @SerializedName("description")
-        private String description;
-
-        @SerializedName("system_time")
-        private String systemTime;
-
-        @SerializedName("start_time")
-        private String startTime;
-
-        @SerializedName("total_time")
-        private int totalTime;
-
         @SerializedName("questions")
         private int questions;
-
+        @SerializedName("date")
+        private String date;
+        @SerializedName("quiz_id")
+        private int quizId;
+        @SerializedName("image")
+        private String image;
+        @SerializedName("title")
+        private String title;
+        @SerializedName("type")
+        private String type;
+        @SerializedName("description")
+        private String description;
+        @SerializedName("system_time")
+        private String systemTime;
+        @SerializedName("start_time")
+        private String startTime;
+        @SerializedName("total_time")
+        private int totalTime;
         @SerializedName("category")
         private Category category;
-
-        @SerializedName("desc")
-        private String desc;
-
-        public int getTotalPlays() {
-            return totalPlays;
-        }
-
-        public void setTotalPlays(int totalPlays) {
-            this.totalPlays = totalPlays;
-        }
-
-        public Object getUpdatedAt() {
-            return updatedAt;
-        }
-
-        public void setUpdatedAt(Object updatedAt) {
-            this.updatedAt = updatedAt;
-        }
-
-        public int getIsPermium() {
-            return isPermium;
-        }
-
-        public void setIsPermium(int isPermium) {
-            this.isPermium = isPermium;
-        }
+        @SerializedName("win_percent")
+        private Integer winPercent;
+        @SerializedName("prize")
+        private Integer prize;
+        @SerializedName("entry")
+        private List<Integer> entry = null;
 
         public int getTotalPoints() {
             return totalPoints;
@@ -281,28 +239,20 @@ public class HomePage {
             this.catId = catId;
         }
 
-        public Object getCreatedAt() {
-            return createdAt;
+        public int getQuestions() {
+            return questions;
         }
 
-        public void setCreatedAt(Object createdAt) {
-            this.createdAt = createdAt;
+        public void setQuestions(int questions) {
+            this.questions = questions;
         }
 
-        public int getQuestionsCount() {
-            return questionsCount;
+        public int getQuizId() {
+            return quizId;
         }
 
-        public void setQuestionsCount(int questionsCount) {
-            this.questionsCount = questionsCount;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public void setId(int id) {
-            this.id = id;
+        public void setQuizId(int quizId) {
+            this.quizId = quizId;
         }
 
         public String getTitle() {
@@ -331,14 +281,6 @@ public class HomePage {
 
         public String getTypeInString() {
             return type;
-        }
-
-        public int getQuestions() {
-            return questions;
-        }
-
-        public void setQuestions(int questions) {
-            this.questions = questions;
         }
 
         public String getSystemTime() {
@@ -373,12 +315,44 @@ public class HomePage {
             this.category = category;
         }
 
-        public String getDesc() {
-            return desc;
+        public String getImage() {
+            return image;
         }
 
-        public void setDesc(String desc) {
-            this.desc = desc;
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
+
+        public Integer getWinPercent() {
+            return winPercent;
+        }
+
+        public void setWinPercent(Integer winPercent) {
+            this.winPercent = winPercent;
+        }
+
+        public Integer getPrize() {
+            return prize;
+        }
+
+        public void setPrize(Integer prize) {
+            this.prize = prize;
+        }
+
+        public List<Integer> getEntry() {
+            return entry;
+        }
+
+        public void setEntry(List<Integer> entry) {
+            this.entry = entry;
         }
     }
 }

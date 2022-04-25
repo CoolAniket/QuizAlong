@@ -89,7 +89,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }*/
 
-    public void updateData(List<TwistQuizPage.Quize> categories) {
+    public void updateData(List<TwistQuizPage.QuizItem> categories) {
         this.categories.addAll(categories);
         notifyDataSetChanged();
     }

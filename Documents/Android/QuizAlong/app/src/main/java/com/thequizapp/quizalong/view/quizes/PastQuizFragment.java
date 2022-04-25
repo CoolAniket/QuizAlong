@@ -12,8 +12,9 @@ import android.view.inputmethod.InputMethodManager;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
+import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.FragmentPastQuizBinding;
-import com.thequizapp.quizalong.model.home.HomePage;
+import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.viewmodel.PastQuizViewModel;
 
@@ -28,13 +29,13 @@ import androidx.lifecycle.ViewModelProvider;
 public class PastQuizFragment extends Fragment {
 
 
-    private final List<HomePage.QuizesItem> quizesItems;
+    private final List<TwistQuizPage.QuizItem> quizesItems;
     FragmentPastQuizBinding binding;
     PastQuizViewModel viewModel;
 
 
 
-    public PastQuizFragment(List<HomePage.QuizesItem> quizData) {
+    public PastQuizFragment(List<TwistQuizPage.QuizItem> quizData) {
         Log.d("UpcomingQuizFragment", "");
         quizesItems = quizData;
     }
@@ -54,7 +55,8 @@ public class PastQuizFragment extends Fragment {
         viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
 
             startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem)));
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
         });
 
         viewModel.getToast().observe(this, toastMsg -> {

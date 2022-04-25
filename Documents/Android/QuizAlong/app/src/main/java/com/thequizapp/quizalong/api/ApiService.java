@@ -5,6 +5,7 @@ import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
 import com.thequizapp.quizalong.model.notification.Notifications;
+import com.thequizapp.quizalong.model.payment.TransactionResponse;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
 import com.thequizapp.quizalong.model.payment.OrderResponse;
@@ -65,6 +66,10 @@ public interface ApiService {
     @GET(Const.PAYMENT_RZP_ORDER_ID)
     Single<OrderResponse> getRzpOrderId(@Header(Const.API_KEY) String apiKey,
                                         @Path(Const.AMOUNT) int amount);
+
+    @GET(Const.PAYMENT_TRANSACTION_HISTORY)
+    Single<TransactionResponse> getTransactionHistory(@Header(Const.API_KEY) String apiKey,
+                                                      @Path(Const.USER_ID) int userId);
     @FormUrlEncoded
     @POST(Const.PAYMENT_ADD_PAYMENT_DATA)
     Single<RestResponse> addPaymentData(@Header(Const.API_KEY) String apiKey,

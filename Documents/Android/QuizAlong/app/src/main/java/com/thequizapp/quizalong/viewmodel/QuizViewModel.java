@@ -12,9 +12,7 @@ import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
-import com.thequizapp.quizalong.model.questions.Questions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
-import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.ArrayList;
@@ -30,7 +28,8 @@ public class QuizViewModel extends ViewModel {
     private final CompositeDisposable disposable = new CompositeDisposable();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
     private HomePage.QuizesItem quizesItem;
-    private TwistQuizPage.Quize twistQuizesItem;
+    private TwistQuizPage.QuizItem twistQuizesItem;
+    private String quizType = "";
     private MutableLiveData<NewQuestions.Question> currentQuestions = new MutableLiveData<>();
     private ObservableInt trueAnswerPosition = new ObservableInt(-1);
     private ObservableInt wrongAnswerPosition = new ObservableInt(-1);
@@ -272,11 +271,11 @@ public class QuizViewModel extends ViewModel {
         this.quizesItem = quizesItem;
     }
 
-    public TwistQuizPage.Quize getTwistQuizesItem() {
+    public TwistQuizPage.QuizItem getTwistQuizesItem() {
         return twistQuizesItem;
     }
 
-    public void setTwistQuizesItem(TwistQuizPage.Quize twistQuizesItem) {
+    public void setTwistQuizesItem(TwistQuizPage.QuizItem twistQuizesItem) {
         this.twistQuizesItem = twistQuizesItem;
     }
 
@@ -462,5 +461,13 @@ public class QuizViewModel extends ViewModel {
 
     public void setUseLifeLineInCurrentQue(boolean useLifeLineInCurrentQue) {
         isUseLifeLineInCurrentQue = useLifeLineInCurrentQue;
+    }
+
+    public String getQuizType() {
+        return quizType;
+    }
+
+    public void setQuizType(String quizType) {
+        this.quizType = quizType;
     }
 }

@@ -50,7 +50,7 @@ public class EditProfileActivity extends BaseActivity {
     private void initData() {
         SessionManager sessionManager = new SessionManager(this);
         viewModel.setUser(sessionManager.getUser());
-        String[] strings = viewModel.getUser().getUser().getFullName().split("\\s+");
+        String[] strings = viewModel.getUser().getUser().getFullname().split("\\s+");
         if (strings.length > 0) {
             viewModel.setFirstName(strings[0]);
         }

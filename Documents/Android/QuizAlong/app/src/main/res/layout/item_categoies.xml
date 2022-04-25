@@ -6,7 +6,7 @@
 
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.home.TwistQuizPage.Quize" />
+            type="com.thequizapp.quizalong.model.home.TwistQuizPage.QuizItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -96,7 +96,7 @@
                     android:layout_height="110dp"
                     android:layout_gravity="center"
                     app:normal_image="@{model.image}"
-                    android:src="@drawable/dummy" />
+                    android:src="@drawable/ic_profile_user_tint" />
 
                 <TextView
                     android:id="@+id/tv_title"

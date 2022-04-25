@@ -26,7 +26,6 @@ import com.thequizapp.quizalong.viewmodel.PaymentViewModel;
 import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Random;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
@@ -62,7 +61,7 @@ public class PaymentActivity extends BaseActivity implements PaymentResultWithDa
 
         sessionManager = new SessionManager(this);
         //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
-        TwistQuizPage.Quize quiz = new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.Quize.class);
+        TwistQuizPage.QuizItem quiz = new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.QuizItem.class);
         viewModel.setQuiz(quiz);
         viewModel.setAmount(getIntent().getIntExtra("amount", 1));
         viewModel.getOrderDetails();

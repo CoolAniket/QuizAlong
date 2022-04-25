@@ -36,7 +36,7 @@
 
                 <ImageView
                     android:id="@+id/iv_title"
-                    android:layout_width="105dp"
+                    android:layout_width="135dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/quiz_along_logo"

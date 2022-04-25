@@ -33,9 +33,6 @@ public class QuizListActivity extends BaseActivity {
     }
 
     private void initView() {
-
-
-
         String catStr = getIntent().getStringExtra("data");
         viewModel.setCategoriesItem(new Gson().fromJson(catStr, CategoriesResponse.Category.class));
         viewModel.getQuizesByCatId();

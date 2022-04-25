@@ -43,7 +43,7 @@ public class LeaderBoardViewModel extends ViewModel {
     public void setUser(CurrentUser user) {
         this.user = user;
         LeaderBoard.QuizesItem quizesItem = new LeaderBoard.QuizesItem();
-        quizesItem.setFullName(user.getUser().getFullName());
+        quizesItem.setFullName(user.getUser().getFullname());
         quizesItem.setIdentity(user.getUser().getIdentity());
 //        quizesItem.setImage(user.getUser().getImage().toString());
 //        quizesItem.setTotalPoints(user.getUser().getTotalPoints());

@@ -20,8 +20,10 @@ import com.thequizapp.quizalong.adapter.MainViewPagerAdapter;
 import com.thequizapp.quizalong.databinding.ActivityMainBinding;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.faqs.FAQActivity;
 import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
 import com.thequizapp.quizalong.view.notification.NotificationActivity;
+import com.thequizapp.quizalong.view.payment.TransactionHistoryActivity;
 import com.thequizapp.quizalong.view.playhistory.PlayHistoryActivity;
 import com.thequizapp.quizalong.view.quizes.MyQuizActivity;
 import com.thequizapp.quizalong.view.redeem.HistoryRedeemRequestActivity;
@@ -84,7 +86,12 @@ public class  MainActivity extends BaseActivity {
     }
 
     private void initDrawerListener() {
-        binding.navDrawer.lytLeaderBoard.setOnClickListener(v -> startActivity(new Intent(this, LeaderBoardActivity.class)));
+        binding.navDrawer.lytTraHis.setOnClickListener(v -> startActivity(new Intent(this, TransactionHistoryActivity.class)));
+        binding.navDrawer.lytFaq.setOnClickListener(v -> startActivity(new Intent(this, FAQActivity.class)));
+        binding.navDrawer.lytProfile.setOnClickListener(v -> {
+            onBackPressed();
+            viewModel.onClickMenu(2);
+        });
         binding.navDrawer.lytPlayHistory.setOnClickListener(v -> startActivity(new Intent(this, PlayHistoryActivity.class)));
         binding.navDrawer.lytRedeemRequest.setOnClickListener(v -> startActivity(new Intent(this, HistoryRedeemRequestActivity.class)));
         binding.navDrawer.lytMyQuiz.setOnClickListener(v -> startActivity(new Intent(this, MyQuizActivity.class)));

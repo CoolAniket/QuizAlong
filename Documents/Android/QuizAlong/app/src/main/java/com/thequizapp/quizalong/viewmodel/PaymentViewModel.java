@@ -3,11 +3,9 @@ package com.thequizapp.quizalong.viewmodel;
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.rest.RestResponse;
-import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.HashMap;
-import java.util.concurrent.ThreadLocalRandom;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
@@ -22,7 +20,7 @@ public class PaymentViewModel extends ViewModel {
     private MutableLiveData<RestResponse> onSuccess = new MutableLiveData<>();
     private int amount = 25;
     private CompositeDisposable disposable = new CompositeDisposable();
-    private TwistQuizPage.Quize quiz;
+    private TwistQuizPage.QuizItem quiz;
 
     public ObservableBoolean getIsLoading() {
         return isLoading;
@@ -57,11 +55,11 @@ public class PaymentViewModel extends ViewModel {
     }
 
 
-    public void setQuiz(TwistQuizPage.Quize quiz) {
+    public void setQuiz(TwistQuizPage.QuizItem quiz) {
         this.quiz = quiz;
     }
 
-    public TwistQuizPage.Quize getQuiz() {
+    public TwistQuizPage.QuizItem getQuiz() {
         return quiz;
     }
 

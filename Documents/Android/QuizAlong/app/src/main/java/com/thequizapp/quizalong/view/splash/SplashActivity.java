@@ -1,6 +1,5 @@
 package com.thequizapp.quizalong.view.splash;
 
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -13,6 +12,7 @@ import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.utils.Global;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.home.CourseSelectionActivity;
 import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
 import com.thequizapp.quizalong.view.login.LoginActivity;
 import com.thequizapp.quizalong.view.main.MainActivity;
@@ -54,16 +54,27 @@ public class SplashActivity extends BaseActivity {
                                     startActivity(intent);
                                 }
                                 else if(sessionManager.getAdditionalDetails() == null){
-                                    Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
-                                    Log.e("11111 ",""+sessionManager.getUser().getAdditional_info());
+                                    Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getUser_id()));
+                                    //Log.e("11111 ",""+sessionManager.getUser().getAdditional_info());
+                                    //startActivity(new Intent(this, AdditionalInfoActivity.class));
                                     if(sessionManager.getUser().getAdditional_info() == 1) {
                                         startActivity(new Intent(this, AdditionalInfoActivity.class));
                                     }else {
                                         startActivity(new Intent(this, MainActivity.class));
                                     }
                                 }
+                                else if(sessionManager.getCourseSelection() == null){
+                                    Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getUser_id()));
+                                    //Log.e("11111 ",""+sessionManager.getUser().getAdditional_info());
+                                    //startActivity(new Intent(this, AdditionalInfoActivity.class));
+                                    if(sessionManager.getUser().getUser_categories() < 2) {
+                                        startActivity(new Intent(this, CourseSelectionActivity.class));
+                                    }else {
+                                        startActivity(new Intent(this, MainActivity.class));
+                                    }
+                                }
                                 else {
-                                    Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
+                                    Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getUser_id()));
                                     startActivity(new Intent(this, MainActivity.class));
                                 }
                                 finishAffinity();

@@ -98,8 +98,9 @@ public class EditProfileViewModel extends ViewModel {
             return;
         }
         HashMap<String, RequestBody> hashMap = new HashMap<>();
-        hashMap.put("fullName", toRequestBody(firstName.concat(" ").concat(lastName)));
-        hashMap.put(Const.USER_ID, toRequestBody(Global.userId.get()));
+        hashMap.put("fullname", toRequestBody(firstName.concat(" ").concat(lastName)));
+        hashMap.put(Const.USERID, toRequestBody(Global.userId.get()));
+//        hashMap.put(Const.USERID, toRequestBody("35"));
         MultipartBody.Part body = null;
         if (profileUri != null && !profileUri.isEmpty()) {
             File file = new File(profileUri);

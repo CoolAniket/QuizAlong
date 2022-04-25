@@ -1,7 +1,7 @@
 package com.thequizapp.quizalong.viewmodel;
 
-import com.thequizapp.quizalong.adapter.QuizesAdapter;
-import com.thequizapp.quizalong.model.home.HomePage;
+import com.thequizapp.quizalong.adapter.PastQuizesAdapter;
+import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class PastQuizViewModel extends ViewModel {
     private final ObservableBoolean isLoading = new ObservableBoolean(true);
     private final MutableLiveData<String> toast = new MutableLiveData<>();
 
-    private QuizesAdapter quizesAdapter = new QuizesAdapter(true);
+    private PastQuizesAdapter quizesAdapter = new PastQuizesAdapter();
 
 
     public ObservableBoolean getIsEmpty() {
@@ -31,11 +31,15 @@ public class PastQuizViewModel extends ViewModel {
         return toast;
     }
 
-    public QuizesAdapter getQuizesAdapter() {
+    public void setQuizesAdapter(PastQuizesAdapter quizesAdapter) {
+        this.quizesAdapter = quizesAdapter;
+    }
+
+    public PastQuizesAdapter getQuizesAdapter() {
         return quizesAdapter;
     }
 
-    public void updateQuizData(List<HomePage.QuizesItem> quizData) {
+    public void updateQuizData(List<TwistQuizPage.QuizItem> quizData) {
         isEmpty.set(quizData.isEmpty());
         quizesAdapter.updateData(quizData);
     }

@@ -10,7 +10,7 @@
 
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.home.TwistQuizPage.Quize" />
+            type="com.thequizapp.quizalong.model.home.TwistQuizPage.QuizItem" />
     </data>
 
     <androidx.cardview.widget.CardView

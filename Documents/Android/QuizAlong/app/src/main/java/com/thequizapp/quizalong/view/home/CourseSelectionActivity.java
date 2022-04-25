@@ -22,17 +22,19 @@ import com.thequizapp.quizalong.viewmodel.CourseSelectionViewModel;
 public class CourseSelectionActivity extends BaseActivity {
     ActivityCourseSelectionBinding binding;
     CourseSelectionViewModel viewModel;
+    SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_course_selection);
         viewModel = new ViewModelProvider(this).get(CourseSelectionViewModel.class);
+        sessionManager = new SessionManager(this);
         initListener();
         binding.setViewModel(viewModel);
     }
 
     private void initListener() {
-        Global.userId.set(String.valueOf(new SessionManager(this).getUser().getUser().getId()));
+        Global.userId.set(String.valueOf(new SessionManager(this).getUser().getUser().getUser_id()));
 
         viewModel.getCourseData(Const.COURSE_TYPE_MEDICINE, Integer.parseInt(Global.userId.get()));
 //        viewModel.getCourseData(Const.COURSE_TYPE_MEDICINE, 35);
@@ -40,6 +42,7 @@ public class CourseSelectionActivity extends BaseActivity {
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             if (isSuccess != null && isSuccess) {
                 Toast.makeText(this, getResources().getString(R.string.cat_add_successfully), Toast.LENGTH_SHORT).show();
+                sessionManager.saveCourseSelection(isSuccess.toString());
                 startActivity(new Intent(this, MainActivity.class));
                 finishAffinity();
             }

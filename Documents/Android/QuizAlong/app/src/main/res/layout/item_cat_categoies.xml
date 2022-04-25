@@ -45,7 +45,7 @@
                     android:id="@+id/iv_icon"
                     android:layout_width="85dp"
                     android:layout_height="85dp"
-                    android:src="@drawable/dummy"
+                    android:src="@drawable/ic_profile_user_tint"
                     app:normal_image="@{model.image}"/>
 
                 <TextView

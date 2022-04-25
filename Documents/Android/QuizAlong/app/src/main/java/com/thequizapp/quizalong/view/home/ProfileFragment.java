@@ -65,10 +65,10 @@ public class ProfileFragment extends Fragment {
             if (sessionManager.getGameSettings() != null) {
                 viewModel.setCurrentPrice(sessionManager.getGameSettings().getCoinsToUsd());
             }
-            /*viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
+            viewModel.getUser().observe(getViewLifecycleOwner(), user -> {
                 binding.setViewModel(viewModel);
                 sessionManager.saveUser(user);
-            });*/
+            });
         }
     }
 
@@ -97,7 +97,7 @@ public class ProfileFragment extends Fragment {
             if (getActivity() != null) {
                 ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 if (viewModel.getUser().getValue() != null) {
-                    ClipData clip = ClipData.newPlainText("Copied", viewModel.getUser().getValue().getUser().getReferCode());
+                    ClipData clip = ClipData.newPlainText("Copied", viewModel.getUser().getValue().getUser().getRefercode());
                     clipboard.setPrimaryClip(clip);
                     Toast.makeText(getActivity(), "Copied successfully", Toast.LENGTH_SHORT).show();
                 }
@@ -106,11 +106,14 @@ public class ProfileFragment extends Fragment {
         binding.ivShare.setOnClickListener(v -> {
             if (getActivity() != null && viewModel.getUser().getValue() != null) {
                 Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-                String shareBody = "Hey there, I play many quiz games and earn rewards in this app "
-                        + viewModel.getUser().getValue().getUser().getTotalPoints()
-                        + ". User this refer code "
-                        + viewModel.getUser().getValue().getUser().getReferCode()
-                        + " and have fun.\n https://play.google.com/store/apps/details?id=" + getActivity().getPackageName();
+                String shareBody = viewModel.getUser().getValue().getUser().getFullname()
+                        + " has invited you to try QuizAlong: the best medical partner you'll ever wish for.\n\n"
+                        + "Smartest way to the future of learning clinical concepts for doctors to multifold your earnings and learnings in just 5 minutes.\n\n"
+                        + "Join today for free and you'll get a FREE LIFELINE to help you excel the quiz.\n\n"
+                        + "Link: www.quizalong.com/download"
+
+                        + "\n\nUse this refer code "
+                        + viewModel.getUser().getValue().getUser().getRefercode() ;
                 intent.setType("text/plain");
                 intent.putExtra(android.content.Intent.EXTRA_SUBJECT, getActivity().getResources().getString(R.string.app_name));
                 intent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);

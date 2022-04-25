@@ -46,7 +46,7 @@ public class CategoriesFragment extends Fragment {
     }
 
     private void initListener() {
-        /*viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getId());
+        viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getUser_id());
         viewModel.setFavouriteCheck();
         viewModel.getCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {
             Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
@@ -55,7 +55,7 @@ public class CategoriesFragment extends Fragment {
             intent.putExtra("data", new Gson().toJson(categoriesItem));
             ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
             startActivity(intent, activityOptions.toBundle());
-        });*/
+        });
 
         viewModel.getToast().observe(this, toastMsg -> {
             if (toastMsg != null && !toastMsg.isEmpty()) {

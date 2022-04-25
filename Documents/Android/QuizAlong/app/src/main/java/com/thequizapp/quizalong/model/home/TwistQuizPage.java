@@ -12,7 +12,7 @@ public class TwistQuizPage {
     @SerializedName("message")
     private String message;
     @SerializedName("quizes")
-    private List<Quize> quizes = null;
+    private List<QuizItem> quizes = null;
 
     public Boolean getStatus() {
         return status;
@@ -30,11 +30,11 @@ public class TwistQuizPage {
         this.message = message;
     }
 
-    public List<Quize> getQuizes() {
+    public List<QuizItem> getQuizes() {
         return quizes;
     }
 
-    public void setQuizes(List<Quize> quizes) {
+    public void setQuizes(List<QuizItem> quizes) {
         this.quizes = quizes;
     }
 
@@ -48,7 +48,7 @@ public class TwistQuizPage {
     }
 
 
-    public class Quize {
+    public static class QuizItem {
 
         @SerializedName("system_time")
         private String systemTime;

@@ -119,6 +119,30 @@
     <string name="category_help_text">\u25CF You can always change your favourite category using [img src=ic_star_checked/] feature on top right corner of each category</string>
     <string name="minimum_2_favourite">\u25CF Minimum 2 favourite categories are required</string>
     <string name="my_quiz">My Quiz</string>
+    <string name="faq_a_1">Yes 100%, and we believe in complete transparency. As soon as winners are declared your winning credits will be initiated to your source of payment.</string>
+    <string name="faq_a_2">There are no limits, so enroll and win in as many quizzes as you possibly can.</string>
+    <string name="faq_a_3">Winner selection algorithm is based on 2 aspects, in order: 1) Number of questions correct 2) Cumulative time taken for entire quiz.</string>
+    <string name="faq_a_4">“SKIP” lifeline helps you to pass a question as correct before you can attempt it. You can only use one life per game.</string>
+    <string name="faq_a_5">Yes! You can pick and play any category quiz. You can also change your interested categories any time later.</string>
+    <string name="faq_a_6">Add your friend’s referral code and you both get an extra lifeline.</string>
+    <string name="faq_a_7">We require ID proof to verify and protect accounts. We need to keep our users protected.</string>
+    <string name="faq_a_8">Payment Gateway - Razorpay charges a small fee while paying through wallet, UPI or cards. We suggest opting Wallet and UPI for instant credit of winnings in your account.</string>
+    <string name="faq_a_9">Reach out to us on contact@quizalong.com with your username and Quiz details and we’ll surely get back to you.</string>
+    <string name="faq_a_10">You can pick a quiz of any subject you like, anyday, anytime and play for Free / Paid. Moreover, We also provide the TimeTable for upcoming days of the week so that you can plan your week ahead.</string>
+    <string name="faq_a_11">Issue not listed here? Extensive FAQs has been covered on our website www.quizalong.com/FAQs</string>
+    <string name="faq_q_1">Is the money real?</string>
+    <string name="faq_q_2">How much can I earn in a day?</string>
+    <string name="faq_q_3">How are winners decided?</string>
+    <string name="faq_q_4">What is a “SKIP”  lifeline? </string>
+    <string name="faq_q_5">Can I play quiz which are not of my current year?</string>
+    <string name="faq_q_6">How does referral work?</string>
+    <string name="faq_q_7">Why does QuizAlong require a ID proof to sign up?</string>
+    <string name="faq_q_8">Why is there a convenience fee deduction  from my winnings?</string>
+    <string name="faq_q_9">Having a problem related to payments?</string>
+    <string name="faq_q_10">What do you mean by 100% Flexibility?</string>
+    <string name="faq_q_11">Having other trouble?</string>
+    <string name="faqs">FAQs</string>
+    <string name="transaction_history">Transaction History</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

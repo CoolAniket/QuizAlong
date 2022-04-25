@@ -17,8 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.facebook.ads.NativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
-import com.thequizapp.quizalong.databinding.ItemCategoiesBinding;
-import com.thequizapp.quizalong.databinding.ItemPopularQuizesBinding;
 import com.thequizapp.quizalong.databinding.ItemUpcomingQuizesBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
@@ -92,7 +90,7 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }*/
 
-    public void updateData(List<TwistQuizPage.Quize> categories) {
+    public void updateData(List<TwistQuizPage.QuizItem> categories) {
         this.categories.addAll(categories);
         notifyDataSetChanged();
     }
@@ -125,7 +123,7 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 
     public interface OnItemClick {
-        void onClick(Pair[] pair, TwistQuizPage.Quize categoriesItem);
+        void onClick(Pair[] pair, TwistQuizPage.QuizItem categoriesItem);
     }
 
     public class UpcomingQuizViewHolder extends RecyclerView.ViewHolder {
@@ -138,8 +136,8 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
         public void setModel(int position) {
             if(categories.size() > 0) {
-                if (categories.get(position) instanceof TwistQuizPage.Quize) {
-                    TwistQuizPage.Quize categoriesItem = (TwistQuizPage.Quize) categories.get(position);
+                if (categories.get(position) instanceof TwistQuizPage.QuizItem) {
+                    TwistQuizPage.QuizItem categoriesItem = (TwistQuizPage.QuizItem) categories.get(position);
                     binding.tvTitle.setTransitionName("hero" + position);
                     /*binding.ivIcon.setTransitionName("hero1" + position);*/
                     binding.btnCheck.setOnClickListener(v -> {

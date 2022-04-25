@@ -1,7 +1,6 @@
 package com.thequizapp.quizalong.view.quiz;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,7 +17,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -27,11 +24,9 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
-import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.receivers.GameStartReceiver;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
@@ -40,7 +35,6 @@ import com.thequizapp.quizalong.utils.ads.BannerAds;
 import com.thequizapp.quizalong.utils.ads.InterstitialAds;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
 import com.thequizapp.quizalong.view.BaseActivity;
-import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
 import com.thequizapp.quizalong.view.results.ShowQuizAnswersActivity;
 import com.thequizapp.quizalong.viewmodel.QuizViewModel;
 
@@ -51,13 +45,25 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
 public class QuizActivity extends BaseActivity implements Runnable {
+//    public static enum TYPE {
+//        PAST("past"),
+//        UPCOMING("upcoming"),
+//        TWIST("twist");
+//
+//    }
+    public final class Type {
+        public static final String PAST = "past";
+        public static final String UPCOMING = "upcoming";
+        public static final String TWIST = "twist";
+
+        private Type() { }
+    }
     ActivityQuizBinding binding;
     QuizViewModel viewModel;
     SessionManager sessionManager;
@@ -96,7 +102,10 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
         sessionManager = new SessionManager(this);
         //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
-        viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.Quize.class));
+        TwistQuizPage.QuizItem quize = new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.QuizItem.class);
+        viewModel.setTwistQuizesItem(quize);
+        String quizType = getIntent().getStringExtra("quiz_type");
+        viewModel.setQuizType(quizType);
         viewModel.getQuestionsByQuizId();
         Random r=new Random();
         int randomNumber=r.nextInt(TIPS.length);
@@ -176,7 +185,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
                 public void onFinish() {
                     Log.e("omFinish ", "");
-                    addScore(true);
+                    addScore(true,"");
                 }
             };
             cTimer.start();
@@ -281,8 +290,23 @@ public class QuizActivity extends BaseActivity implements Runnable {
         binding.tvExit.setOnClickListener(v -> onBackPressed());
         binding.tvCancel.setOnClickListener(v -> onBackPressed());
         binding.btnGo.setOnClickListener(v -> {
-            viewModel.getIsInfo().set(true);
-            startLobbyTimer();
+
+            Log.e(">.... ",viewModel.getQuizType());
+            if(viewModel.getQuizType().contains("past")){
+                Log.e(">.... inside ",viewModel.getQuizType());
+                viewModel.getIsInfo().set(true);
+                /*startLobbyTimer();*/
+                viewModel.getIsLobby().set(true);
+                startCountDown();
+
+            }else
+            {
+                viewModel.getIsInfo().set(true);
+                startLobbyTimer();
+                /*viewModel.getIsLobby().set(true);
+                startCountDown();*/
+            }
+
         });
         binding.lyt2X.setOnClickListener(v -> {
             rewardAds.setOnRewarded(() -> {
@@ -380,7 +404,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
             binding.setAnswerList(viewModel.getAnswerList());
 
         });
-        //viewModel.getIsAnswer().observe(this, this::showResultDialog);
+        viewModel.getIsAnswer().observe(this, this::addSkipScore);
 
         viewModel.getAnswerVal().observe(this, this::showResultDialog);
 
@@ -425,26 +449,32 @@ public class QuizActivity extends BaseActivity implements Runnable {
                                             }
                                     ).start());
         }*/
-        Log.e(">>> ",answer);
+        //Log.e(">>> ",answer);
+        if(cTimer != null)
             cTimer.cancel();
         viewModel.setUseLifeLineInCurrentQue(false);
         handler.removeCallbacks(this);
 
-        addScore(false);
+        addScore(false,"");
     }
 
-    private void addScore(boolean isTimerOff) {
+    private void addSkipScore(Boolean isAnswerRight) {
+        addScore(false,"skip");
+        Log.e(">>> ","Skip Called ");
+    }
 
+    private void addScore(boolean isTimerOff,String skipVal) {
+        viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff,skipVal);
         Log.e("???? ",viewModel.getCurrentPosition().get()+""+viewModel.getAnswerVal().getValue());
         if (viewModel.getQuestionsList().size() > viewModel.getCurrentPosition().get()) {
-            viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff);
+
             viewModel.getCurrentQuestions().setValue(viewModel.getQuestionsList().get(viewModel.getCurrentPosition().get()));
             viewModel.getCurrentPosition().set(viewModel.getCurrentPosition().get() + 1);
             startCountDown();
         } else {
             handler.removeCallbacks(this);
             viewModel.getIsComplete().set(true);
-            viewModel.callAddGameDataLiveApi();
+            viewModel.callAddGameDataLiveApi(viewModel.getQuizType());
         }
         binding.rtlMain.setRotationY(-90);
         binding.rtlMain.animate().withLayer()

@@ -1,7 +1,5 @@
 package com.thequizapp.quizalong.adapter;
 
-import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
-import static com.thequizapp.quizalong.api.Const.AD_TYPE;
 import static com.thequizapp.quizalong.api.Const.POST_TYPE;
 
 import android.util.Log;
@@ -18,7 +16,6 @@ import com.facebook.ads.NativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemCategoiesBinding;
-import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 
 import java.util.ArrayList;
@@ -65,7 +62,7 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
 
 
-    public void updateData(List<TwistQuizPage.Quize> categories) {
+    public void updateData(List<TwistQuizPage.QuizItem> categories) {
         this.categories.addAll(categories);
         notifyDataSetChanged();
     }
@@ -91,7 +88,7 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
     public interface OnItemClick {
-        void onClick(Pair[] pair, TwistQuizPage.Quize categoriesItem);
+        void onClick(Pair[] pair, TwistQuizPage.QuizItem categoriesItem);
     }
 
     public class HomeCategoriesViewHolder extends RecyclerView.ViewHolder {
@@ -104,8 +101,8 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         public void setModel(int position) {
             if(categories.size() > 0) {
-                if (categories.get(position) instanceof TwistQuizPage.Quize) {
-                    TwistQuizPage.Quize categoriesItem = (TwistQuizPage.Quize) categories.get(position);
+                if (categories.get(position) instanceof TwistQuizPage.QuizItem) {
+                    TwistQuizPage.QuizItem categoriesItem = (TwistQuizPage.QuizItem) categories.get(position);
                     binding.tvTitle.setTransitionName("hero" + position);
                     binding.ivIcon.setTransitionName("hero1" + position);
                     binding.btnCheck.setOnClickListener(v -> {

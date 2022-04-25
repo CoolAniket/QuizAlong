@@ -34,7 +34,7 @@
                     android:layout_marginHorizontal="15dp"
                     android:fontFamily="@font/gilroy_semi_bold"
                     android:singleLine="true"
-                    android:text='@{"Hello, "+viewModel.user.user.fullName}'
+                    android:text='@{"Hello, "+viewModel.user.user.fullname}'
                     android:textColor="@color/black"
                     android:textSize="20sp" />
                 <!--android:text='@{"Hello, "+viewModel.user.user.fullName}'-->

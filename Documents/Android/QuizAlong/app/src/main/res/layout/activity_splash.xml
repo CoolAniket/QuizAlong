@@ -9,19 +9,45 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:gravity="center">
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
-            android:src="@drawable/splash_bg" />
+            android:src="@drawable/splash_bg"
+            android:alpha="0.75"/>
 
-        <ImageView
-            android:layout_width="200dp"
-            android:layout_height="100dp"
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:src="@drawable/quiz_along_logo" />
+            android:orientation="horizontal"
+            android:paddingHorizontal="32dp"
+            >
+            <ImageView
+                android:id="@+id/launcher_icon"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_launcher"
+                android:adjustViewBounds="true"
+                android:layout_marginTop="8dp"
+                />
+            <ImageView
+                android:id="@+id/app_logo"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="100dp"
+                android:src="@drawable/quiz_along_logo"
+                />
+
+        </LinearLayout>
+
+
+
 
 
     </RelativeLayout>
