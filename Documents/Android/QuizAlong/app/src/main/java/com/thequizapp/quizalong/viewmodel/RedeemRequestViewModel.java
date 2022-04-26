@@ -37,11 +37,11 @@ public class RedeemRequestViewModel extends ViewModel {
             return;
         }
         if (paymentMethod == null || paymentMethod.isEmpty()) {
-            toast.setValue("Please select payment method...");
+            toast.setValue("Please select payment method");
             return;
         }
         if (account == null || account.isEmpty()) {
-            toast.setValue("Please enter account Credential...");
+            toast.setValue("Please enter account Credential");
             return;
         }
         disposable.add(Global.initRetrofit().addRedeemRequest(BuildConfig.APIKEY, amount, paymentMethod, account, String.valueOf(Global.userId))

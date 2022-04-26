@@ -111,24 +111,24 @@ public class SetPasswordViewModel extends ViewModel {
     }
     public void forgotPassword() {
         if (email == null || email.isEmpty()) {
-            toast.setValue("Please enter email...!");
+            toast.setValue("Please enter email");
             return;
         }
         Log.e("....",email+"");
         if (!isEmailValid(email)) {
-            toast.setValue("Please enter valid email...!");
+            toast.setValue("Please enter valid email");
             return;
         }
         if (password == null || password.isEmpty()) {
-            toast.setValue("Please enter password...!");
+            toast.setValue("Please enter password");
             return;
         }
         if (retypePassword == null || retypePassword.isEmpty()) {
-            toast.setValue("Please enter confirm password...!");
+            toast.setValue("Please enter confirm password");
             return;
         }
         if (!retypePassword.equals(password)) {
-            toast.setValue("Password does not match...!");
+            toast.setValue("Password does not match");
             return;
         }
         isLoading.set(true);

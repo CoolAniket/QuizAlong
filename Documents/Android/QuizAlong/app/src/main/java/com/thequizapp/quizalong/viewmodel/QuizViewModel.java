@@ -44,6 +44,7 @@ public class QuizViewModel extends ViewModel {
     private List<String> answerList = new ArrayList<>();
     private List<NewQuestions.Question> questionsList = new ArrayList<>();
     private MutableLiveData<Boolean> isAnswer = new MutableLiveData<>();
+    private MutableLiveData<Boolean> isSkipAnswer = new MutableLiveData<>();
     private MutableLiveData<String> answerVal = new MutableLiveData<>();
     private ObservableInt currentPosition = new ObservableInt(0);
     private ObservableBoolean isComplete = new ObservableBoolean(false);
@@ -144,8 +145,22 @@ public class QuizViewModel extends ViewModel {
     }
 
     public void onAnswerClick(int selectAnswerNum) {
-        if (currentQuestions.getValue() != null) {
-            rapidFireDuration.set(0);
+        Log.e("selectAnswerNum ","..."+selectAnswerNum+" "+isAnswer.getValue());
+        if (currentQuestions.getValue() != null && isAnswer.getValue() == null ) {
+            //rapidFireDuration.set(0);
+
+            if(selectAnswerNum == 0){
+                firstAnswerVisibility.set(View.VISIBLE);
+
+            }else if(selectAnswerNum == 1){
+                secondAnswerVisibility.set(View.VISIBLE);
+
+            }else if(selectAnswerNum == 2){
+                thirdAnswerVisibility.set(View.VISIBLE);
+
+            }else {
+                fourthAnswerVisibility.set(View.VISIBLE);
+            }
             NewQuestions.Question questionsItem = currentQuestions.getValue();
             String answer = answerList.get(selectAnswerNum);
             isAnswer.setValue(true);
@@ -234,7 +249,19 @@ public class QuizViewModel extends ViewModel {
             }
     }
     public void skipQuestion() {
-        isAnswer.setValue(true);
+        //isSkipAnswer.setValue(true);
+        firstAnswerVisibility.set(View.VISIBLE);
+        secondAnswerVisibility.set(View.VISIBLE);
+        thirdAnswerVisibility.set(View.VISIBLE);
+        fourthAnswerVisibility.set(View.VISIBLE);
+    }
+
+    public void resetQuestion() {
+        //isSkipAnswer.setValue(true);
+        firstAnswerVisibility.set(View.GONE);
+        secondAnswerVisibility.set(View.GONE);
+        thirdAnswerVisibility.set(View.GONE);
+        fourthAnswerVisibility.set(View.GONE);
     }
 
     public void hide2WrongAnswer() {
@@ -406,6 +433,14 @@ public class QuizViewModel extends ViewModel {
 
     public MutableLiveData<Boolean> getIsAnswer() {
         return isAnswer;
+    }
+
+    public void setIsSkipAnswer(MutableLiveData<Boolean> isSkipAnswer) {
+        this.isSkipAnswer = isSkipAnswer;
+    }
+
+    public MutableLiveData<Boolean> getIsSkipAnswer() {
+        return isSkipAnswer;
     }
 
     public void setIsAnswer(MutableLiveData<Boolean> isAnswer) {

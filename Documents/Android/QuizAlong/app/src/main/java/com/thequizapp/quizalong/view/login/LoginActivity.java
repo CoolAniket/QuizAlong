@@ -65,16 +65,25 @@ public class LoginActivity extends BaseActivity {
             }
         });
         viewModel.getOnSuccess().observe(this, user -> {
-            Log.e("....",""+user);
+            Log.e("....",""+user.getAdditional_info());
+
             sessionManager.saveUser(user);
 
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
             /*startActivity(new Intent(this, MainActivity.class));
             finishAffinity();*/
+            Log.e("sessionManager ",""+sessionManager.getUser().getAdditional_info());
             if(sessionManager.getUser().getAdditional_info() == 1) {
                 startActivity(new Intent(this, AdditionalInfoActivity.class));
             }else {
-                startActivity(new Intent(this, MainActivity.class));
+                if(sessionManager.getUser().getUser_categories() >= 6) {
+                    startActivity(new Intent(this, MainActivity.class));
+                }else
+                {
+                    startActivity(new Intent(this, CourseSelectionActivity.class));
+                }
+
+                startActivity(new Intent(this, CourseSelectionActivity.class));
             }
             finishAffinity();
         });

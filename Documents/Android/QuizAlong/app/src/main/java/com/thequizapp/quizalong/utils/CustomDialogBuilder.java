@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -91,6 +92,7 @@ public class CustomDialogBuilder {
         if (isUseFiftyFifty) {
             binding.ivFiftyDisable.setVisibility(View.VISIBLE);
         }
+        Log.e("Dialog....",""+isUseSkip);
         if (isUseSkip) {
             binding.ivSkipDisable.setVisibility(View.VISIBLE);
         }

@@ -118,6 +118,10 @@ public interface ApiService {
                                               @Path(Const.QUIZ_ID_NEW) String quizId,
                                               @Path(Const.USER_ID) String userId);
 
+    @GET(Const.QUIZ_ANS_PAST)
+    Single<ShowResultsRequest> getQuizAnsPast(@Header(Const.API_KEY) String apiKey,
+                                              @Path(Const.QUIZ_ID_NEW) String quizId,
+                                              @Path(Const.USER_ID) String userId);
     @FormUrlEncoded
     @POST(Const.USER_ADD_POINTS_TO_WALLET)
     Single<RestResponse> addPointsToWallet(@Header(Const.API_KEY) String apiKey,

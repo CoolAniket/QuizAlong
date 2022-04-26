@@ -53,7 +53,7 @@ public class ForgotPasswordViewModel extends ViewModel {
 
     public void forgotPassword() {
         if (email == null || email.isEmpty()) {
-            toast.setValue("Please enter email...!");
+            toast.setValue("Please enter email");
             return;
         }
         isLoading.set(true);

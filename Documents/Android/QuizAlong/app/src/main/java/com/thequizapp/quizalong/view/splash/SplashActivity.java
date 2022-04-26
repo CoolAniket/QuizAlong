@@ -13,6 +13,7 @@ import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.utils.Global;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.home.CourseSelectionActivity;
 import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
 import com.thequizapp.quizalong.view.login.LoginActivity;
 import com.thequizapp.quizalong.view.main.MainActivity;
@@ -60,7 +61,13 @@ public class SplashActivity extends BaseActivity {
                                     if(sessionManager.getUser().getAdditional_info() == 1) {
                                         startActivity(new Intent(this, AdditionalInfoActivity.class));
                                     }else {
-                                        startActivity(new Intent(this, MainActivity.class));
+
+                                        if(sessionManager.getUser().getUser_categories() >= 6) {
+                                            startActivity(new Intent(this, MainActivity.class));
+                                        }else
+                                        {
+                                            startActivity(new Intent(this, CourseSelectionActivity.class));
+                                        }
                                     }
                                 }
                                 else {

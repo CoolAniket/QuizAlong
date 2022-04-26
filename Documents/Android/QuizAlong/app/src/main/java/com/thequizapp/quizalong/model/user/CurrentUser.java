@@ -3,6 +3,7 @@ package com.thequizapp.quizalong.model.user;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CurrentUser {
 
@@ -18,8 +19,14 @@ public class CurrentUser {
     @SerializedName("additional_info")
     private int additional_info;
 
+    @SerializedName("user_categories")
+    private int user_categories;
+
     @SerializedName("course")
     public ArrayList<Course> course;
+
+    @SerializedName("colleges")
+    public ArrayList<College> colleges;
 
     public String getMessage() {
         return message;
@@ -53,12 +60,29 @@ public class CurrentUser {
         this.additional_info = additional_info;
     }
 
+    public int getUser_categories() {
+        return user_categories;
+    }
+
+    public void setUser_categories(int user_categories) {
+        this.user_categories = user_categories;
+    }
+
     public ArrayList<Course> getCourse() {
         return course;
     }
 
     public void setCourse(ArrayList<Course> course) {
         this.course = course;
+    }
+
+    public ArrayList<College> getColleges() {
+        return colleges;
+    }
+
+
+    public void setColleges(ArrayList<College> colleges) {
+        this.colleges = colleges;
     }
 
     public static class User {
@@ -316,4 +340,48 @@ public class CurrentUser {
         }
     }
 
+    public class College {
+
+        @SerializedName("id")
+        private Integer id;
+        @SerializedName("name")
+        private String name;
+        @SerializedName("created_at")
+        private Object createdAt;
+        @SerializedName("updated_at")
+        private Object updatedAt;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Object getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(Object createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public Object getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(Object updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+    }
 }

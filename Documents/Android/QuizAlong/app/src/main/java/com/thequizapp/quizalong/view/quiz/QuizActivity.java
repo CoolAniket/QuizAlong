@@ -66,6 +66,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
     private RewardAds rewardAds;
     private CountDownTimer cTimer = null;
     private CountDownTimer lTimer = null;
+    private CountDownTimer slideTimer = null;
+    private int tipCnt =0;
     private static final String[] TIPS = new String[] {
             "You can increase your chance of winning significantly if you play in a group of 2 or more.",
             "SKIP lifeline helps you to directly pass the question as correct.",
@@ -76,7 +78,6 @@ public class QuizActivity extends BaseActivity implements Runnable {
             "Excluding wrong answers can definitely help your narrow down your options.",
             "All the quiz answers are backed by latest guidelines and involved practical case scanerios.",
             "Grand quizes happpens over weekends having grand winnings of upto 1000 coins in one quiz.",
-            "MGM Medical College",
             "You can always plan your quizes ahead by looking at upcoming quizzes of your subject"
     };
     @Override
@@ -99,8 +100,37 @@ public class QuizActivity extends BaseActivity implements Runnable {
         viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.Quize.class));
         viewModel.getQuestionsByQuizId();
         Random r=new Random();
-        int randomNumber=r.nextInt(TIPS.length);
-        binding.tvTip.setText(TIPS[randomNumber]);
+        //int randomNumber=r.nextInt(TIPS.length);
+        binding.tvTip.setText(TIPS[tipCnt]);
+        Log.e("......",""+getIntent().getStringExtra("quiz_type"));
+        /*if(!getIntent().getStringExtra("quiz_type").contains("past")) {
+            slideTextWithTime();
+        }*/
+    }
+
+    private void slideTextWithTime(){
+        if (slideTimer != null)
+            slideTimer.cancel();
+        slideTimer = new CountDownTimer(15000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                Log.e("seconds remaining: ", "slide" + millisUntilFinished / 1000);
+
+            }
+
+            public void onFinish() {
+                Log.e("omFinish ", "");
+                Random r=new Random();
+                int randomNumber=r.nextInt(TIPS.length);
+                if(tipCnt >= (TIPS.length-1) ){
+                    tipCnt = 0;
+                }else{
+                    tipCnt++;
+                }
+                binding.tvTip.setText(TIPS[tipCnt]);
+                slideTextWithTime();
+            }
+        };
+        slideTimer.start();
     }
 
     private void initReceiver() {
@@ -176,13 +206,21 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
                 public void onFinish() {
                     Log.e("omFinish ", "");
-                    addScore(true,"");
+                    if(viewModel.isUseSkip()){
+                        viewModel.showAllAnswers();
+                        addScore(false,"skip");
+                    }else if(viewModel.getIsAnswer().getValue()){
+                        addScore(false,"");
+                    }
+                    else {
+                        addScore(true, "");
+                    }
                 }
             };
             cTimer.start();
         }
-        viewModel.getRapidFireDuration().set(sessionManager.getRapidFireTime());
-        handler.postDelayed(this, 1000);
+        //viewModel.getRapidFireDuration().set(sessionManager.getRapidFireTime());
+        //handler.postDelayed(this, 1000);
 
     }
 
@@ -232,6 +270,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
                         viewModel.getLobbyTime().setValue("00:00:00");
                         /*For direct start comment below lines*/
                         viewModel.getIsLobby().set(true);
+                        if (slideTimer != null)
+                            slideTimer.cancel();
                         startCountDown();
                     }
                 };
@@ -290,9 +330,12 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 viewModel.getIsLobby().set(true);
                 startCountDown();
 
+                if (slideTimer != null)
+                    slideTimer.cancel();
             }else
             {
                 viewModel.getIsInfo().set(true);
+                slideTextWithTime();
                 startLobbyTimer();
                 /*viewModel.getIsLobby().set(true);
                 startCountDown();*/
@@ -319,7 +362,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
         });
         binding.lytShowResult.setOnClickListener(v ->{
             startActivity(new Intent(this, ShowQuizAnswersActivity.class).
-                    putExtra("quizId", String.valueOf(viewModel.getTwistQuizesItem().getQuizId())));
+                    putExtra("quizId", String.valueOf(viewModel.getTwistQuizesItem().getQuizId())).
+                    putExtra("quiz_type",getIntent().getStringExtra("quiz_type")));
         });
     }
 
@@ -395,7 +439,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
             binding.setAnswerList(viewModel.getAnswerList());
 
         });
-        viewModel.getIsAnswer().observe(this, this::addSkipScore);
+        //viewModel.getIsAnswer().observe(this, this::addSkipScore);
+
+        //viewModel.getIsSkipAnswer().observe(this, this::addSkipScore);
 
         viewModel.getAnswerVal().observe(this, this::showResultDialog);
 
@@ -441,18 +487,18 @@ public class QuizActivity extends BaseActivity implements Runnable {
                                     ).start());
         }*/
         //Log.e(">>> ",answer);
-        if(cTimer != null)
-            cTimer.cancel();
+        /*if(cTimer != null)
+            cTimer.cancel();*/
         viewModel.setUseLifeLineInCurrentQue(false);
         handler.removeCallbacks(this);
 
-        addScore(false,"");
+        //addScore(false,"");
     }
 
-    private void addSkipScore(Boolean isAnswerRight) {
+    /*private void addSkipScore(Boolean isAnswerRight) {
         addScore(false,"skip");
         Log.e(">>> ","Skip Called ");
-    }
+    }*/
 
     private void addScore(boolean isTimerOff,String skipVal) {
         viewModel.createGameHashMap(viewModel.getCurrentPosition().get(),isTimerOff,skipVal);
@@ -461,10 +507,14 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
             viewModel.getCurrentQuestions().setValue(viewModel.getQuestionsList().get(viewModel.getCurrentPosition().get()));
             viewModel.getCurrentPosition().set(viewModel.getCurrentPosition().get() + 1);
+            viewModel.getIsAnswer().setValue(null);
+            viewModel.resetQuestion();
             startCountDown();
         } else {
             handler.removeCallbacks(this);
             viewModel.getIsComplete().set(true);
+            if(cTimer != null)
+                cTimer.cancel();
             viewModel.callAddGameDataLiveApi(getIntent().getStringExtra("quiz_type"));
         }
         binding.rtlMain.setRotationY(-90);
@@ -476,13 +526,13 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
     @Override
     public void run() {
-        viewModel.getRapidFireDuration().set(viewModel.getRapidFireDuration().get() - 1);
+        /*viewModel.getRapidFireDuration().set(viewModel.getRapidFireDuration().get() - 1);
         if (viewModel.getRapidFireDuration().get() == 0) {
             viewModel.timesUp();
             handler.removeCallbacks(this);
         } else {
             handler.postDelayed(this, 1000);
-        }
+        }*/
     }
 
     @Override
@@ -496,12 +546,16 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 cTimer.cancel();
             if(lTimer != null)
                 lTimer.cancel();
+            if (slideTimer != null)
+                slideTimer.cancel();
             super.onBackPressed();
         } else {
             if(cTimer != null)
                 cTimer.cancel();
             if(lTimer != null)
                 lTimer.cancel();
+            if (slideTimer != null)
+                slideTimer.cancel();
             handler.removeCallbacks(this);
             new CustomDialogBuilder(this).
                     showSimpleDialog(R.drawable.ic_warning,

@@ -71,11 +71,11 @@ public class LoginViewModel extends ViewModel {
 
     public void onLoginClick() {
         if (email == null || email.isEmpty()) {
-            toast.setValue("Please enter email...!");
+            toast.setValue("Please enter email");
             return;
         }
         if (password == null || password.isEmpty()) {
-            toast.setValue("Please enter password...!");
+            toast.setValue("Please enter password");
             return;
         }
         isLoading.set(true);
@@ -87,7 +87,7 @@ public class LoginViewModel extends ViewModel {
                         if (user != null) {
                             if (!user.isEmailVerified()) {
                                 isLoading.set(false);
-                                toast.setValue("Please verify email first...!");
+                                toast.setValue("Please verify email first");
                             } else {
                                 HashMap<String, String> hashMap = new HashMap<>();
                                 hashMap.put("fullname", email.split("@")[0]);

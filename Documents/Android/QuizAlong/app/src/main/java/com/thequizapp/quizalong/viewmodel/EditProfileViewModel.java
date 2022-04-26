@@ -90,11 +90,11 @@ public class EditProfileViewModel extends ViewModel {
 
     public void editProfile() {
         if (firstName == null || firstName.isEmpty()) {
-            toast.setValue("Please enter firstName...!");
+            toast.setValue("Please enter firstName");
             return;
         }
         if (lastName == null || lastName.isEmpty()) {
-            toast.setValue("Please enter lastName...!");
+            toast.setValue("Please enter lastName");
             return;
         }
         HashMap<String, RequestBody> hashMap = new HashMap<>();

@@ -46,7 +46,7 @@
             android:layout_marginTop="50dp"
             android:orientation="vertical"
             android:visibility="@{viewModel.isLoading || viewModel.isComplete ? View.GONE : View.VISIBLE}"
-            tools:visibility="gone">
+            tools:visibility="visible">
 
 
             <TextView
@@ -141,7 +141,7 @@
                             android:gravity="center"
                             android:paddingHorizontal="15dp"
                             android:paddingVertical="4.5dp"
-                            android:text="@{viewModel.twistQuizesItem.title}"
+                            android:text="@{viewModel.twistQuizesItem.description}"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="11sp" />
@@ -155,6 +155,7 @@
                             android:gravity="center"
                             android:paddingHorizontal="15dp"
                             android:paddingVertical="4.5dp"
+                            android:visibility="gone"
                             >
 
 <!--                            <ImageView-->
@@ -406,7 +407,7 @@
                                 android:text='@{""+viewModel.rapidFireDuration}'
                                 android:textColor="@color/white"
                                 android:textSize="14sp"
-                                />
+                                android:visibility="gone"/>
                         </RelativeLayout>
 
                         <androidx.cardview.widget.CardView
@@ -420,10 +421,12 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:scaleType="centerCrop"
-                                android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="10dp"
+                                android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/checked : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -431,7 +434,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(0)}"
-                                android:textColor="@{viewModel.trueAnswerPosition == 0 ? @color/white : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
+                                android:textColor="@color/black"
                                 android:textSize="16sp"
                                 tools:text="@tools:sample/date/ddmmyy"
                                 tools:textColor="@color/dim_white" />
@@ -457,10 +460,12 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:scaleType="centerCrop"
-                                android:src="@{viewModel.trueAnswerPosition == 1 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @drawable/false_bg : @drawable/bg_white) }" />
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="10dp"
+                                android:src="@{viewModel.trueAnswerPosition == 1 ? @drawable/checked : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @drawable/checked : @drawable/bg_white) }" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -468,7 +473,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(1)}"
-                                android:textColor="@{viewModel.trueAnswerPosition == 1 ? @color/white : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @color/white : @color/black)}"
+                                android:textColor="@color/black"
                                 android:textSize="16sp" />
 
 
@@ -494,10 +499,12 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:scaleType="centerCrop"
-                                android:src="@{viewModel.trueAnswerPosition == 2 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="10dp"
+                                android:src="@{viewModel.trueAnswerPosition == 2 ? @drawable/checked : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />
 
 
                             <TextView
@@ -506,7 +513,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(2)}"
-                                android:textColor="@{viewModel.trueAnswerPosition == 2 ? @color/white : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
+                                android:textColor="@color/black"
                                 android:textSize="16sp" />
 
                             <ImageView
@@ -532,10 +539,14 @@
                             app:cardElevation="4dp">
 
                             <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
                                 android:scaleType="centerCrop"
-                                android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/true_bg : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/false_bg : @drawable/bg_white) }" />
+                                android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/checked : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="10dp"
+                                />
+                                <!--android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/tick : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/tick : @drawable/bg_white) }" />-->
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -543,7 +554,7 @@
                                 android:fontFamily="@font/gilroy_reguler"
                                 android:gravity="center"
                                 android:text="@{answerList.get(3)}"
-                                android:textColor="@{viewModel.trueAnswerPosition == 3 ? @color/white : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @color/white : @color/black)}"
+                                android:textColor="@color/black"
                                 android:textSize="16sp" />
 
 
@@ -586,7 +597,7 @@
             android:gravity="center"
             android:orientation="vertical"
             android:visibility="@{viewModel.isComplete ? View.VISIBLE : View.GONE}"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <LinearLayout
                 android:id="@+id/lyt_ss"
@@ -617,7 +628,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="220dp"
+                    android:layout_height="170dp"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="10dp"
                     app:cardCornerRadius="20dp">
@@ -765,7 +776,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:gravity="center_vertical">
+                            android:gravity="center_vertical"
+                            android:visibility="gone">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -811,7 +823,8 @@
                     android:gravity="center"
                     android:orientation="horizontal"
                     android:paddingHorizontal="20dp"
-                    android:paddingVertical="8dp">
+                    android:paddingVertical="8dp"
+                    android:visibility="gone">
 
                     <ImageView
                         android:layout_width="wrap_content"

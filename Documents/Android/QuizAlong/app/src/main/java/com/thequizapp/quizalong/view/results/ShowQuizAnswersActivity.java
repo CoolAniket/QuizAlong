@@ -44,8 +44,13 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     }
 
     private void initListener(){
-        Log.e(">>>> ?? ",""+getIntent().getStringExtra("quizId"));
-        viewModel.getQuizResults(""+getIntent().getStringExtra("quizId"));
+        Log.e(">>>> ?? ","quizId "+getIntent().getStringExtra("quizId"));
+        Log.e(">>>> ?? ","quiz_type "+getIntent().getStringExtra("quiz_type"));
+        if(getIntent().getStringExtra("quiz_type").contains("past")) {
+            viewModel.getQuizResults("" + getIntent().getStringExtra("quizId"),getIntent().getStringExtra("quiz_type"));
+        }else{
+            viewModel.getQuizResults("" + getIntent().getStringExtra("quizId"),getIntent().getStringExtra("quiz_type"));
+        }
         LinearLayoutManager manager= (LinearLayoutManager) binding.rvQuestions.getLayoutManager();
 
         binding.btnPrev.setOnClickListener(new View.OnClickListener() {
