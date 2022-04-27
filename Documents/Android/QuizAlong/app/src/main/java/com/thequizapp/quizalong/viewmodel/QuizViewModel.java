@@ -146,9 +146,9 @@ public class QuizViewModel extends ViewModel {
 
     public void onAnswerClick(int selectAnswerNum) {
         Log.e("selectAnswerNum ","..."+selectAnswerNum+" "+isAnswer.getValue());
-        if (currentQuestions.getValue() != null && isAnswer.getValue() == null ) {
+        if (currentQuestions.getValue() != null ) {
             //rapidFireDuration.set(0);
-
+            resetQuestion();
             if(selectAnswerNum == 0){
                 firstAnswerVisibility.set(View.VISIBLE);
 
