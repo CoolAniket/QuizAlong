@@ -194,8 +194,9 @@ public class AdditionalInfoViewModel extends ViewModel {
                                     setMobileAuthenticated(true);
                                     toast.setValue("OTP verified successfully.");
                                 }
-                                else
+                                else {
                                     toast.setValue("Incorrect OTP. Please try again.");
+                                }
                             } else {
                                 toast.setValue(throwable.getLocalizedMessage());
                             }

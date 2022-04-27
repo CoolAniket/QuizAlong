@@ -85,4 +85,21 @@ public class CourseSelectionViewModel extends ViewModel {
                     }
                 }));
     }
+
+    public void filterList(String searchQuery) {
+        if (searchQuery.length() > 0) {
+            List<CategoriesResponse.Category> temp = new ArrayList<>();
+            for (CategoriesResponse.Category d : categories) {
+                //or use .equal(text) with you want equal match
+                //use .toLowerCase() for better matches
+                if (d.getValue().toLowerCase().contains(searchQuery.toLowerCase())) {
+                    temp.add(d);
+                }
+            }
+            //update recyclerview
+            categoriesAdapter.updateData(temp);
+        } else {
+            categoriesAdapter.updateData(categories);
+        }
+    }
 }

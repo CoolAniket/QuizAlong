@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class CourseSelectionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private final List<CategoriesResponse.Category> categories = new ArrayList<>();
+    private List<CategoriesResponse.Category> categories = new ArrayList<>();
 
     private final Set<Integer> selectedCategories = new HashSet<>();
 
@@ -54,11 +54,10 @@ public class CourseSelectionAdapter extends RecyclerView.Adapter<RecyclerView.Vi
         return categories.size();
     }
 
-    public void updateData(List<CategoriesResponse.Category> categories) {
-        this.categories.addAll(categories);
+    public void updateData(@NonNull List<CategoriesResponse.Category> categories) {
+        this.categories = categories;
         notifyDataSetChanged();
     }
-
 
     public class CourseCategoriesViewHolder extends RecyclerView.ViewHolder {
         ItemCatCategoiesSelectionBinding binding;

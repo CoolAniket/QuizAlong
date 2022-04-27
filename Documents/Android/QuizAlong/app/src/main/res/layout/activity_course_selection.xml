@@ -56,6 +56,16 @@
                     android:layout_toRightOf="@id/iv_back"/>
 
             </RelativeLayout>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/sv_filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:queryHint="@string/search"
+                app:queryBackground="@drawable/bg_white_rounded"
+                app:submitBackground="@drawable/bg_white_rounded"
+                android:background="@drawable/bg_white_rounded"
+                />
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_cat"
                 android:layout_width="match_parent"
@@ -64,12 +74,13 @@
                 app:adapter="@{viewModel.categoriesAdapter}"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="3"
+                android:layout_marginBottom="8dp"
                 tools:listitem="@layout/item_cat_categoies_selection" />
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_marginHorizontal="20dp"
-                android:layout_marginVertical="30dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/bg_white_5"
                 android:backgroundTint="#2B2424"
                 android:fontFamily="@font/gilroy_bold"

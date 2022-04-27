@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.inputmethod.InputMethodManager;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -57,5 +58,19 @@ public class CourseSelectionActivity extends BaseActivity {
                         .show();
             }
         });
+
+        binding.svFilter.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                viewModel.filterList(s);
+                return false;
+            }
+        });
+        binding.svFilter.setOnClickListener(view -> binding.svFilter.onActionViewExpanded());
     }
 }

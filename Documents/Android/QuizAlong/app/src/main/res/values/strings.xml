@@ -143,6 +143,7 @@
     <string name="faq_q_11">Having other trouble?</string>
     <string name="faqs">FAQs</string>
     <string name="transaction_history">Transaction History</string>
+    <string name="search">Search</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

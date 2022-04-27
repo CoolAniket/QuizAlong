@@ -123,32 +123,29 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         //
         getStudents();
 
-        binding.btnPick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Calendar calendar = Calendar.getInstance();
-                year = calendar.get(Calendar.YEAR);
-                month = calendar.get(Calendar.MONTH);
-                day = calendar.get(Calendar.DAY_OF_MONTH);
+        binding.btnPick.setOnClickListener(v -> {
+            Calendar calendar = Calendar.getInstance();
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
 
-                /*maxYear = year - 7;
-                maxMonth = month;
-                maxDay = day;
+            /*maxYear = year - 7;
+            maxMonth = month;
+            maxDay = day;
 
-                minYear = year - 18;
-                minMonth = month;
-                minDay = day;*/
-                Date today = new Date();
-                Calendar c = Calendar.getInstance();
-                c.setTime(today);
-                c.add( Calendar.YEAR, -18 ); // Subtract 6 months
-                long minDate = c.getTime().getTime() ;// Twice!
+            minYear = year - 18;
+            minMonth = month;
+            minDay = day;*/
+            Date today = new Date();
+            Calendar c = Calendar.getInstance();
+            c.setTime(today);
+            c.add( Calendar.YEAR, -18 ); // Subtract 6 months
+            long minDate = c.getTime().getTime() ;// Twice!
 
-                DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionalInfoActivity.this, R.style.DialogTheme,AdditionalInfoActivity.this,year, month,day);
-                datePickerDialog.getDatePicker().setMaxDate(minDate);
-                //datePickerDialog.getDatePicker().setMinDate(minDate);
-                datePickerDialog.show();
-            }
+            DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionalInfoActivity.this, R.style.DialogTheme,AdditionalInfoActivity.this,year, month,day);
+            datePickerDialog.getDatePicker().setMaxDate(minDate);
+            //datePickerDialog.getDatePicker().setMinDate(minDate);
+            datePickerDialog.show();
         });
 
         binding.etCollegeName.addTextChangedListener(new TextWatcher()
