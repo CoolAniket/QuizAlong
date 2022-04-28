@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class LeaderBoard {
+public class LeaderBoardResponse {
 
-    @SerializedName("quizes")
-    private List<QuizesItem> quizes;
+    @SerializedName("leaderboard")
+    private List<LeaderboardItem> leaderboardList;
 
     @SerializedName("message")
     private String message;
@@ -15,12 +15,12 @@ public class LeaderBoard {
     @SerializedName("status")
     private boolean status;
 
-    public List<QuizesItem> getQuizes() {
-        return quizes;
+    public List<LeaderboardItem> getLeaderboardList() {
+        return leaderboardList;
     }
 
-    public void setQuizes(List<QuizesItem> quizes) {
-        this.quizes = quizes;
+    public void setLeaderboardList(List<LeaderboardItem> leaderboardList) {
+        this.leaderboardList = leaderboardList;
     }
 
     public String getMessage() {
@@ -39,28 +39,34 @@ public class LeaderBoard {
         this.status = status;
     }
 
-    public static class QuizesItem {
+    public static class LeaderboardItem {
 
         @SerializedName("image")
         private String image;
 
-        @SerializedName("full_name")
+        @SerializedName("user_fullname")
         private String fullName;
-
-        @SerializedName("wallet")
-        private int wallet;
-
-        @SerializedName("total_plays")
-        private int totalPlays;
 
         @SerializedName("updated_at")
         private String updatedAt;
 
-        @SerializedName("identity")
-        private String identity;
+        @SerializedName("user_identity")
+        private String userIdentity;
+
+        @SerializedName("points")
+        private int points;
 
         @SerializedName("total_points")
         private int totalPoints;
+
+        @SerializedName("time")
+        private int time;
+
+        @SerializedName("paid")
+        private int paid;
+
+        @SerializedName("won")
+        private int won;
 
         @SerializedName("created_at")
         private String createdAt;
@@ -68,8 +74,11 @@ public class LeaderBoard {
         @SerializedName("id")
         private int id;
 
-        @SerializedName("refer_code")
-        private String referCode;
+        @SerializedName("quiz_id")
+        private String quizId;
+
+        @SerializedName("user_id")
+        private int userId;
 
         public String getImage() {
             return image;
@@ -87,22 +96,6 @@ public class LeaderBoard {
             this.fullName = fullName;
         }
 
-        public int getWallet() {
-            return wallet;
-        }
-
-        public void setWallet(int wallet) {
-            this.wallet = wallet;
-        }
-
-        public int getTotalPlays() {
-            return totalPlays;
-        }
-
-        public void setTotalPlays(int totalPlays) {
-            this.totalPlays = totalPlays;
-        }
-
         public String getUpdatedAt() {
             return updatedAt;
         }
@@ -111,12 +104,20 @@ public class LeaderBoard {
             this.updatedAt = updatedAt;
         }
 
-        public String getIdentity() {
-            return identity;
+        public String getUserIdentity() {
+            return userIdentity;
         }
 
-        public void setIdentity(String identity) {
-            this.identity = identity;
+        public void setUserIdentity(String userIdentity) {
+            this.userIdentity = userIdentity;
+        }
+
+        public int getPoints() {
+            return points;
+        }
+
+        public void setPoints(int points) {
+            this.points = points;
         }
 
         public int getTotalPoints() {
@@ -125,6 +126,30 @@ public class LeaderBoard {
 
         public void setTotalPoints(int totalPoints) {
             this.totalPoints = totalPoints;
+        }
+
+        public int getTime() {
+            return time;
+        }
+
+        public void setTime(int time) {
+            this.time = time;
+        }
+
+        public int getPaid() {
+            return paid;
+        }
+
+        public void setPaid(int paid) {
+            this.paid = paid;
+        }
+
+        public int getWon() {
+            return won;
+        }
+
+        public void setWon(int won) {
+            this.won = won;
         }
 
         public String getCreatedAt() {
@@ -143,12 +168,20 @@ public class LeaderBoard {
             this.id = id;
         }
 
-        public String getReferCode() {
-            return referCode;
+        public int getUserId() {
+            return userId;
         }
 
-        public void setReferCode(String referCode) {
-            this.referCode = referCode;
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
+
+        public String getQuizId() {
+            return quizId;
+        }
+
+        public void setQuizId(String quizId) {
+            this.quizId = quizId;
         }
     }
 }

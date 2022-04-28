@@ -26,6 +26,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
+import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.receivers.GameStartReceiver;
@@ -35,6 +36,7 @@ import com.thequizapp.quizalong.utils.ads.BannerAds;
 import com.thequizapp.quizalong.utils.ads.InterstitialAds;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
 import com.thequizapp.quizalong.view.results.ShowQuizAnswersActivity;
 import com.thequizapp.quizalong.viewmodel.QuizViewModel;
 
@@ -308,13 +310,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
             }
 
         });
-        binding.lyt2X.setOnClickListener(v -> {
-            rewardAds.setOnRewarded(() -> {
-                viewModel.getTotalScore().set(viewModel.getTotalScore().get() * 2);
-                onBackPressed();
-            });
-            rewardAds.showAds();
-        });
+
         binding.lytShare.setOnClickListener(v -> {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -327,8 +323,15 @@ public class QuizActivity extends BaseActivity implements Runnable {
             }
         });
         binding.lytShowResult.setOnClickListener(v ->{
-            startActivity(new Intent(this, ShowQuizAnswersActivity.class).
-                    putExtra("quizId", String.valueOf(viewModel.getTwistQuizesItem().getQuizId())));
+            startActivity(new Intent(this, ShowQuizAnswersActivity.class)
+                    .putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getTwistQuizesItem().getQuizId()))
+                    .putExtra(Const.QUIZ_TYPE, viewModel.getQuizType()));
+        });
+        binding.lytShowLeaderboard.setOnClickListener(v -> {
+            startActivity(new Intent(this, LeaderBoardActivity.class)
+                    .putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getTwistQuizesItem().getQuizId()))
+                    .putExtra(Const.QUIZ_TYPE, viewModel.getQuizType()));
+
         });
     }
 

@@ -6,6 +6,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.thequizapp.quizalong.R;
+import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityLeaderBoardBinding;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.BannerAds;
@@ -22,15 +23,26 @@ public class LeaderBoardActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_leader_board);
         viewModel = new ViewModelProvider(this).get(LeaderBoardViewModel.class);
         initView();
+        initData();
         initObserve();
         initListener();
+
         binding.setViewModel(viewModel);
     }
 
     private void initView() {
         viewModel.setUser(new SessionManager(this).getUser());
-        viewModel.getLeaderBoard();
+
         new BannerAds(this, binding.bannerAds);
+    }
+
+    private void initData() {
+
+        String quizType = getIntent().getStringExtra(Const.QUIZ_TYPE);
+        String quizId = getIntent().getStringExtra(Const.QUIZ_ID);
+        viewModel.setQuizType(quizType);
+        viewModel.setQuizId(quizId);
+        viewModel.getLeaderBoard();
     }
 
     private void initObserve() {

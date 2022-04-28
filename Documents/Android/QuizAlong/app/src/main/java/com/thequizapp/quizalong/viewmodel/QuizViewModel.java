@@ -173,36 +173,64 @@ public class QuizViewModel extends ViewModel {
         }
 
     }
-    public void createGameHashMap(int pos, boolean isTimerOff) {
+    public void createGameHashMap(int pos, boolean isTimerOff, String skip) {
         if(isTimerOff) {
-            Log.e(">>>> ", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
+            Log.e("Hash", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
             hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-            hashMap.put("selected_ans[" + (pos - 1) + "]", "--");
+            hashMap.put("selected_ans[" + (pos - 1) + "]", "");
             hashMap.put("time_taken[" + (pos - 1) + "]", "0");
         }else{
-            Log.e(">>>> ", String.valueOf(getTimeRemaining()));
-            hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-            hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
-            hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining()));
+            Log.e("Hash.....",skip);
+            if (skip == "skip") {
+                hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
+                hashMap.put("selected_ans[" + (pos - 1) + "]", "skip");
+                hashMap.put("time_taken[" + (pos - 1) + "]", "0");
+            }else {
+                Log.e("Hash", String.valueOf(getTimeRemaining().get()));
+                hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
+                hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
+                hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining().get()));
+            }
+
         }
     }
     /*public void callAddGameDataLiveApi(HashMap<String, Integer> hashMap) {*/
-        public void callAddGameDataLiveApi() {
-        hashMap.put("user_id", String.valueOf(Global.userId.get()));
+        public void callAddGameDataLiveApi(String quizType) {
+            Log.e("::: ",""+Global.userId.get()+" "+getTwistQuizesItem().getQuizId());
+        hashMap.put("user_id", Global.userId.get());
         hashMap.put("quiz_id", String.valueOf(getTwistQuizesItem().getQuizId()));
-        disposable.add(Global.initRetrofit().addGameDataLive(BuildConfig.APIKEY, hashMap)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
-                .doOnTerminate(() -> isLoading.set(false))
-                .subscribe((addDataLiveResponse, throwable) -> {
-                    Log.e(">>>> +",""+addDataLiveResponse+".."+throwable);
-                    if (addDataLiveResponse != null) {
-                        onSuccess.setValue(addDataLiveResponse);
-                    } else if (throwable != null) {
-                        toast.setValue(throwable.getLocalizedMessage());
-                    }
-                }));
+
+            Log.e("::: map ",hashMap.size()+""+hashMap.get(""));
+            Log.e("::: quizType ",quizType);
+            if(quizType == "past"){
+                disposable.add(Global.initRetrofit().addGameDataPast(BuildConfig.APIKEY, hashMap)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .unsubscribeOn(Schedulers.io())
+                        .doOnTerminate(() -> isLoading.set(false))
+                        .subscribe((addDataLiveResponse, throwable) -> {
+                            Log.e(">>>> past", "" + addDataLiveResponse + ".." + throwable);
+                            if (addDataLiveResponse != null) {
+                                onSuccess.setValue(addDataLiveResponse);
+                            } else if (throwable != null) {
+                                toast.setValue(throwable.getLocalizedMessage());
+                            }
+                        }));
+            }else {
+                disposable.add(Global.initRetrofit().addGameDataLive(BuildConfig.APIKEY, hashMap)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .unsubscribeOn(Schedulers.io())
+                        .doOnTerminate(() -> isLoading.set(false))
+                        .subscribe((addDataLiveResponse, throwable) -> {
+                            Log.e(">>>> live", "" + addDataLiveResponse + ".." + throwable);
+                            if (addDataLiveResponse != null) {
+                                onSuccess.setValue(addDataLiveResponse);
+                            } else if (throwable != null) {
+                                toast.setValue(throwable.getLocalizedMessage());
+                            }
+                        }));
+            }
     }
     public void skipQuestion() {
         isAnswer.setValue(true);

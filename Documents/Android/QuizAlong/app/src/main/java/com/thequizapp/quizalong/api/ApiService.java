@@ -3,20 +3,18 @@ package com.thequizapp.quizalong.api;
 import com.thequizapp.quizalong.model.categories.CategoriesResponse;
 import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
-import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
+import com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse;
 import com.thequizapp.quizalong.model.notification.Notifications;
 import com.thequizapp.quizalong.model.payment.TransactionResponse;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
 import com.thequizapp.quizalong.model.payment.OrderResponse;
-import com.thequizapp.quizalong.model.questions.Questions;
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
 import com.thequizapp.quizalong.model.results.ShowResultsRequest;
 import com.thequizapp.quizalong.model.settings.Settings;
 import com.thequizapp.quizalong.model.user.CurrentUser;
-import com.thequizapp.quizalong.view.results.ShowQuizAnswersActivity;
 
 import java.util.HashMap;
 
@@ -109,6 +107,10 @@ public interface ApiService {
     Single<AddDataLiveResponse> addGameDataLive(@Header(Const.API_KEY) String apiKey,
                                                 @FieldMap HashMap<String, String> hashMap);
 
+    @FormUrlEncoded
+    @POST(Const.QUIZ_ADD_GAME_DATA_PAST)
+    Single<AddDataLiveResponse> addGameDataPast(@Header(Const.API_KEY) String apiKey,
+                                                @FieldMap HashMap<String, String> hashMap);
 
     @GET(Const.QUIZ_QUESTIONS_OF_QUIZ)
     Single<NewQuestions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,
@@ -118,6 +120,15 @@ public interface ApiService {
     Single<ShowResultsRequest> getQuizAnsLive(@Header(Const.API_KEY) String apiKey,
                                               @Path(Const.QUIZ_ID_NEW) String quizId,
                                               @Path(Const.USER_ID) String userId);
+
+    @GET(Const.APP_PAST_LEADERBOARD)
+    Single<LeaderBoardResponse> getPastLeaderBoard(@Header(Const.API_KEY) String apiKey,
+                                                   @Path(Const.QUIZ_ID_NEW) String quizId,
+                                                   @Path(Const.USER_ID) String userId);
+
+    @GET(Const.APP_LIVE_LEADERBOARD)
+    Single<LeaderBoardResponse> getLiveLeaderBoard(@Header(Const.API_KEY) String apiKey,
+                                                   @Path(Const.QUIZ_ID_NEW) String quizId);
 
     @FormUrlEncoded
     @POST(Const.USER_ADD_POINTS_TO_WALLET)
@@ -155,9 +166,6 @@ public interface ApiService {
                                           @Field(Const.PAYMENT_METHOD) String paymentMethod,
                                           @Field(Const.ACCOUNT) String account,
                                           @Field(Const.USER_ID) String userId);
-
-    @POST(Const.APP_LEADERBOARD)
-    Single<LeaderBoard> getLeaderBoard(@Header(Const.API_KEY) String apiKey);
 
     @FormUrlEncoded
     @POST(Const.USER_FETCH_REDEEMS)

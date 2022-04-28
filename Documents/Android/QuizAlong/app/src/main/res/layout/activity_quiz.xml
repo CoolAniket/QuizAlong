@@ -604,8 +604,7 @@
                 <ImageView
                     android:layout_width="90dp"
                     android:layout_height="90dp"
-                    android:src="@drawable/ic_finish_flag"
-                    app:tint="@color/white" />
+                    android:src="@drawable/flag"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -803,31 +802,31 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center">
 
-                <LinearLayout
-                    android:id="@+id/lyt_2_x"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:background="@drawable/bg_white_50"
-                    android:gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="20dp"
-                    android:paddingVertical="8dp">
+<!--                <LinearLayout-->
+<!--                    android:id="@+id/lyt_2_x"-->
+<!--                    android:layout_width="150dp"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center_horizontal"-->
+<!--                    android:background="@drawable/bg_white_50"-->
+<!--                    android:gravity="center"-->
+<!--                    android:orientation="horizontal"-->
+<!--                    android:paddingHorizontal="20dp"-->
+<!--                    android:paddingVertical="8dp">-->
 
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/ic_multi_media" />
+<!--                    <ImageView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:src="@drawable/ic_multi_media" />-->
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/gilroy_bold"
-                        android:text="2x Points"
-                        android:textColor="@color/black"
-                        android:textSize="16sp" />
-                </LinearLayout>
+<!--                    <TextView-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="5dp"-->
+<!--                        android:fontFamily="@font/gilroy_bold"-->
+<!--                        android:text="2x Points"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="16sp" />-->
+<!--                </LinearLayout>-->
 
                 <LinearLayout
                     android:id="@+id/lyt_share"
@@ -930,7 +929,7 @@
         </LinearLayout>
 
         <RelativeLayout
-            tools:visibility="visible"
+            tools:visibility="gone"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:visibility="@{!viewModel.isLobby ? View.VISIBLE : View.GONE}">
@@ -1084,12 +1083,12 @@
                         android:gravity="center"
                         android:paddingHorizontal="15dp"
                         android:paddingVertical="4.5dp"
-                        android:visibility="@{viewModel.quizesItem.type == 0 ? View.GONE : View.VISIBLE }">
+>
 
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:src="@{viewModel.quizesItem.type == 1 ? @drawable/ic_flame : @drawable/ic_warning}" />
+                            android:src="@drawable/ic_flame" />
 
                         <TextView
                             android:layout_width="wrap_content"

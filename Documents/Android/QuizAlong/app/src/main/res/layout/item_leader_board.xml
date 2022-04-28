@@ -10,7 +10,7 @@
 
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
     </data>
 
     <androidx.cardview.widget.CardView
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/gilroy_bold"
-                android:text='@{""+model.totalPoints}'
+                android:text='@{""+model.points}'
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>

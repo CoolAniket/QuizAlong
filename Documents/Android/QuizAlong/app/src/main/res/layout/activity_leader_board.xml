@@ -10,18 +10,18 @@
 
         <variable
             name="firstUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
 
         <variable
             name="secondUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
 
         <variable
             name="thirdUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
         <variable
             name="myUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoard.QuizesItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
         <variable
             name="myUserPosition"
             type="String" />

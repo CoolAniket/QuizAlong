@@ -30,7 +30,8 @@ public class ShowQuizResultsViewModel extends ViewModel {
     public MutableLiveData<ShowResultsRequest> getOnSuccess() {
         return onSuccess;
     }
-
+    private String quizId = "";
+    private String quizType = "";
     private ShowResultsRequest showResultsRequest;
 
     public MutableLiveData<String> getPaginationVal() {
@@ -77,7 +78,22 @@ public class ShowQuizResultsViewModel extends ViewModel {
         return showQuestionAnsAdapter;
     }
 
-    public void getQuizResults(String quizId) {
+    public String getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(String quizId) {
+        this.quizId = quizId;
+    }
+
+    public String getQuizType() {
+        return quizType;
+    }
+
+    public void setQuizType(String quizType) {
+        this.quizType = quizType;
+    }
+    public void getQuizResults() {
         Log.e("ShowResult... "," "+quizId+" "+Global.userId.get());
         disposable.add(Global.initRetrofit().getQuizAnsLive(BuildConfig.APIKEY, quizId, Global.userId.get())
                 .subscribeOn(Schedulers.io())

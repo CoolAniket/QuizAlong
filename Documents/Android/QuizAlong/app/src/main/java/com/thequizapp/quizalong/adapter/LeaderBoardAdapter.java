@@ -10,13 +10,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemLeaderBoardBinding;
-import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
+import com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.LeaderBoardViewHolder> {
-    private List<LeaderBoard.QuizesItem> leaderBoards = new ArrayList<>();
+    private List<LeaderBoardResponse.LeaderboardItem> leaderBoards = new ArrayList<>();
 
     @NonNull
     @Override
@@ -35,7 +35,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         return leaderBoards.size();
     }
 
-    public void updateData(List<LeaderBoard.QuizesItem> leaderBoards) {
+    public void updateData(List<LeaderBoardResponse.LeaderboardItem> leaderBoards) {
         this.leaderBoards = leaderBoards;
         notifyDataSetChanged();
     }
@@ -49,7 +49,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         }
 
         public void setModel(int position) {
-            LeaderBoard.QuizesItem leaderBoard = leaderBoards.get(position);
+            LeaderBoardResponse.LeaderboardItem leaderBoard = leaderBoards.get(position);
             binding.setModel(leaderBoard);
             binding.setPosition(String.valueOf(position + 4));
         }

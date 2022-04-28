@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel;
 
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.adapter.LeaderBoardAdapter;
-import com.thequizapp.quizalong.model.leaderboard.LeaderBoard;
+import com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse;
 import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
@@ -21,12 +21,14 @@ public class LeaderBoardViewModel extends ViewModel {
     private LeaderBoardAdapter leaderBoardAdapter = new LeaderBoardAdapter();
     private final CompositeDisposable disposable = new CompositeDisposable();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
-    private MutableLiveData<LeaderBoard.QuizesItem> firstUser = new MutableLiveData<>();
-    private MutableLiveData<LeaderBoard.QuizesItem> secondUser = new MutableLiveData<>();
-    private MutableLiveData<LeaderBoard.QuizesItem> thirdUser = new MutableLiveData<>();
-    private MutableLiveData<LeaderBoard.QuizesItem> myUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> firstUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> secondUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> thirdUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> myUser = new MutableLiveData<>();
     private MutableLiveData<String> myUserPosition = new MutableLiveData<>();
     private CurrentUser user;
+    private String quizId = "";
+    private String quizType = "";
 
     public LeaderBoardAdapter getLeaderBoardAdapter() {
         return leaderBoardAdapter;
@@ -42,12 +44,12 @@ public class LeaderBoardViewModel extends ViewModel {
 
     public void setUser(CurrentUser user) {
         this.user = user;
-        LeaderBoard.QuizesItem quizesItem = new LeaderBoard.QuizesItem();
-        quizesItem.setFullName(user.getUser().getFullname());
-        quizesItem.setIdentity(user.getUser().getIdentity());
+        LeaderBoardResponse.LeaderboardItem leaderboardItem = new LeaderBoardResponse.LeaderboardItem();
+        leaderboardItem.setFullName(user.getUser().getFullname());
+        leaderboardItem.setUserIdentity(user.getUser().getIdentity());
 //        quizesItem.setImage(user.getUser().getImage().toString());
 //        quizesItem.setTotalPoints(user.getUser().getTotalPoints());
-        myUser.postValue(quizesItem);
+        myUser.postValue(leaderboardItem);
         myUserPosition.postValue("0");
     }
 
@@ -59,35 +61,35 @@ public class LeaderBoardViewModel extends ViewModel {
         this.isLoading = isLoading;
     }
 
-    public MutableLiveData<LeaderBoard.QuizesItem> getFirstUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getFirstUser() {
         return firstUser;
     }
 
-    public void setFirstUser(MutableLiveData<LeaderBoard.QuizesItem> firstUser) {
+    public void setFirstUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> firstUser) {
         this.firstUser = firstUser;
     }
 
-    public MutableLiveData<LeaderBoard.QuizesItem> getSecondUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getSecondUser() {
         return secondUser;
     }
 
-    public void setSecondUser(MutableLiveData<LeaderBoard.QuizesItem> secondUser) {
+    public void setSecondUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> secondUser) {
         this.secondUser = secondUser;
     }
 
-    public MutableLiveData<LeaderBoard.QuizesItem> getThirdUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getThirdUser() {
         return thirdUser;
     }
 
-    public void setThirdUser(MutableLiveData<LeaderBoard.QuizesItem> thirdUser) {
+    public void setThirdUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> thirdUser) {
         this.thirdUser = thirdUser;
     }
 
-    public MutableLiveData<LeaderBoard.QuizesItem> getMyUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getMyUser() {
         return myUser;
     }
 
-    public void setMyUser(MutableLiveData<LeaderBoard.QuizesItem> myUser) {
+    public void setMyUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> myUser) {
         this.myUser = myUser;
     }
 
@@ -99,39 +101,90 @@ public class LeaderBoardViewModel extends ViewModel {
         this.myUserPosition = myUserPosition;
     }
 
+    public String getQuizId() {
+        return quizId;
+    }
+
+    public void setQuizId(String quizId) {
+        this.quizId = quizId;
+    }
+
+    public String getQuizType() {
+        return quizType;
+    }
+
+    public void setQuizType(String quizType) {
+        this.quizType = quizType;
+    }
 
     public void getLeaderBoard() {
-        disposable.add(Global.initRetrofit().getLeaderBoard(BuildConfig.APIKEY)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
-                .doOnSubscribe(disposable1 -> isLoading.set(true))
-                .doOnTerminate(() -> isLoading.set(false))
-                .subscribe((leaderBoard, throwable) -> {
-                    if (leaderBoard != null) {
-                        if (!leaderBoard.getQuizes().isEmpty()) {
-                            firstUser.setValue(leaderBoard.getQuizes().get(0));
-                        }
-                        if (leaderBoard.getQuizes().size() > 1) {
-                            secondUser.setValue(leaderBoard.getQuizes().get(1));
-                        }
-                        if (leaderBoard.getQuizes().size() > 2) {
-                            thirdUser.setValue(leaderBoard.getQuizes().get(2));
-                        }
-                        List<LeaderBoard.QuizesItem> newList = new ArrayList<>();
-                        for (int i = 3; i < leaderBoard.getQuizes().size(); i++) {
-                            LeaderBoard.QuizesItem quizesItem = leaderBoard.getQuizes().get(i);
-                            myUserPosition.setValue(""+i);
-                            if (quizesItem.getIdentity().equals(user.getUser().getIdentity())) {
-                                myUser.setValue(quizesItem);
+        if ("past".equals(quizType)) {
+            disposable.add(Global.initRetrofit().getPastLeaderBoard(BuildConfig.APIKEY, quizId, Global.userId.get())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .doOnSubscribe(disposable1 -> isLoading.set(true))
+                    .doOnTerminate(() -> isLoading.set(false))
+                    .subscribe((leaderBoard, throwable) -> {
+                        if (leaderBoard != null) {
+                            if (!leaderBoard.getLeaderboardList().isEmpty()) {
+                                firstUser.setValue(leaderBoard.getLeaderboardList().get(0));
                             }
-                            newList.add(quizesItem);
-                        }
-                        leaderBoardAdapter.updateData(newList);
-                    } else if (throwable != null) {
+                            if (leaderBoard.getLeaderboardList().size() > 1) {
+                                secondUser.setValue(leaderBoard.getLeaderboardList().get(1));
+                            }
+                            if (leaderBoard.getLeaderboardList().size() > 2) {
+                                thirdUser.setValue(leaderBoard.getLeaderboardList().get(2));
+                            }
+                            List<LeaderBoardResponse.LeaderboardItem> newList = new ArrayList<>();
+                            for (int i = 3; i < leaderBoard.getLeaderboardList().size(); i++) {
+                                LeaderBoardResponse.LeaderboardItem leaderboardItem = leaderBoard.getLeaderboardList().get(i);
+                                myUserPosition.setValue("" + i);
+                                if (leaderboardItem.getUserIdentity().equals(user.getUser().getIdentity())) {
+                                    myUser.setValue(leaderboardItem);
+                                }
+                                newList.add(leaderboardItem);
+                            }
+                            leaderBoardAdapter.updateData(newList);
+                        } else if (throwable != null) {
 //
-                    }
-                }));
+                        }
+                    }));
+        } else {
+            disposable.add(Global.initRetrofit().getLiveLeaderBoard(BuildConfig.APIKEY, quizId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .doOnSubscribe(disposable1 -> isLoading.set(true))
+                    .doOnTerminate(() -> isLoading.set(false))
+                    .subscribe((leaderBoard, throwable) -> {
+                        if (leaderBoard != null) {
+                            if (!leaderBoard.getLeaderboardList().isEmpty()) {
+                                firstUser.setValue(leaderBoard.getLeaderboardList().get(0));
+                            }
+                            if (leaderBoard.getLeaderboardList().size() > 1) {
+                                secondUser.setValue(leaderBoard.getLeaderboardList().get(1));
+                            }
+                            if (leaderBoard.getLeaderboardList().size() > 2) {
+                                thirdUser.setValue(leaderBoard.getLeaderboardList().get(2));
+                            }
+                            List<LeaderBoardResponse.LeaderboardItem> newList = new ArrayList<>();
+                            for (int i = 3; i < leaderBoard.getLeaderboardList().size(); i++) {
+                                LeaderBoardResponse.LeaderboardItem leaderboardItem = leaderBoard.getLeaderboardList().get(i);
+                                myUserPosition.setValue("" + i);
+                                if (leaderboardItem.getUserIdentity().equals(user.getUser().getIdentity())) {
+                                    myUser.setValue(leaderboardItem);
+                                }
+                                newList.add(leaderboardItem);
+                            }
+                            leaderBoardAdapter.updateData(newList);
+                        } else if (throwable != null) {
+//
+                        }
+                    }));
+        }
+
+
     }
 
     @Override

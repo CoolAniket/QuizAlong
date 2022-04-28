@@ -11,6 +11,7 @@
     <string name="enter_your_mail">Enter your mail</string>
     <string name="password">Password</string>
     <string name="forgot_password">Forgot Password?</string>
+    <string name="set_password">Create Account</string>
     <string name="log_in">Log in</string>
     <string name="sign_in_with_google">Sign in with google</string>
     <string name="sign_in_with_facebook">Sign in with facebook</string>

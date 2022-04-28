@@ -32,6 +32,8 @@ public final class Const {
     public static final String APP_SETTINGS = "app/settings";
     public static final String USER_EDIT_PROFILE = "user/editProfile";
     public static final String USER_PLACE_REDEEM = "user/placeRedeem";
+    public static final String APP_PAST_LEADERBOARD = "app/leaderboard/getPastLeaderboard/{quiz_id}/{user_id}";
+    public static final String APP_LIVE_LEADERBOARD = "app/leaderboard/getLiveLeaderboard/{quiz_id}";
     public static final String APP_LEADERBOARD = "app/leaderboard";
     public static final String USER_FETCH_REDEEMS = "user/fetchRedeems";
     public static final String APP_NOTIFICATIONS = "app/notifications";
