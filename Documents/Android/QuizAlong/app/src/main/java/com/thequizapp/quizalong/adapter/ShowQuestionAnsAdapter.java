@@ -78,10 +78,15 @@ public class ShowQuestionAnsAdapter extends RecyclerView.Adapter<RecyclerView.Vi
 
                 }
             }*/
-            ShowResultsRequest.Question queItem = (ShowResultsRequest.Question) questions.get(position);
-            ShowResultsRequest.UserAnswer ansItem = (ShowResultsRequest.UserAnswer) answers.get(position);
-            binding.setAnsmodel(ansItem);
-            binding.setModel(queItem);
+            // Getting index out of bound exception for quizId 16
+            if (questions.size() > position) {
+                ShowResultsRequest.Question queItem = (ShowResultsRequest.Question) questions.get(position);
+                binding.setModel(queItem);
+            }
+            if (answers.size() > position) {
+                ShowResultsRequest.UserAnswer ansItem = (ShowResultsRequest.UserAnswer) answers.get(position);
+                binding.setAnsmodel(ansItem);
+            }
         }
     }
 }

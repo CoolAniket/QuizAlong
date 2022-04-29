@@ -202,7 +202,7 @@ public class QuizViewModel extends ViewModel {
 
             Log.e("::: map ",hashMap.size()+""+hashMap.get(""));
             Log.e("::: quizType ",quizType);
-            if(quizType == "past"){
+            if(quizType.equals("past")){
                 disposable.add(Global.initRetrofit().addGameDataPast(BuildConfig.APIKEY, hashMap)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
