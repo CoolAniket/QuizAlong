@@ -8,8 +8,6 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.ads.NativeAd;
-import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemPopularQuizesBinding;
 import com.thequizapp.quizalong.model.home.HomePage;
@@ -17,8 +15,6 @@ import com.thequizapp.quizalong.model.home.HomePage;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
-import static com.thequizapp.quizalong.api.Const.AD_TYPE;
 import static com.thequizapp.quizalong.api.Const.POST_TYPE;
 
 public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

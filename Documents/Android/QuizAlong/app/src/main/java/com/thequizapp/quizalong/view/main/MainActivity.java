@@ -19,6 +19,7 @@ import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.adapter.MainViewPagerAdapter;
 import com.thequizapp.quizalong.databinding.ActivityMainBinding;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
+import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
 import com.thequizapp.quizalong.view.faqs.FAQActivity;
 import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
@@ -47,7 +48,7 @@ public class  MainActivity extends BaseActivity {
     }
 
     private void initView() {
-        //viewModel.setUser(new SessionManager(this).getUser());
+        viewModel.setUser(new SessionManager(this).getUser());
         lastView = binding.ivHome;
         setSelect(0);
         initViewPager();

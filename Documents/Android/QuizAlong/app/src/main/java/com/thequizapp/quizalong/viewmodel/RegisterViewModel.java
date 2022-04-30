@@ -56,15 +56,15 @@ public class RegisterViewModel extends ViewModel {
 
     public void onRegisterClick() {
         if (fullName == null || fullName.isEmpty()) {
-            toast.setValue("Please enter fullName...!");
+            toast.setValue("Please enter fullName.");
             return;
         }
         if (email == null || email.isEmpty()) {
-            toast.setValue("Please enter email...!");
+            toast.setValue("Please enter email");
             return;
         }
         if (!isEmailValid(email)) {
-            toast.setValue("Please enter valid email...!");
+            toast.setValue("Please enter valid email");
             return;
         }
         if (!isValidMobile(mobileNo)) {
@@ -72,11 +72,11 @@ public class RegisterViewModel extends ViewModel {
             return;
         }
         if (password == null || password.isEmpty()) {
-            toast.setValue("Please enter password...!");
+            toast.setValue("Please enter password");
             return;
         }
         if (reTypePassword == null || reTypePassword.isEmpty()) {
-            toast.setValue("Please enter confirm password...!");
+            toast.setValue("Please enter confirm password");
             return;
         }
         if (!reTypePassword.equals(password)) {

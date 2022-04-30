@@ -95,9 +95,9 @@
     <string name="facebook_client_token">c223f1a0ds    cxx 55cf4ae81bfef9becc67de85</string>
 
     <string name="sign_up_successfully">Check your email for verification</string>
-    <string name="log_in_successfully">Log In successfully…!</string>
-    <string name="live_data_successfully">Data Submitted Successfully…!</string>
-    <string name="cat_add_successfully">Categories added successfully…!</string>
+    <string name="log_in_successfully">Log In successful</string>
+    <string name="live_data_successfully">Data Submitted Successful</string>
+    <string name="cat_add_successfully">Categories added successful</string>
     <string name="correct_answer_is">Correct answer is</string>
     <string name="silver_player">Silver Player</string>
     <string name="pro_player">Pro Player</string>

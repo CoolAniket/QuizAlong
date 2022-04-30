@@ -46,7 +46,7 @@ public class CategoriesFragment extends Fragment {
     }
 
     private void initListener() {
-        viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getUser_id());
+        viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getId());
         viewModel.setFavouriteCheck();
         viewModel.getCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {
             Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);

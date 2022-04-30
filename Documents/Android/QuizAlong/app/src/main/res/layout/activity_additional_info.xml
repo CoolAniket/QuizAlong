@@ -159,7 +159,19 @@
                                 android:layout_marginTop="10dp"
                                 android:layout_marginRight="10dp"
                                 android:layout_gravity="center">
+                                <Spinner
+                                    android:id="@+id/sp_college"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="35dp"
+                                    android:fontFamily="@font/gilroy_reguler"
+                                    android:dropDownSelector="@color/black"
+                                    android:textSize="14sp"
+                                    android:hint="@string/select_year_pass"
+                                    android:background="@drawable/bg_white_5"
+                                    android:backgroundTint="@color/dim_white"
+                                    />
                                 <AutoCompleteTextView
+                                    android:visibility="gone"
                                     android:id="@+id/et_collegeName"
                                     android:layout_width="match_parent"
                                     android:layout_height="35dp"

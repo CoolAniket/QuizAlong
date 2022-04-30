@@ -24,6 +24,9 @@ public class CurrentUser {
     @SerializedName("course")
     public ArrayList<Course> course;
 
+    @SerializedName("colleges")
+    public ArrayList<College> colleges;
+
     public String getMessage() {
         return message;
     }
@@ -72,6 +75,15 @@ public class CurrentUser {
         this.course = course;
     }
 
+    public ArrayList<College> getColleges() {
+        return colleges;
+    }
+
+
+    public void setColleges(ArrayList<College> colleges) {
+        this.colleges = colleges;
+    }
+
     public static class User {
 
         @SerializedName("image")
@@ -100,7 +112,7 @@ public class CurrentUser {
 
 //        @SerializedName("user_id")
         @SerializedName(value="name", alternate={"user_id", "id"})
-        private int user_id;
+        private int id;
 
         @SerializedName("refercode")
         private String refercode;
@@ -162,12 +174,12 @@ public class CurrentUser {
             this.identity = identity;
         }
 
-        public int getUser_id() {
-            return user_id;
+        public int getId() {
+            return id;
         }
 
-        public void setUser_id(int user_id) {
-            this.user_id = user_id;
+        public void setId(int id) {
+            this.id = id;
         }
 
         public String getRefercode() {
@@ -297,4 +309,48 @@ public class CurrentUser {
         }
     }
 
+    public class College {
+
+        @SerializedName("id")
+        private Integer id;
+        @SerializedName("name")
+        private String name;
+        @SerializedName("created_at")
+        private Object createdAt;
+        @SerializedName("updated_at")
+        private Object updatedAt;
+
+        public Integer getId() {
+            return id;
+        }
+
+        public void setId(Integer id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public Object getCreatedAt() {
+            return createdAt;
+        }
+
+        public void setCreatedAt(Object createdAt) {
+            this.createdAt = createdAt;
+        }
+
+        public Object getUpdatedAt() {
+            return updatedAt;
+        }
+
+        public void setUpdatedAt(Object updatedAt) {
+            this.updatedAt = updatedAt;
+        }
+
+    }
 }

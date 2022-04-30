@@ -32,7 +32,9 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -78,13 +80,19 @@
                     android:src="@drawable/ic_coin"
                     android:layout_gravity="center"/>
             </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/white"/>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
                 <TextView
                     android:id="@+id/tv_title"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{model.title.toString()}"
                     android:textStyle="bold"
@@ -92,10 +100,9 @@
                     android:textSize="15sp"
                     android:fontFamily="@font/gilroy_medium"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:layout_marginLeft="10dp"/>
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/gilroy_medium"
                     android:text="@{model.description}"
@@ -109,7 +116,9 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -155,7 +164,9 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp">
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -179,8 +190,9 @@
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:layout_height="0dp"
+                android:layout_weight="1"
                 >
                 <LinearLayout
                     android:id="@+id/btn_check"

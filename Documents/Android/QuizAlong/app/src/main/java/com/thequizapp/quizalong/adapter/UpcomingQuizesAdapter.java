@@ -80,9 +80,8 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     @Override
     public int getItemCount() {
-        /*return 3;*/
         Log.e("twistQuiz",""+categories.size());
-        return categories.size();
+        return Math.min(categories.size(), 3);
     }
 
     /*public void updateData(List<HomePage.CategoriesItem> categories) {

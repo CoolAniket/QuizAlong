@@ -57,23 +57,30 @@ public class ShowQuizAnswersActivity extends BaseActivity {
 
     private void initListener(){
         LinearLayoutManager manager= (LinearLayoutManager) binding.rvQuestions.getLayoutManager();
-        binding.btnPrev.setOnClickListener(view -> {
-            p = manager.findLastVisibleItemPosition() - 1;
-            binding.rvQuestions.smoothScrollToPosition(p);
-            //viewModel.getPaginationVal().setValue(""+p);
-            //Log.e("PPPP" ,""+p);
-            checkVisibility();
-            String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
-            viewModel.getPaginationVal().setValue(str);
+
+        binding.btnPrev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                p = manager.findLastVisibleItemPosition() - 1;
+                binding.rvQuestions.smoothScrollToPosition(p);
+                //viewModel.getPaginationVal().setValue(""+p);
+                //Log.e("PPPP" ,""+p);
+                checkVisibility();
+                String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
+                viewModel.getPaginationVal().setValue(str);
+            }
         });
 
-        binding.btnNext.setOnClickListener(view -> {
-            p = manager.findFirstVisibleItemPosition() + 1;
-            binding.rvQuestions.smoothScrollToPosition(p);
-            //Log.e("NNNN" ,""+p);
-            checkVisibility();
-            String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
-            viewModel.getPaginationVal().setValue(str);
+        binding.btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                p = manager.findFirstVisibleItemPosition() + 1;
+                binding.rvQuestions.smoothScrollToPosition(p);
+                //Log.e("NNNN" ,""+p);
+                checkVisibility();
+                String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
+                viewModel.getPaginationVal().setValue(str);
+            }
         });
         binding.btnViewLeaderboard.setOnClickListener(v -> {
             startActivity(new Intent(this, LeaderBoardActivity.class).

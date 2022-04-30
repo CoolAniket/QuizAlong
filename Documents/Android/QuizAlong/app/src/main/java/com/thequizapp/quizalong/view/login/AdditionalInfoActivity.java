@@ -51,6 +51,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
     SessionManager sessionManager;
     private ArrayList<String> courses;
     private ArrayList<String> years;
+    private ArrayList<String> colleges;
     int day, month, year, hour, minute;
     int myday, myMonth, myYear, myHour, myMinute;
 
@@ -76,6 +77,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         sessionManager = new SessionManager(this);
         courses = new ArrayList<String>();
         years = new ArrayList<String>();
+        colleges = new ArrayList<String>();
         initData();
         initObserve();
         initListener();
@@ -99,6 +101,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
             sessionManager.saveAdditionalDetails(isSuccess.toString());
+            //startActivity(new Intent(this, MainActivity.class));
             startActivity(new Intent(this, CourseSelectionActivity.class));
             finishAffinity();
         });
@@ -123,29 +126,32 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         //
         getStudents();
 
-        binding.btnPick.setOnClickListener(v -> {
-            Calendar calendar = Calendar.getInstance();
-            year = calendar.get(Calendar.YEAR);
-            month = calendar.get(Calendar.MONTH);
-            day = calendar.get(Calendar.DAY_OF_MONTH);
+        binding.btnPick.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance();
+                year = calendar.get(Calendar.YEAR);
+                month = calendar.get(Calendar.MONTH);
+                day = calendar.get(Calendar.DAY_OF_MONTH);
 
-            /*maxYear = year - 7;
-            maxMonth = month;
-            maxDay = day;
+                /*maxYear = year - 7;
+                maxMonth = month;
+                maxDay = day;
 
-            minYear = year - 18;
-            minMonth = month;
-            minDay = day;*/
-            Date today = new Date();
-            Calendar c = Calendar.getInstance();
-            c.setTime(today);
-            c.add( Calendar.YEAR, -18 ); // Subtract 6 months
-            long minDate = c.getTime().getTime() ;// Twice!
+                minYear = year - 18;
+                minMonth = month;
+                minDay = day;*/
+                Date today = new Date();
+                Calendar c = Calendar.getInstance();
+                c.setTime(today);
+                c.add( Calendar.YEAR, -18 ); // Subtract 6 months
+                long minDate = c.getTime().getTime() ;// Twice!
 
-            DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionalInfoActivity.this, R.style.DialogTheme,AdditionalInfoActivity.this,year, month,day);
-            datePickerDialog.getDatePicker().setMaxDate(minDate);
-            //datePickerDialog.getDatePicker().setMinDate(minDate);
-            datePickerDialog.show();
+                DatePickerDialog datePickerDialog = new DatePickerDialog(AdditionalInfoActivity.this, R.style.DialogTheme,AdditionalInfoActivity.this,year, month,day);
+                datePickerDialog.getDatePicker().setMaxDate(minDate);
+                //datePickerDialog.getDatePicker().setMinDate(minDate);
+                datePickerDialog.show();
+            }
         });
 
         binding.etCollegeName.addTextChangedListener(new TextWatcher()
@@ -228,6 +234,16 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
 
         Log.e("KKKK ",""+courses);
 
+        colleges.add("Select college name");
+        for(int k=0;k<viewModel.getUser().getColleges().size();k++){
+            try {
+                //Getting json object
+                colleges.add(viewModel.getUser().getColleges().get(k).getName());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
         years.add("Current official year");
         for(int j=0;j<viewModel.getUser().getCourse().get(0).getYear().size();j++){
             try {
@@ -258,6 +274,22 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, COLLEGES);
         binding.etCollegeName.setAdapter(adapter);
+        binding.spCollege.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, colleges));
+        binding.spCollege.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+                if (position != 0) {
+                    viewModel.setCollegeName(""+viewModel.getUser().getColleges().get(position).getName());
+                } else {
+                    viewModel.setCollegeName(null);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
         binding.spYear.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, years));
         binding.spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -7,13 +7,11 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.thequizapp.quizalong.BuildConfig;
-import com.thequizapp.quizalong.adapter.PastQuizesAdapter;
 import com.thequizapp.quizalong.adapter.ShowQuestionAnsAdapter;
 import com.thequizapp.quizalong.adapter.ShowResultsAdapter;
 import com.thequizapp.quizalong.model.results.ShowResultsRequest;
-import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
-import com.thequizapp.quizalong.view.results.ShowQuizAnswersActivity;
+import com.thequizapp.quizalong.view.quiz.QuizActivity;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -94,25 +92,47 @@ public class ShowQuizResultsViewModel extends ViewModel {
         this.quizType = quizType;
     }
     public void getQuizResults() {
-        Log.e("ShowResult... "," "+quizId+" "+Global.userId.get());
-        disposable.add(Global.initRetrofit().getQuizAnsLive(BuildConfig.APIKEY, quizId, Global.userId.get())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
-                .doOnTerminate(() -> isLoading.set(false))
-                .subscribe((ShowResult, throwable) -> {
-                    Log.e("ShowResult...",""+ShowResult+" "+throwable);
-                    if (ShowResult != null) {
-                        onSuccess.setValue(ShowResult);
-                        //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
-                        showQuestionAnsAdapter.updateData(ShowResult);
+        Log.e("ShowResult... "," "+quizId+" "+Global.userId.get()+" type "+quizType);
+
+        if(quizType.equals(QuizActivity.Type.PAST)){
+            disposable.add(Global.initRetrofit().getQuizAnsPast(BuildConfig.APIKEY, quizId, Global.userId.get())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .doOnTerminate(() -> isLoading.set(false))
+                    .subscribe((ShowResult, throwable) -> {
+                        Log.e("ShowResult...","past "+ShowResult+" "+throwable);
+                        if (ShowResult != null) {
+                            onSuccess.setValue(ShowResult);
+                            //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
+                            showQuestionAnsAdapter.updateData(ShowResult);
                         /*String str = "1"+"/"+ShowResult.getQuestions().size();
                         getPaginationVal().setValue(str);*/
-                        this.setUser(ShowResult);
-                    } else if (throwable != null) {
-                        toast.setValue(throwable.getLocalizedMessage());
-                    }
-                }));
+                            this.setUser(ShowResult);
+                        } else if (throwable != null) {
+                            toast.setValue(throwable.getLocalizedMessage());
+                        }
+                    }));
+        }else{
+            disposable.add(Global.initRetrofit().getQuizAnsLive(BuildConfig.APIKEY, quizId, Global.userId.get())
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .unsubscribeOn(Schedulers.io())
+                    .doOnTerminate(() -> isLoading.set(false))
+                    .subscribe((ShowResult, throwable) -> {
+                        Log.e("ShowResult...",""+ShowResult+" "+throwable);
+                        if (ShowResult != null) {
+                            onSuccess.setValue(ShowResult);
+                            //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
+                            showQuestionAnsAdapter.updateData(ShowResult);
+                        /*String str = "1"+"/"+ShowResult.getQuestions().size();
+                        getPaginationVal().setValue(str);*/
+                            this.setUser(ShowResult);
+                        } else if (throwable != null) {
+                            toast.setValue(throwable.getLocalizedMessage());
+                        }
+                    }));
+        }
     }
 
     @Override

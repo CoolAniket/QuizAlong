@@ -35,7 +35,7 @@ public class CourseSelectionActivity extends BaseActivity {
     }
 
     private void initListener() {
-        Global.userId.set(String.valueOf(new SessionManager(this).getUser().getUser().getUser_id()));
+        Global.userId.set(String.valueOf(new SessionManager(this).getUser().getUser().getId()));
 
         viewModel.getCourseData(Const.COURSE_TYPE_MEDICINE, Integer.parseInt(Global.userId.get()));
 //        viewModel.getCourseData(Const.COURSE_TYPE_MEDICINE, 35);

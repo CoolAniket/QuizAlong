@@ -28,7 +28,7 @@ public class TransactionHistoryActivity extends AppCompatActivity {
 
     private void initView() {
 //        viewModel.setUser(new SessionManager(this).getUser());
-        viewModel.getTransactionHistory(new SessionManager(this).getUser().getUser().getUser_id());
+        viewModel.getTransactionHistory(new SessionManager(this).getUser().getUser().getId());
     }
 
     private void initObserve() {

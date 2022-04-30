@@ -149,7 +149,7 @@ public class AdditionalInfoViewModel extends ViewModel {
 
     public void authenticatePhone() {
         if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
-            toast.setValue("Please enter a valid mobile number...!");
+            toast.setValue("Please enter a valid mobile number");
             return;
         }
         HashMap<String, String> hashMap = new HashMap<>();
@@ -215,19 +215,20 @@ public class AdditionalInfoViewModel extends ViewModel {
     }
     public void submitProfile() {
         if (collegeName == null || collegeName.isEmpty()) {
-            toast.setValue("Please enter college name...!");
+            toast.setValue("Please enter college name");
             return;
         }
+        //Log.d("MMMMM ",""+isValidMobile(mobileNo));
         if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
-            toast.setValue("Please enter mobile number...!");
+            toast.setValue("Please enter mobile number");
             return;
         }
         if (!mobileAuthenticated) {
-            toast.setValue("Please authenticate mobile number...!");
+            toast.setValue("Please authenticate mobile number");
             return;
         }
         if (year == null || year.isEmpty()) {
-            toast.setValue("Please select year...!");
+            toast.setValue("Please select year");
             return;
         }
         /*if (courseName == null || courseName.isEmpty()) {
@@ -275,6 +276,10 @@ public class AdditionalInfoViewModel extends ViewModel {
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
+
+    /*private boolean isValidMobile(String phone) {
+        return android.util.Patterns.PHONE.matcher(phone).matches();
+    }*/
 
     private boolean isValidMobile(String phone) {
         if(!Pattern.matches("[a-zA-Z]+", phone)) {

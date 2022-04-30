@@ -40,7 +40,7 @@ public class SessionManager {
     }
 
     public void saveUser(CurrentUser user) {
-        Global.userId.set(String.valueOf(user.getUser().getUser_id()));
+        Global.userId.set(String.valueOf(user.getUser().getId()));
         editor.putString(Const.USER, new Gson().toJson(user));
         editor.apply();
     }
