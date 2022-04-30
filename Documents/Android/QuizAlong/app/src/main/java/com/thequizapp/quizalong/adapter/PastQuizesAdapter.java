@@ -1,7 +1,5 @@
 package com.thequizapp.quizalong.adapter;
 
-import static com.thequizapp.quizalong.api.Const.AD_FB_TYPE;
-import static com.thequizapp.quizalong.api.Const.AD_TYPE;
 import static com.thequizapp.quizalong.api.Const.POST_TYPE;
 
 import android.view.LayoutInflater;
@@ -36,23 +34,9 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (viewType == AD_TYPE) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_past_quizes, parent, false);
+        return new PopularQuizesViewHolder(view);
 
-            View unifiedNativeLayoutView = LayoutInflater.from(
-                    parent.getContext()).inflate(R.layout.admob_quiz,
-                    parent, false);
-            return new UnifiedNativeAdViewHolder(unifiedNativeLayoutView);
-
-        } else if (viewType == AD_FB_TYPE) {
-
-            LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-            View view = inflater.inflate(R.layout.fb_quiz, parent, false);
-            return new AdHolder(view);
-
-        } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_past_quizes, parent, false);
-            return new PopularQuizesViewHolder(view);
-        }
     }
 
     @Override
@@ -60,15 +44,6 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         if (holder instanceof PopularQuizesViewHolder) {
             PopularQuizesViewHolder viewHolder = (PopularQuizesViewHolder) holder;
             viewHolder.setModel(position);
-        } else if (holder instanceof UnifiedNativeAdViewHolder) {
-            UnifiedNativeAdViewHolder viewHolder = (UnifiedNativeAdViewHolder) holder;
-            UnifiedNativeAd nativeAd = (UnifiedNativeAd) quizes.get(position);
-            viewHolder.populateNativeAdView(nativeAd, ((UnifiedNativeAdViewHolder) holder).getAdView());
-        } else if (holder instanceof AdHolder) {
-            AdHolder adHolder = (AdHolder) holder;
-            adHolder.adChoicesContainer.removeAllViews();
-            NativeAd ad = (NativeAd) quizes.get(position);
-            adHolder.showAds(ad);
         }
     }
 
