@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.thequizapp.quizalong.R;
-import com.thequizapp.quizalong.databinding.ItemCatCategoiesBinding;
+import com.thequizapp.quizalong.databinding.ItemCatCategoriesBinding;
 import com.thequizapp.quizalong.model.categories.CategoriesResponse;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class CatCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.View
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cat_categoies, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_cat_categories, parent, false);
         return new HomeCategoriesViewHolder(view);
     }
 
@@ -75,7 +75,7 @@ public class CatCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.View
 
 
     public class HomeCategoriesViewHolder extends RecyclerView.ViewHolder {
-        ItemCatCategoiesBinding binding;
+        ItemCatCategoriesBinding binding;
 
         public HomeCategoriesViewHolder(@NonNull View itemView) {
             super(itemView);
