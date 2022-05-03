@@ -259,38 +259,11 @@
                         android:orientation="vertical">
 
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
 
-                            <LinearLayout
-                                android:layout_width="100dp"
-                                android:layout_height="45dp"
-                                android:layout_alignParentEnd="true"
-                                android:layout_gravity="end"
-                                android:background="@drawable/bg_top_right_bottom_left_20"
-                                android:gravity="center"
-                                android:orientation="vertical"
-                                android:visibility="visible">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/gilroy_bold"
-                                    android:text='@{""+viewModel.totalScore}'
-                                    android:textColor="@color/white"
-                                    android:textSize="16sp"
-                                    android:visibility="gone"/>
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/gilroy_medium"
-                                    android:text="FREE/25/50"
-                                    android:textAllCaps="true"
-                                    android:textColor="@color/white"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -315,37 +288,74 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_centerInParent="true"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/bg_white_25"
-                                android:backgroundTint="@color/purple"
-                                android:orientation="horizontal"
-                                android:paddingHorizontal="10dp"
-                                android:paddingVertical="3dp">
+                                android:layout_weight="1"
+                                android:gravity="center">
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:background="@drawable/bg_white_25"
+                                    android:backgroundTint="@color/purple"
+                                    android:orientation="horizontal"
+                                    android:paddingHorizontal="10dp"
+                                    android:paddingVertical="3dp">
 
-                                <!--<ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_coin" />-->
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="5dp"
-                                    android:fontFamily="@font/gilroy_bold"
-                                    android:text='Countdown :- '
-                                    android:textColor="@color/white" />
+                                    <!--<ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:src="@drawable/ic_coin" />-->
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:fontFamily="@font/gilroy_bold"
+                                        android:text='Countdown :- '
+                                        android:textColor="@color/white" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="5dp"
-                                    android:fontFamily="@font/gilroy_bold"
-                                    android:text="@{String.valueOf(viewModel.timeRemaining)}"
-                                    android:textColor="@color/white" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="5dp"
+                                        android:fontFamily="@font/gilroy_bold"
+                                        android:text="@{String.valueOf(viewModel.timeRemaining)}"
+                                        android:textColor="@color/white" />
+                                </LinearLayout>
                             </LinearLayout>
-                        </RelativeLayout>
+
+
+                            <LinearLayout
+                                android:id="@+id/payTxt"
+                                android:layout_width="100dp"
+                                android:layout_height="45dp"
+                                android:layout_alignParentEnd="true"
+                                android:layout_gravity="end"
+                                android:background="@drawable/bg_top_right_bottom_left_20"
+                                android:gravity="center"
+                                android:orientation="vertical"
+                                android:visibility="visible">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gilroy_bold"
+                                    android:text='@{""+viewModel.totalScore}'
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp"
+                                    android:visibility="gone"/>
+
+                                <TextView
+                                    android:id="@+id/tv_quiztype"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/gilroy_medium"
+                                    android:text="FREE/25/50"
+                                    android:textAllCaps="true"
+                                    android:textColor="@color/white"
+                                    android:textSize="14sp" />
+                            </LinearLayout>
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="wrap_content"

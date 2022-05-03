@@ -54,7 +54,7 @@ public class HomeFragment extends Fragment {
             SessionManager sessionManager = new SessionManager(getActivity());
             viewModel.getUser().setValue(sessionManager.getUser());
         }
-        Log.e("Home... ",viewModel.getUser().getValue().getUser().getFullname()+"");
+        //Log.e("Home... ",viewModel.getUser().getValue().getUser().getFullname()+"");
         viewModel.getHomeData();
     }
 

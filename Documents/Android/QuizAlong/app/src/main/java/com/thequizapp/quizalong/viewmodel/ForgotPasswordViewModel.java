@@ -62,7 +62,7 @@ public class ForgotPasswordViewModel extends ViewModel {
                 .addOnCompleteListener(task -> {
                     isLoading.set(false);
                     if (task.isSuccessful()) {
-                        toast.setValue("Email sent successfully...");
+                        toast.setValue("Email sent successfully.");
                         onSuccess.setValue(true);
                     } else if (task.getException() != null) {
                         toast.setValue(task.getException().getLocalizedMessage());

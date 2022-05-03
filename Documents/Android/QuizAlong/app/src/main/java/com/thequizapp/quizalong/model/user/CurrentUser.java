@@ -16,10 +16,10 @@ public class CurrentUser {
     private boolean status;
 
     @SerializedName("additional_info")
-    private int additional_info;
+    private int additional_info = -1;
 
     @SerializedName("user_categories")
-    private int user_categories;
+    private int user_categories = -1;
 
     @SerializedName("course")
     public ArrayList<Course> course;

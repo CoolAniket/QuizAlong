@@ -15,6 +15,7 @@ import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.FragmentCategoriesBinding;
+import com.thequizapp.quizalong.utils.Global;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.quizes.QuizListActivity;
 import com.thequizapp.quizalong.viewmodel.CategoriesViewModel;
@@ -46,7 +47,8 @@ public class CategoriesFragment extends Fragment {
     }
 
     private void initListener() {
-        viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getId());
+        viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, Integer.parseInt(Global.userId.get()));
+        //viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getId());
         viewModel.setFavouriteCheck();
         viewModel.getCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {
             Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);

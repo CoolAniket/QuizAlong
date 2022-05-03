@@ -94,7 +94,7 @@ public class ShowQuizResultsViewModel extends ViewModel {
     public void getQuizResults() {
         Log.e("ShowResult... "," "+quizId+" "+Global.userId.get()+" type "+quizType);
 
-        if(quizType.equals(QuizActivity.Type.PAST)){
+        if(quizType.contains(QuizActivity.Type.PAST)){
             disposable.add(Global.initRetrofit().getQuizAnsPast(BuildConfig.APIKEY, quizId, Global.userId.get())
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
@@ -104,8 +104,11 @@ public class ShowQuizResultsViewModel extends ViewModel {
                         Log.e("ShowResult...","past "+ShowResult+" "+throwable);
                         if (ShowResult != null) {
                             onSuccess.setValue(ShowResult);
+                            paginationVal.setValue("1"+"/"+ShowResult.getQuestions().size());
+                            Log.e("ShowResult...",""+ShowResult.getUserAnswers().get(0));
                             //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
                             showQuestionAnsAdapter.updateData(ShowResult);
+
                         /*String str = "1"+"/"+ShowResult.getQuestions().size();
                         getPaginationVal().setValue(str);*/
                             this.setUser(ShowResult);

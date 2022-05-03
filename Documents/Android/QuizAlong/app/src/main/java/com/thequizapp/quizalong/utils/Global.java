@@ -19,7 +19,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Global {
 
-    public static final AtomicReference<String> userId = new AtomicReference<>("20");
+    public static final AtomicReference<String> userId = new AtomicReference<>("37");
 
     Global() {
     }

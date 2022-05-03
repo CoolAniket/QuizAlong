@@ -42,6 +42,7 @@ public class ShowQuizAnswersActivity extends BaseActivity {
 
         String quizType = getIntent().getStringExtra(Const.QUIZ_TYPE);
         String quizId = getIntent().getStringExtra(Const.QUIZ_ID);
+        Log.e(":::: ",quizType+"jjjjjjj");
         viewModel.setQuizType(quizType);
         viewModel.setQuizId(quizId);
         viewModel.getQuizResults();
@@ -58,6 +59,7 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     private void initListener(){
         LinearLayoutManager manager= (LinearLayoutManager) binding.rvQuestions.getLayoutManager();
 
+
         binding.btnPrev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -66,10 +68,12 @@ public class ShowQuizAnswersActivity extends BaseActivity {
                 //viewModel.getPaginationVal().setValue(""+p);
                 //Log.e("PPPP" ,""+p);
                 checkVisibility();
+                viewModel.getPaginationVal().setValue("");
                 String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
                 viewModel.getPaginationVal().setValue(str);
             }
         });
+
 
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +82,7 @@ public class ShowQuizAnswersActivity extends BaseActivity {
                 binding.rvQuestions.smoothScrollToPosition(p);
                 //Log.e("NNNN" ,""+p);
                 checkVisibility();
+                viewModel.getPaginationVal().setValue("");
                 String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
                 viewModel.getPaginationVal().setValue(str);
             }

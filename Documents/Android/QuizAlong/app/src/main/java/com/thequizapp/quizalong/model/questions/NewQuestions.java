@@ -12,6 +12,11 @@ public class NewQuestions {
     private Boolean status;
     @SerializedName("message")
     private String message;
+    @SerializedName("skip_lifeline")
+    private String skipLifeline;
+    @SerializedName("subscribed_amount")
+    private String subscribedAmount;
+
     @SerializedName("questions")
     private List<Question> questions = null;
 
@@ -29,6 +34,22 @@ public class NewQuestions {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getSkipLifeline() {
+        return skipLifeline;
+    }
+
+    public void setSkipLifeline(String skipLifeline) {
+        this.skipLifeline = skipLifeline;
+    }
+
+    public String getSubscribedAmount() {
+        return subscribedAmount;
+    }
+
+    public void setSubscribedAmount(String subscribedAmount) {
+        this.subscribedAmount = subscribedAmount;
     }
 
     public List<Question> getQuestions() {

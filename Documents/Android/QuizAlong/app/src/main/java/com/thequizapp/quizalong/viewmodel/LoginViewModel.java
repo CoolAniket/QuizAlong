@@ -99,7 +99,7 @@ public class LoginViewModel extends ViewModel {
                             }
                         }
                     } else {
-                        Log.e("Login......",""+task.getException().getLocalizedMessage());
+                        //Log.e("Login......",""+task.getException().getLocalizedMessage());
                         if (task.getException() != null) {
                             if(task.getException().getLocalizedMessage().contains("There is no user record corresponding to this identifier. The user may have been deleted.")){
                                 noRecord.setValue(email);
@@ -123,11 +123,11 @@ public class LoginViewModel extends ViewModel {
                 .unsubscribeOn(Schedulers.io())
                 .doOnTerminate(() -> isLoading.set(false))
                 .subscribe((user, throwable) -> {
-                    Log.e(">>>> +",""+ user.isStatus()+".."+throwable);
+                    //Log.e(">>>> +",""+ user+".."+throwable);
 
                     if (user != null) {
                         if(user.isStatus()) {
-                            Log.e(">>>> +",""+ user+".."+throwable);
+                            //Log.e(">>>> +",""+ user+".."+throwable);
                             onSuccess.setValue(user);
                         }else {
                             toast.setValue(user.getMessage());

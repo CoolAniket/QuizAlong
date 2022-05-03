@@ -37,6 +37,7 @@ public class QuizViewModel extends ViewModel {
     private ObservableInt wrongAnswerPosition = new ObservableInt(-1);
     private ObservableInt totalScore = new ObservableInt(00);
     private ObservableInt totalQuestions = new ObservableInt(00);
+    //private ObservableInt skipLifelines = new ObservableInt(0);
     private ObservableInt firstAnswerVisibility = new ObservableInt(View.GONE);
     private ObservableInt secondAnswerVisibility = new ObservableInt(View.GONE);
     private ObservableInt thirdAnswerVisibility = new ObservableInt(View.GONE);
@@ -47,6 +48,8 @@ public class QuizViewModel extends ViewModel {
     private MutableLiveData<Boolean> isAnswer = new MutableLiveData<>();
     private MutableLiveData<Boolean> isSkipAnswer = new MutableLiveData<>();
     private MutableLiveData<String> answerVal = new MutableLiveData<>();
+    private MutableLiveData<String> skipLifelines = new MutableLiveData<>();
+    private MutableLiveData<String> subscribedAmount = new MutableLiveData<>();
     private ObservableInt currentPosition = new ObservableInt(0);
     private ObservableBoolean isComplete = new ObservableBoolean(false);
     private ObservableBoolean isInfo = new ObservableBoolean(false);
@@ -107,7 +110,7 @@ public class QuizViewModel extends ViewModel {
 
     }
     public void getQuestionsByQuizId() {
-        disposable.add(Global.initRetrofit().getQuestionsByQuizId(BuildConfig.APIKEY, String.valueOf(twistQuizesItem.getQuizId()))
+        disposable.add(Global.initRetrofit().getQuestionsByQuizId(BuildConfig.APIKEY, String.valueOf(twistQuizesItem.getQuizId()),Global.userId.get())
                 /*disposable.add(Global.initRetrofit().getQuestionsByQuizId(BuildConfig.APIKEY, "11")*/
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -117,9 +120,13 @@ public class QuizViewModel extends ViewModel {
                 .subscribe((questions, throwable) -> {
                     Log.e("QUIZ....",""+questions);
                     Log.e("QUIZ....",""+throwable);
+                    Log.e("QUIZ....",""+questions.getSkipLifeline());
+                    Log.e("QUIZ....",""+questions.getSubscribedAmount());
                     if (questions != null) {
                         questionsList = questions.getQuestions();
                         totalQuestions.set(questions.getQuestions().size());
+                        skipLifelines.setValue(questions.getSkipLifeline());
+                        subscribedAmount.setValue(questions.getSubscribedAmount());
                         currentQuestions.setValue(questions.getQuestions().get(currentPosition.get()));
                         currentPosition.set(currentPosition.get() + 1);
                     } else if (throwable != null) {
@@ -147,9 +154,9 @@ public class QuizViewModel extends ViewModel {
 
     public void onAnswerClick(int selectAnswerNum) {
         Log.e("selectAnswerNum ","..."+selectAnswerNum+" "+isAnswer.getValue());
-        if (currentQuestions.getValue() != null && isAnswer.getValue() == null ) {
+        if (currentQuestions.getValue() != null /*&& isAnswer.getValue() == null*/ ) {
             //rapidFireDuration.set(0);
-
+            resetQuestion();
             if(selectAnswerNum == 0){
                 firstAnswerVisibility.set(View.VISIBLE);
 
@@ -192,18 +199,19 @@ public class QuizViewModel extends ViewModel {
     }
     public void createGameHashMap(int pos, boolean isTimerOff, String skip) {
         if(isTimerOff) {
-            Log.e("Hash", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
+            //Log.e("Hash", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
             hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
             hashMap.put("selected_ans[" + (pos - 1) + "]", "");
             hashMap.put("time_taken[" + (pos - 1) + "]", "0");
         }else{
-            Log.e("Hash.....",skip);
+            //Log.e("Hash.....",skip);
             if (skip == "skip") {
                 hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
                 hashMap.put("selected_ans[" + (pos - 1) + "]", "skip");
                 hashMap.put("time_taken[" + (pos - 1) + "]", "0");
             }else {
-                Log.e("Hash", String.valueOf(getTimeRemaining().get()));
+                //Log.e("Hash", String.valueOf(getTimeRemaining().get()));
+                //Log.e("Answer...", answerVal.getValue());
                 hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
                 hashMap.put("selected_ans[" + (pos - 1) + "]", answerVal.getValue());
                 hashMap.put("time_taken[" + (pos - 1) + "]", String.valueOf(getTimeRemaining().get()));
@@ -213,8 +221,8 @@ public class QuizViewModel extends ViewModel {
     }
     /*public void callAddGameDataLiveApi(HashMap<String, Integer> hashMap) {*/
         public void callAddGameDataLiveApi(String quizType) {
-            Log.e("::: ",""+Global.userId.get()+" "+getTwistQuizesItem().getQuizId());
-        hashMap.put("user_id", Global.userId.get());
+            //Log.e("::: ",""+Global.userId.get()+" "+getTwistQuizesItem().getQuizId());
+        hashMap.put("user_id", Global.userId.get());/*Global.userId.get()*/
         hashMap.put("quiz_id", String.valueOf(getTwistQuizesItem().getQuizId()));
 
             Log.e("::: map ",hashMap.size()+""+hashMap.get(""));
@@ -297,6 +305,13 @@ public class QuizViewModel extends ViewModel {
         fourthAnswerVisibility.set(View.GONE);
     }
 
+    public void resetAllAnswers() {
+        firstAnswerVisibility.set(View.VISIBLE);
+        secondAnswerVisibility.set(View.VISIBLE);
+        thirdAnswerVisibility.set(View.VISIBLE);
+        fourthAnswerVisibility.set(View.VISIBLE);
+    }
+
     public void timesUp() {
         if (currentQuestions.getValue() != null) {
             rapidFireDuration.set(0);
@@ -374,6 +389,22 @@ public class QuizViewModel extends ViewModel {
 
     public void setTotalQuestions(ObservableInt totalQuestions) {
         this.totalQuestions = totalQuestions;
+    }
+
+    public MutableLiveData<String> getSkipLifelines() {
+        return skipLifelines;
+    }
+
+    public MutableLiveData<String> getSubscribedAmount() {
+        return subscribedAmount;
+    }
+
+    public void setSubscribedAmount(MutableLiveData<String> subscribedAmount) {
+        this.subscribedAmount = subscribedAmount;
+    }
+
+    public void setSkipLifelines(MutableLiveData<String> skipLifelines) {
+        this.skipLifelines = skipLifelines;
     }
 
     public ObservableInt getFirstAnswerVisibility() {

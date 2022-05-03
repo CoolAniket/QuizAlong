@@ -114,7 +114,8 @@ public interface ApiService {
 
     @GET(Const.QUIZ_QUESTIONS_OF_QUIZ)
     Single<NewQuestions> getQuestionsByQuizId(@Header(Const.API_KEY) String apiKey,
-                                              @Path(Const.QUIZ_ID_NEW) String quizId);
+                                              @Path(Const.QUIZ_ID_NEW) String quizId,
+                                              @Path(Const.USER_ID) String userId);
 
     @GET(Const.QUIZ_ANS_LIVE)
     Single<ShowResultsRequest> getQuizAnsLive(@Header(Const.API_KEY) String apiKey,
