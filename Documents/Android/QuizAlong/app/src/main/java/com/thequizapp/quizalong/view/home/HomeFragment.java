@@ -20,6 +20,7 @@ import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
+import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
 import com.thequizapp.quizalong.view.payment.PaymentActivity;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.view.quizes.QuizListActivity;
@@ -81,6 +82,7 @@ public class HomeFragment extends Fragment {
             startActivity(intent, activityOptions.toBundle());*/
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
                         .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.TWIST));
             }
         });
@@ -96,6 +98,7 @@ public class HomeFragment extends Fragment {
                 intent.putExtra("data", new Gson().toJson(quizesItem));
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
                         .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
             }
         });
@@ -105,9 +108,16 @@ public class HomeFragment extends Fragment {
             //intent.putExtra("name", (String) pairs[0].second);
             //intent.putExtra("logo", (String) pairs[1].second);
             //intent.putExtra("data", new Gson().toJson(quizesItem));
-            startActivity(new Intent(getActivity(), QuizActivity.class)
-                    .putExtra("data", new Gson().toJson(quizesItem))
-                    .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
+            if(quizesItem.getPlayed() == 0) {
+                startActivity(new Intent(getActivity(), QuizActivity.class)
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ? viewModel.getUser().getValue().getUser().getFullname() : "Player")
+                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
+            }else{
+                startActivity(new Intent(getActivity(), LeaderBoardActivity.class)
+                        .putExtra(Const.QUIZ_ID, String.valueOf(quizesItem.getQuizId()))
+                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
+            }
         });
     }
 

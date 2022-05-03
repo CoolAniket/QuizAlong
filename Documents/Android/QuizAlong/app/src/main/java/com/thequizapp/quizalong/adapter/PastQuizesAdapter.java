@@ -130,7 +130,7 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
             if(quizes.size() > 0) {
                 if (quizes.get(position) instanceof TwistQuizPage.QuizItem) {
                     TwistQuizPage.QuizItem quizesItem = (TwistQuizPage.QuizItem) quizes.get(position);
-                    binding.getRoot().setOnClickListener(v -> onItemClicks.onClick(quizesItem));
+                    binding.btnStartNow.setOnClickListener(v -> onItemClicks.onClick(quizesItem));
                     binding.setModel(quizesItem);
 
                 }

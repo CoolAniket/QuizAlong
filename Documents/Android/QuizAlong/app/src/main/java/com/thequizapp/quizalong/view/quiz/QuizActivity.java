@@ -116,7 +116,6 @@ public class QuizActivity extends BaseActivity implements Runnable {
         Random r=new Random();
         //int randomNumber=r.nextInt(TIPS.length);
         binding.tvTip.setText(TIPS[tipCnt]);
-        Log.e("......",""+getIntent().getStringExtra("quiz_type"));
         /*if(!getIntent().getStringExtra("quiz_type").contains("past")) {
             slideTextWithTime();
         }*/
@@ -447,11 +446,10 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 //shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, I completed this quiz, and had a lots of fun. Play and have fun in this app.https://play.google.com/store/apps/details?id=" + getPackageName());
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Osmosis Prime has invited you to try QuizAlong: the best medical partner you'll ever wish for. +" +
-                        "\n Smartest way to the future of learning clinical concepts for doctors to multifold your earnings and learnings in just 5 minutes.+" +
-                        "\nJoin today for free and you'll get a FREE LIFELINE to help you excel the quiz. +" +
-                        "\nLink: www.quizalong.com/download+" +
-                        "\nUse this refer code 11B3CFB7");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra("user_name")+" has just completed this quiz on Quizalong : the best medical partner you’ll ever wish for +" +
+                        "\n Dive into the smartest way of learning top notch clinical accent men and start multifolding your learning and earning in just 5 minutes.+" +
+                        "\n Join now for FREE+" +
+                        "\n http://quizalong.com/#download+");
                 shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
                 shareIntent.setType("image/*");
                 shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);

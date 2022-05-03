@@ -75,6 +75,8 @@ public class TwistQuizPage {
         @SerializedName("entry")
         private List<Integer> entry = null;
 
+        @SerializedName("played")
+        private Integer played;
 
         public String getSystemTime() {
             return systemTime;
@@ -162,6 +164,14 @@ public class TwistQuizPage {
 
         public void setPrize(Integer prize) {
             this.prize = prize;
+        }
+
+        public Integer getPlayed() {
+            return played;
+        }
+
+        public void setPlayed(Integer played) {
+            this.played = played;
         }
 
         public List<Integer> getEntry() {
