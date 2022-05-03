@@ -228,11 +228,11 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 }
 
                 public void onFinish() {
-                    Log.e("omFinish ", "");
+                    //Log.e("omFinish ", ""+viewModel.getIsAnswer().getValue());
                     if(viewModel.isUseSkip()){
                         viewModel.showAllAnswers();
                         addScore(false,"skip");
-                    }else if(viewModel.getIsAnswer().getValue()){
+                    }else if(viewModel.getIsAnswer().getValue() != null){
                         addScore(false,"");
                     }
                     else {
