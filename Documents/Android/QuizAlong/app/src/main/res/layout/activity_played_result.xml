@@ -10,17 +10,8 @@
 
         <variable
             name="viewModel"
-            type="com.thequizapp.quizalong.viewmodel.QuizViewModel" />
-        <variable
-            name="lobbyTime"
-            type="String" />
-        <variable
-            name="question"
-            type="com.thequizapp.quizalong.model.questions.NewQuestions.Question" />
+            type="com.thequizapp.quizalong.viewmodel.PlayedResultViewModel" />
 
-        <variable
-            name="answerList"
-            type="java.util.List&lt;String&gt;" />
     </data>
     <RelativeLayout
         android:layout_width="match_parent"
@@ -37,8 +28,7 @@
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
-            android:visibility="@{viewModel.isComplete ? View.VISIBLE : View.GONE}"
-            tools:visibility="visible">
+            >
 
             <LinearLayout
                 android:id="@+id/lyt_ss"
