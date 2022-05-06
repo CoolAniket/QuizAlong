@@ -198,7 +198,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/gilroy_medium"
-                                android:text="Available Points"
+                                android:text="@string/available_coins"
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -206,23 +206,41 @@
 
                     <LinearLayout
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="10dp"
                         android:layout_weight="1"
                         android:orientation="vertical">
 
 
-                        <View
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            app:cardBackgroundColor="@color/cobalt_blue"
+                            app:cardCornerRadius="10dp"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:fontFamily="@font/gilroy_medium"
+                                android:textColor="@color/white"
+                                android:textSize="16sp"
+                                android:text='@{"SKIP LIFELINE : "+viewModel.user.user.lifeline}'
+                                />
+                        </androidx.cardview.widget.CardView>
+
+
 
                         <androidx.cardview.widget.CardView
                             android:id="@+id/card_redeem"
                             android:layout_width="match_parent"
-                            android:layout_height="45dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
                             app:cardBackgroundColor="@color/black"
-                            app:cardCornerRadius="10dp">
+                            app:cardCornerRadius="10dp"
+                            android:layout_marginTop="10dp">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -280,7 +298,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:fontFamily="@font/gilroy_medium"
-                            android:text="Refer your friends and earn 500 points !"
+                            android:text="Refer your friends and earn a SKIP LIFELINE."
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 

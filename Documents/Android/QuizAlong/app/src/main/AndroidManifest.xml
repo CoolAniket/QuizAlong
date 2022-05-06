@@ -16,6 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/ThemeQuizBox"
         android:usesCleartextTraffic="true">
+        <activity android:name=".view.results.PlayedResultActivity" />
         <activity android:name=".view.web.WebViewActivity" />
         <activity android:name=".view.edit.EditProfileActivity" />
         <activity android:name=".view.quiz.QuizActivity" />

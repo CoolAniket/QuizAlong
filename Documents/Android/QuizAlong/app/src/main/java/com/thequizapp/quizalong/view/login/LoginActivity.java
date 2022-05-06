@@ -66,12 +66,10 @@ public class LoginActivity extends BaseActivity {
         });
         viewModel.getOnSuccess().observe(this, user -> {
             Log.e("....",""+user.getAdditional_info());
-
             sessionManager.saveUser(user);
-
+            sessionManager.saveAdditionalDetails(user.getAdditional_info());
+            sessionManager.saveCourseSelection(user.getUser_categories());
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
-            /*startActivity(new Intent(this, MainActivity.class));
-            finishAffinity();*/
             Log.e("sessionManager ",""+sessionManager.getUser().getAdditional_info());
             if(sessionManager.getUser().getAdditional_info() == 1) {
                 startActivity(new Intent(this, AdditionalInfoActivity.class));

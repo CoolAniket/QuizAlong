@@ -50,7 +50,7 @@
     <string name="lets_go">Let&#8216;s GO </string>
     <string name="skip_the_question">Skip the question</string>
     <string name="more_coins">More Coins</string>
-    <string name="redeem">Redeem</string>
+    <string name="redeem">Redeem Coins</string>
     <string name="refer_amp_earn"><![CDATA[Refer & Earn]]></string>
     <string name="your_code_is">Your code is</string>
     <string name="log_out">Log Out</string>
@@ -62,7 +62,7 @@
     <string name="completed">Completed</string>
     <string name="total_score">Total Score</string>
     <string name="exit">Exit</string>
-    <string name="finished">Finished..!</string>
+    <string name="finished">Finished</string>
     <string name="complete">Complete</string>
     <string name="cancel">Cancel</string>
     <string name="first_name">First Name</string>
@@ -145,6 +145,8 @@
     <string name="faqs">FAQs</string>
     <string name="transaction_history">Transaction History</string>
     <string name="search">Search</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="available_coins">Available Coins</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

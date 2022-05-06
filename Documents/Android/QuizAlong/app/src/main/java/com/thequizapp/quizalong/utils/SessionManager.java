@@ -53,30 +53,23 @@ public class SessionManager {
         return null;
     }
 
-    public void saveAdditionalDetails(String val) {
-        editor.putString(Const.USER_ADDITION_DETAILS, val);
+    public void saveAdditionalDetails(int val) {
+        editor.putInt(Const.USER_ADDITION_DETAILS, val);
         editor.apply();
     }
 
-    public String getAdditionalDetails() {
-        String userString = pref.getString(Const.USER_ADDITION_DETAILS, "");
-        if (!userString.isEmpty()) {
-            return userString;
-        }
-        return null;
+    public int getAdditionalDetails() {
+        return pref.getInt(Const.USER_ADDITION_DETAILS, -1);
     }
 
-   public void saveCourseSelection(String val) {
-        editor.putString(Const.USER_COURSE_SELECTION, val);
+   public void saveCourseSelection(int val) {
+        editor.putInt(Const.USER_COURSE_SELECTION, val);
         editor.apply();
     }
 
-    public String getCourseSelection() {
-        String userString = pref.getString(Const.USER_COURSE_SELECTION, "");
-        if (!userString.isEmpty()) {
-            return userString;
-        }
-        return null;
+    public int getCourseSelection() {
+        return pref.getInt(Const.USER_COURSE_SELECTION, -1);
+
     }
 
     public void saveSettings(Settings settings) {
@@ -203,17 +196,17 @@ public class SessionManager {
     }
 
     public String getPrivacyUrl() {
-        Settings.AppSettings admobSettings = getAppSettings();
-        if (admobSettings != null) {
-            return admobSettings.getPrivacy();
+        Settings settings = getSettings();
+        if (settings != null) {
+            return settings.getPrivacyPolicy();
         }
         return "";
     }
 
     public String getTermsUrl() {
-        Settings.AppSettings admobSettings = getAppSettings();
-        if (admobSettings != null) {
-            return admobSettings.getTerms();
+        Settings settings = getSettings();
+        if (settings != null) {
+            return settings.getTermsConditions();
         }
         return "";
     }

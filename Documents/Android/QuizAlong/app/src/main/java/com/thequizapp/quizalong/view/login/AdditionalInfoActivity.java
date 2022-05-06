@@ -100,7 +100,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         });
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             Toast.makeText(this, getResources().getString(R.string.log_in_successfully), Toast.LENGTH_SHORT).show();
-            sessionManager.saveAdditionalDetails(isSuccess.toString());
+            sessionManager.saveAdditionalDetails(isSuccess ? 0: 1);
             //startActivity(new Intent(this, MainActivity.class));
             startActivity(new Intent(this, CourseSelectionActivity.class));
             finishAffinity();

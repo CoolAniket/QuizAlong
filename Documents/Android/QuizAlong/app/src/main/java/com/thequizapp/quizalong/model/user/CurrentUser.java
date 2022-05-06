@@ -117,6 +117,10 @@ public class CurrentUser {
         @SerializedName("refercode")
         private String refercode;
 
+
+        @SerializedName("lifeline")
+        private int lifeline;
+
         @SerializedName("course")
         private String course;
 
@@ -188,6 +192,14 @@ public class CurrentUser {
 
         public void setRefercode(String refercode) {
             this.refercode = refercode;
+        }
+
+        public int getLifeline() {
+            return lifeline;
+        }
+
+        public void setLifeline(int lifeline) {
+            this.lifeline = lifeline;
         }
 
         public String getCourse() {
