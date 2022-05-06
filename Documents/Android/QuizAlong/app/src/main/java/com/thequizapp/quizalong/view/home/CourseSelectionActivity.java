@@ -43,7 +43,7 @@ public class CourseSelectionActivity extends BaseActivity {
         viewModel.getIsSuccess().observe(this, isSuccess -> {
             if (isSuccess != null && isSuccess) {
                 Toast.makeText(this, getResources().getString(R.string.cat_add_successfully), Toast.LENGTH_SHORT).show();
-                sessionManager.saveCourseSelection(isSuccess.toString());
+                sessionManager.saveCourseSelection(viewModel.getCategoriesAdapter().getSelectedCategories().size());
                 startActivity(new Intent(this, MainActivity.class));
                 finishAffinity();
             }

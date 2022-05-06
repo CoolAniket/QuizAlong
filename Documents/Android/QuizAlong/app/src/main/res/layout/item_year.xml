@@ -36,7 +36,7 @@
             tools:listitem="@layout/item_cat_categories"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:orientation="horizontal"
-            app:reverseLayout="true"
+            app:reverseLayout="false"
             app:spanCount="2"
             />
 

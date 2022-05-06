@@ -4,6 +4,7 @@
 
     <data>
 
+        <import type="android.view.View" />
         <variable
             name="model"
             type="com.thequizapp.quizalong.model.home.TwistQuizPage.QuizItem" />
@@ -31,170 +32,179 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/cat_bg"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="30dp">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@{model.winPercent.toString()}"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/gilroy_reguler"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="%"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:layout_gravity="center"/>
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/trophy"
-                    android:layout_marginLeft="10dp"
-                    android:layout_gravity="center"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2 X "
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="30dp"/>
-                <ImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_coin"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/white"
-                android:layout_marginTop="30dp"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="40dp"
                 android:orientation="vertical"
                 >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{model.winPercent.toString()}"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="10dp"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:layout_gravity="center"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/trophy"
+                        android:layout_marginLeft="10dp"
+                        android:layout_gravity="center"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2 X "
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="13sp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="30dp"/>
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_coin"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/white"/>
                 <ImageView
                     android:id="@+id/iv_icon"
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="4"
                     android:layout_gravity="center"
                     app:normal_image="@{model.image}"
-                    android:src="@drawable/ic_profile_user_tint" />
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_profile_user_tint"
+                    />
 
                 <TextView
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/gilroy_bold"
                     android:maxLines="2"
-                    android:text="@{model.title}"
+                    android:text='@{model.title+"-"+model.description}'
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="18sp"
+                    android:textSize="15sp"
                     android:layout_gravity="center"/>
-                <!--android:text="@{model.name}"-->
-                <!--<TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:maxLines="3"
-                    android:text="@{model.description}"
-                    android:textColor="@color/white"
-                    android:textSize="14sp" />-->
 
-                <!--<Button
-                    android:id="@+id/btn_check"
-                    android:layout_width="150dp"
-                    android:layout_height="45dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/bg_white_10"
-                    android:backgroundTint="@color/black"
-                    android:fontFamily="@font/gilroy_bold"
-                    android:gravity="center"
-                    android:paddingVertical="10dp"
-                    android:text="@string/check_quizes"
-                    android:textAllCaps="false"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:layout_gravity="center"/>-->
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:layout_marginTop="15dp">
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/border_top_background"
+                    >
                     <LinearLayout
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="40"
-                        android:gravity="center"
-                        android:background="@drawable/my_custom_background">
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/ic_q"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:padding="3dp"
+                            />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Time :"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/gilroy_bold"
-                            android:layout_gravity="center"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{model.startTime}"
+                            android:text='@{model.questions +"Ques"}'
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             android:layout_gravity="center"/>
                     </LinearLayout>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:background="@color/white"
+                        android:layout_gravity="center_vertical"/>
                     <LinearLayout
-                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="60"
-                        android:gravity="center"
-                        android:background="@drawable/border_top_background">
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        >
+                        <ImageView
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/timer_20"
+                            android:layout_gravity="center"
+                            />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{model.totalTime.toString()}"
+                            android:text='@{model.totalTime.toString()+" Mins"}'
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="12sp"
                             android:layout_marginRight="10dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="min"
-                            android:textStyle="bold"
-                            android:textColor="@color/white"
-                            android:textSize="12sp"
-                            android:fontFamily="@font/gilroy_bold"
-                            android:layout_marginRight="10dp"/>
+
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:background="@drawable/border_top_background"
+                    >
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_timer"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="10dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{"Today "+model.startTime.toString()}'
+                        android:textStyle="bold"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:layout_gravity="center"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.2"
                     android:layout_marginTop="0dp"
+                    android:background="@drawable/border_top_background"
+                    android:visibility="@{model.subscribed == 0? View.VISIBLE: View.GONE}"
                     >
                     <LinearLayout
                         android:id="@+id/btn_check"
@@ -202,7 +212,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:background="@drawable/my_custom_background">
+                        >
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -213,6 +223,11 @@
                             android:fontFamily="@font/gilroy_bold"
                             android:layout_gravity="center"/>
                     </LinearLayout>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="20dp"
+                        android:background="@color/white"
+                        android:layout_gravity="center_vertical"/>
                     <LinearLayout
                         android:id="@+id/btn_pay"
                         android:layout_width="match_parent"
@@ -229,6 +244,29 @@
                             android:textSize="12sp"
                             android:fontFamily="@font/gilroy_bold"
                             android:layout_marginRight="10dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1.2"
+                    android:visibility="@{model.subscribed == 0 ? View.GONE: View.VISIBLE}"
+
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:background="@drawable/border_top_background">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{"Enrolled "+ (model.subscribedAmount > 0 ? model.subscribedAmount : "free") +" ->"}'
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:layout_gravity="center"/>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>

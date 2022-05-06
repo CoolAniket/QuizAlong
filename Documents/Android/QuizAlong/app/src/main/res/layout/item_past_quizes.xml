@@ -37,7 +37,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{model.totalTime.toString()}"
+                    android:text="@{model.winPercent.toString()}"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -112,77 +112,103 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal"
-                >
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
                 <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/questions_20"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/iv_icon"
+                    android:layout_width="60dp"
                     android:layout_height="wrap_content"
-                    android:text='@{model.questions.toString()+" Ques"}'
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:layout_gravity="center"
-/>
-                <View
-                    android:layout_width="1dp"
+                    android:scaleType="fitCenter"
+                    android:adjustViewBounds="true"
+                    app:normal_image="@{model.image}"
+                    android:layout_marginStart="10dp"
+
+                    />
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
-                    android:layout_marginVertical="8dp"
+                    android:orientation="vertical"
                     android:layout_marginStart="10dp"
-                    />
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/timer_20"
-                    android:layout_gravity="center"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{model.totalTime.toString()+" Mins"}'
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:layout_gravity="center"
-                    />
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:orientation="horizontal"
+                        >
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_q"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            android:padding="3dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{model.questions.toString()+" Ques"}'
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/gilroy_medium"
+                            android:layout_gravity="center"
+                            />
+                        <View
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:layout_marginVertical="8dp"
+                            android:layout_marginStart="10dp"
+                            />
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/timer_20"
+                            android:layout_gravity="center"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{model.totalTime.toString()+" Mins"}'
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/gilroy_medium"
+                            android:layout_gravity="center"
+                            />
 
 
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1">
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_timer"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="10dp"
+                            />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{"Yesterday "+model.startTime.toString()}'
+                            android:textStyle="bold"
+                            android:textColor="@color/white"
+                            android:textSize="15sp"
+                            android:fontFamily="@font/gilroy_medium"
+                            android:layout_gravity="center"/>
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_timer"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text='@{model.date+" "+model.startTime}'
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:textSize="15sp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:layout_gravity="center"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="1.2"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"

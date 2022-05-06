@@ -14,8 +14,11 @@ import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.FragmentPastQuizBinding;
+import com.thequizapp.quizalong.databinding.FragmentPastQuizScoreBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
+import com.thequizapp.quizalong.view.results.PlayedResultActivity;
+import com.thequizapp.quizalong.viewmodel.MyPastQuizViewModel;
 import com.thequizapp.quizalong.viewmodel.PastQuizViewModel;
 
 import java.util.List;
@@ -30,8 +33,8 @@ public class PastQuizScoreFragment extends Fragment {
 
 
     private final List<TwistQuizPage.QuizItem> quizesItems;
-    FragmentPastQuizBinding binding;
-    PastQuizViewModel viewModel;
+    FragmentPastQuizScoreBinding binding;
+    MyPastQuizViewModel viewModel;
 
 
 
@@ -44,7 +47,7 @@ public class PastQuizScoreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_past_quiz_score, container, false);
-        viewModel = new ViewModelProvider(this).get(PastQuizViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MyPastQuizViewModel.class);
         initListener();
         binding.setViewModel(viewModel);
         return binding.getRoot();
@@ -54,7 +57,7 @@ public class PastQuizScoreFragment extends Fragment {
         viewModel.updateQuizData(quizesItems);
         viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
 
-            startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
+            startActivity(new Intent(binding.getRoot().getContext(), PlayedResultActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
                         .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
         });

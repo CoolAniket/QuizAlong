@@ -69,14 +69,20 @@ public class TwistQuizPage {
         @SerializedName("total_time")
         private Integer totalTime;
         @SerializedName("win_percent")
-        private Integer winPercent;
+        private int winPercent;
         @SerializedName("prize")
-        private Integer prize;
+        private int prize;
+        @SerializedName("subscribed")
+        private int subscribed;
+        @SerializedName("played")
+        private int played;
+        @SerializedName("subscribed_amount")
+        private int subscribedAmount;
+        @SerializedName("type")
+        private String type;
         @SerializedName("entry")
         private List<Integer> entry = null;
 
-        @SerializedName("played")
-        private Integer played;
 
         public String getSystemTime() {
             return systemTime;
@@ -166,12 +172,36 @@ public class TwistQuizPage {
             this.prize = prize;
         }
 
+        public Integer getSubscribed() {
+            return subscribed;
+        }
+
+        public void setSubscribed(Integer subscribed) {
+            this.subscribed = subscribed;
+        }
+
         public Integer getPlayed() {
             return played;
         }
 
         public void setPlayed(Integer played) {
             this.played = played;
+        }
+
+        public Integer getSubscribedAmount() {
+            return subscribedAmount;
+        }
+
+        public void setSubscribedAmount(Integer subscribedAmount) {
+            this.subscribedAmount = subscribedAmount;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
         }
 
         public List<Integer> getEntry() {

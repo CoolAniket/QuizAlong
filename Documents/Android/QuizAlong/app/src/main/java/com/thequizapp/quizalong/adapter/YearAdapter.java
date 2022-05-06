@@ -97,7 +97,7 @@ public class YearAdapter extends RecyclerView.Adapter<YearAdapter.YearViewHolder
         }
 
         public void setupRecyclerView(Context context, CatCategoriesAdapter adapter) {
-            rvCategory.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true));
+            rvCategory.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
             rvCategory.setAdapter(adapter);
         }
     }

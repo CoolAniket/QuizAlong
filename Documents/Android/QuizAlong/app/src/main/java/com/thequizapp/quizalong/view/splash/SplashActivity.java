@@ -43,23 +43,15 @@ public class SplashActivity extends BaseActivity {
                             }
                             Log.e("MMMM ",""+sessionManager.getAdditionalDetails());
                             new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                                /*Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
-                                startActivity(new Intent(this, MainActivity.class));*/
-                                //startActivity(new Intent(this, WelcomeActivity.class));
                                 if (sessionManager.getUser() == null) {
-
-                                    //startActivity(new Intent(this, WelcomeActivity.class));
                                     Intent intent = new Intent(this, LoginActivity.class);
-                                    //ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, pair);
                                     startActivity(intent);
                                 }
-                                else if(sessionManager.getAdditionalDetails() == null){
+                                else if(sessionManager.getAdditionalDetails() == -1){
                                     Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
-                                    //Log.e("11111 ",""+sessionManager.getUser().getAdditional_info());
-                                    //startActivity(new Intent(this, AdditionalInfoActivity.class));
-                                    if(sessionManager.getUser().getAdditional_info() == 1) {
+                                    if(sessionManager.getAdditionalDetails() == 1) {
                                         startActivity(new Intent(this, AdditionalInfoActivity.class));
-                                    } else if (sessionManager.getUser().getUser_categories() < 2) {
+                                    } else if (sessionManager.getCourseSelection() < 2) {
                                         startActivity(new Intent(this, CourseSelectionActivity.class));
                                     } else {
                                         startActivity(new Intent(this, MainActivity.class));

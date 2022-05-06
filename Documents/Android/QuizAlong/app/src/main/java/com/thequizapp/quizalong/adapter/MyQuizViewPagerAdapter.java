@@ -2,6 +2,7 @@ package com.thequizapp.quizalong.adapter;
 
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.view.quizes.PastQuizFragment;
+import com.thequizapp.quizalong.view.quizes.PastQuizScoreFragment;
 import com.thequizapp.quizalong.view.quizes.UpcomingQuizFragment;
 
 import androidx.annotation.NonNull;
@@ -22,7 +23,7 @@ public class MyQuizViewPagerAdapter extends FragmentPagerAdapter {
         if (position == 0) {
             return new UpcomingQuizFragment(quizByCatId.getUpcomingQuizes());
         } else {
-            return new PastQuizFragment(quizByCatId.getPastQuizes());
+            return new PastQuizScoreFragment(quizByCatId.getPastQuizes());
         }
     }
 

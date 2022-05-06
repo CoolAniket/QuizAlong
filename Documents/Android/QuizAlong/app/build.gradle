@@ -98,4 +98,6 @@ dependencies {
 
     //Razor pay
     implementation 'com.razorpay:checkout:1.6.18'
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 }

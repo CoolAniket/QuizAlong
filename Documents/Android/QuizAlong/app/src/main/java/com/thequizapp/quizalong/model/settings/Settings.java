@@ -22,6 +22,28 @@ public class Settings {
     @SerializedName("admob_settings")
     private AdmobSettings admobSettings;
 
+    @SerializedName("privacy_policy")
+    private String privacyPolicy;
+
+    public String getPrivacyPolicy() {
+        return privacyPolicy;
+    }
+
+    public void setPrivacyPolicy(String privacyPolicy) {
+        this.privacyPolicy = privacyPolicy;
+    }
+
+    public String getTermsConditions() {
+        return termsConditions;
+    }
+
+    public void setTermsConditions(String termsConditions) {
+        this.termsConditions = termsConditions;
+    }
+
+    @SerializedName("terms_conditions")
+    private String termsConditions;
+
     public AppSettings getAppSettings() {
         return appSettings;
     }
