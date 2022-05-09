@@ -138,6 +138,7 @@ public class PaymentActivity extends BaseActivity implements PaymentResultWithDa
             hashMap.put(Const.PAYMENT_ID, paymentData.getPaymentId());
             hashMap.put(Const.SIGNATURE, paymentData.getSignature());
             hashMap.put(Const.USER_ID, Global.userId.get());
+            hashMap.put(Const.STATUS, "1");
 
             viewModel.addpaymentdata(hashMap);
         } catch (Exception e) {

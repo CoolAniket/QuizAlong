@@ -26,10 +26,10 @@
     <string name="profile">Profile</string>
     <string name="start_playing_and_earn_rewards">Lets start Learning and Earning !</string>
     <string name="hello_name">Hello Dr Parth</string>
-    <string name="check_quizes">Check Quizes</string>
-    <string name="popular_quizes">Popular Quizes</string>
-    <string name="upcoming_quizes">Upcoming Quizes</string>
-    <string name="past_quizes">Past Quizes</string>
+    <string name="check_quizes">Check Quizzes</string>
+    <string name="popular_quizes">Popular Quizzes</string>
+    <string name="upcoming_quizes">Upcoming Quizzes</string>
+    <string name="past_quizes">Past Quizzes</string>
     <string name="points">Points</string>
     <string name="questions">Questions</string>
     <string name="leaderboard">Leaderboard</string>
@@ -39,7 +39,7 @@
     <string name="privacy_policy">Privacy Policy</string>
     <string name="terms_of_use">Terms Of Use</string>
     <string name="gold_player">Gold Player</string>
-    <string name="quizes_played">Quizes Played</string>
+    <string name="quizes_played">Quizzes Played</string>
     <string name="points_earned">Points Earned</string>
     <string name="wallet">Wallet</string>
     <string name="skip">SKIP</string>
@@ -70,7 +70,7 @@
     <string name="double_dip">Double Dip</string>
     <string name="fifty_fifty">Fifty Fifty</string>
     <string name="quiz_rapid_fire_text">This Quiz is Rapid Fire ,\nwhere you have to answer\nall the questions within\nspecific time limit or\nthat answer will be counted\nas false automatically !</string>
-    <string name="ok_start">Ok, Start</string>
+    <string name="ok_start">OK, Start</string>
     <string name="you_earned">You Earned</string>
     <string name="next">Next</string>
     <string name="enter_your_college">Enter your college name</string>

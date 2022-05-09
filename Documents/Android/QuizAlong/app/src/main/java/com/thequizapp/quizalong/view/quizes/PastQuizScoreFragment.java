@@ -13,13 +13,11 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
-import com.thequizapp.quizalong.databinding.FragmentPastQuizBinding;
 import com.thequizapp.quizalong.databinding.FragmentPastQuizScoreBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.view.results.PlayedResultActivity;
 import com.thequizapp.quizalong.viewmodel.MyPastQuizViewModel;
-import com.thequizapp.quizalong.viewmodel.PastQuizViewModel;
 
 import java.util.List;
 

@@ -59,7 +59,7 @@
                 <RelativeLayout
                     android:id="@+id/app_bar"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:layout_marginTop="10dp">
 
                     <ImageView
@@ -212,7 +212,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="60dp"
                 app:cardBackgroundColor="@color/cobalt_blue"
                 app:cardCornerRadius="15dp"
                 app:cardElevation="0dp"
@@ -230,40 +230,49 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/gilroy_bold"
-                        android:maxLength="5"
-                        android:text='@{myUserPosition}'
+                        android:text='Rank'
                         android:textColor="@color/black"
-                        android:textSize="20sp" />
+                        android:textSize="16sp" />
 
-                    <ImageView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                    <View
+                        android:layout_width="56dp"
+                        android:layout_height="40dp"
                         android:layout_marginHorizontal="15dp"
-                        android:background="@drawable/ic_profile_user"
                         android:backgroundTint="@color/white_30"
                         android:padding="10dp"
-                        app:circle_crop="@{myUser.image}" />
+                         />
 
                     <TextView
+                        android:layout_height="wrap_content"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:fontFamily="@font/gilroy_medium"
-                        android:text="@{myUser.fullName}"
+                        android:layout_weight="2"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text="User"
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/gilroy_bold"
-                        android:text='@{""+myUser.totalPoints}'
+                        android:text='Score'
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="12sp" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text='Won'
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_leader_board"
                 android:layout_width="match_parent"
@@ -275,14 +284,74 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_leader_board" />
 
-            <FrameLayout
-                android:id="@+id/banner_ads"
-                android:layout_width="wrap_content"
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginTop="5dp" />
+                app:cardBackgroundColor="@color/tiffanyblue"
+                app:cardCornerRadius="15dp"
+                app:cardElevation="0dp"
+                app:cardUseCompatPadding="true"
+                android:layout_marginHorizontal="10dp">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginVertical="8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:maxLength="5"
+                        android:text='@{"#"+myUser.id}'
+                        android:textColor="@color/black"
+                        android:textSize="16sp" />
+
+                    <ImageView
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginHorizontal="15dp"
+                        android:background="@drawable/ic_profile_user"
+                        android:backgroundTint="@color/white_30"
+                        android:padding="10dp"
+                        app:circle_crop="@{myUser.image}" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@{myUser.fullName}"
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text='@{""+myUser.totalPoints}'
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+                    <TextView
+                        android:layout_height="wrap_content"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/gilroy_bold"
+                        android:text='@{""+myUser.won}'
+                        android:textColor="@color/black"
+                        android:textSize="12sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
         </LinearLayout>
 
     </RelativeLayout>

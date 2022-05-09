@@ -54,6 +54,7 @@ public class PastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
     }
 
     public void updateData(List<TwistQuizPage.QuizItem> quizes) {
+        this.quizes.clear();
         this.quizes.addAll(quizes);
         notifyDataSetChanged();
     }

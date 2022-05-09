@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
@@ -55,31 +56,20 @@ public class HomeFragment extends Fragment {
             SessionManager sessionManager = new SessionManager(getActivity());
             viewModel.getUser().setValue(sessionManager.getUser());
         }
-        //Log.e("Home... ",viewModel.getUser().getValue().getUser().getFullname()+"");
         viewModel.getHomeData();
     }
 
     private void initListener() {
-        /*viewModel.getHomeCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {
-            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-            intent.putExtra("name", (String) pairs[0].second);
-            intent.putExtra("logo", (String) pairs[1].second);
-            intent.putExtra("data", new Gson().toJson(categoriesItem));
-            ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
-            startActivity(intent, activityOptions.toBundle());
-        });*/
+
         viewModel.getTwistQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
             if (pairs.length == 3) {
                 startPaymentProcess(quizesItem);
-//                startActivity(new Intent(getActivity(), PaymentActivity.class)
-//                        .putExtra("data", new Gson().toJson(quizesItem)));
             } else {
                 Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
                 intent.putExtra("name", (String) pairs[0].second);
                 intent.putExtra("logo", (String) pairs[1].second);
                 intent.putExtra("data", new Gson().toJson(quizesItem));
-            /*ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), pairs);
-            startActivity(intent, activityOptions.toBundle());*/
+
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
                         .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
@@ -104,10 +94,6 @@ public class HomeFragment extends Fragment {
         });
 
         viewModel.getPastQuizesAdapter().setOnItemClicks((quizesItem) -> {
-            Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-            //intent.putExtra("name", (String) pairs[0].second);
-            //intent.putExtra("logo", (String) pairs[1].second);
-            //intent.putExtra("data", new Gson().toJson(quizesItem));
             if(quizesItem.getPlayed() == 0) {
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
@@ -119,6 +105,15 @@ public class HomeFragment extends Fragment {
                         .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
             }
         });
+
+        binding.pullToRefresh.setOnRefreshListener(() -> {
+            refreshData(); // your code
+            binding.pullToRefresh.setRefreshing(false);
+        });
+    }
+
+    private void refreshData() {
+        viewModel.getHomeData();
     }
 
     private void startPaymentProcess(TwistQuizPage.QuizItem quizesItem) {

@@ -27,8 +27,8 @@ public class QuizListActivity extends BaseActivity {
         viewModel = new ViewModelProvider(this).get(QuizListViewModel.class);
         binding.tvTitle.setTransitionName(getIntent().getStringExtra("name"));
         binding.ivLogo.setTransitionName(getIntent().getStringExtra("logo"));
-        initView();
         initListener();
+        initView();
         binding.setViewModel(viewModel);
     }
 

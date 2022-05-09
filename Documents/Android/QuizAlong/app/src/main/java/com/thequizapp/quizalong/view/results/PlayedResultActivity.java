@@ -74,15 +74,16 @@ public class PlayedResultActivity extends AppCompatActivity {
         });
         binding.lytShowResult.setOnClickListener(v ->{
             startActivity(new Intent(this, ShowQuizAnswersActivity.class)
-                    .putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getTwistQuizesItem().getQuizId()))
+                    .putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getTwistQuizesItem().getValue().getQuizId()))
                     .putExtra(Const.QUIZ_TYPE, viewModel.getQuizType()));
         });
         binding.lytShowLeaderboard.setOnClickListener(v -> {
             startActivity(new Intent(this, LeaderBoardActivity.class)
-                    .putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getTwistQuizesItem().getQuizId()))
+                    .putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getTwistQuizesItem().getValue().getQuizId()))
                     .putExtra(Const.QUIZ_TYPE, viewModel.getQuizType()));
 
         });
+        binding.setViewModel(viewModel);
     }
 
 

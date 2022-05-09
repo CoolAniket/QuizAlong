@@ -23,17 +23,15 @@ public class LeaderBoardActivity extends BaseActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_leader_board);
         viewModel = new ViewModelProvider(this).get(LeaderBoardViewModel.class);
         initView();
-        initData();
         initObserve();
         initListener();
-
         binding.setViewModel(viewModel);
+        initData();
     }
 
     private void initView() {
         viewModel.setUser(new SessionManager(this).getUser());
 
-        new BannerAds(this, binding.bannerAds);
     }
 
     private void initData() {

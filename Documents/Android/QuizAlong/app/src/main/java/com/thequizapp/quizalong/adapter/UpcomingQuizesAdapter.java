@@ -90,6 +90,7 @@ public class UpcomingQuizesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }*/
 
     public void updateData(List<TwistQuizPage.QuizItem> categories) {
+        this.categories.clear();
         this.categories.addAll(categories);
         notifyDataSetChanged();
     }

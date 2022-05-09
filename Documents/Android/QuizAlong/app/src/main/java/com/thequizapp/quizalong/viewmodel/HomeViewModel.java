@@ -154,20 +154,10 @@ public class HomeViewModel extends ViewModel {
                     if (pastQuiz != null) {
 
                         if (pastQuiz.getQuizes() != null && !pastQuiz.getQuizes().isEmpty()) {
-                            //pastQuizesAdapter.updateData(pastQuiz.getQuizes());
-                            //Log.e("YYYYYY ",""+pastQuiz.getQuizes().get(0).getTitle());
-                            Collections.sort(pastQuiz.getQuizes(), new Comparator<TwistQuizPage.QuizItem>(){
-                                public int compare(TwistQuizPage.QuizItem obj1, TwistQuizPage.QuizItem obj2) {
-                                    // ## Ascending order
-                                    return obj1.getPlayed().toString().compareToIgnoreCase("1"); // To compare string values
-                                    // return Integer.valueOf(obj1.empId).compareTo(Integer.valueOf(obj2.empId)); // To compare integer values
-
-                                    // ## Descending order
-                                    // return obj2.firstName.compareToIgnoreCase(obj1.firstName); // To compare string values
-                                    // return Integer.valueOf(obj2.empId).compareTo(Integer.valueOf(obj1.empId)); // To compare integer values
-                                }
+                            Collections.sort(pastQuiz.getQuizes(), (obj1, obj2) -> {
+                                // ## Ascending order
+                                return obj1.getPlayed().toString().compareToIgnoreCase("1"); // To compare string values
                             });
-                            //Log.e("WWWWWW ",""+pastQuiz.getQuizes().get(0).getTitle());
                             pastQuizesAdapter.updateData(pastQuiz.getQuizes());
                         }
 
