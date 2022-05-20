@@ -10,14 +10,15 @@
 
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.home.TwistQuizPage.QuizItem" />
+            type="com.thequizapp.quizalong.model.quiz.QuizItem" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="20dp"
-        android:layout_margin="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="10dp"
         app:cardUseCompatPadding="true">
 
         <ImageView
@@ -102,10 +103,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@{model.description}"
+                    android:fontFamily="@font/gilroy_bold"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
-                    android:fontFamily="@font/gilroy_bold"
                     android:layout_gravity="center"
                     android:layout_marginStart="10dp"/>
             </LinearLayout>
@@ -251,6 +252,7 @@
                 </LinearLayout>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/btn_enrolled"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1.2"
@@ -261,7 +263,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:background="@drawable/border_top_background">
+                    android:background="@drawable/border_top_background"
+
+                    >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

@@ -1,7 +1,7 @@
 package com.thequizapp.quizalong.viewmodel;
 
 import com.thequizapp.quizalong.adapter.PastQuizesAdapter;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 
 import java.util.List;
 
@@ -39,8 +39,8 @@ public class PastQuizViewModel extends ViewModel {
         return quizesAdapter;
     }
 
-    public void updateQuizData(List<TwistQuizPage.QuizItem> quizData) {
+    public void updateQuizData(List<QuizItem> quizData) {
         isEmpty.set(quizData.isEmpty());
-        quizesAdapter.updateData(quizData);
+        quizesAdapter.updateData(quizData, true);
     }
 }

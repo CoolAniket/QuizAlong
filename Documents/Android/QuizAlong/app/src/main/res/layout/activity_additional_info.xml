@@ -254,6 +254,7 @@
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
                                     android:paddingHorizontal="15dp"
+                                    android:layout_marginEnd="8dp"
                                     android:singleLine="true"
                                     android:textSize="14sp"
                                     android:maxLength="13"
@@ -426,8 +427,8 @@
                                             android:id="@+id/iv_idProof"
                                             android:layout_width="60dp"
                                             android:layout_height="60dp"
-                                            android:backgroundTint="@color/white"
-                                            android:background="@drawable/ic_profile_user" />
+                                            android:background="@drawable/ic_profile_user"
+                                            android:backgroundTint="@color/white" />
                                     </RelativeLayout>
                                 </LinearLayout>
 

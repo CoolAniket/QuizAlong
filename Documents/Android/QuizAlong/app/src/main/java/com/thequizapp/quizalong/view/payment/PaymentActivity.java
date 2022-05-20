@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.webkit.WebView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityPaymentBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.model.rest.RestResponse;
 import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
@@ -29,6 +31,7 @@ import java.util.HashMap;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 public class PaymentActivity extends BaseActivity implements PaymentResultWithDataListener {
@@ -60,8 +63,8 @@ public class PaymentActivity extends BaseActivity implements PaymentResultWithDa
     private void initData() {
 
         sessionManager = new SessionManager(this);
-        //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
-        TwistQuizPage.QuizItem quiz = new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.QuizItem.class);
+        //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class));
+        QuizItem quiz = new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class);
         viewModel.setQuiz(quiz);
         viewModel.setAmount(getIntent().getIntExtra("amount", 1));
         viewModel.getOrderDetails();
@@ -70,6 +73,11 @@ public class PaymentActivity extends BaseActivity implements PaymentResultWithDa
     private void initListener() {
         viewModel.getOrderId().observe(this, this::initiatePyment);
         viewModel.getOnSuccess().observe(this, this::proceedSuccess);
+        viewModel.getOnStatus().observe(this, stringBooleanPair -> {
+            if (!stringBooleanPair.second) {
+
+            }
+        });
     }
 
     private void proceedSuccess(RestResponse restResponse) {

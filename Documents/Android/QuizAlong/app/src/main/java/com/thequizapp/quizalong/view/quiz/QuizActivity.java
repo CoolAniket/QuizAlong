@@ -1,7 +1,6 @@
 package com.thequizapp.quizalong.view.quiz;
 
 import android.Manifest;
-import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
@@ -10,7 +9,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-import android.media.MediaPlayer;
 import android.media.MediaScannerConnection;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -19,7 +17,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.core.app.ActivityCompat;
@@ -27,13 +24,11 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
-import com.thequizapp.quizalong.model.home.HomePage;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.receivers.GameStartReceiver;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.SessionManager;
@@ -52,19 +47,12 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Random;
 
 public class QuizActivity extends BaseActivity implements Runnable {
-//    public static enum TYPE {
-//        PAST("past"),
-//        UPCOMING("upcoming"),
-//        TWIST("twist");
-//
-//    }
     public final class Type {
         public static final String PAST = "past";
         public static final String UPCOMING = "upcoming";
@@ -110,15 +98,12 @@ public class QuizActivity extends BaseActivity implements Runnable {
     private void initData() {
 
         sessionManager = new SessionManager(this);
-        //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
-        viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.QuizItem.class));
+        //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class));
+        viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class));
         viewModel.getQuestionsByQuizId();
         Random r=new Random();
         //int randomNumber=r.nextInt(TIPS.length);
         binding.tvTip.setText(TIPS[tipCnt]);
-        /*if(!getIntent().getStringExtra("quiz_type").contains("past")) {
-            slideTextWithTime();
-        }*/
         if(getIntent().getStringExtra("quiz_type").contains("past")){
             //binding.payTxt.setVisibility(View.INVISIBLE);
             binding.tvQuiztype.setText("FREE");
@@ -342,9 +327,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
         binding.tvCancel.setOnClickListener(v -> onBackPressed());
         binding.btnGo.setOnClickListener(v -> {
 
-            Log.e(">.... ",getIntent().getStringExtra("quiz_type"));
+//            Log.e(">.... ",getIntent().getStringExtra("quiz_type"));
             if(getIntent().getStringExtra("quiz_type").contains("past")){
-                Log.e(">.... inside ",getIntent().getStringExtra("quiz_type"));
+//                Log.e(">.... inside ",getIntent().getStringExtra("quiz_type"));
                 viewModel.getIsInfo().set(true);
                 /*startLobbyTimer();*/
                 viewModel.getIsLobby().set(true);

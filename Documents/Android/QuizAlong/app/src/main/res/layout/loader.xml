@@ -8,7 +8,8 @@
 
         <variable
             name="isLoading"
-            type="androidx.databinding.ObservableBoolean" />
+            type="androidx.databinding.ObservableBoolean"
+            android:value="true"/>
     </data>
 
     <LinearLayout
@@ -18,7 +19,8 @@
         android:clickable="true"
         android:focusable="true"
         android:gravity="center"
-        android:visibility="@{isLoading ? View.VISIBLE : View.GONE}">
+        android:visibility="@{isLoading ? View.VISIBLE : View.GONE}"
+        >
 
         <com.github.ybq.android.spinkit.SpinKitView
             android:id="@+id/spin_kit"

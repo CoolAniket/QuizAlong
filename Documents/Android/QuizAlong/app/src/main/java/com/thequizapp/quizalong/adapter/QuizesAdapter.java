@@ -1,5 +1,6 @@
 package com.thequizapp.quizalong.adapter;
 
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,8 +10,8 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.thequizapp.quizalong.R;
-import com.thequizapp.quizalong.databinding.ItemPopularQuizesBinding;
-import com.thequizapp.quizalong.model.home.HomePage;
+import com.thequizapp.quizalong.databinding.ItemUpcomingQuizesBinding;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,8 @@ import java.util.List;
 import static com.thequizapp.quizalong.api.Const.POST_TYPE;
 
 public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-    private List<HomePage.QuizesItem> quizes = new ArrayList<>();
-    private OnItemClicks onItemClicks;
+    private List<QuizItem> quizes = new ArrayList<>();
+    private OnItemClick onItemClick;
     private boolean showAll = false;
 
     public QuizesAdapter() {
@@ -28,11 +29,11 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         this.showAll = showAll;
     }
 
-    public List<HomePage.QuizesItem> getQuizes() {
+    public List<QuizItem> getQuizes() {
         return quizes;
     }
 
-    public void setQuizes(List<HomePage.QuizesItem> quizes) {
+    public void setQuizes(List<QuizItem> quizes) {
         this.quizes = quizes;
     }
 
@@ -40,7 +41,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_popular_quizes, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_upcoming_quizes, parent, false);
         return new PopularQuizesViewHolder(view);
 
     }
@@ -58,7 +59,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         return showAll ? quizes.size(): 3;
     }
 
-    public void updateData(List<HomePage.QuizesItem> quizes) {
+    public void updateData(List<QuizItem> quizes) {
         this.quizes.addAll(quizes);
         notifyDataSetChanged();
     }
@@ -70,26 +71,19 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
     @Override
     public int getItemViewType(int position) {
-        /*if (quizes.get(position) instanceof UnifiedNativeAd) {
-            return AD_TYPE;
-        } else if (quizes.get(position) instanceof NativeAd) {
-            return AD_FB_TYPE;
-        } else {
-            return POST_TYPE;
-        }*/
         return POST_TYPE;
     }
 
-    public void setOnItemClicks(OnItemClicks onItemClicks) {
-        this.onItemClicks = onItemClicks;
+    public void setOnItemClick(OnItemClick onItemClick) {
+        this.onItemClick = onItemClick;
     }
 
-    public interface OnItemClicks {
-        void onClick(HomePage.QuizesItem quizesItem);
+    public interface OnItemClick {
+        void onClick(Pair<View, String>[] pair, QuizItem categoriesItem);
     }
 
     public class PopularQuizesViewHolder extends RecyclerView.ViewHolder {
-        ItemPopularQuizesBinding binding;
+        ItemUpcomingQuizesBinding binding;
 
         public PopularQuizesViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -100,8 +94,27 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         public void setModel(int position) {
             if(quizes.size() > position) {
                 if (quizes.get(position) != null) {
-                    HomePage.QuizesItem quizesItem = quizes.get(position);
-                    binding.getRoot().setOnClickListener(v -> onItemClicks.onClick(quizesItem));
+                    QuizItem quizesItem = quizes.get(position);
+                    binding.btnCheck.setOnClickListener(v -> {
+                        Pair<View, String>[] pairs = new Pair[2];
+                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        onItemClick.onClick(pairs, quizesItem);
+                    });
+                    binding.btnPay.setOnClickListener(v -> {
+                        Pair<View, String>[] pairs = new Pair[3];
+                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        pairs[2] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        onItemClick.onClick(pairs, quizesItem);
+                    });
+//                    binding.getRoot().setOnClickListener(v -> onItemClicks.onClick(quizesItem));
+                    binding.btnEnrolled.setOnClickListener(v -> {
+                        Pair<View, String>[] pairs = new Pair[2];
+                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        onItemClick.onClick(pairs, quizesItem);
+                    });
                     binding.setModel(quizesItem);
 
                 }

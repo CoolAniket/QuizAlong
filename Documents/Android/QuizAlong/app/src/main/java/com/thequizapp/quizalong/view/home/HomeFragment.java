@@ -1,23 +1,26 @@
 package com.thequizapp.quizalong.view.home;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.FragmentHomeBinding;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.RewardAds;
@@ -45,7 +48,6 @@ public class HomeFragment extends Fragment {
         viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
         initView();
         initListener();
-        loadNativeAds();
         binding.setViewModel(viewModel);
         return binding.getRoot();
     }
@@ -64,12 +66,9 @@ public class HomeFragment extends Fragment {
         viewModel.getTwistQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
             if (pairs.length == 3) {
                 startPaymentProcess(quizesItem);
+            } else if (pairs[0].second.equals("Free")) {
+                enrollForFree(quizesItem);
             } else {
-                Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-                intent.putExtra("name", (String) pairs[0].second);
-                intent.putExtra("logo", (String) pairs[1].second);
-                intent.putExtra("data", new Gson().toJson(quizesItem));
-
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
                         .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
@@ -79,13 +78,9 @@ public class HomeFragment extends Fragment {
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
             if (pairs.length == 3) {
                 startPaymentProcess(quizesItem);
-//                startActivity(new Intent(getActivity(), PaymentActivity.class)
-//                        .putExtra("data", new Gson().toJson(quizesItem)));
+            } else if (pairs[0].second.equals("Free")) {
+                enrollForFree(quizesItem);
             } else {
-                Intent intent = new Intent(binding.getRoot().getContext(), QuizListActivity.class);
-                intent.putExtra("name", (String) pairs[0].second);
-                //intent.putExtra("logo", (String) pairs[1].second);
-                intent.putExtra("data", new Gson().toJson(quizesItem));
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
                         .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
@@ -110,14 +105,29 @@ public class HomeFragment extends Fragment {
             refreshData(); // your code
             binding.pullToRefresh.setRefreshing(false);
         });
+
+        viewModel.toast.observe(this, toastMsg -> {
+            if (toastMsg != null && !toastMsg.isEmpty()) {
+                InputMethodManager imm = (InputMethodManager) requireContext().getSystemService(Activity.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(binding.getRoot().getWindowToken(), 0);
+                Snackbar.make(binding.getRoot(), toastMsg, 2000)
+                        .setBackgroundTint(ContextCompat.getColor(requireContext(), R.color.black))
+                        .setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
+                        .show();
+            }
+        });
+        viewModel.onSuccess.observe(this, response -> {
+            Toast.makeText(requireContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+            refreshData();
+        });
     }
 
     private void refreshData() {
         viewModel.getHomeData();
     }
 
-    private void startPaymentProcess(TwistQuizPage.QuizItem quizesItem) {
-        new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(new CustomDialogBuilder.OnPaymentAmountSelectListener() {
+    private void startPaymentProcess(QuizItem quizesItem) {
+        new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(quizesItem.getEntry(), new CustomDialogBuilder.OnPaymentAmountSelectListener() {
             @Override
             public void onAmountClick(int amount) {
                 startActivity(new Intent(getActivity(), PaymentActivity.class)
@@ -132,30 +142,28 @@ public class HomeFragment extends Fragment {
         });
     }
 
-    private void loadNativeAds() {
-        rewardAds = new RewardAds(getActivity());
-        /*new MultipleCustomNativeAds(getActivity(), (adsData, position) -> {
-            if (viewModel.getQuizesAdapter() != null) {
-                if (adsData instanceof UnifiedNativeAd) {
-                    viewModel.getQuizesAdapter().addNewAds(position, (UnifiedNativeAd) adsData);
-                } else if (adsData instanceof NativeAd) {
-                    viewModel.getQuizesAdapter().addFBAds(position, (NativeAd) adsData);
-                }
-                return position < viewModel.getQuizesAdapter().getQuizes().size();
-            }
-            return true;
-        }, 4);*/
+    private void enrollForFree(QuizItem quizesItem) {
+        new CustomDialogBuilder(requireContext()).showEnrollForFreeDialog(new CustomDialogBuilder.OnEnrollOptionSelectListener() {
 
-        /*new MultipleCustomNativeAds(getActivity(), (adsData, position) -> {
-            if (viewModel.getHomeCategoriesAdapter() != null) {
-                if (adsData instanceof UnifiedNativeAd) {
-                    viewModel.getHomeCategoriesAdapter().addNewAds(position, (UnifiedNativeAd) adsData);
-                } else if (adsData instanceof NativeAd) {
-                    viewModel.getHomeCategoriesAdapter().addFBAds(position, (NativeAd) adsData);
+            @Override
+            public void onClick(Type enrollmentType) {
+                switch (enrollmentType) {
+                    case PAY:
+                        // start Payment Process
+                        startPaymentProcess(quizesItem);
+                        break;
+                    default:
+                        viewModel.subscribeForFreeApi(quizesItem);
+                        break;
                 }
-                return position < viewModel.getHomeCategoriesAdapter().getCategories().size();
+
             }
-            return true;
-        }, 3);*/
+
+            @Override
+            public void onDismissClick() {
+
+            }
+        });
     }
+
 }

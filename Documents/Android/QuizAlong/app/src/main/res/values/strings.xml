@@ -147,6 +147,19 @@
     <string name="search">Search</string>
     <string name="yesterday">Yesterday</string>
     <string name="available_coins">Available Coins</string>
+    <string name="show_more">Show More</string>
+    <string name="show_less">Show Less</string>
+    <string name="free">Free</string>
+    <string name="proceed_to_pay">Proceed to pay</string>
+    <string name="proceed_to_enroll">Proceed to Enroll</string>
+    <string name="note_top_50_of">Note: Top <u>50%</u> of only PAID participants will win <u>2x</u> the entry fee at the end of quiz.</string>
+    <string name="pay">Pay</string>
+    <string name="_2_x">2 X</string>
+    <string name="let_s_go">Let\'s GO</string>
+    <string name="skip_lifeline_helps_"># SKIPLifeline helps you to pass question on correct</string>
+    <string name="did_you_know">Did you know?</string>
+    <string name="check_score"><![CDATA[Check Score ->]]></string>
+    <string name="start_now"><![CDATA[Start Now ->]]></string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

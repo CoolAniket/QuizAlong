@@ -7,7 +7,7 @@
         <import type="android.view.View" />
         <variable
             name="model"
-            type="com.thequizapp.quizalong.model.home.TwistQuizPage.QuizItem" />
+            type="com.thequizapp.quizalong.model.quiz.QuizItem" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -105,15 +105,15 @@
                     android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="1.5"
                     android:layout_marginTop="10dp"
                     android:ellipsize="end"
-                    android:fontFamily="@font/gilroy_bold"
-                    android:maxLines="2"
+                    android:fontFamily="@font/gilroy_medium"
+                    android:lines="2"
                     android:text='@{model.title+"-"+model.description}'
                     android:textAllCaps="true"
                     android:textColor="@color/white"
-                    android:textSize="15sp"
+                    android:textSize="12sp"
                     android:layout_gravity="center"/>
 
                 <LinearLayout
@@ -247,11 +247,11 @@
                     </LinearLayout>
                 </LinearLayout>
                 <LinearLayout
+                    android:id="@+id/btn_enrolled"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:layout_weight="1.2"
                     android:visibility="@{model.subscribed == 0 ? View.GONE: View.VISIBLE}"
-
                     >
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -264,7 +264,7 @@
                             android:text='@{"Enrolled "+ (model.subscribedAmount > 0 ? model.subscribedAmount : "free") +" ->"}'
                             android:textStyle="bold"
                             android:textColor="@color/white"
-                            android:textSize="15sp"
+                            android:textSize="12sp"
                             android:fontFamily="@font/gilroy_bold"
                             android:layout_gravity="center"/>
                     </LinearLayout>

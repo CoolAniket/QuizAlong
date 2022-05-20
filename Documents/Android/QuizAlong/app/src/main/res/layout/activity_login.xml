@@ -102,8 +102,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="14sp"
-                    android:layout_height="14sp"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
                     android:src="@drawable/bg_oval" />
 
                 <TextView
@@ -141,8 +141,8 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="14sp"
-                    android:layout_height="14sp"
+                    android:layout_width="11dp"
+                    android:layout_height="11dp"
                     android:src="@drawable/bg_oval" />
 
                 <TextView

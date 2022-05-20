@@ -17,6 +17,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemCategoiesBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,12 +58,12 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     @Override
     public int getItemCount() {
         /*return 3;*/
-        Log.e("upcomingQuiz",""+categories.size());
+//        Log.e("upcomingQuiz",""+categories.size());
         return categories.size();
     }
 
 
-    public void updateData(List<TwistQuizPage.QuizItem> categories) {
+    public void updateData(List<QuizItem> categories) {
         this.categories.clear();
         this.categories.addAll(categories);
         notifyDataSetChanged();
@@ -89,7 +90,7 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
 
     public interface OnItemClick {
-        void onClick(Pair[] pair, TwistQuizPage.QuizItem categoriesItem);
+        void onClick(Pair[] pair, QuizItem categoriesItem);
     }
 
     public class HomeCategoriesViewHolder extends RecyclerView.ViewHolder {
@@ -102,14 +103,13 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
         public void setModel(int position) {
             if(categories.size() > 0) {
-                if (categories.get(position) instanceof TwistQuizPage.QuizItem) {
-                    TwistQuizPage.QuizItem categoriesItem = (TwistQuizPage.QuizItem) categories.get(position);
+                if (categories.get(position) instanceof QuizItem) {
+                    QuizItem categoriesItem = (QuizItem) categories.get(position);
                     binding.tvTitle.setTransitionName("hero" + position);
                     binding.ivIcon.setTransitionName("hero1" + position);
                     binding.btnCheck.setOnClickListener(v -> {
-                        Pair<View, String>[] pairs = new Pair[2];
-                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        Pair<View, String>[] pairs = new Pair[1];
+                        pairs[0] = new Pair<>(binding.tvTitle, "Free");
                         onItemClick.onClick(pairs, categoriesItem);
                     });
                     binding.btnPay.setOnClickListener(v -> {
@@ -117,6 +117,12 @@ public class TwistQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                         pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
                         pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
                         pairs[2] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        onItemClick.onClick(pairs, categoriesItem);
+                    });
+                    binding.btnEnrolled.setOnClickListener(v -> {
+                        Pair<View, String>[] pairs = new Pair[2];
+                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
+                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
                         onItemClick.onClick(pairs, categoriesItem);
                     });
 //                    binding.getRoot().setOnClickListener(v -> binding.btnCheck.performClick());

@@ -14,7 +14,7 @@ import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemCategoiesBinding;
 import com.thequizapp.quizalong.model.home.HomePage;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class HomeCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.Vie
         notifyDataSetChanged();
     }*/
 
-    public void updateData(List<TwistQuizPage.QuizItem> categories) {
+    public void updateData(List<QuizItem> categories) {
         this.categories.addAll(categories);
         notifyDataSetChanged();
     }

@@ -62,7 +62,7 @@
             android:paddingHorizontal="10dp"
             app:adapter="@{viewModel.transactionAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_leader_board" />
+            tools:listitem="@layout/item_transaction" />
 
 
     </LinearLayout>

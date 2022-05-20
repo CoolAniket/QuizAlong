@@ -14,7 +14,7 @@ import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.FragmentPastQuizBinding;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.viewmodel.PastQuizViewModel;
 
@@ -29,13 +29,13 @@ import androidx.lifecycle.ViewModelProvider;
 public class PastQuizFragment extends Fragment {
 
 
-    private final List<TwistQuizPage.QuizItem> quizesItems;
+    private final List<QuizItem> quizesItems;
     FragmentPastQuizBinding binding;
     PastQuizViewModel viewModel;
 
 
 
-    public PastQuizFragment(List<TwistQuizPage.QuizItem> quizData) {
+    public PastQuizFragment(List<QuizItem> quizData) {
         Log.d("UpcomingQuizFragment", "");
         quizesItems = quizData;
     }

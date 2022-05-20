@@ -8,7 +8,7 @@ import java.util.List;
 public class AddDataLiveResponse {
 
     @SerializedName("quizes")
-    private List<HomePage.QuizesItem> quizes;
+    private List<QuizItem> quizes;
 
     @SerializedName("message")
     private String message;
@@ -16,11 +16,11 @@ public class AddDataLiveResponse {
     @SerializedName("status")
     private boolean status;
 
-    public List<HomePage.QuizesItem> getQuizes() {
+    public List<QuizItem> getQuizes() {
         return quizes;
     }
 
-    public void setQuizes(List<HomePage.QuizesItem> quizes) {
+    public void setQuizes(List<QuizItem> quizes) {
         this.quizes = quizes;
     }
 

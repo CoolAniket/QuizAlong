@@ -2,6 +2,7 @@ package com.thequizapp.quizalong.viewmodel;
 
 import com.thequizapp.quizalong.model.home.HomePage;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
@@ -12,9 +13,7 @@ public class PlayedResultViewModel extends ViewModel {
 
     private final CompositeDisposable disposable = new CompositeDisposable();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
-//    private HomePage.QuizesItem quizesItem;
-//    private TwistQuizPage.QuizItem twistQuizesItem;
-    private final MutableLiveData<TwistQuizPage.QuizItem> twistQuizesItem = new MutableLiveData<>();
+    private final MutableLiveData<QuizItem> twistQuizesItem = new MutableLiveData<>();
 
     private String quizType = "";
 
@@ -26,19 +25,11 @@ public class PlayedResultViewModel extends ViewModel {
         this.isLoading = isLoading;
     }
 
-//    public HomePage.QuizesItem getQuizesItem() {
-//        return quizesItem;
-//    }
-//
-//    public void setQuizesItem(HomePage.QuizesItem quizesItem) {
-//        this.quizesItem = quizesItem;
-//    }
-
-    public MutableLiveData<TwistQuizPage.QuizItem> getTwistQuizesItem() {
+    public MutableLiveData<QuizItem> getTwistQuizesItem() {
         return twistQuizesItem;
     }
 
-    public void setTwistQuizesItem(TwistQuizPage.QuizItem twistQuizesItem) {
+    public void setTwistQuizesItem(QuizItem twistQuizesItem) {
         this.twistQuizesItem.setValue(twistQuizesItem);
     }
 

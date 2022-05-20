@@ -1,10 +1,7 @@
 package com.thequizapp.quizalong.view.web;
 
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.webkit.WebSettings;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableBoolean;
@@ -17,27 +14,27 @@ import com.thequizapp.quizalong.view.BaseActivity;
 import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import javax.net.ssl.HttpsURLConnection;
-
 public class WebViewActivity extends BaseActivity {
     ActivityWebViewBinding binding;
+    private ObservableBoolean isLoading = new ObservableBoolean(false);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_web_view);
+        binding.wwLoader.setIsLoading(isLoading);
 //        WebSettings ws = binding.webview.getSettings();
 //        ws.setJavaScriptEnabled(true);
 //        ws.setAllowFileAccess(true);
 
         SessionManager sessionManager = new SessionManager(this);
-        String pdfUrl = getIntent().getIntExtra("type", 0) == 0 ? sessionManager.getPrivacyUrl() : sessionManager.getTermsUrl();
+        int type = getIntent().getIntExtra("type", 0);
+        String pdfUrl = type == 0 ? sessionManager.getPrivacyUrl() : sessionManager.getTermsUrl();
 //        binding.webview.loadUrl();
-        binding.tvTitle.setText(getIntent().getIntExtra("type", 0) == 0 ? "Privacy Policy" : "Terms of Use");
+        binding.tvTitle.setText(type == 0 ? "Privacy Policy" : "Terms of Use");
         binding.ivBack.setOnClickListener(v -> onBackPressed());
         binding.wwLoader.getIsLoading().set(true);
         new RetrivePDFfromUrl().execute(pdfUrl);

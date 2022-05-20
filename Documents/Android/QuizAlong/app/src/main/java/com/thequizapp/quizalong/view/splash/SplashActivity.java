@@ -47,19 +47,15 @@ public class SplashActivity extends BaseActivity {
                                     Intent intent = new Intent(this, LoginActivity.class);
                                     startActivity(intent);
                                 }
-                                else if(sessionManager.getAdditionalDetails() == -1){
+                                else {
                                     Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
-                                    if(sessionManager.getAdditionalDetails() == 1) {
+                                    if(sessionManager.getAdditionalDetails() != 0) {
                                         startActivity(new Intent(this, AdditionalInfoActivity.class));
                                     } else if (sessionManager.getCourseSelection() < 2) {
                                         startActivity(new Intent(this, CourseSelectionActivity.class));
                                     } else {
                                         startActivity(new Intent(this, MainActivity.class));
                                     }
-                                }
-                                else {
-                                    Global.userId.set(String.valueOf(sessionManager.getUser().getUser().getId()));
-                                    startActivity(new Intent(this, MainActivity.class));
                                 }
                                 finishAffinity();
                             }, 1000);

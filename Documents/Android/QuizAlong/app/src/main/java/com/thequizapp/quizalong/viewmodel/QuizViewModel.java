@@ -14,6 +14,7 @@ import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
 import com.thequizapp.quizalong.model.questions.Questions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
@@ -29,8 +30,8 @@ public class QuizViewModel extends ViewModel {
 
     private final CompositeDisposable disposable = new CompositeDisposable();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
-    private HomePage.QuizesItem quizesItem;
-    private TwistQuizPage.QuizItem twistQuizesItem;
+    private QuizItem quizesItem;
+    private QuizItem twistQuizesItem;
     private String quizType = "";
     private MutableLiveData<NewQuestions.Question> currentQuestions = new MutableLiveData<>();
     private ObservableInt trueAnswerPosition = new ObservableInt(-1);
@@ -205,7 +206,7 @@ public class QuizViewModel extends ViewModel {
             hashMap.put("time_taken[" + (pos - 1) + "]", "0");
         }else{
             //Log.e("Hash.....",skip);
-            if (skip == "skip") {
+            if (skip.equals("skip")) {
                 hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
                 hashMap.put("selected_ans[" + (pos - 1) + "]", "skip");
                 hashMap.put("time_taken[" + (pos - 1) + "]", "0");
@@ -225,8 +226,8 @@ public class QuizViewModel extends ViewModel {
         hashMap.put("user_id", Global.userId.get());/*Global.userId.get()*/
         hashMap.put("quiz_id", String.valueOf(getTwistQuizesItem().getQuizId()));
 
-            Log.e("::: map ",hashMap.size()+""+hashMap.get(""));
-            Log.e("::: quizType ",quizType);
+//            Log.e("::: map ",hashMap.size()+""+hashMap.get(""));
+//            Log.e("::: quizType ",quizType);
             if(quizType.equals("past")){
                 disposable.add(Global.initRetrofit().addGameDataPast(BuildConfig.APIKEY, hashMap)
                         .subscribeOn(Schedulers.io())
@@ -335,19 +336,19 @@ public class QuizViewModel extends ViewModel {
         this.isLoading = isLoading;
     }
 
-    public HomePage.QuizesItem getQuizesItem() {
+    public QuizItem getQuizesItem() {
         return quizesItem;
     }
 
-    public void setQuizesItem(HomePage.QuizesItem quizesItem) {
+    public void setQuizesItem(QuizItem quizesItem) {
         this.quizesItem = quizesItem;
     }
 
-    public TwistQuizPage.QuizItem getTwistQuizesItem() {
+    public QuizItem getTwistQuizesItem() {
         return twistQuizesItem;
     }
 
-    public void setTwistQuizesItem(TwistQuizPage.QuizItem twistQuizesItem) {
+    public void setTwistQuizesItem(QuizItem twistQuizesItem) {
         this.twistQuizesItem = twistQuizesItem;
     }
 

@@ -24,6 +24,7 @@ import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityPlayedResultBinding;
 import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
 import com.thequizapp.quizalong.viewmodel.PlayedResultViewModel;
@@ -53,8 +54,8 @@ public class PlayedResultActivity extends AppCompatActivity {
     private void initData() {
 
         sessionManager = new SessionManager(this);
-        //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), HomePage.QuizesItem.class));
-        viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), TwistQuizPage.QuizItem.class));
+        //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class));
+        viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class));
         //int randomNumber=r.nextInt(TIPS.length);
 
         viewModel.setQuizType(getIntent().getStringExtra("quiz_type"));

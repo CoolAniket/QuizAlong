@@ -34,7 +34,6 @@ public class AdditionalInfoViewModel extends ViewModel {
     private ObservableBoolean isOtpSent = new ObservableBoolean(false);
     private ObservableBoolean isOtpVerified = new ObservableBoolean(false);
 
-
     private CurrentUser user;
 
     private String courseName;
@@ -231,10 +230,14 @@ public class AdditionalInfoViewModel extends ViewModel {
             toast.setValue("Please select year");
             return;
         }
-        /*if (courseName == null || courseName.isEmpty()) {
-            toast.setValue("Please select course...!");
+        if (dob == null || dob.isEmpty()) {
+            toast.setValue("Please select Date of birth");
             return;
-        }*/
+        }
+        if (profileUri == null || profileUri.isEmpty()) {
+            toast.setValue("Please upload photo id proof");
+            return;
+        }
         HashMap<String, RequestBody> hashMap = new HashMap<>();
         hashMap.put("user_id", toRequestBody(Global.userId.get()));
         /*hashMap.put("course_id", toRequestBody(getCourseName()));*/
@@ -243,7 +246,8 @@ public class AdditionalInfoViewModel extends ViewModel {
         hashMap.put("college", toRequestBody(getCollegeName()));
         hashMap.put("dob", toRequestBody(getDob()));
         hashMap.put("mobile_no", toRequestBody(getMobileNo()));
-        hashMap.put("refercode", toRequestBody(getReferralCode()));
+        if (referralCode != null && !referralCode.isEmpty())
+            hashMap.put("refercode", toRequestBody(getReferralCode()));
         MultipartBody.Part body = null;
         if (profileUri != null && !profileUri.isEmpty()) {
             File file = new File(profileUri);

@@ -2,34 +2,33 @@ package com.thequizapp.quizalong.viewmodel;
 
 import android.util.Log;
 
-import androidx.databinding.ObservableBoolean;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
-
 import com.thequizapp.quizalong.BuildConfig;
-import com.thequizapp.quizalong.adapter.HomeCategoriesAdapter;
 import com.thequizapp.quizalong.adapter.PastQuizesAdapter;
-import com.thequizapp.quizalong.adapter.QuizesAdapter;
 import com.thequizapp.quizalong.adapter.TwistQuizesAdapter;
 import com.thequizapp.quizalong.adapter.UpcomingQuizesAdapter;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.api.Const;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
+import com.thequizapp.quizalong.model.rest.RestResponse;
 import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.Collections;
-import java.util.Comparator;
+import java.util.HashMap;
 
+import androidx.databinding.ObservableBoolean;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModel;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class HomeViewModel extends ViewModel {
+    public final MutableLiveData<RestResponse> onSuccess = new MutableLiveData<>();
+    public final MutableLiveData<String> toast = new MutableLiveData<>();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
     private MutableLiveData<CurrentUser> user = new MutableLiveData<>();
-    //private HomeCategoriesAdapter homeCategoriesAdapter = new HomeCategoriesAdapter();
     private TwistQuizesAdapter twistQuizesAdapter = new TwistQuizesAdapter();
     private UpcomingQuizesAdapter upcomingQuizesAdapter = new UpcomingQuizesAdapter();
-    //private QuizesAdapter quizesAdapter = new QuizesAdapter();
     private PastQuizesAdapter pastQuizesAdapter = new PastQuizesAdapter();
     private CompositeDisposable disposable = new CompositeDisposable();
 
@@ -49,14 +48,6 @@ public class HomeViewModel extends ViewModel {
         this.user = user;
     }
 
-    /*public HomeCategoriesAdapter getHomeCategoriesAdapter() {
-        return homeCategoriesAdapter;
-    }
-
-    public void setHomeCategoriesAdapter(HomeCategoriesAdapter homeCategoriesAdapter) {
-        this.homeCategoriesAdapter = homeCategoriesAdapter;
-    }*/
-
     public TwistQuizesAdapter getTwistQuizesAdapter() {
         return twistQuizesAdapter;
     }
@@ -73,13 +64,6 @@ public class HomeViewModel extends ViewModel {
         this.upcomingQuizesAdapter = upcomingQuizesAdapter;
     }
 
-    /*public QuizesAdapter getQuizesAdapter() {
-        return quizesAdapter;
-    }
-
-    public void setQuizesAdapter(QuizesAdapter quizesAdapter) {
-        this.quizesAdapter = quizesAdapter;
-    }*/
 
     public void setPastQuizesAdapter(PastQuizesAdapter pastQuizesAdapter) {
         this.pastQuizesAdapter = pastQuizesAdapter;
@@ -90,25 +74,6 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void getHomeData() {
-        /*disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .unsubscribeOn(Schedulers.io())
-                .doOnSubscribe(disposable1 -> isLoading.set(true))
-                .doOnTerminate(() -> isLoading.set(false))
-                .subscribe((homePage, throwable) -> {
-                    if (homePage != null) {
-                        if (homePage.getCategories() != null && !homePage.getCategories().isEmpty()) {
-                            homeCategoriesAdapter.updateData(homePage.getCategories());
-                        }
-                        if (homePage.getQuizes() != null && !homePage.getQuizes().isEmpty()) {
-                            quizesAdapter.updateData(homePage.getQuizes());
-                        }
-                    } else if (throwable != null) {
-                        //
-                    }
-                }));*/
-        //Log.e("Idddddd. ",""+getUser().getValue().getUser().getId());
         disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY,Integer.parseInt(Global.userId.get()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -118,9 +83,7 @@ public class HomeViewModel extends ViewModel {
                 .subscribe((twistQuiz, throwable) -> {
                     Log.e("twistQuiz ",""+throwable);
                     if (twistQuiz != null) {
-                        if (twistQuiz.getQuizes() != null && !twistQuiz.getQuizes().isEmpty()) {
-                            twistQuizesAdapter.updateData(twistQuiz.getQuizes());
-                        }
+                        twistQuizesAdapter.updateData(twistQuiz.getQuizes());
                     } else if (throwable != null) {
                         //
                     }
@@ -135,10 +98,7 @@ public class HomeViewModel extends ViewModel {
                 .subscribe((upcomingQuiz, throwable) -> {
                     Log.e("upcomingQuiz",""+throwable);
                     if (upcomingQuiz != null) {
-
-                        if (upcomingQuiz.getQuizes() != null && !upcomingQuiz.getQuizes().isEmpty()) {
-                            upcomingQuizesAdapter.updateData(upcomingQuiz.getQuizes());
-                        }
+                        upcomingQuizesAdapter.updateData(upcomingQuiz.getQuizes(), false);
                     } else if (throwable != null) {
                         //
                     }
@@ -152,26 +112,58 @@ public class HomeViewModel extends ViewModel {
                 .subscribe((pastQuiz, throwable) -> {
                     Log.e("pastQuiz ",""+throwable);
                     if (pastQuiz != null) {
-
                         if (pastQuiz.getQuizes() != null && !pastQuiz.getQuizes().isEmpty()) {
                             Collections.sort(pastQuiz.getQuizes(), (obj1, obj2) -> {
                                 // ## Ascending order
                                 return obj1.getPlayed().toString().compareToIgnoreCase("1"); // To compare string values
                             });
-                            pastQuizesAdapter.updateData(pastQuiz.getQuizes());
                         }
-
-
+                        pastQuizesAdapter.updateData(pastQuiz.getQuizes(), false);
                     } else if (throwable != null) {
                         //
                     }
                 }));
     }
 
+    public void showMore(int quizType) {
+        if (quizType == 0) {
+            upcomingQuizesAdapter.switchLoadFullList();
+        } else {
+            pastQuizesAdapter.switchLoadFullList();
+        }
+    }
 
     @Override
     protected void onCleared() {
         super.onCleared();
         disposable.clear();
+    }
+
+    public void subscribeForFreeApi(QuizItem quizesItem) {
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put(Const.QUIZ_ID_NEW, String.valueOf(quizesItem.getQuizId()));
+        hashMap.put(Const.AMOUNT, String.valueOf(0));
+        hashMap.put(Const.USER_ID, Global.userId.get());
+        hashMap.put(Const.STATUS, "1");
+
+        addpaymentdata(hashMap);
+    }
+
+    public void addpaymentdata(HashMap<String, String> hashMap) {
+        disposable.add(Global.initRetrofit().addPaymentData(BuildConfig.APIKEY, hashMap)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable1 -> isLoading.set(true))
+                .doOnTerminate(() -> isLoading.set(false))
+                .subscribe((orderResponse, throwable) -> {
+                    if (orderResponse != null && orderResponse.isStatus()) {
+                        if (orderResponse.isStatus()) {
+                            onSuccess.setValue(orderResponse);
+                        } else {
+                            toast.setValue(orderResponse.getMessage());
+                        }
+                    }
+                }));
     }
 }

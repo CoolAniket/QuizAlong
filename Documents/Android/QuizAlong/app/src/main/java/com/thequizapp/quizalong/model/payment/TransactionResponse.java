@@ -52,6 +52,10 @@ public class TransactionResponse {
 
         @SerializedName("status")
         private String status;
+
+        @SerializedName("transaction_date")
+        private String transactionDate;
+
         public int getQuizId() {
             return quizId;
         }
@@ -87,6 +91,13 @@ public class TransactionResponse {
         }
         public void setStatus(String status) {
             this.status = status;
+        }
+        public String getTransactionDate() {
+            return transactionDate;
+        }
+
+        public void setTransactionDate(String transactionDate) {
+            this.transactionDate = transactionDate;
         }
     }
 }

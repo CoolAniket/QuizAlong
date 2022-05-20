@@ -9,12 +9,12 @@ import java.util.List;
 public class QuizByCatId {
 
 //    @SerializedName("quizes")
-//    private List<HomePage.QuizesItem> quizes;
+//    private List<QuizItem> quizes;
 
     @SerializedName("upcoming_quizes")
-    private List<HomePage.QuizesItem> upcomingQuizes;
+    private List<QuizItem> upcomingQuizes;
     @SerializedName("past_quizes")
-    private List<TwistQuizPage.QuizItem> pastQuizes;
+    private List<QuizItem> pastQuizes;
 
     @SerializedName("message")
     private String message;
@@ -23,19 +23,19 @@ public class QuizByCatId {
     private boolean status;
 
 
-    public List<HomePage.QuizesItem> getUpcomingQuizes() {
+    public List<QuizItem> getUpcomingQuizes() {
         return upcomingQuizes;
     }
 
-    public void setUpcomingQuizes(List<HomePage.QuizesItem> upcomingQuizes) {
+    public void setUpcomingQuizes(List<QuizItem> upcomingQuizes) {
         this.upcomingQuizes = upcomingQuizes;
     }
 
-    public List<TwistQuizPage.QuizItem> getPastQuizes() {
+    public List<QuizItem> getPastQuizes() {
         return pastQuizes;
     }
 
-    public void setPastQuizes(List<TwistQuizPage.QuizItem> pastQuizes) {
+    public void setPastQuizes(List<QuizItem> pastQuizes) {
         this.pastQuizes = pastQuizes;
     }
 

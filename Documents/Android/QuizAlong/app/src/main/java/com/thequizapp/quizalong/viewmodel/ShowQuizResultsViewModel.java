@@ -92,7 +92,7 @@ public class ShowQuizResultsViewModel extends ViewModel {
         this.quizType = quizType;
     }
     public void getQuizResults() {
-        Log.e("ShowResult... "," "+quizId+" "+Global.userId.get()+" type "+quizType);
+//        Log.e("ShowResult... "," "+quizId+" "+Global.userId.get()+" type "+quizType);
 
         if(quizType.contains(QuizActivity.Type.PAST)){
             disposable.add(Global.initRetrofit().getQuizAnsPast(BuildConfig.APIKEY, quizId, Global.userId.get())

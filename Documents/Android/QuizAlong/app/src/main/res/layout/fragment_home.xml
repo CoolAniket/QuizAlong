@@ -61,8 +61,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_width="11dp"
+                            android:layout_height="11dp"
                             android:src="@drawable/bg_oval"
                             app:tint="@color/cobalt_blue" />
 
@@ -95,8 +95,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_width="11dp"
+                            android:layout_height="11dp"
                             android:src="@drawable/bg_oval"
                             app:tint="@color/cobalt_blue" />
 
@@ -121,6 +121,35 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="3"
                         tools:listitem="@layout/item_popular_quizes" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginBottom="8dp"
+                        android:padding="8dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:onClick="@{()->viewModel.showMore(0)}"
+                        android:visibility="@{viewModel.upcomingQuizesAdapter.itemCountObserve > 3 ? View.VISIBLE : View.GONE}"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:text="@{viewModel.upcomingQuizesAdapter.loadFullList ? @string/show_more : @string/show_less}"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp"/>
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_swap_vertical_circle_24"
+                             />
+                    </LinearLayout>
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -130,8 +159,8 @@
                         android:orientation="horizontal">
 
                         <ImageView
-                            android:layout_width="14dp"
-                            android:layout_height="14dp"
+                            android:layout_width="11dp"
+                            android:layout_height="11dp"
                             android:src="@drawable/bg_oval"
                             app:tint="@color/cobalt_blue" />
 
@@ -151,11 +180,39 @@
                         android:id="@+id/rv_past"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:orientation="horizontal"
+                        android:orientation="vertical"
                         app:adapter="@{viewModel.pastQuizesAdapter}"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:itemCount="10"
                         tools:listitem="@layout/item_past_quizes" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginBottom="8dp"
+                        android:padding="8dp"
+                        android:gravity="center_vertical|end"
+                        android:orientation="horizontal"
+                        android:onClick="@{()->viewModel.showMore(1)}"
+                        android:visibility="@{viewModel.pastQuizesAdapter.itemCountObserve > 3 ? View.VISIBLE : View.GONE}"
+                        >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:text="@{viewModel.pastQuizesAdapter.loadFullList ? @string/show_less : @string/show_more}"
+                            android:textAllCaps="true"
+                            android:textColor="@color/black"
+                            android:textSize="16sp"
+                            android:layout_marginEnd="8dp"/>
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_swap_vertical_circle_24"
+                            />
+                    </LinearLayout>
                 </LinearLayout>
 
             </androidx.core.widget.NestedScrollView>

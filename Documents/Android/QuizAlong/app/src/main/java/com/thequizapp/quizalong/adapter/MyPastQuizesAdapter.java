@@ -7,9 +7,8 @@ import android.view.ViewGroup;
 import com.facebook.ads.NativeAd;
 import com.google.android.gms.ads.formats.UnifiedNativeAd;
 import com.thequizapp.quizalong.R;
-import com.thequizapp.quizalong.databinding.ItemPastQuizesBinding;
 import com.thequizapp.quizalong.databinding.ItemPastQuizesScoreBinding;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,7 +53,7 @@ public class MyPastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return quizes.size();
     }
 
-    public void updateData(List<TwistQuizPage.QuizItem> quizes) {
+    public void updateData(List<QuizItem> quizes) {
         this.quizes.addAll(quizes);
         notifyDataSetChanged();
     }
@@ -90,7 +89,7 @@ public class MyPastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     public interface OnItemClicks {
-        void onClick(TwistQuizPage.QuizItem quizesItem);
+        void onClick(QuizItem quizesItem);
     }
 
     public class PopularQuizesViewHolder extends RecyclerView.ViewHolder {
@@ -104,8 +103,8 @@ public class MyPastQuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
         public void setModel(int position) {
             if(quizes.size() > 0) {
-                if (quizes.get(position) instanceof TwistQuizPage.QuizItem) {
-                    TwistQuizPage.QuizItem quizesItem = (TwistQuizPage.QuizItem) quizes.get(position);
+                if (quizes.get(position) instanceof QuizItem) {
+                    QuizItem quizesItem = (QuizItem) quizes.get(position);
                     binding.getRoot().setOnClickListener(v -> onItemClicks.onClick(quizesItem));
                     binding.setModel(quizesItem);
 

@@ -169,7 +169,7 @@
                                 android:layout_marginStart="5dp"
                                 android:fontFamily="@font/gilroy_medium"
                                 android:singleLine="true"
-                                android:text="@{viewModel.quizesItem.getTypeInString()}"
+                                android:text="@{viewModel.quizesItem.type}"
                                 android:textAllCaps="true"
                                 android:textColor="@color/black"
                                 android:textSize="11sp" />
@@ -186,7 +186,7 @@
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:layout_gravity="center"
-                            android:layout_marginLeft="10dp"/>
+                            android:layout_marginStart="10dp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -200,18 +200,18 @@
                             android:layout_height="20dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/trophy"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginStart="10dp"
                             android:layout_gravity="center"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2 X "
+                            android:text="@string/_2_x"
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="13sp"
                             android:layout_gravity="center_vertical"
-                            android:layout_marginLeft="30dp"/>
+                            android:layout_marginStart="30dp"/>
                         <ImageView
                             android:layout_width="18dp"
                             android:layout_height="18dp"
@@ -1119,7 +1119,7 @@
                             android:layout_marginStart="5dp"
                             android:fontFamily="@font/gilroy_medium"
                             android:singleLine="true"
-                            android:text="@{viewModel.quizesItem.getTypeInString()}"
+                            android:text="@{viewModel.quizesItem.type}"
                             android:textAllCaps="true"
                             android:textColor="@color/black"
                             android:textSize="11sp" />
@@ -1173,7 +1173,7 @@
                             android:layout_height="wrap_content"
                             android:gravity="center"
                             android:fontFamily="@font/gilroy_bold"
-                            android:text="Did you know?"
+                            android:text="@string/did_you_know"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:layout_marginTop="10dp"/>
@@ -1182,7 +1182,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/gilroy_bold"
-                            android:text='# "SKIP" Lifeline helps you to pass question on correct'
+                            android:text='@string/skip_lifeline_helps_'
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:layout_marginTop="30dp"
@@ -1227,7 +1227,7 @@
                     android:fontFamily="@font/gilroy_bold"
                     android:text="@string/correct_fast"
                     android:textColor="@color/white"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -1238,7 +1238,7 @@
                     android:text="@string/remember"
                     android:textColor="@color/white"
                     android:textAlignment="center"
-                    android:textSize="20dp" />
+                    android:textSize="20sp" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/btn_go"
@@ -1261,7 +1261,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:fontFamily="@font/gilroy_bold"
-                        android:text="Let's GO"
+                        android:text="@string/let_s_go"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
                 </androidx.cardview.widget.CardView>

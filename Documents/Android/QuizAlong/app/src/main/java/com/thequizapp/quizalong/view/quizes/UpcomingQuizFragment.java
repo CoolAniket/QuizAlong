@@ -1,7 +1,6 @@
 package com.thequizapp.quizalong.view.quizes;
 
 import android.app.Activity;
-import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,17 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
-import com.thequizapp.quizalong.databinding.FragmentCategoriesBinding;
 import com.thequizapp.quizalong.databinding.FragmentUpcomingQuizBinding;
-import com.thequizapp.quizalong.model.home.HomePage;
-import com.thequizapp.quizalong.utils.SessionManager;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
+import com.thequizapp.quizalong.utils.CustomDialogBuilder;
+import com.thequizapp.quizalong.view.payment.PaymentActivity;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
-import com.thequizapp.quizalong.viewmodel.CategoriesViewModel;
 import com.thequizapp.quizalong.viewmodel.UpcomingQuizViewModel;
 
 import java.util.List;
@@ -33,13 +32,13 @@ import androidx.lifecycle.ViewModelProvider;
 public class UpcomingQuizFragment extends Fragment {
 
 
-    private final List<HomePage.QuizesItem> upcomingQuizes;
+    private final List<QuizItem> upcomingQuizes;
     FragmentUpcomingQuizBinding binding;
     UpcomingQuizViewModel viewModel;
 
 
 
-    public UpcomingQuizFragment(List<HomePage.QuizesItem> quizData) {
+    public UpcomingQuizFragment(List<QuizItem> quizData) {
         Log.d("UpcomingQuizFragment", "");
         upcomingQuizes = quizData;
     }
@@ -56,11 +55,16 @@ public class UpcomingQuizFragment extends Fragment {
 
     private void initListener() {
         viewModel.updateQuizData(upcomingQuizes);
-        viewModel.getQuizesAdapter().setOnItemClicks(quizesItem -> {
-
-            startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
+        viewModel.getQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
+            if (pairs.length == 3) {
+                startPaymentProcess(quizesItem);
+            } else if (pairs[0].second.equals("Free")) {
+                enrollForFree(quizesItem);
+            } else {
+                startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
                         .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
+            }
         });
 
         viewModel.getToast().observe(this, toastMsg -> {
@@ -73,8 +77,52 @@ public class UpcomingQuizFragment extends Fragment {
                         .show();
             }
         });
+
+        viewModel.onSuccess.observe(this, response -> {
+            Toast.makeText(requireContext(), response.getMessage(), Toast.LENGTH_LONG).show();
+//            refreshData();
+        });
     }
     public int getColorById(int colorId) {
         return ContextCompat.getColor(requireContext(), colorId);
+    }
+    private void startPaymentProcess(QuizItem quizesItem) {
+        new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(quizesItem.getEntry(), new CustomDialogBuilder.OnPaymentAmountSelectListener() {
+            @Override
+            public void onAmountClick(int amount) {
+                startActivity(new Intent(getActivity(), PaymentActivity.class)
+                        .putExtra("data", new Gson().toJson(quizesItem))
+                        .putExtra("amount", amount));
+            }
+
+            @Override
+            public void onDismissClick() {
+
+            }
+        });
+    }
+
+    private void enrollForFree(QuizItem quizesItem) {
+        new CustomDialogBuilder(requireContext()).showEnrollForFreeDialog(new CustomDialogBuilder.OnEnrollOptionSelectListener() {
+
+            @Override
+            public void onClick(Type enrollmentType) {
+                switch (enrollmentType) {
+                    case PAY:
+                        // start Payment Process
+                        startPaymentProcess(quizesItem);
+                        break;
+                    default:
+                        viewModel.subscribeForFreeApi(quizesItem);
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onDismissClick() {
+
+            }
+        });
     }
 }

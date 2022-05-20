@@ -1,6 +1,8 @@
 package com.thequizapp.quizalong.utils;
 
 
+import android.text.TextUtils;
+
 import com.thequizapp.quizalong.api.ApiService;
 import com.thequizapp.quizalong.api.Const;
 
@@ -19,8 +21,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Global {
 
-    public static final AtomicReference<String> userId = new AtomicReference<>("37");
+    public static final AtomicReference<String> userId = new AtomicReference<>("");
 
+    /*
+    * already logged in account, app restart, shows aniket's profile
+    * logout login, original name came up.
+    * */
     Global() {
     }
 
@@ -55,7 +61,6 @@ public class Global {
     }
 
     public static String prettyCount(Number number) {
-
         try {
             char[] suffix = {' ', 'k', 'M', 'B', 'T', 'P', 'E'};
             long numValue = number.longValue();
@@ -78,6 +83,31 @@ public class Global {
             }
         } catch (Exception e) {
             return String.valueOf(number);
+        }
+    }
+
+    public static String prettyAmount(Number number) {
+        try {
+            int value = number.intValue();
+            if (number.intValue() > 0 ) {
+                return "" + value;
+            } else {
+                return "Free";
+            }
+        } catch (Exception e) {
+            return String.valueOf(number);
+        }
+    }
+
+    public static String prettyNullId(String value) {
+        try {
+            if (TextUtils.isEmpty(value) ) {
+                return "--";
+            } else {
+                return value;
+            }
+        } catch (Exception e) {
+            return "--";
         }
     }
 

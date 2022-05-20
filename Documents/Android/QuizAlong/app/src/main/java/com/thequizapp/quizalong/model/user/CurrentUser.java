@@ -1,8 +1,17 @@
 package com.thequizapp.quizalong.model.user;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
+import com.google.gson.reflect.TypeToken;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CurrentUser {
 
@@ -68,6 +77,35 @@ public class CurrentUser {
     }
 
     public ArrayList<Course> getCourse() {
+        if (course ==null) {
+            String jsonCourse = "[\n" +
+                    "        {\n" +
+                    "            \"key\": 1,\n" +
+                    "            \"value\": \"Medicine\",\n" +
+                    "            \"image\": \"uploads/wwnNO4qeulx6WahaK0st7R9AexTjw7Rdq1baHw8q.png\",\n" +
+                    "            \"year\": [\n" +
+                    "                {\n" +
+                    "                    \"key\": 1,\n" +
+                    "                    \"value\": \"First Year\"\n" +
+                    "                },\n" +
+                    "                {\n" +
+                    "                    \"key\": 2,\n" +
+                    "                    \"value\": \"Second Year\"\n" +
+                    "                },\n" +
+                    "                {\n" +
+                    "                    \"key\": 3,\n" +
+                    "                    \"value\": \"Third Year\"\n" +
+                    "                },\n" +
+                    "                {\n" +
+                    "                    \"key\": 4,\n" +
+                    "                    \"value\": \"Fourth Year\"\n" +
+                    "                }\n" +
+                    "            ]\n" +
+                    "        }\n" +
+                    "    ]";
+
+            course = new Gson().fromJson(jsonCourse, new TypeToken<List<Course>>(){}.getType());
+        }
         return course;
     }
 
@@ -76,6 +114,65 @@ public class CurrentUser {
     }
 
     public ArrayList<College> getColleges() {
+        if (colleges == null) {
+            String jsonCollege = "[\n" +
+                    "        {\n" +
+                    "            \"id\": 1,\n" +
+                    "            \"name\": \"HBT, Dr.R.N.Cooper Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 2,\n" +
+                    "            \"name\": \"Grant Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 3,\n" +
+                    "            \"name\": \"Seth G.S. Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 4,\n" +
+                    "            \"name\": \"Topiwala Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 5,\n" +
+                    "            \"name\": \"Lokmanya Tilak Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 6,\n" +
+                    "            \"name\": \"K.J. Somaiya Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 7,\n" +
+                    "            \"name\": \"Terna Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 8,\n" +
+                    "            \"name\": \"Rajiv Gandhi Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"id\": 9,\n" +
+                    "            \"name\": \"Vedanta Medical College\",\n" +
+                    "            \"created_at\": null,\n" +
+                    "            \"updated_at\": null\n" +
+                    "        }\n" +
+                    "    ]";
+            colleges = new Gson().fromJson(jsonCollege, new TypeToken<List<College>>(){}.getType());
+        }
         return colleges;
     }
 

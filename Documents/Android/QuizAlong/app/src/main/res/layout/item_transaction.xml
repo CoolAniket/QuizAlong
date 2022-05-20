@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <import type="com.thequizapp.quizalong.utils.Global" />
         <variable
             name="model"
             type="com.thequizapp.quizalong.model.payment.TransactionResponse.History" />
@@ -25,13 +25,19 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        </LinearLayout>-->
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/gilroy_bold"
-                android:text='@{model.quizTitle}'
+                android:text='@{Global.prettyNullId(model.quizTitle)+" "+Global.prettyNullId(model.quizDescription)}'
                 android:textColor="@color/black"
-                android:textSize="20sp"
+                android:textSize="12sp"
                 android:layout_weight="5"/>
 
             <TextView
@@ -39,9 +45,9 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:fontFamily="@font/gilroy_medium"
-                android:text='@{""+model.amount}'
+                android:text='@{Global.prettyAmount(model.amount)}'
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 />
 
             <TextView
@@ -51,9 +57,9 @@
                 android:layout_marginStart="5dp"
                 android:fontFamily="@font/gilroy_bold"
                 android:ellipsize="middle"
-                android:text='@{""+model.orderId}'
+                android:text="@{Global.prettyNullId(model.orderId)}"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
