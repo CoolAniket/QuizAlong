@@ -63,6 +63,7 @@ public class LoginActivity extends BaseActivity {
                         .setTextColor(getColorById(R.color.white))
                         .show();
             }
+            //startActivity(new Intent(this, MainActivity.class));
         });
         viewModel.getOnSuccess().observe(this, user -> {
             Log.e("....",""+user.getAdditional_info());
@@ -132,6 +133,7 @@ public class LoginActivity extends BaseActivity {
                 hashMap.put("firebase_auth", "0");
                 viewModel.getIsLoading().set(true);
                 viewModel.registerUser(hashMap);
+                //startActivity(new Intent(this, MainActivity.class));
             } catch (JSONException | NullPointerException e) {
                 e.printStackTrace();
             }
