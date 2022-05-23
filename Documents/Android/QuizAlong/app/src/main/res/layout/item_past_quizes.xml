@@ -37,7 +37,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{model.totalTime.toString()}"
+                    android:text="@{model.winPercent.toString()}"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -126,7 +126,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Questions"
+                    android:text="Q"
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="15sp"
@@ -160,6 +160,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="1">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:scaleType="centerCrop"
+                    app:normal_image="@{model.image}"
+                    android:layout_marginLeft="10dp"
+                    android:layout_gravity="center"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -187,6 +194,7 @@
                 android:layout_weight="1"
                 >
                 <LinearLayout
+                    android:id="@+id/btn_startNow"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -195,7 +203,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Start Now ->"
+                        android:text='@{model.played == 0?"Start Now ->":"Leaderboard"}'
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="15sp"
