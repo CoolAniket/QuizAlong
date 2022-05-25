@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 import com.thequizapp.quizalong.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.main.MainActivity;
 
 import java.io.IOException;
@@ -45,6 +46,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String token) {
+        SessionManager sessionManager = new SessionManager(this);
+        sessionManager.saveNotificationToken(token);
         Log.d("FCM.....", "Refreshed token: " + token);
 
         // If you want to send messages to this application instance or

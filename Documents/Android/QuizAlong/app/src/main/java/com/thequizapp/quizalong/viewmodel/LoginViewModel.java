@@ -28,6 +28,7 @@ public class LoginViewModel extends ViewModel {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     private String email;
     private String password;
+    private String notificationToken;
 
     public MutableLiveData<String> getToast() {
         return toast;
@@ -35,6 +36,14 @@ public class LoginViewModel extends ViewModel {
 
     public void setToast(MutableLiveData<String> toast) {
         this.toast = toast;
+    }
+
+    public String getNotificationToken() {
+        return notificationToken;
+    }
+
+    public void setNotificationToken(String notificationToken) {
+        this.notificationToken = notificationToken;
     }
 
     public ObservableBoolean getIsLoading() {
@@ -78,6 +87,7 @@ public class LoginViewModel extends ViewModel {
             toast.setValue("Please enter password");
             return;
         }
+        Log.e("TOKEN.....1",getNotificationToken());
         isLoading.set(true);
         auth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
@@ -95,6 +105,7 @@ public class LoginViewModel extends ViewModel {
                                 hashMap.put("password", password);
                                 hashMap.put("social_login", "0");
                                 hashMap.put("firebase_auth", "1");
+                                hashMap.put("registerationid", getNotificationToken());
                                 registerUser(hashMap);
                             }
                         }

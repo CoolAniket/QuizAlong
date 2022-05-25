@@ -59,6 +59,7 @@ public final class Const {
     public static final String COUNT = "count";
     public static final String PROFILE_IMAGE = "profileImage";
     //SharedPreference
+    public static final String NOTIFICATION_TOKEN = "notification_token";
     public static final String USER = "user";
     public static final String USER_ADDITION_DETAILS = "user_details";
     public static final String USER_COURSE_SELECTION = "course_selection";

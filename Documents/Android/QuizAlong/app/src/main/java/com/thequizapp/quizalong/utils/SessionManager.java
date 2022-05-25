@@ -3,6 +3,7 @@ package com.thequizapp.quizalong.utils;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.api.Const;
@@ -43,6 +44,21 @@ public class SessionManager {
         Global.userId.set(String.valueOf(user.getUser().getId()));
         editor.putString(Const.USER, new Gson().toJson(user));
         editor.apply();
+    }
+    public void saveNotificationToken(String token) {
+        Log.d("saveNotificationToken ", "Refreshed token: " + token);
+        editor.putString(Const.NOTIFICATION_TOKEN, token);
+        editor.apply();
+    }
+
+    public String getNotificationToken() {
+
+        String userString = pref.getString(Const.NOTIFICATION_TOKEN, "");
+        Log.d("getNotificationToken ", "Refreshed token: " + userString);
+        if (!userString.isEmpty()) {
+            return userString;
+        }
+        return "";
     }
 
     public CurrentUser getUser() {

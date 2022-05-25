@@ -90,6 +90,7 @@ public class LoginActivity extends BaseActivity {
                 setPasswordViewModel.getToast().observe(this, s -> Toast.makeText(this, s, Toast.LENGTH_SHORT).show());
                 setPasswordViewModel.getOnSuccess().observe(this, isSuccess -> bottomSheetDialog.dismiss());
                 setPasswordViewModel.setEmail(email);
+                setPasswordViewModel.setNotificationToken(sessionManager.getNotificationToken());
                 setPasswordViewModel.getOnSuccess().observe(this, user -> {
                     Toast.makeText(this, getResources().getString(R.string.sign_up_successfully), Toast.LENGTH_LONG).show();
                     //onBackPressed();
@@ -103,10 +104,11 @@ public class LoginActivity extends BaseActivity {
 
             /*}*/
         });
-
+        viewModel.setNotificationToken(sessionManager.getNotificationToken());
     }
 
     private void initListener() {
+        Log.e("TOOOOOO ",sessionManager.getNotificationToken());
         binding.lytForgot.setOnClickListener(v -> {
             BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(this);
             ItemForgotPassBinding forgotPassBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.item_forgot_pass, null, false);
@@ -118,6 +120,7 @@ public class LoginActivity extends BaseActivity {
             bottomSheetDialog.setContentView(forgotPassBinding.getRoot());
             bottomSheetDialog.show();
         });
+        Log.e("TOKEN.....3",sessionManager.getNotificationToken());
         binding.lytNewHere.setOnClickListener(v -> startActivity(new Intent(this, RegisterActivity.class)));
         GoogleLoginManager googleLoginManager = new GoogleLoginManager(this);
         faceBookLoginManager = new FaceBookLoginManager(this, jsonObject -> {
@@ -128,6 +131,7 @@ public class LoginActivity extends BaseActivity {
                 hashMap.put("password", "");
                 hashMap.put("social_login", "1");
                 hashMap.put("firebase_auth", "0");
+                hashMap.put("registerationid", sessionManager.getNotificationToken());
                 viewModel.getIsLoading().set(true);
                 viewModel.registerUser(hashMap);
             } catch (JSONException | NullPointerException e) {
@@ -154,6 +158,7 @@ public class LoginActivity extends BaseActivity {
         try {
             GoogleSignInAccount account = completedTask.getResult(ApiException.class);
             Log.e(">>>> 1",""+account.getDisplayName());
+            Log.e("TOKEN.....4",sessionManager.getNotificationToken());
             if (account != null) {
                 HashMap<String, String> hashMap = new HashMap<>();
                 hashMap.put("fullname", account.getDisplayName());
@@ -161,6 +166,7 @@ public class LoginActivity extends BaseActivity {
                 hashMap.put("password", "");
                 hashMap.put("social_login", "1");
                 hashMap.put("firebase_auth", "0");
+                hashMap.put("registerationid", sessionManager.getNotificationToken());
                 viewModel.getIsLoading().set(true);
                 viewModel.registerUser(hashMap);
             }

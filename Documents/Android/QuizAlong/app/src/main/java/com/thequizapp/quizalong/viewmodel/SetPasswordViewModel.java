@@ -34,6 +34,15 @@ public class SetPasswordViewModel extends ViewModel {
     public MutableLiveData<String> getToast() {
         return toast;
     }
+    private String notificationToken;
+
+    public String getNotificationToken() {
+        return notificationToken;
+    }
+
+    public void setNotificationToken(String notificationToken) {
+        this.notificationToken = notificationToken;
+    }
 
     public void setToast(MutableLiveData<String> toast) {
         this.toast = toast;
@@ -132,7 +141,7 @@ public class SetPasswordViewModel extends ViewModel {
             return;
         }
         isLoading.set(true);
-
+        Log.e("TOKEN.....2 ",getNotificationToken());
         /*FirebaseAuth.getInstance().sendPasswordResetEmail(email)
                 .addOnCompleteListener(task -> {
                     isLoading.set(false);
@@ -162,7 +171,7 @@ public class SetPasswordViewModel extends ViewModel {
                                         hashMap.put("password", password);
                                         hashMap.put("social_login", "0");
                                         hashMap.put("firebase_auth", "1");
-
+                                        hashMap.put("registerationid", getNotificationToken());
                                         registerUser(hashMap);
                                     }
                                 });
