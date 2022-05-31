@@ -152,7 +152,7 @@
     <string name="free">Free</string>
     <string name="proceed_to_pay">Proceed to pay</string>
     <string name="proceed_to_enroll">Proceed to Enroll</string>
-    <string name="note_top_50_of">Note: Top <u>50%</u> of only PAID participants will win <u>2x</u> the entry fee at the end of quiz.</string>
+    <string name="note_top_50_of"><![CDATA[Note: Top <u>%1$d%%</u> of only PAID participants will win <u>%2$dx</u> the entry fee at the end of quiz.]]></string>
     <string name="pay">Pay</string>
     <string name="_2_x">2 X</string>
     <string name="let_s_go">Let\'s GO</string>

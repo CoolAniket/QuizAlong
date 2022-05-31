@@ -90,7 +90,7 @@ public class Global {
         try {
             int value = number.intValue();
             if (number.intValue() > 0 ) {
-                return prefix + value;
+                return prefix + value + " INR";
             } else {
                 return "Free";
             }

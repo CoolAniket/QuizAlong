@@ -106,7 +106,7 @@
                     android:ellipsize="middle"
                     android:text='@{Global.prettyPaymentStatus(model.status)}'
                     android:textColor="@color/white"
-                    android:background='@{model.status.equals("Success") ? @color/green : model.status.equals("Failure") ? @color/red : @color/yellow}'
+                    android:background='@{model.status.equals("Success") ? @drawable/custom_background_green : model.status.equals("Failure") ? @drawable/custom_background_red : @drawable/custom_background_yellow}'
                     android:textSize="10sp"
                     />
 

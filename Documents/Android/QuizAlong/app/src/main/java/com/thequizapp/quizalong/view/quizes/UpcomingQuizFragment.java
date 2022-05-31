@@ -103,7 +103,7 @@ public class UpcomingQuizFragment extends Fragment {
     }
 
     private void enrollForFree(QuizItem quizesItem) {
-        new CustomDialogBuilder(requireContext()).showEnrollForFreeDialog(new CustomDialogBuilder.OnEnrollOptionSelectListener() {
+        new CustomDialogBuilder(requireContext()).showEnrollForFreeDialog(quizesItem, new CustomDialogBuilder.OnEnrollOptionSelectListener() {
 
             @Override
             public void onClick(Type enrollmentType) {

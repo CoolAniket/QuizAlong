@@ -31,276 +31,199 @@
                 android:src="@drawable/quiz_along_logo" />
         </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/lyt_profile"
+        <!-- DrawerLayout segment -->
+        <ScrollView
+            android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:paddingVertical="15dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:background="@drawable/bg_oval"
-                android:backgroundTint="@color/cobalt_blue"
-                android:padding="8dp"
-                android:src="@drawable/ic_profile_user_tint"
-                app:tint="@color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/profile"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/lyt_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:paddingVertical="15dp"
+                    android:gravity="center_vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:background="@drawable/bg_oval"
+                        android:backgroundTint="@color/cobalt_blue"
+                        android:padding="8dp"
+                        android:src="@drawable/ic_profile_user_tint"
+                        app:tint="@color/white" />
 
-        <LinearLayout
-            android:id="@+id/lyt_play_history"
-            android:layout_width="match_parent"
-            android:visibility="gone"
-            android:paddingHorizontal="15dp"
-            android:layout_height="wrap_content"
-            android:paddingVertical="15dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/profile"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:src="@drawable/ic_round_history" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:background="@color/dark_grey" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/play_history"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyt_my_quiz"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:paddingVertical="15dp"
+                    android:gravity="center_vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:visibility="gone"
-            android:background="@color/dark_grey" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:padding="2dp"
+                        android:src="@drawable/ic_profile_user_tint"
+                        app:tint="@color/cobalt_blue" />
 
-        <LinearLayout
-            android:id="@+id/lyt_redeem_request"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:paddingVertical="15dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/my_quiz"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                android:src="@drawable/ic_dollar_symbol"
-                app:tint="@color/cobalt_blue" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:background="@color/dark_grey" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/redeem_requests"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyt_tra_his"
+                    android:paddingVertical="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:gravity="center_vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:padding="2dp"
+                        app:tint="@color/cobalt_blue"
+                        android:src="@drawable/ic_transaction_history" />
 
-        <LinearLayout
-            android:id="@+id/lyt_my_quiz"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:paddingVertical="15dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/transaction_history"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                android:src="@drawable/ic_profile_user_tint"
-                app:tint="@color/cobalt_blue" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:background="@color/dark_grey" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/my_quiz"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyt_faq"
+                    android:paddingVertical="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:gravity="center_vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:padding="2dp"
+                        app:tint="@color/cobalt_blue"
+                        android:src="@drawable/ic_faq" />
 
-        <LinearLayout
-            android:id="@+id/lyt_update"
-            android:paddingVertical="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/faqs"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                app:tint="@color/cobalt_blue"
-                android:src="@drawable/ic_notification" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:background="@color/dark_grey" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/updates"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyt_privacy"
+                    android:paddingVertical="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:gravity="center_vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:padding="2dp"
+                        app:tint="@color/cobalt_blue"
+                        android:src="@drawable/ic_privacy" />
 
-        <LinearLayout
-            android:id="@+id/lyt_tra_his"
-            android:paddingVertical="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/privacy_policy"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                app:tint="@color/cobalt_blue"
-                android:src="@drawable/ic_transaction_history" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:background="@color/dark_grey" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/transaction_history"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lyt_terms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="15dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:gravity="center_vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
+                    <ImageView
+                        android:layout_width="28dp"
+                        android:layout_height="28dp"
+                        android:padding="2dp"
+                        app:tint="@color/cobalt_blue"
+                        android:src="@drawable/ic_term_of_use" />
 
-        <LinearLayout
-            android:id="@+id/lyt_faq"
-            android:paddingVertical="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:gravity="center_vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/terms_of_use"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                app:tint="@color/cobalt_blue"
-                android:src="@drawable/ic_faq" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.3dp"
+                    android:background="@color/dark_grey" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/faqs"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
-
-        <LinearLayout
-            android:id="@+id/lyt_privacy"
-            android:paddingVertical="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                app:tint="@color/cobalt_blue"
-                android:src="@drawable/ic_privacy" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/privacy_policy"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
-
-        <LinearLayout
-            android:id="@+id/lyt_terms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingVertical="15dp"
-            android:layout_marginHorizontal="15dp"
-            android:gravity="center_vertical">
-
-            <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:padding="2dp"
-                app:tint="@color/cobalt_blue"
-                android:src="@drawable/ic_term_of_use" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:fontFamily="@font/gilroy_medium"
-                android:text="@string/terms_of_use"
-                android:textColor="@color/black"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.3dp"
-            android:background="@color/dark_grey" />
     </LinearLayout>
 </layout>

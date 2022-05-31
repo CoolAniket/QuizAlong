@@ -97,8 +97,7 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 if (quizes.get(position) != null) {
                     QuizItem quizesItem = quizes.get(position);
                     binding.btnCheck.setOnClickListener(v -> {
-                        Pair<View, String>[] pairs = new Pair[2];
-                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        Pair<View, String>[] pairs = new Pair[1];
                         pairs[0] = new Pair<>(binding.tvTitle, "Free");
                         onItemClick.onClick(pairs, quizesItem);
                     });
