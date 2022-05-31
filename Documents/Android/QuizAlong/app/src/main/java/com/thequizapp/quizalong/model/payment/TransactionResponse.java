@@ -34,7 +34,7 @@ public class TransactionResponse {
         this.history = history;
     }
 
-    public class History {
+    public static class History {
         @SerializedName("quiz_id")
         private int quizId;
 

@@ -111,7 +111,7 @@ public class QuizViewModel extends ViewModel {
 
     }
     public void getQuestionsByQuizId() {
-        disposable.add(Global.initRetrofit().getQuestionsByQuizId(BuildConfig.APIKEY, String.valueOf(twistQuizesItem.getQuizId()),Global.userId.get())
+        disposable.add(Global.initRetrofit().getQuestionsByQuizId(BuildConfig.APIKEY, String.valueOf(twistQuizesItem.getQuizId()), Global.userId.get())
                 /*disposable.add(Global.initRetrofit().getQuestionsByQuizId(BuildConfig.APIKEY, "11")*/
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -119,20 +119,22 @@ public class QuizViewModel extends ViewModel {
                 .doOnSubscribe(disposable1 -> isLoading.set(true))
                 .doOnTerminate(() -> isLoading.set(false))
                 .subscribe((questions, throwable) -> {
-                    Log.e("QUIZ....",""+questions);
-                    Log.e("QUIZ....",""+throwable);
-                    Log.e("QUIZ....",""+questions.getSkipLifeline());
-                    Log.e("QUIZ....",""+questions.getSubscribedAmount());
-                    if (questions != null) {
-                        questionsList = questions.getQuestions();
-                        totalQuestions.set(questions.getQuestions().size());
-                        skipLifelines.setValue(questions.getSkipLifeline());
-                        subscribedAmount.setValue(questions.getSubscribedAmount());
-                        currentQuestions.setValue(questions.getQuestions().get(currentPosition.get()));
-                        currentPosition.set(currentPosition.get() + 1);
-                    } else if (throwable != null) {
-//
+                    if (throwable == null) {
+                        Log.d("QUIZ....",""+questions);
+                        Log.d("QUIZ....",""+questions.getSkipLifeline());
+                        Log.d("QUIZ....",""+questions.getSubscribedAmount());
+                        if (questions.getQuestions() != null && questions.getQuestions().size() > currentPosition.get()) {
+                            questionsList = questions.getQuestions();
+                            totalQuestions.set(questions.getQuestions().size());
+                            skipLifelines.setValue(questions.getSkipLifeline());
+                            subscribedAmount.setValue(questions.getSubscribedAmount());
+                            currentQuestions.setValue(questions.getQuestions().get(currentPosition.get()));
+                            currentPosition.set(currentPosition.get() + 1);
+                        }
+                    } else {
+                        Log.e("QUIZ....",""+throwable);
                     }
+
                 }));
     }
 
@@ -154,7 +156,7 @@ public class QuizViewModel extends ViewModel {
     }
 
     public void onAnswerClick(int selectAnswerNum) {
-        Log.e("selectAnswerNum ","..."+selectAnswerNum+" "+isAnswer.getValue());
+        Log.d("selectAnswerNum ","..."+selectAnswerNum+" "+isAnswer.getValue());
         if (currentQuestions.getValue() != null /*&& isAnswer.getValue() == null*/ ) {
             //rapidFireDuration.set(0);
             resetQuestion();

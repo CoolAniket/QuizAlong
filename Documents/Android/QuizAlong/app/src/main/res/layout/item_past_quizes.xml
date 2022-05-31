@@ -198,7 +198,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{"Yesterday "+model.startTime.toString()}'
+                            android:text='@{model.day+" "+model.startTime.toString()}'
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="15sp"

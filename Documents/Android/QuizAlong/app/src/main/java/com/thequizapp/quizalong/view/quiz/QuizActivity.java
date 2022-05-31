@@ -234,8 +234,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
         /*viewModel.getIsLobby().set(true);
         startCountDown();*/
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm");
-            String currentTime = new SimpleDateFormat("HH:mm:ss", Locale.getDefault()).format(new Date());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa");
+            String currentTime = new SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(new Date());
             Date startDate = simpleDateFormat.parse(currentTime);
             Date endDate = null;
             endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());

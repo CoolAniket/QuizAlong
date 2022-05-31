@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/gilroy_medium"
-                    android:text='@{Global.prettyAmount(model.amount, "-")}'
+                    android:text='@{Global.prettyAmount(model.amount, "+")}'
                     android:textColor="@color/black"
                     android:textSize="12sp"
                     />
@@ -80,12 +80,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/gilroy_medium"
-                    android:singleLine="true"
-                    android:ellipsize="middle"
-                    android:text='@{"From: "+Global.prettyNullId(model.orderId)}'
+                    android:text='@{"To: "+Global.prettyNullId(model.orderId)}'
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:gravity="start"
+                    android:gravity="end"
                     />
 
             </LinearLayout>
@@ -93,8 +91,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
@@ -102,21 +99,18 @@
                     android:layout_weight="1.5"
                     android:fontFamily="@font/gilroy_medium"
                     android:padding="4dp"
-                    android:singleLine="true"
-                    android:ellipsize="middle"
-                    android:text='@{Global.prettyPaymentStatus(model.status)}'
+                    android:text='@{Global.prettyWinningStatus(model.status)}'
                     android:textColor="@color/white"
                     android:background='@{model.status.equals("Success") ? @color/green : model.status.equals("Failure") ? @color/red : @color/yellow}'
-                    android:textSize="10sp"
+                    android:textSize="12sp"
                     />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
-                    android:layout_marginStart="4dp"
+                    android:layout_marginStart="5dp"
                     android:fontFamily="@font/gilroy_bold"
-                    android:singleLine="true"
                     android:ellipsize="middle"
                     android:text='@{"Trans id: "+Global.prettyNullId(model.orderId)}'
                     android:textColor="@color/black"

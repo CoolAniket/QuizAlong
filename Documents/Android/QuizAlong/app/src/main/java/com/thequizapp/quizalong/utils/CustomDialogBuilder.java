@@ -27,6 +27,7 @@ import com.thequizapp.quizalong.databinding.DialogRapidFireBinding;
 import com.thequizapp.quizalong.databinding.DialogSimpleBinding;
 import com.thequizapp.quizalong.view.splash.SplashActivity;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 public class CustomDialogBuilder {
@@ -147,14 +148,18 @@ public class CustomDialogBuilder {
             return;
         DialogPaymentAmountBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_payment_amount, null, false);
 
+        binding.btn50.setText(MessageFormat.format("INR {0}", entry.get(1)));
         binding.btn50.setOnClickListener(v -> {
             mBuilder.dismiss();
             onDismissListener.onAmountClick(entry.get(1));
         });
+
+        binding.btn100.setText(MessageFormat.format("INR {0}", entry.get(2)));
         binding.btn100.setOnClickListener(v -> {
             mBuilder.dismiss();
             onDismissListener.onAmountClick(entry.get(2));
         });
+        
         binding.tvCancel.setOnClickListener(v -> {
             mBuilder.dismiss();
             onDismissListener.onDismissClick();

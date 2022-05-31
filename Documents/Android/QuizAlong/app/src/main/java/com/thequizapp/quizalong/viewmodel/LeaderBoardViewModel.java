@@ -1,5 +1,7 @@
 package com.thequizapp.quizalong.viewmodel;
 
+import android.os.Build;
+
 import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -11,6 +13,8 @@ import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -25,7 +29,7 @@ public class LeaderBoardViewModel extends ViewModel {
     private MutableLiveData<LeaderBoardResponse.LeaderboardItem> secondUser = new MutableLiveData<>();
     private MutableLiveData<LeaderBoardResponse.LeaderboardItem> thirdUser = new MutableLiveData<>();
     private MutableLiveData<LeaderBoardResponse.LeaderboardItem> myUser = new MutableLiveData<>();
-    private MutableLiveData<String> myUserPosition = new MutableLiveData<>();
+    private MutableLiveData<Boolean> myUserPosition = new MutableLiveData<>();
     private CurrentUser user;
     private String quizId = "";
     private String quizType = "";
@@ -50,7 +54,7 @@ public class LeaderBoardViewModel extends ViewModel {
 //        quizesItem.setImage(user.getUser().getImage().toString());
 //        quizesItem.setTotalPoints(user.getUser().getTotalPoints());
         myUser.postValue(leaderboardItem);
-        myUserPosition.postValue("0");
+        myUserPosition.postValue(false);
     }
 
     public ObservableBoolean getIsLoading() {
@@ -93,11 +97,11 @@ public class LeaderBoardViewModel extends ViewModel {
         this.myUser = myUser;
     }
 
-    public MutableLiveData<String> getMyUserPosition() {
+    public MutableLiveData<Boolean> getMyUserPosition() {
         return myUserPosition;
     }
 
-    public void setMyUserPosition(MutableLiveData<String> myUserPosition) {
+    public void setMyUserPosition(MutableLiveData<Boolean> myUserPosition) {
         this.myUserPosition = myUserPosition;
     }
 
@@ -136,16 +140,22 @@ public class LeaderBoardViewModel extends ViewModel {
                             if (leaderBoard.getLeaderboardList().size() > 2) {
                                 thirdUser.setValue(leaderBoard.getLeaderboardList().get(2));
                             }
-                            List<LeaderBoardResponse.LeaderboardItem> newList = new ArrayList<>();
+//                            List<LeaderBoardResponse.LeaderboardItem> newList = new ArrayList<>();
                             for (int i = 3; i < leaderBoard.getLeaderboardList().size(); i++) {
                                 LeaderBoardResponse.LeaderboardItem leaderboardItem = leaderBoard.getLeaderboardList().get(i);
-                                myUserPosition.setValue("" + i);
-                                if (leaderboardItem.getUserIdentity().equals(user.getUser().getIdentity())) {
+                                if (leaderboardItem.getUserId() == user.getUser().getId()) {
+                                    myUserPosition.setValue(true);
                                     myUser.setValue(leaderboardItem);
+                                    break;
                                 }
-                                newList.add(leaderboardItem);
+//                                newList.add(leaderboardItem);
                             }
-                            leaderBoardAdapter.updateData(newList);
+                            if (leaderBoard.getLeaderboardList().size() > 1) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    Collections.sort(leaderBoard.getLeaderboardList(), Comparator.comparingInt(LeaderBoardResponse.LeaderboardItem::getId));
+                                }
+                            }
+                            leaderBoardAdapter.updateData(leaderBoard.getLeaderboardList());
                         } else if (throwable != null) {
 //
                         }
@@ -168,16 +178,22 @@ public class LeaderBoardViewModel extends ViewModel {
                             if (leaderBoard.getLeaderboardList().size() > 2) {
                                 thirdUser.setValue(leaderBoard.getLeaderboardList().get(2));
                             }
-                            List<LeaderBoardResponse.LeaderboardItem> newList = new ArrayList<>();
+
                             for (int i = 3; i < leaderBoard.getLeaderboardList().size(); i++) {
                                 LeaderBoardResponse.LeaderboardItem leaderboardItem = leaderBoard.getLeaderboardList().get(i);
-                                myUserPosition.setValue("" + i);
-                                if (leaderboardItem.getUserIdentity().equals(user.getUser().getIdentity())) {
+                                if (leaderboardItem.getUserId() == user.getUser().getId()) {
+                                    myUserPosition.setValue(true);
                                     myUser.setValue(leaderboardItem);
+                                    break;
                                 }
-                                newList.add(leaderboardItem);
+//                                newList.add(leaderboardItem);
                             }
-                            leaderBoardAdapter.updateData(newList);
+                            if (leaderBoard.getLeaderboardList().size() > 1) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                    Collections.sort(leaderBoard.getLeaderboardList(), Comparator.comparingInt(LeaderBoardResponse.LeaderboardItem::getId));
+                                }
+                            }
+                            leaderBoardAdapter.updateData(leaderBoard.getLeaderboardList());
                         } else if (throwable != null) {
 //
                         }

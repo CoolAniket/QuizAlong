@@ -196,11 +196,11 @@
                             android:textSize="13sp"
                             android:layout_gravity="center"/>
                         <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
                             android:scaleType="centerCrop"
                             android:src="@drawable/trophy"
-                            android:layout_marginStart="10dp"
+                            android:layout_marginStart="4dp"
                             android:layout_gravity="center"/>
 
                         <TextView
@@ -268,8 +268,6 @@
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_centerVertical="true"
                                 android:layout_marginStart="20dp"
                                 android:orientation="horizontal">
 
@@ -288,7 +286,7 @@
                             </LinearLayout>
 
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center">
@@ -329,7 +327,6 @@
                                 android:id="@+id/payTxt"
                                 android:layout_width="100dp"
                                 android:layout_height="45dp"
-                                android:layout_alignParentEnd="true"
                                 android:layout_gravity="end"
                                 android:background="@drawable/bg_top_right_bottom_left_20"
                                 android:gravity="center"
@@ -387,8 +384,12 @@
                                 android:orientation="horizontal"
                                 android:paddingHorizontal="10dp"
                                 android:paddingVertical="3dp"
-                                android:visibility="gone">
-
+                                >
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="100dp"
+                                    app:normal_image="@{viewModel.twistQuizesItem.image}"
+                                    />
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1053,11 +1054,11 @@
                         android:textSize="13sp"
                         android:layout_gravity="center"/>
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
                         android:scaleType="centerCrop"
                         android:src="@drawable/trophy"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="4dp"
                         android:layout_gravity="center"/>
 
                     <TextView

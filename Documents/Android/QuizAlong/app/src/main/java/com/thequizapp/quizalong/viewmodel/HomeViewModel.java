@@ -74,7 +74,7 @@ public class HomeViewModel extends ViewModel {
     }
 
     public void getHomeData() {
-        disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY,Integer.parseInt(Global.userId.get()))
+        disposable.add(Global.initRetrofit().getTwistQuizPage(BuildConfig.APIKEY, String.valueOf(Global.userId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -89,7 +89,7 @@ public class HomeViewModel extends ViewModel {
                     }
                 }));
 
-        disposable.add(Global.initRetrofit().getUpcomingQuizPage(BuildConfig.APIKEY,Integer.parseInt(Global.userId.get()))
+        disposable.add(Global.initRetrofit().getUpcomingQuizPage(BuildConfig.APIKEY, String.valueOf(Global.userId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())
@@ -103,7 +103,7 @@ public class HomeViewModel extends ViewModel {
                         //
                     }
                 }));
-        disposable.add(Global.initRetrofit().getPastQuizPage(BuildConfig.APIKEY,Integer.parseInt(Global.userId.get()))
+        disposable.add(Global.initRetrofit().getPastQuizPage(BuildConfig.APIKEY, String.valueOf(Global.userId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

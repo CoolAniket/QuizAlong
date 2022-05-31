@@ -20,6 +20,8 @@ public class QuizItem {
     private Integer questions;
     @SerializedName("date")
     private String date;
+    @SerializedName("day")
+    private String day;
     @SerializedName("start_time")
     private String startTime;
     @SerializedName("total_time")
@@ -94,6 +96,14 @@ public class QuizItem {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getDay() {
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
     }
 
     public String getStartTime() {

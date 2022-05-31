@@ -140,7 +140,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{model.questions +"Ques"}'
+                            android:text='@{model.questions +" Ques"}'
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="12sp"
@@ -192,7 +192,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text='@{"Today "+model.startTime.toString()}'
+                        android:text='@{model.day+" "+model.startTime.toString()}'
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="12sp"

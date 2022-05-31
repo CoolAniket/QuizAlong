@@ -37,7 +37,7 @@ public class MyQuizViewModel extends ViewModel {
     }
 
     public void getMyQuizes() {
-        disposable.add(Global.initRetrofit().getMyQuizes(BuildConfig.APIKEY, Integer.parseInt(Global.userId.get()))
+        disposable.add(Global.initRetrofit().getMyQuizes(BuildConfig.APIKEY, String.valueOf(Global.userId))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

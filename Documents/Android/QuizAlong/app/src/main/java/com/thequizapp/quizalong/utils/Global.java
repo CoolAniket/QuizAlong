@@ -86,11 +86,11 @@ public class Global {
         }
     }
 
-    public static String prettyAmount(Number number) {
+    public static String prettyAmount(Number number, String prefix) {
         try {
             int value = number.intValue();
             if (number.intValue() > 0 ) {
-                return "" + value;
+                return prefix + value;
             } else {
                 return "Free";
             }
@@ -103,6 +103,40 @@ public class Global {
         try {
             if (TextUtils.isEmpty(value) ) {
                 return "--";
+            } else {
+                return value;
+            }
+        } catch (Exception e) {
+            return "--";
+        }
+    }
+    public static String prettyPaymentStatus(String value) {
+        try {
+            if (TextUtils.isEmpty(value) ) {
+                return "--";
+            } else if (value.equals("Success")) {
+                return "PAYMENT SUCCESSFUL";
+            } else if (value.equals("Pending")) {
+                return "PAYMENT PENDING";
+            } else if (value.equals("Failure")) {
+                return "PAYMENT FAILED";
+            } else {
+                return value;
+            }
+        } catch (Exception e) {
+            return "--";
+        }
+    }
+    public static String prettyWinningStatus(String value) {
+        try {
+            if (TextUtils.isEmpty(value) ) {
+                return "--";
+            } else if (value.equals("Success")) {
+                return "WINNINGS CREDITED";
+            } else if (value.equals("Pending")) {
+                return "WINNINGS PENDING";
+            } else if (value.equals("Failure")) {
+                return "WINNINGS FAILED";
             } else {
                 return value;
             }

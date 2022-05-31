@@ -51,7 +51,7 @@ public class ShowResultsRequest {
     }
 
 
-    public class Question {
+    public static class Question {
 
         @SerializedName("id")
         private Integer id;
@@ -82,7 +82,7 @@ public class ShowResultsRequest {
         @SerializedName("assigned")
         private Integer assigned;
         @SerializedName("description")
-        private Object description;
+        private String description;
 
         public Integer getId() {
             return id;
@@ -196,17 +196,17 @@ public class ShowResultsRequest {
             this.assigned = assigned;
         }
 
-        public Object getDescription() {
+        public String getDescription() {
             return description;
         }
 
-        public void setDescription(Object description) {
+        public void setDescription(String description) {
             this.description = description;
         }
 
     }
 
-    public class UserAnswer {
+    public static class UserAnswer {
 
         @SerializedName("id")
         private Integer id;
