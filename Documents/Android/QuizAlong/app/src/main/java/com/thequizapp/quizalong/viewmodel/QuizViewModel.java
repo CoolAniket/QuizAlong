@@ -307,7 +307,7 @@ public class QuizViewModel extends ViewModel {
             int count = 0;
             for (int i = 0; i < answerList.size(); i++) {
                 String ans = answerList.get(i);
-                if (!ans.equals(questionsItem.getTrueAns())) {
+//                if (!ans.equals(questionsItem.getTrueAns())) {
                     if (i == 0) {
                         firstAnswerVisibility.set(View.VISIBLE);
                     } else if (i == 1) {
@@ -321,7 +321,7 @@ public class QuizViewModel extends ViewModel {
                     if (count == 2)
                         break;
 
-                }
+//                }
             }
         }
     }
@@ -346,10 +346,10 @@ public class QuizViewModel extends ViewModel {
             NewQuestions.Question questionsItem = currentQuestions.getValue();
             for (int i = 0; i < answerList.size(); i++) {
                 String ans = answerList.get(i);
-                if (ans.equals(questionsItem.getTrueAns())) {
+//                if (ans.equals(questionsItem.getTrueAns())) {
                     trueAnswerPosition.set(i);
                     break;
-                }
+//                }
             }
             isAnswer.setValue(false);
         }

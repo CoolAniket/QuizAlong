@@ -66,14 +66,6 @@ public class NewQuestions {
         private Integer id;
         @SerializedName("question")
         private String question;
-        @SerializedName("true_ans")
-        private String trueAns;
-        @SerializedName("false_1")
-        private String false1;
-        @SerializedName("false_2")
-        private String false2;
-        @SerializedName("false_3")
-        private String false3;
         @SerializedName("reward")
         private Integer reward;
         @SerializedName("has_image")
@@ -111,38 +103,6 @@ public class NewQuestions {
 
         public void setQuestion(String question) {
             this.question = question;
-        }
-
-        public String getTrueAns() {
-            return trueAns;
-        }
-
-        public void setTrueAns(String trueAns) {
-            this.trueAns = trueAns;
-        }
-
-        public String getFalse1() {
-            return false1;
-        }
-
-        public void setFalse1(String false1) {
-            this.false1 = false1;
-        }
-
-        public String getFalse2() {
-            return false2;
-        }
-
-        public void setFalse2(String false2) {
-            this.false2 = false2;
-        }
-
-        public String getFalse3() {
-            return false3;
-        }
-
-        public void setFalse3(String false3) {
-            this.false3 = false3;
         }
 
         public Integer getReward() {
@@ -230,16 +190,6 @@ public class NewQuestions {
 
         public void setPoints(Integer points) {
             this.points = points;
-        }
-
-        public List<String> getAnswerList() {
-            List<String> strings = new ArrayList<>();
-            strings.add(getFalse1());
-            strings.add(getTrueAns());
-            strings.add(getFalse2());
-            strings.add(getFalse3());
-            Collections.shuffle(strings);
-            return strings;
         }
     }
 }

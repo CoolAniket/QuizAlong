@@ -2,7 +2,9 @@ package com.thequizapp.quizalong.view.web;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableBoolean;
@@ -20,7 +22,7 @@ import java.net.URL;
 
 public class WebViewActivity extends BaseActivity {
     ActivityWebViewBinding binding;
-    private ObservableBoolean isLoading = new ObservableBoolean(false);
+    private ObservableBoolean isLoading = new ObservableBoolean(true);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +34,20 @@ public class WebViewActivity extends BaseActivity {
         ws.setAllowFileAccess(true);
 
         SessionManager sessionManager = new SessionManager(this);
+        binding.webview.setWebChromeClient(new WebChromeClient() {
+            public void onProgressChanged(WebView view, int progress)
+            {
+                // Return the app name after finish loading
+                if(progress == 100)
+                    binding.wwLoader.getIsLoading().set(false);
+            }
+        });
         int type = getIntent().getIntExtra("type", 0);
         String pdfUrl = type == 0 ? sessionManager.getPrivacyUrl() : sessionManager.getTermsUrl();
         binding.webview.loadUrl(pdfUrl);
         binding.tvTitle.setText(type == 0 ? "Privacy Policy" : "Terms of Use");
         binding.ivBack.setOnClickListener(v -> onBackPressed());
-        binding.wwLoader.getIsLoading().set(true);
+//        binding.wwLoader.getIsLoading().set(true);
 //        new RetrivePDFfromUrl().execute(pdfUrl);
     }
 
