@@ -10,18 +10,18 @@
 
         <variable
             name="firstUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardUser" />
 
         <variable
             name="secondUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardUser" />
 
         <variable
             name="thirdUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardUser" />
         <variable
             name="myUser"
-            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardItem" />
+            type="com.thequizapp.quizalong.model.leaderboard.LeaderBoardResponse.LeaderboardUser" />
         <variable
             name="myUserPosition"
             type="boolean" />
@@ -80,11 +80,54 @@
                         android:src="@drawable/leaderboard" />
                 </RelativeLayout>
 
+                <RelativeLayout
+                    android:id="@+id/rl_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_below="@id/app_bar"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/spinner_border"
+                    >
+
+                    <Spinner
+                        android:id="@+id/sp_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:background="@android:color/transparent"
+                        android:layout_marginStart="5dp"
+                        android:spinnerMode="dropdown"
+                        android:paddingStart="4dp"
+                        android:paddingEnd="40dp"/>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/sp_type"
+                        android:layout_marginStart="-48dp"
+                        android:paddingEnd="-4dp"
+                        android:src="@drawable/drop_spinner" />
+
+                </RelativeLayout>
+
+<!--                <Spinner-->
+<!--                    android:id="@+id/sp_type"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="35dp"-->
+<!--                    android:layout_below="@id/app_bar"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:paddingHorizontal="32dp"-->
+<!--                    android:background="@drawable/bg_white_25"-->
+<!--                    android:backgroundTint="@color/dim_white"-->
+<!--                    android:hint="@string/select"-->
+<!--                    android:theme="@style/CustomSpinnerTheme"/>-->
+
                 <ImageView
                     android:id="@+id/iv_crown"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_below="@id/app_bar"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_below="@id/rl_spinner"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/crowns" />
 
@@ -92,7 +135,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/app_bar"
+                    android:layout_below="@id/rl_spinner"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
@@ -107,8 +150,8 @@
                         android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="110dp"
-                        android:layout_height="110dp"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
                         android:background="@drawable/ic_profile_user"
                         android:backgroundTint="@color/cobalt_blue"
                         android:padding="12dp"
@@ -141,8 +184,8 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="125dp"
-                        android:layout_height="125dp"
+                        android:layout_width="105dp"
+                        android:layout_height="105dp"
                         android:background="@drawable/ic_profile_user"
                         android:backgroundTint="@color/cobalt_blue"
                         android:padding="10dp"
@@ -168,7 +211,7 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/app_bar"
+                    android:layout_below="@id/rl_spinner"
                     android:layout_alignParentEnd="true"
                     android:layout_marginTop="29dp"
                     android:layout_marginEnd="22dp"
@@ -184,8 +227,8 @@
                         android:textSize="20sp" />
 
                     <ImageView
-                        android:layout_width="85dp"
-                        android:layout_height="85dp"
+                        android:layout_width="65dp"
+                        android:layout_height="65dp"
                         android:background="@drawable/ic_profile_user"
                         android:backgroundTint="@color/cobalt_blue"
                         android:padding="8dp"
@@ -232,11 +275,11 @@
                         android:fontFamily="@font/gilroy_bold"
                         android:text='Rank'
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <View
-                        android:layout_width="56dp"
-                        android:layout_height="40dp"
+                        android:layout_width="40dp"
+                        android:layout_height="32dp"
                         android:layout_marginHorizontal="15dp"
                         android:backgroundTint="@color/white_30"
                         android:padding="10dp"
@@ -245,7 +288,7 @@
                     <TextView
                         android:layout_height="wrap_content"
                         android:layout_width="0dp"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:fontFamily="@font/gilroy_bold"
                         android:text="User"
                         android:textColor="@color/black"
@@ -310,11 +353,11 @@
                         android:maxLength="5"
                         android:text='@{"#"+myUser.id}'
                         android:textColor="@color/black"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
 
                     <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_marginHorizontal="15dp"
                         android:background="@drawable/ic_profile_user"
                         android:backgroundTint="@color/white_30"
@@ -324,7 +367,7 @@
                     <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="2"
+                        android:layout_weight="3"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:fontFamily="@font/gilroy_medium"
