@@ -15,6 +15,9 @@ public class TransactionResponse {
     @SerializedName("history")
     private List<History> history = new ArrayList<>();
 
+    @SerializedName("winnings")
+    private List<History> winnings = new ArrayList<>();
+
     public Boolean getStatus() {
         return status;
     }
@@ -32,6 +35,14 @@ public class TransactionResponse {
     }
     public void setHistory(List<History> history) {
         this.history = history;
+    }
+
+    public List<History> getWinnings() {
+        return winnings;
+    }
+
+    public void setWinnings(List<History> winnings) {
+        this.winnings = winnings;
     }
 
     public static class History {

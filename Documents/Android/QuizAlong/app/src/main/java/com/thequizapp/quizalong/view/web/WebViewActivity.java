@@ -2,6 +2,7 @@ package com.thequizapp.quizalong.view.web;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.webkit.WebSettings;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ObservableBoolean;
@@ -26,18 +27,18 @@ public class WebViewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_web_view);
         binding.wwLoader.setIsLoading(isLoading);
-//        WebSettings ws = binding.webview.getSettings();
-//        ws.setJavaScriptEnabled(true);
-//        ws.setAllowFileAccess(true);
+        WebSettings ws = binding.webview.getSettings();
+        ws.setJavaScriptEnabled(true);
+        ws.setAllowFileAccess(true);
 
         SessionManager sessionManager = new SessionManager(this);
         int type = getIntent().getIntExtra("type", 0);
         String pdfUrl = type == 0 ? sessionManager.getPrivacyUrl() : sessionManager.getTermsUrl();
-//        binding.webview.loadUrl();
+        binding.webview.loadUrl(pdfUrl);
         binding.tvTitle.setText(type == 0 ? "Privacy Policy" : "Terms of Use");
         binding.ivBack.setOnClickListener(v -> onBackPressed());
         binding.wwLoader.getIsLoading().set(true);
-        new RetrivePDFfromUrl().execute(pdfUrl);
+//        new RetrivePDFfromUrl().execute(pdfUrl);
     }
 
     // create an async task class for loading pdf file from URL.
@@ -73,7 +74,7 @@ public class WebViewActivity extends BaseActivity {
             // after the execution of our async
             binding.wwLoader.getIsLoading().set(false);
             // task we are loading our pdf in our pdf view.
-            binding.webview.fromStream(inputStream).load();
+//            binding.webview.fromStream(inputStream).load();
         }
     }
 }

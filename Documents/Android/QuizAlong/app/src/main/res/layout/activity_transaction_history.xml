@@ -53,6 +53,35 @@
                 android:backgroundTint="@color/white"
                 />-->
         </androidx.appcompat.widget.Toolbar>
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="8dp" >
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize">
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/all"/>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/payments"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/payments"/>
+                <com.google.android.material.tabs.TabItem
+                    android:id="@+id/winnings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="@string/winnings"/>
+            </com.google.android.material.tabs.TabLayout>
+        </androidx.viewpager.widget.ViewPager>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_leader_board"
             android:layout_width="match_parent"
@@ -63,6 +92,7 @@
             app:adapter="@{viewModel.transactionAdapter}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_transaction" />
+<!--            tools:listitem="@layout/item_winning" />-->
 
 
     </LinearLayout>

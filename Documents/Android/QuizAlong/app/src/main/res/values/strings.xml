@@ -160,6 +160,10 @@
     <string name="did_you_know">Did you know?</string>
     <string name="check_score"><![CDATA[Check Score ->]]></string>
     <string name="start_now"><![CDATA[Start Now ->]]></string>
+    <string name="made_in_india">Made in India</string>
+    <string name="all">all</string>
+    <string name="payments">payments</string>
+    <string name="winnings">winnings</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

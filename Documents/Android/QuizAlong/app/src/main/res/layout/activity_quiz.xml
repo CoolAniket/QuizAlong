@@ -847,7 +847,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="5dp"
                         android:fontFamily="@font/gilroy_bold"
-                        android:text="2x Points"
+                        android:text='@{viewModel.twistQuizesItem.prize +" x Points"}'
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>

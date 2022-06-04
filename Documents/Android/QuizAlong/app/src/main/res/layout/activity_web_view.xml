@@ -45,20 +45,20 @@
 
         </RelativeLayout>
 
-<!--        <WebView-->
-<!--            android:id="@+id/webview"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent" />-->
+
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.github.barteksc.pdfviewer.PDFView
+            <!--<com.github.barteksc.pdfviewer.PDFView
+                android:id="@+id/webview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />-->
+            <WebView
                 android:id="@+id/webview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
-
             <include
                 android:id="@+id/ww_loader"
                 layout="@layout/loader"
