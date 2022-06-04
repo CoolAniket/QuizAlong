@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 
+import androidx.core.text.HtmlCompat;
 import androidx.databinding.DataBindingUtil;
 
 import com.facebook.login.LoginManager;
@@ -25,8 +26,10 @@ import com.thequizapp.quizalong.databinding.DialogLifeLineBinding;
 import com.thequizapp.quizalong.databinding.DialogPaymentAmountBinding;
 import com.thequizapp.quizalong.databinding.DialogRapidFireBinding;
 import com.thequizapp.quizalong.databinding.DialogSimpleBinding;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.view.splash.SplashActivity;
 
+import java.text.MessageFormat;
 import java.util.List;
 
 public class CustomDialogBuilder {
@@ -147,14 +150,18 @@ public class CustomDialogBuilder {
             return;
         DialogPaymentAmountBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_payment_amount, null, false);
 
+        binding.btn50.setText(MessageFormat.format("INR {0}", entry.get(1)));
         binding.btn50.setOnClickListener(v -> {
             mBuilder.dismiss();
             onDismissListener.onAmountClick(entry.get(1));
         });
+
+        binding.btn100.setText(MessageFormat.format("INR {0}", entry.get(2)));
         binding.btn100.setOnClickListener(v -> {
             mBuilder.dismiss();
             onDismissListener.onAmountClick(entry.get(2));
         });
+        
         binding.tvCancel.setOnClickListener(v -> {
             mBuilder.dismiss();
             onDismissListener.onDismissClick();
@@ -164,11 +171,12 @@ public class CustomDialogBuilder {
         mBuilder.show();
     }
 
-    public void showEnrollForFreeDialog(OnEnrollOptionSelectListener onDismissListener) {
+    public void showEnrollForFreeDialog(QuizItem quizesItem, OnEnrollOptionSelectListener onDismissListener) {
         if (mContext == null)
             return;
+//        String note = ;
         DialogEnrollForFreeBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_enroll_for_free, null, false);
-
+        binding.tvNote.setText(HtmlCompat.fromHtml(String.format(mContext.getResources().getString(R.string.note_top_50_of), quizesItem.getWinPercent(), quizesItem.getPrize()) , HtmlCompat.FROM_HTML_MODE_LEGACY));
         binding.btnFree.setOnClickListener(v -> {
             mBuilder.dismiss();
             onDismissListener.onClick(OnEnrollOptionSelectListener.Type.FREE);

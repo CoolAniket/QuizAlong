@@ -35,7 +35,7 @@ public class CategoriesViewModel extends ViewModel {
 
 
 
-    public void getHomeData(int courseId, int userId) {
+    public void getHomeData(int courseId, String userId) {
         disposable.add(Global.initRetrofit().getAllCategories(BuildConfig.APIKEY, courseId, userId)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

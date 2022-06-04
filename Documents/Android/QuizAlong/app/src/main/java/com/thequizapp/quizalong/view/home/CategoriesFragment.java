@@ -47,7 +47,7 @@ public class CategoriesFragment extends Fragment {
     }
 
     private void initListener() {
-        viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, Integer.parseInt(Global.userId.get()));
+        viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, String.valueOf(Global.userId));
         //viewModel.getHomeData(Const.COURSE_TYPE_MEDICINE, new SessionManager(requireContext()).getUser().getUser().getId());
         viewModel.setFavouriteCheck();
         viewModel.getCategoriesAdapter().setOnItemClick((pairs, categoriesItem) -> {

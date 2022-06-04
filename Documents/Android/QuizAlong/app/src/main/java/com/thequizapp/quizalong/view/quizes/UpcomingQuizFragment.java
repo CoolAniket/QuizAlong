@@ -58,7 +58,7 @@ public class UpcomingQuizFragment extends Fragment {
         viewModel.getQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
             if (pairs.length == 3) {
                 startPaymentProcess(quizesItem);
-            } else if (pairs[0].second.equals("Free")) {
+            } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
                 enrollForFree(quizesItem);
             } else {
                 startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
@@ -103,7 +103,7 @@ public class UpcomingQuizFragment extends Fragment {
     }
 
     private void enrollForFree(QuizItem quizesItem) {
-        new CustomDialogBuilder(requireContext()).showEnrollForFreeDialog(new CustomDialogBuilder.OnEnrollOptionSelectListener() {
+        new CustomDialogBuilder(requireContext()).showEnrollForFreeDialog(quizesItem, new CustomDialogBuilder.OnEnrollOptionSelectListener() {
 
             @Override
             public void onClick(Type enrollmentType) {

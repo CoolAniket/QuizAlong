@@ -51,7 +51,7 @@ public class ShowResultsRequest {
     }
 
 
-    public class Question {
+    public static class Question {
 
         @SerializedName("id")
         private Integer id;
@@ -206,7 +206,7 @@ public class ShowResultsRequest {
 
     }
 
-    public class UserAnswer {
+    public static class UserAnswer {
 
         @SerializedName("id")
         private Integer id;

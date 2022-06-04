@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemUpcomingQuizesBinding;
 import com.thequizapp.quizalong.model.quiz.QuizItem;
+import com.thequizapp.quizalong.utils.Global;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,9 +97,8 @@ public class QuizesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 if (quizes.get(position) != null) {
                     QuizItem quizesItem = quizes.get(position);
                     binding.btnCheck.setOnClickListener(v -> {
-                        Pair<View, String>[] pairs = new Pair[2];
-                        pairs[0] = new Pair<>(binding.tvTitle, binding.tvTitle.getTransitionName());
-                        pairs[1] = new Pair<>(binding.ivIcon, binding.ivIcon.getTransitionName());
+                        Pair<View, String>[] pairs = new Pair[1];
+                        pairs[0] = new Pair<>(binding.tvTitle, "Free");
                         onItemClick.onClick(pairs, quizesItem);
                     });
                     binding.btnPay.setOnClickListener(v -> {

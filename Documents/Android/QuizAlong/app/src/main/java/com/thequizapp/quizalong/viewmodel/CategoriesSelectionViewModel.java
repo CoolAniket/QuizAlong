@@ -25,7 +25,7 @@ public class CategoriesSelectionViewModel extends ViewModel {
 
 
     public void getHomeData() {
-        disposable.add(Global.initRetrofit().getAllCategories(BuildConfig.APIKEY, 0, 0)
+        disposable.add(Global.initRetrofit().getAllCategories(BuildConfig.APIKEY, 0, "0")
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .unsubscribeOn(Schedulers.io())

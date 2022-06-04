@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2 X "
+                    android:text='@{model.prize +" X"}'
                     android:textStyle="bold"
                     android:textColor="@color/white"
                     android:textSize="13sp"
@@ -191,7 +191,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text='@{"Today "+model.startTime.toString()}'
+                            android:text='@{model.day+" "+model.startTime.toString()}'
                             android:textStyle="bold"
                             android:textColor="@color/white"
                             android:textSize="15sp"

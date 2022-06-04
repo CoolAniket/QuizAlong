@@ -93,10 +93,7 @@ public class  MainActivity extends BaseActivity {
             onBackPressed();
             viewModel.onClickMenu(2);
         });
-        binding.navDrawer.lytPlayHistory.setOnClickListener(v -> startActivity(new Intent(this, PlayHistoryActivity.class)));
-        binding.navDrawer.lytRedeemRequest.setOnClickListener(v -> startActivity(new Intent(this, HistoryRedeemRequestActivity.class)));
         binding.navDrawer.lytMyQuiz.setOnClickListener(v -> startActivity(new Intent(this, MyQuizActivity.class)));
-        binding.navDrawer.lytUpdate.setOnClickListener(v -> startActivity(new Intent(this, NotificationActivity.class)));
         binding.navDrawer.lytPrivacy.setOnClickListener(v -> startActivity(new Intent(this, WebViewActivity.class).putExtra("type", 0)));
         binding.navDrawer.lytTerms.setOnClickListener(v -> startActivity(new Intent(this, WebViewActivity.class).putExtra("type", 1)));
     }

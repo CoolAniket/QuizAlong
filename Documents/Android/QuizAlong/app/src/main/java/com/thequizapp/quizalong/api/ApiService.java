@@ -43,23 +43,23 @@ public interface ApiService {
 
     @GET(Const.QUIZ_TWIST)
     Single<TwistQuizPage> getTwistQuizPage(@Header(Const.API_KEY) String apiKey,
-                                           @Path(Const.USER_ID) int userId);
+                                           @Path(Const.USER_ID) String userId);
 
     @GET(Const.QUIZ_UPCOMING)
     Single<TwistQuizPage> getUpcomingQuizPage(@Header(Const.API_KEY) String apiKey,
-                                              @Path(Const.USER_ID) int userId);
+                                              @Path(Const.USER_ID) String userId);
 
     @GET(Const.QUIZ_PAST)
     Single<TwistQuizPage> getPastQuizPage(@Header(Const.API_KEY) String apiKey,
-                                          @Path(Const.USER_ID) int userId);
+                                          @Path(Const.USER_ID) String userId);
 
     @GET(Const.QUIZ_ALLCATEGORIES)
     Single<CategoriesResponse> getAllCategories(@Header(Const.API_KEY) String apiKey,
                                                 @Path(Const.COURSE_ID) int course_id,
-                                                @Path(Const.USER_ID) int userId);
+                                                @Path(Const.USER_ID) String userId);
     @GET(Const.QUIZ_MY_QUIZ)
     Single<QuizByCatId> getMyQuizes(@Header(Const.API_KEY) String apiKey,
-                                                @Path(Const.USER_ID) int userId);
+                                                @Path(Const.USER_ID) String userId);
 
     @GET(Const.PAYMENT_RZP_ORDER_ID)
     Single<OrderResponse> getRzpOrderId(@Header(Const.API_KEY) String apiKey,
