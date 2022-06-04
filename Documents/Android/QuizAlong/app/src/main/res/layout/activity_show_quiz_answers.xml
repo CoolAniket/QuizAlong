@@ -41,11 +41,21 @@
                 android:src="@drawable/quiz_along_logo"
                 android:layout_gravity="center"
                 android:layout_marginTop="50dp"/>
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginTop="10dp">
+                <TextView
+                    android:id="@+id/tv_paginationstart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:singleLine="true"
+                    android:textColor="@color/white"
+                    android:textSize="15sp"
+                    android:text=""
+                    android:gravity="center"/>
                 <TextView
                     android:id="@+id/tv_pagination"
                     android:layout_width="match_parent"
@@ -55,8 +65,9 @@
                     android:singleLine="true"
                     android:textColor="@color/white"
                     android:textSize="15sp"
-                    android:text=""/>
-            </LinearLayout>
+                    android:text=""
+                    android:gravity="center"/>
+            </RelativeLayout>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_questions"
                 android:layout_width="match_parent"

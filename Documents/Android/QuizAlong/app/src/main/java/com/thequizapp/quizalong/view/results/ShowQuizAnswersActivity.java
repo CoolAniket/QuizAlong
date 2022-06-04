@@ -54,6 +54,14 @@ public class ShowQuizAnswersActivity extends BaseActivity {
             //binding.tvPagination.setText("");
             //binding.tvPagination.setText(pageStr);
         });
+
+        viewModel.getOnSuccess().observe(this, response -> {
+            Log.e("Response .. ",""+response.getQuestions());
+            //binding.tvPagination.setText(pageStr);
+            String str = p+ "/" + response.getQuestions().size();
+            Log.e("Start", "" + str);
+            binding.tvPaginationstart.setText(str);
+        });
     }
 
     private void initListener(){
@@ -76,6 +84,7 @@ public class ShowQuizAnswersActivity extends BaseActivity {
                     Log.e("PPPP", "" + str);
                     binding.tvPagination.setText(str);
                     viewModel.getPaginationVal().setValue(str);
+                    binding.tvPaginationstart.setVisibility(View.GONE);
                 }
             });
 
