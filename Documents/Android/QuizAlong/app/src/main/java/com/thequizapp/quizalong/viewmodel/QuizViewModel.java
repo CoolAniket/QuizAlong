@@ -14,7 +14,9 @@ import com.thequizapp.quizalong.model.home.TwistQuizPage;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
 import com.thequizapp.quizalong.model.questions.Questions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
+import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
 import com.thequizapp.quizalong.model.quiz.QuizItem;
+import com.thequizapp.quizalong.model.rest.RestResponse;
 import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.Global;
 
@@ -32,6 +34,7 @@ public class QuizViewModel extends ViewModel {
     private ObservableBoolean isLoading = new ObservableBoolean(true);
     private QuizItem quizesItem;
     private QuizItem twistQuizesItem;
+
     private String quizType = "";
     private MutableLiveData<NewQuestions.Question> currentQuestions = new MutableLiveData<>();
     private ObservableInt trueAnswerPosition = new ObservableInt(-1);
@@ -73,6 +76,7 @@ public class QuizViewModel extends ViewModel {
     public ObservableInt getTimeRemaining() {
         return timeRemaining;
     }
+    public final MutableLiveData<LobbyMessageResponse> onLobbySuccess = new MutableLiveData<>();
 
     public void setTimeRemaining(ObservableInt timeRemaining) {
         this.timeRemaining = timeRemaining;
@@ -104,6 +108,8 @@ public class QuizViewModel extends ViewModel {
     public void setOnSuccess(MutableLiveData<AddDataLiveResponse> onSuccess) {
         this.onSuccess = onSuccess;
     }
+
+
     public void letGoBtn() {
 
     }
@@ -133,6 +139,25 @@ public class QuizViewModel extends ViewModel {
                         }
                     } else {
                         Log.e("QUIZ....",""+throwable);
+                    }
+
+                }));
+    }
+
+    public void getLobbyMessages() {
+        disposable.add(Global.initRetrofit().lobbyMessages(BuildConfig.APIKEY)
+                /*disposable.add(Global.initRetrofit().getQuestionsByQuizId(BuildConfig.APIKEY, "11")*/
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable1 -> isLoading.set(true))
+                .doOnTerminate(() -> isLoading.set(false))
+                .subscribe((messages, throwable) -> {
+                    if (throwable == null) {
+                        Log.e("Lobby....","Messages "+messages);
+                       onLobbySuccess.setValue(messages);
+                    } else {
+                        Log.e("Lobby....","Messages "+throwable);
                     }
 
                 }));

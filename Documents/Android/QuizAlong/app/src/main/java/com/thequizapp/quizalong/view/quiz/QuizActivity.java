@@ -22,12 +22,14 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
+import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
 import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.receivers.GameStartReceiver;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
@@ -47,8 +49,10 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -70,6 +74,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
     private CountDownTimer lTimer = null;
     private CountDownTimer slideTimer = null;
     private int tipCnt =0;
+    private List<LobbyMessageResponse.QuizItem> lobbyMessagesList = new ArrayList<>();
     private static final String[] TIPS = new String[] {
             "You can increase your chance of winning significantly if you play in a group of 2 or more.",
             "SKIP lifeline helps you to directly pass the question as correct.",
@@ -101,6 +106,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
         //viewModel.setQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class));
         viewModel.setTwistQuizesItem(new Gson().fromJson(getIntent().getStringExtra("data"), QuizItem.class));
         viewModel.getQuestionsByQuizId();
+        viewModel.getLobbyMessages();
         Random r=new Random();
         //int randomNumber=r.nextInt(TIPS.length);
         binding.tvTip.setText(TIPS[tipCnt]);
@@ -116,7 +122,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
         viewModel.setQuizType(getIntent().getStringExtra("quiz_type"));
     }
 
-    private void slideTextWithTime(){
+    private void slideTextWithTime(List<LobbyMessageResponse.QuizItem> messages,String[] TIPS){
+
+
         if (slideTimer != null)
             slideTimer.cancel();
         slideTimer = new CountDownTimer(15000, 1000) {
@@ -127,15 +135,24 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
             public void onFinish() {
                 Log.e("omFinish ", "");
-                Random r=new Random();
-                int randomNumber=r.nextInt(TIPS.length);
-                if(tipCnt >= (TIPS.length-1) ){
-                    tipCnt = 0;
-                }else{
-                    tipCnt++;
+                if(messages.size() > 0) {
+                    if (tipCnt >= (messages.size() - 1)) {
+                        tipCnt = 0;
+                    } else {
+                        tipCnt++;
+                    }
+                    binding.tvTip.setText(messages.get(tipCnt).getMessage());
+                    Log.e("UUUUU ",messages.get(tipCnt).getMessage());
+
+                }else {
+                    if (tipCnt >= (TIPS.length - 1)) {
+                        tipCnt = 0;
+                    } else {
+                        tipCnt++;
+                    }
+                    binding.tvTip.setText(TIPS[tipCnt]);
                 }
-                binding.tvTip.setText(TIPS[tipCnt]);
-                slideTextWithTime();
+                slideTextWithTime(messages,TIPS);
             }
         };
         slideTimer.start();
@@ -170,6 +187,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
     }
 
     private void initView() {
+        Log.e("LOBBYYY "," ++ "+lobbyMessagesList);
         new BannerAds(QuizActivity.this, binding.bannerAds);
         interstitialAds = new InterstitialAds(QuizActivity.this);
 
@@ -340,7 +358,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
             }else
             {
                 viewModel.getIsInfo().set(true);
-                slideTextWithTime();
+                slideTextWithTime(lobbyMessagesList,TIPS);
                 startLobbyTimer();
                 /*viewModel.getIsLobby().set(true);
                 startCountDown();*/
@@ -484,6 +502,12 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
         viewModel.getLobbyTime().observe(this, timeString -> {
             binding.tvLobbyTime.setText(timeString);
+        });
+
+        viewModel.onLobbySuccess.observe(this, response -> {
+            lobbyMessagesList.addAll(response.getQuizes());
+            Log.e("....","///// "+lobbyMessagesList);
+            slideTextWithTime(lobbyMessagesList,TIPS);
         });
     }
 

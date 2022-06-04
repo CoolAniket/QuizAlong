@@ -104,7 +104,7 @@ public class ShowQuizResultsViewModel extends ViewModel {
                         Log.e("ShowResult...","past "+ShowResult+" "+throwable);
                         if (ShowResult != null) {
                             onSuccess.setValue(ShowResult);
-                            //paginationVal.setValue("1"+"/"+ShowResult.getQuestions().size());
+                            paginationVal.setValue("1"+"/"+ShowResult.getQuestions().size());
                             Log.e("ShowResult...",""+ShowResult.getUserAnswers().get(0));
                             //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
                             showQuestionAnsAdapter.updateData(ShowResult);
@@ -126,6 +126,7 @@ public class ShowQuizResultsViewModel extends ViewModel {
                         Log.e("ShowResult...",""+ShowResult+" "+throwable);
                         if (ShowResult != null) {
                             onSuccess.setValue(ShowResult);
+                            paginationVal.setValue("1"+"/"+ShowResult.getQuestions().size());
                             //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
                             showQuestionAnsAdapter.updateData(ShowResult);
                         /*String str = "1"+"/"+ShowResult.getQuestions().size();

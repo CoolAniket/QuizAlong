@@ -9,6 +9,7 @@ import com.thequizapp.quizalong.model.payment.TransactionResponse;
 import com.thequizapp.quizalong.model.questions.NewQuestions;
 import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
 import com.thequizapp.quizalong.model.payment.OrderResponse;
+import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
 import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
@@ -183,4 +184,7 @@ public interface ApiService {
     Single<Notifications> getNotifications(@Header(Const.API_KEY) String apiKey,
                                            @Field(Const.START) String start,
                                            @Field(Const.COUNT) String count);
+
+    @GET(Const.LOBBY_MESSAGES)
+    Single<LobbyMessageResponse> lobbyMessages(@Header(Const.API_KEY) String apiKey);
 }

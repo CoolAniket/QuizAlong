@@ -51,8 +51,8 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     private void initObserve(){
         viewModel.getPaginationVal().observe(this, pageStr -> {
            Log.e("pageStr .. ",""+pageStr);
-            binding.tvPagination.setText("");
-            binding.tvPagination.setText(pageStr);
+            //binding.tvPagination.setText("");
+            //binding.tvPagination.setText(pageStr);
         });
     }
 
@@ -70,9 +70,11 @@ public class ShowQuizAnswersActivity extends BaseActivity {
                     //viewModel.getPaginationVal().setValue(""+p);
                     Log.e("PPPP", "" + p);
                     checkVisibility();
-                    viewModel.getPaginationVal().setValue("");
+                    //viewModel.getPaginationVal().setValue("");
+                    binding.tvPagination.setText("");
                     String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
                     Log.e("PPPP", "" + str);
+                    binding.tvPagination.setText(str);
                     viewModel.getPaginationVal().setValue(str);
                 }
             });
@@ -85,9 +87,11 @@ public class ShowQuizAnswersActivity extends BaseActivity {
                     binding.rvQuestions.smoothScrollToPosition(p);
                     Log.e("NNNN", "" + p);
                     checkVisibility();
-                    viewModel.getPaginationVal().setValue("");
+                    //viewModel.getPaginationVal().setValue("");
+                    binding.tvPagination.setText("");
                     String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
                     Log.e("NNNN", "" + str);
+                    binding.tvPagination.setText(str);
                     viewModel.getPaginationVal().setValue(str);
                 }
             });
