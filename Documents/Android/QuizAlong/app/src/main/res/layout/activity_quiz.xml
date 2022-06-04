@@ -384,11 +384,12 @@
                                 android:orientation="horizontal"
                                 android:paddingHorizontal="10dp"
                                 android:paddingVertical="3dp"
+                                android:visibility='@{question.image.equals("") ? View.GONE : View.VISIBLE}'
                                 >
                                 <ImageView
                                     android:layout_width="match_parent"
                                     android:layout_height="100dp"
-                                    app:normal_image="@{viewModel.twistQuizesItem.image}"
+                                    app:normal_image="@{question.image}"
                                     />
                                 <ImageView
                                     android:layout_width="wrap_content"
