@@ -41,8 +41,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
-
-
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -57,59 +55,85 @@
                         android:textSize="16sp"
                         app:scroll_text="@{true}" />
 
-
-
-                    <androidx.cardview.widget.CardView
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp">
-
-                        <!--<ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:scaleType="centerCrop"
-                            android:layout_gravity="center_vertical|right"
-                            android:layout_marginRight="10dp"
-                            android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/checked : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />-->
-
-                        <LinearLayout
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text='@{ansmodel.selectedAns.equalsIgnoreCase(model.trueAns) ? "You Marked":"You Missed"}'
+                            android:layout_gravity="right"
+                            android:textSize="11sp"
+                            android:textColor="@color/green"
+                            />
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/custom_border_green">
-                            <TextView
+                            android:layout_height="50dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="4dp"
+                            android:layout_margin="2dp">
+
+                            <!--<ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:scaleType="centerCrop"
+                                android:layout_gravity="center_vertical|right"
+                                android:layout_marginRight="10dp"
+                                android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/checked : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />-->
+
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:fontFamily="@font/gilroy_reguler"
-                                android:gravity="center"
-                                android:text="@{model.trueAns}"
-                                android:textColor="@color/black"
-                                android:textSize="16sp"
-                                tools:text="@tools:sample/date/ddmmyy" />
-                        </LinearLayout>
+                                android:background="@drawable/custom_border_green">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:fontFamily="@font/gilroy_reguler"
+                                    android:gravity="center"
+                                    android:text="@{model.trueAns}"
+                                    android:textColor="@color/black"
+                                    android:textSize="16sp"
+                                    tools:text="@tools:sample/date/ddmmyy" />
+                            </LinearLayout>
 
 
-                        <!--<View
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@drawable/bg_white_5"
-                            android:backgroundTint="@color/black_55"
-                            android:clickable="true"
-                            android:focusable="true"
-                            android:visibility="@{viewModel.firstAnswerVisibility}" />-->
-                    </androidx.cardview.widget.CardView>
+                            <!--<View
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_white_5"
+                                android:backgroundTint="@color/black_55"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:visibility="@{viewModel.firstAnswerVisibility}" />-->
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{ansmodel.selectedAns.equalsIgnoreCase(model.false1) ? "You Marked":""}'
+                        android:layout_gravity="right"
+                        android:textSize="11sp"
+                        android:textColor="@color/red"
+                        />
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="10dp"
                         app:cardBackgroundColor="@color/white"
-
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp">
+                        app:cardElevation="4dp"
+                        android:layout_margin="2dp">
 
                         <!--<ImageView
                             android:layout_width="30dp"
@@ -144,15 +168,29 @@
                             android:scaleType="centerCrop"
                             android:visibility="@{viewModel.secondAnswerVisibility}" />-->
                     </androidx.cardview.widget.CardView>
-
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{ansmodel.selectedAns.equalsIgnoreCase(model.false2) ? "You Marked":""}'
+                        android:layout_gravity="right"
+                        android:textSize="11sp"
+                        android:textColor="@color/red"
+                        />
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="10dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp">
+                        app:cardElevation="4dp"
+                        android:layout_margin="2dp">
 
                         <!--<ImageView
                             android:layout_width="30dp"
@@ -187,16 +225,30 @@
                             android:scaleType="centerCrop"
                             android:visibility="@{viewModel.thirdAnswerVisibility}" />-->
                     </androidx.cardview.widget.CardView>
-
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text='@{ansmodel.selectedAns.equalsIgnoreCase(model.false3) ? "You Marked":""}'
+                        android:layout_gravity="right"
+                        android:textSize="11sp"
+                        android:textColor="@color/red"
+                        />
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="20dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
-                        app:cardElevation="4dp">
+                        app:cardElevation="4dp"
+                        android:layout_margin="2dp">
 
                         <!--<ImageView
                             android:layout_width="30dp"
@@ -233,6 +285,7 @@
                             android:scaleType="centerCrop"
                             android:visibility="@{viewModel.fourthAnswerVisibility}" />-->
                     </androidx.cardview.widget.CardView>
+                </LinearLayout>
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
