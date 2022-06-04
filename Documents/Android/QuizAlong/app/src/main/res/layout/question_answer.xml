@@ -64,7 +64,6 @@
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        app:cardBackgroundColor='@color/green'
                         app:cardCornerRadius="8dp"
                         app:cardElevation="4dp">
 
@@ -76,16 +75,21 @@
                             android:layout_marginRight="10dp"
                             android:src="@{viewModel.trueAnswerPosition == 0 ? @drawable/checked : (viewModel.wrongAnswerPosition == 0 || viewModel.firstAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />-->
 
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:fontFamily="@font/gilroy_reguler"
-                            android:gravity="center"
-                            android:text="@{model.trueAns}"
-                            android:textColor="@color/black"
-                            android:textSize="16sp"
-                            tools:text="@tools:sample/date/ddmmyy"
-                            tools:textColor="@color/dim_white" />
+                            android:background="@drawable/custom_border_green">
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{model.trueAns}"
+                                android:textColor="@color/black"
+                                android:textSize="16sp"
+                                tools:text="@tools:sample/date/ddmmyy" />
+                        </LinearLayout>
+
 
                         <!--<View
                             android:layout_width="match_parent"
@@ -102,7 +106,7 @@
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        app:cardBackgroundColor='@{ansmodel.selectedAns.contains(model.false1) ? @color/red:@color/white}'
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="4dp">
 
@@ -113,15 +117,20 @@
                             android:layout_gravity="center_vertical|right"
                             android:layout_marginRight="10dp"
                             android:src="@{viewModel.trueAnswerPosition == 1 ? @drawable/checked : (viewModel.wrongAnswerPosition == 1 || viewModel.secondAnswerVisibility == View.VISIBLE? @drawable/checked : @drawable/bg_white) }" />-->
-
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:fontFamily="@font/gilroy_reguler"
-                            android:gravity="center"
-                            android:text="@{model.false1}"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:background='@{ansmodel.selectedAns.contains(model.false1) ? @drawable/custom_border_red:@color/white}'>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{model.false1}"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
 
 
                         <!--<ImageView
@@ -140,7 +149,7 @@
                         android:layout_height="50dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
-                        app:cardBackgroundColor='@{ansmodel.selectedAns.contains(model.false2) ? @color/red:@color/white}'
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="4dp">
 
@@ -152,15 +161,20 @@
                             android:layout_marginRight="10dp"
                             android:src="@{viewModel.trueAnswerPosition == 2 ? @drawable/checked : (viewModel.wrongAnswerPosition == 2 || viewModel.thirdAnswerVisibility == View.VISIBLE ? @drawable/checked : @drawable/bg_white) }" />-->
 
-
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:fontFamily="@font/gilroy_reguler"
-                            android:gravity="center"
-                            android:text="@{model.false2}"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:background='@{ansmodel.selectedAns.contains(model.false2) ? @drawable/custom_border_red:@color/white}'>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{model.false2}"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
 
                         <!--<ImageView
                             android:layout_width="match_parent"
@@ -179,7 +193,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="20dp"
-                        app:cardBackgroundColor='@{ansmodel.selectedAns.contains(model.false3) ? @color/red:@color/white}'
+                        app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="4dp">
 
@@ -192,15 +206,20 @@
                             android:layout_marginRight="10dp"
                             />-->
                         <!--android:src="@{viewModel.trueAnswerPosition == 3 ? @drawable/tick : (viewModel.wrongAnswerPosition == 3 || viewModel.fourthAnswerVisibility == View.VISIBLE ? @drawable/tick : @drawable/bg_white) }" />-->
-
-                        <TextView
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:fontFamily="@font/gilroy_reguler"
-                            android:gravity="center"
-                            android:text="@{model.false3}"
-                            android:textColor="@color/black"
-                            android:textSize="16sp" />
+                            android:background='@{ansmodel.selectedAns.contains(model.false3) ? @drawable/custom_border_red:@color/white}'>
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:fontFamily="@font/gilroy_reguler"
+                                android:gravity="center"
+                                android:text="@{model.false3}"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
 
 
                         <!--<ImageView
