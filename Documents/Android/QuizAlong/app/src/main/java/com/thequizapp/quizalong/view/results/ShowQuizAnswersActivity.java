@@ -50,7 +50,7 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     }
     private void initObserve(){
         viewModel.getPaginationVal().observe(this, pageStr -> {
-//            Log.e("pageStr .. ",""+pageStr);
+           Log.e("pageStr .. ",""+pageStr);
             binding.tvPagination.setText("");
             binding.tvPagination.setText(pageStr);
         });
@@ -59,34 +59,39 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     private void initListener(){
         LinearLayoutManager manager= (LinearLayoutManager) binding.rvQuestions.getLayoutManager();
 
+        /*if(binding.rvQuestions.getAdapter() != null) {*/
 
-        binding.btnPrev.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p = manager.findLastVisibleItemPosition() - 1;
-                binding.rvQuestions.smoothScrollToPosition(p);
-                //viewModel.getPaginationVal().setValue(""+p);
-                //Log.e("PPPP" ,""+p);
-                checkVisibility();
-                viewModel.getPaginationVal().setValue("");
-                String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
-                viewModel.getPaginationVal().setValue(str);
-            }
-        });
+        //Log.e("countttt", "" + binding.rvQuestions.getAdapter().getItemCount());
+            binding.btnPrev.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    p = manager.findLastVisibleItemPosition() - 1;
+                    binding.rvQuestions.smoothScrollToPosition(p);
+                    //viewModel.getPaginationVal().setValue(""+p);
+                    Log.e("PPPP", "" + p);
+                    checkVisibility();
+                    viewModel.getPaginationVal().setValue("");
+                    String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
+                    Log.e("PPPP", "" + str);
+                    viewModel.getPaginationVal().setValue(str);
+                }
+            });
 
 
-        binding.btnNext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                p = manager.findFirstVisibleItemPosition() + 1;
-                binding.rvQuestions.smoothScrollToPosition(p);
-                //Log.e("NNNN" ,""+p);
-                checkVisibility();
-                viewModel.getPaginationVal().setValue("");
-                String str = (p+1)+"/"+binding.rvQuestions.getAdapter().getItemCount();
-                viewModel.getPaginationVal().setValue(str);
-            }
-        });
+            binding.btnNext.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    p = manager.findFirstVisibleItemPosition() + 1;
+                    binding.rvQuestions.smoothScrollToPosition(p);
+                    Log.e("NNNN", "" + p);
+                    checkVisibility();
+                    viewModel.getPaginationVal().setValue("");
+                    String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
+                    Log.e("NNNN", "" + str);
+                    viewModel.getPaginationVal().setValue(str);
+                }
+            });
+        /*}*/
         binding.btnViewLeaderboard.setOnClickListener(v -> {
             startActivity(new Intent(this, LeaderBoardActivity.class).
                     putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getQuizId()))
