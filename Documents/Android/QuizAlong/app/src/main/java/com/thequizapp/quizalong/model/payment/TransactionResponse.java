@@ -13,7 +13,7 @@ public class TransactionResponse {
     private boolean status;
 
     @SerializedName("history")
-    private List<History> history = new ArrayList<>();
+    private List<List<History>> history = new ArrayList<>();
 
     @SerializedName("winnings")
     private List<History> winnings = new ArrayList<>();
@@ -30,10 +30,10 @@ public class TransactionResponse {
     public void setMessage(String message) {
         this.message = message;
     }
-    public List<History> getHistory() {
+    public List<List<History>> getHistory() {
         return history;
     }
-    public void setHistory(List<History> history) {
+    public void setHistory(List<List<History>> history) {
         this.history = history;
     }
 

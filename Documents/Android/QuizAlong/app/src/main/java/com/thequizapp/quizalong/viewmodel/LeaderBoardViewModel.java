@@ -204,9 +204,7 @@ public class LeaderBoardViewModel extends ViewModel {
             }
         }
         if (users.size() > 1) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                Collections.sort(users, Comparator.comparingInt(LeaderBoardResponse.LeaderboardUser::getId));
-            }
+            users.sort(Comparator.comparingInt(LeaderBoardResponse.LeaderboardUser::getId));
         }
         leaderBoardAdapter.updateData(users);
     }

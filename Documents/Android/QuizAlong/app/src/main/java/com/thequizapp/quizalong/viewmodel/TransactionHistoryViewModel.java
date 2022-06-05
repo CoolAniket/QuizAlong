@@ -14,7 +14,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class TransactionHistoryViewModel extends ViewModel {
-    public final TransactionAdapter transactionAdapter = new TransactionAdapter();
+//    public final TransactionAdapter transactionAdapter = new TransactionAdapter();
 
     private final CompositeDisposable disposable = new CompositeDisposable();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
@@ -45,7 +45,7 @@ public class TransactionHistoryViewModel extends ViewModel {
                     if (transactionResponse != null && transactionResponse.getHistory() != null) {
 //                        isEmpty.set(transactionResponse.getPastQuizes().isEmpty());
                         historyData.postValue(transactionResponse);
-                        transactionAdapter.updateData(transactionResponse.getHistory());
+//                        transactionAdapter.updateData(transactionResponse.getHistory());
                     }
                 }));
     }

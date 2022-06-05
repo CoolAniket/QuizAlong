@@ -82,16 +82,16 @@
             </com.google.android.material.tabs.TabLayout>
         </androidx.viewpager.widget.ViewPager>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_leader_board"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical"
-            android:paddingHorizontal="10dp"
-            app:adapter="@{viewModel.transactionAdapter}"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:listitem="@layout/item_transaction" />
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/rv_leader_board"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:orientation="vertical"-->
+<!--            android:paddingHorizontal="10dp"-->
+<!--            app:adapter="@{viewModel.transactionAdapter}"-->
+<!--            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"-->
+<!--            tools:listitem="@layout/item_transaction" />-->
 <!--            tools:listitem="@layout/item_winning" />-->
 
 

@@ -22,12 +22,12 @@ public class TransactionHistoryViewPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 1:
-                return new PaymentsFragment(transactionResponse.getHistory());
+                return new PaymentsFragment(transactionResponse.getHistory().get(position));
             case 2:
-                return new WinningsFragment(transactionResponse.getHistory());
+                return new WinningsFragment(transactionResponse.getHistory().get(position));
             case 0:
             default:
-                return new AllTransactionFragment(transactionResponse.getHistory());
+                return new AllTransactionFragment(transactionResponse.getHistory().get(position));
         }
     }
 
