@@ -232,8 +232,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
                 public void onFinish() {
                     //Log.e("omFinish ", ""+viewModel.getIsAnswer().getValue());
-                    if(viewModel.isUseSkip()){
+                    if(viewModel.isUseOnce()){
                         viewModel.showAllAnswers();
+                        viewModel.setUseOnce(false);
                         addScore(false,"skip");
                     } else {
                         addScore(viewModel.getIsAnswer().getValue() == null, "");
@@ -307,6 +308,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
     }
     private void initListener() {
+
         binding.ivLifeLine.setOnClickListener(v -> {
             if (!viewModel.isUseLifeLineInCurrentQue()) {
                 new CustomDialogBuilder(this).showLifeLineDialog(viewModel.isUseDoubleDeep(), viewModel.isUseFiftyFifty(), viewModel.isUseSkip(), new CustomDialogBuilder.OnLifeLineListener() {
@@ -328,6 +330,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
                     public void onSkipClick() {
                         handler.postDelayed(QuizActivity.this, 1000);
                         viewModel.setUseSkip(true);
+                        viewModel.setUseOnce(true);
                         viewModel.skipQuestion();
                     }
 
@@ -491,7 +494,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
         //viewModel.getIsSkipAnswer().observe(this, this::addSkipScore);
 
-        viewModel.getAnswerVal().observe(this, this::showResultDialog);
+        //viewModel.getAnswerVal().observe(this, this::showResultDialog);
 
         viewModel.getOnSuccess().observe(this, AddDataResponse -> {
 
@@ -565,6 +568,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
             viewModel.resetQuestion();
             startCountDown();
         } else {
+            viewModel.setUseLifeLineInCurrentQue(false);
             handler.removeCallbacks(this);
             viewModel.getIsComplete().set(true);
             if(cTimer != null)

@@ -226,6 +226,8 @@ public class ShowResultsRequest {
         private String createdAt;
         @SerializedName("updated_at")
         private String updatedAt;
+        @SerializedName("skipped")
+        private Boolean skipped;
 
         public Integer getId() {
             return id;
@@ -299,5 +301,12 @@ public class ShowResultsRequest {
             this.updatedAt = updatedAt;
         }
 
+        public Boolean getSkipped() {
+            return skipped;
+        }
+
+        public void setSkipped(Boolean skipped) {
+            this.skipped = skipped;
+        }
     }
 }

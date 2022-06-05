@@ -56,10 +56,10 @@ public class ShowQuizAnswersActivity extends BaseActivity {
         });
 
         viewModel.getOnSuccess().observe(this, response -> {
-            Log.e("Response .. ",""+response.getQuestions());
+            //Log.e("Response .. ",""+response.getQuestions());
             //binding.tvPagination.setText(pageStr);
             String str = p+ "/" + response.getQuestions().size();
-            Log.e("Start", "" + str);
+            //Log.e("Start", "" + str);
             binding.tvPaginationstart.setText(str);
         });
     }
@@ -76,12 +76,12 @@ public class ShowQuizAnswersActivity extends BaseActivity {
                     p = manager.findLastVisibleItemPosition() - 1;
                     binding.rvQuestions.smoothScrollToPosition(p);
                     //viewModel.getPaginationVal().setValue(""+p);
-                    Log.e("PPPP", "" + p);
+                    //Log.e("PPPP", "" + p);
                     checkVisibility();
                     //viewModel.getPaginationVal().setValue("");
                     binding.tvPagination.setText("");
                     String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
-                    Log.e("PPPP", "" + str);
+                    //Log.e("PPPP", "" + str);
                     binding.tvPagination.setText(str);
                     viewModel.getPaginationVal().setValue(str);
                     binding.tvPaginationstart.setVisibility(View.GONE);
@@ -94,12 +94,12 @@ public class ShowQuizAnswersActivity extends BaseActivity {
                 public void onClick(View view) {
                     p = manager.findFirstVisibleItemPosition() + 1;
                     binding.rvQuestions.smoothScrollToPosition(p);
-                    Log.e("NNNN", "" + p);
+                    //Log.e("NNNN", "" + p);
                     checkVisibility();
                     //viewModel.getPaginationVal().setValue("");
                     binding.tvPagination.setText("");
                     String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
-                    Log.e("NNNN", "" + str);
+                    //Log.e("NNNN", "" + str);
                     binding.tvPagination.setText(str);
                     viewModel.getPaginationVal().setValue(str);
                 }
@@ -114,7 +114,7 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     }
 
     public void checkVisibility() {
-        Log.e("PPPP" ,(p+1)+""+binding.rvQuestions.getAdapter().getItemCount());
+        //Log.e("PPPP" ,(p+1)+""+binding.rvQuestions.getAdapter().getItemCount());
 
         if (p < 1) {
             binding.btnPrev.setVisibility(View.GONE);

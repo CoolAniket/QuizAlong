@@ -62,6 +62,7 @@ public class QuizViewModel extends ViewModel {
     private boolean isUseDoubleDeep = false;
     private boolean isUseFiftyFifty = false;
     private boolean isUseSkip = false;
+    private boolean isUseOnce = false;
     private boolean isUseLifeLineInCurrentQue = false;
     private MutableLiveData<AddDataLiveResponse> onSuccess = new MutableLiveData<>();
     private MutableLiveData<String> toast = new MutableLiveData<>();
@@ -577,6 +578,14 @@ public class QuizViewModel extends ViewModel {
 
     public void setUseSkip(boolean useSkip) {
         isUseSkip = useSkip;
+    }
+
+    public boolean isUseOnce() {
+        return isUseOnce;
+    }
+
+    public void setUseOnce(boolean useOnce) {
+        isUseOnce = useOnce;
     }
 
     public boolean isUseLifeLineInCurrentQue() {
