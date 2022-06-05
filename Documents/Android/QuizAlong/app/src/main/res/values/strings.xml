@@ -164,6 +164,7 @@
     <string name="all">all</string>
     <string name="payments">payments</string>
     <string name="winnings">winnings</string>
+    <string name="select">Select</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

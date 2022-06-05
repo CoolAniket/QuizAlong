@@ -1,15 +1,19 @@
 package com.thequizapp.quizalong.utils;
 
 
+import android.os.Build;
 import android.text.TextUtils;
 
 import com.thequizapp.quizalong.api.ApiService;
 import com.thequizapp.quizalong.api.Const;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
+import androidx.annotation.RequiresApi;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -23,10 +27,6 @@ public class Global {
 
     public static final AtomicReference<String> userId = new AtomicReference<>("");
 
-    /*
-    * already logged in account, app restart, shows aniket's profile
-    * logout login, original name came up.
-    * */
     Global() {
     }
 
@@ -146,4 +146,15 @@ public class Global {
     }
 
 
+    public static List<String> prettyAmountDropdown(List<Integer> entry) {
+        List<String> finalArray = new ArrayList<>();
+        entry.forEach(value -> {
+            if (value > 0 ) {
+                finalArray.add("Enrolled "+ value);
+            } else {
+                finalArray.add("Enrolled free");
+            }
+        });
+        return finalArray;
+    }
 }

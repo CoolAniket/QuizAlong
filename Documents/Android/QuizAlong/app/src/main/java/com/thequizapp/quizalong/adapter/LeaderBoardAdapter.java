@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.LeaderBoardViewHolder> {
-    private final List<LeaderBoardResponse.LeaderboardItem> leaderBoards = new ArrayList<>();
+    private final List<LeaderBoardResponse.LeaderboardUser> leaderBoards = new ArrayList<>();
 
     @NonNull
     @Override
@@ -35,7 +35,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         return leaderBoards.size();
     }
 
-    public void updateData(List<LeaderBoardResponse.LeaderboardItem> leaderBoards) {
+    public void updateData(List<LeaderBoardResponse.LeaderboardUser> leaderBoards) {
         this.leaderBoards.clear();
         this.leaderBoards.addAll(leaderBoards);
         notifyDataSetChanged();
@@ -50,7 +50,7 @@ public class LeaderBoardAdapter extends RecyclerView.Adapter<LeaderBoardAdapter.
         }
 
         public void setModel(int position) {
-            LeaderBoardResponse.LeaderboardItem leaderBoard = leaderBoards.get(position);
+            LeaderBoardResponse.LeaderboardUser leaderBoard = leaderBoards.get(position);
             binding.setModel(leaderBoard);
             binding.setPosition(String.valueOf(position + 4));
         }

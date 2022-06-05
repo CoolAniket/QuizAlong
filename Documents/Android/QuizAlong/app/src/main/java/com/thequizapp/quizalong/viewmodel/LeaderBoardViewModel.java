@@ -25,14 +25,17 @@ public class LeaderBoardViewModel extends ViewModel {
     private LeaderBoardAdapter leaderBoardAdapter = new LeaderBoardAdapter();
     private final CompositeDisposable disposable = new CompositeDisposable();
     private ObservableBoolean isLoading = new ObservableBoolean(true);
-    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> firstUser = new MutableLiveData<>();
-    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> secondUser = new MutableLiveData<>();
-    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> thirdUser = new MutableLiveData<>();
-    private MutableLiveData<LeaderBoardResponse.LeaderboardItem> myUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardUser> firstUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardUser> secondUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardUser> thirdUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse.LeaderboardUser> myUser = new MutableLiveData<>();
+    private MutableLiveData<LeaderBoardResponse> leaderBoardResult = new MutableLiveData<>();
+
     private MutableLiveData<Boolean> myUserPosition = new MutableLiveData<>();
     private CurrentUser user;
     private String quizId = "";
     private String quizType = "";
+    private List<Integer> typeArray = new ArrayList<>();
 
     public LeaderBoardAdapter getLeaderBoardAdapter() {
         return leaderBoardAdapter;
@@ -48,12 +51,12 @@ public class LeaderBoardViewModel extends ViewModel {
 
     public void setUser(CurrentUser user) {
         this.user = user;
-        LeaderBoardResponse.LeaderboardItem leaderboardItem = new LeaderBoardResponse.LeaderboardItem();
-        leaderboardItem.setFullName(user.getUser().getFullname());
-        leaderboardItem.setUserIdentity(user.getUser().getIdentity());
+        LeaderBoardResponse.LeaderboardUser leaderboardUser = new LeaderBoardResponse.LeaderboardUser();
+        leaderboardUser.setFullName(user.getUser().getFullname());
+        leaderboardUser.setUserIdentity(user.getUser().getIdentity());
 //        quizesItem.setImage(user.getUser().getImage().toString());
 //        quizesItem.setTotalPoints(user.getUser().getTotalPoints());
-        myUser.postValue(leaderboardItem);
+        myUser.postValue(leaderboardUser);
         myUserPosition.postValue(false);
     }
 
@@ -65,35 +68,35 @@ public class LeaderBoardViewModel extends ViewModel {
         this.isLoading = isLoading;
     }
 
-    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getFirstUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardUser> getFirstUser() {
         return firstUser;
     }
 
-    public void setFirstUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> firstUser) {
+    public void setFirstUser(MutableLiveData<LeaderBoardResponse.LeaderboardUser> firstUser) {
         this.firstUser = firstUser;
     }
 
-    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getSecondUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardUser> getSecondUser() {
         return secondUser;
     }
 
-    public void setSecondUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> secondUser) {
+    public void setSecondUser(MutableLiveData<LeaderBoardResponse.LeaderboardUser> secondUser) {
         this.secondUser = secondUser;
     }
 
-    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getThirdUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardUser> getThirdUser() {
         return thirdUser;
     }
 
-    public void setThirdUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> thirdUser) {
+    public void setThirdUser(MutableLiveData<LeaderBoardResponse.LeaderboardUser> thirdUser) {
         this.thirdUser = thirdUser;
     }
 
-    public MutableLiveData<LeaderBoardResponse.LeaderboardItem> getMyUser() {
+    public MutableLiveData<LeaderBoardResponse.LeaderboardUser> getMyUser() {
         return myUser;
     }
 
-    public void setMyUser(MutableLiveData<LeaderBoardResponse.LeaderboardItem> myUser) {
+    public void setMyUser(MutableLiveData<LeaderBoardResponse.LeaderboardUser> myUser) {
         this.myUser = myUser;
     }
 
@@ -121,6 +124,14 @@ public class LeaderBoardViewModel extends ViewModel {
         this.quizType = quizType;
     }
 
+    public MutableLiveData<LeaderBoardResponse> getLeaderBoardResult() {
+        return leaderBoardResult;
+    }
+
+    public List<Integer> getTypeArray() {
+        return typeArray;
+    }
+
     public void getLeaderBoard() {
         if ("past".equals(quizType)) {
             disposable.add(Global.initRetrofit().getPastLeaderBoard(BuildConfig.APIKEY, quizId, Global.userId.get())
@@ -131,34 +142,9 @@ public class LeaderBoardViewModel extends ViewModel {
                     .doOnTerminate(() -> isLoading.set(false))
                     .subscribe((leaderBoard, throwable) -> {
                         if (leaderBoard != null) {
-                            if (!leaderBoard.getLeaderboardList().isEmpty()) {
-                                firstUser.setValue(leaderBoard.getLeaderboardList().get(0));
-                            }
-                            if (leaderBoard.getLeaderboardList().size() > 1) {
-                                secondUser.setValue(leaderBoard.getLeaderboardList().get(1));
-                            }
-                            if (leaderBoard.getLeaderboardList().size() > 2) {
-                                thirdUser.setValue(leaderBoard.getLeaderboardList().get(2));
-                            }
-//                            List<LeaderBoardResponse.LeaderboardItem> newList = new ArrayList<>();
-                            for (int i = 3; i < leaderBoard.getLeaderboardList().size(); i++) {
-                                LeaderBoardResponse.LeaderboardItem leaderboardItem = leaderBoard.getLeaderboardList().get(i);
-                                if (leaderboardItem.getUserId() == user.getUser().getId()) {
-                                    myUserPosition.setValue(true);
-                                    myUser.setValue(leaderboardItem);
-                                    break;
-                                }
-//                                newList.add(leaderboardItem);
-                            }
-                            if (leaderBoard.getLeaderboardList().size() > 1) {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    Collections.sort(leaderBoard.getLeaderboardList(), Comparator.comparingInt(LeaderBoardResponse.LeaderboardItem::getId));
-                                }
-                            }
-                            leaderBoardAdapter.updateData(leaderBoard.getLeaderboardList());
-                        } else if (throwable != null) {
-//
+                            this.leaderBoardResult.setValue(leaderBoard);
                         }
+
                     }));
         } else {
             disposable.add(Global.initRetrofit().getLiveLeaderBoard(BuildConfig.APIKEY, quizId)
@@ -169,43 +155,59 @@ public class LeaderBoardViewModel extends ViewModel {
                     .doOnTerminate(() -> isLoading.set(false))
                     .subscribe((leaderBoard, throwable) -> {
                         if (leaderBoard != null) {
-                            if (!leaderBoard.getLeaderboardList().isEmpty()) {
-                                firstUser.setValue(leaderBoard.getLeaderboardList().get(0));
-                            }
-                            if (leaderBoard.getLeaderboardList().size() > 1) {
-                                secondUser.setValue(leaderBoard.getLeaderboardList().get(1));
-                            }
-                            if (leaderBoard.getLeaderboardList().size() > 2) {
-                                thirdUser.setValue(leaderBoard.getLeaderboardList().get(2));
-                            }
-
-                            for (int i = 3; i < leaderBoard.getLeaderboardList().size(); i++) {
-                                LeaderBoardResponse.LeaderboardItem leaderboardItem = leaderBoard.getLeaderboardList().get(i);
-                                if (leaderboardItem.getUserId() == user.getUser().getId()) {
-                                    myUserPosition.setValue(true);
-                                    myUser.setValue(leaderboardItem);
-                                    break;
-                                }
-//                                newList.add(leaderboardItem);
-                            }
-                            if (leaderBoard.getLeaderboardList().size() > 1) {
-                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                    Collections.sort(leaderBoard.getLeaderboardList(), Comparator.comparingInt(LeaderBoardResponse.LeaderboardItem::getId));
-                                }
-                            }
-                            leaderBoardAdapter.updateData(leaderBoard.getLeaderboardList());
-                        } else if (throwable != null) {
-//
+                            this.leaderBoardResult.setValue(leaderBoard);
                         }
+
                     }));
         }
-
-
     }
 
     @Override
     protected void onCleared() {
         super.onCleared();
         disposable.dispose();
+    }
+
+    public void updateAdapter(int position) {
+        if (leaderBoardResult.getValue() != null) {
+            switch (position) {
+                case 0:
+                    updateAdapter(leaderBoardResult.getValue().getLeaderboardItem().getGroup1());
+                    break;
+                case 1:
+                    updateAdapter(leaderBoardResult.getValue().getLeaderboardItem().getGroup2());
+                    break;
+                case 2:
+                    updateAdapter(leaderBoardResult.getValue().getLeaderboardItem().getGroup3());
+                    break;
+            }
+        }
+    }
+
+    private void updateAdapter(List<LeaderBoardResponse.LeaderboardUser> users) {
+        if (!users.isEmpty()) {
+            firstUser.setValue(users.get(0));
+        }
+        if (users.size() > 1) {
+            secondUser.setValue(users.get(1));
+        }
+        if (users.size() > 2) {
+            thirdUser.setValue(users.get(2));
+        }
+
+        for (int i = 3; i < users.size(); i++) {
+            LeaderBoardResponse.LeaderboardUser leaderboardUser = users.get(i);
+            if (leaderboardUser.getUserId() == user.getUser().getId()) {
+                myUserPosition.setValue(true);
+                myUser.setValue(leaderboardUser);
+                break;
+            }
+        }
+        if (users.size() > 1) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                Collections.sort(users, Comparator.comparingInt(LeaderBoardResponse.LeaderboardUser::getId));
+            }
+        }
+        leaderBoardAdapter.updateData(users);
     }
 }
