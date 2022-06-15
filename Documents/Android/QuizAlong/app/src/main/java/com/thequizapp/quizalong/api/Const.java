@@ -6,7 +6,7 @@ public final class Const {
     public static final String BASE_URL = "https://quizalong.in/api/";
     public static final String ITEM_BASE_URL = "https://quizalong.in/public/storage/";
     //Api End Point
-    public static final String USER_REGISTER = "user/register";
+    public static final String USER_REGISTER = "user/regin";
     public static final String ADDITIONAL_DETAILS = "user/additionDetails";
     public static final String USER_SEND_OTP = "user/sendotp";
     public static final String USER_VERIFY_OTP = "user/verifyotp";
