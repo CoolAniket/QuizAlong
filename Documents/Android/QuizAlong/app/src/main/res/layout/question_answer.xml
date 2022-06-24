@@ -60,7 +60,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="10dp"
+                        android:layout_marginTop="7dp"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
@@ -72,7 +72,7 @@
                             />
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="50dp"
+                            android:layout_height="40dp"
                             app:cardCornerRadius="8dp"
                             app:cardElevation="4dp"
                             android:layout_margin="2dp">
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="7dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
@@ -129,7 +129,7 @@
                         />
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="4dp"
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="7dp"
                     android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
                         />
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="4dp"
@@ -231,7 +231,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="7dp"
                     android:layout_marginBottom="10dp"
                     android:orientation="vertical">
                     <TextView
@@ -244,7 +244,7 @@
                         />
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="50dp"
+                        android:layout_height="40dp"
                         app:cardBackgroundColor="@color/white"
                         app:cardCornerRadius="8dp"
                         app:cardElevation="4dp"
@@ -291,7 +291,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="7dp"
                     android:layout_marginBottom="10dp"
                     android:visibility='@{ansmodel.selectedAns.equalsIgnoreCase("skip") ? View.VISIBLE:View.GONE}'
                     android:orientation="vertical">
@@ -307,17 +307,32 @@
                 </LinearLayout>
 
             </androidx.cardview.widget.CardView>
-        <TextView
-            android:id="@+id/tv_description"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:fontFamily="@font/gilroy_bold"
-            android:text="@{model.description}"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="5dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <ScrollView
+                android:id="@+id/SCROLLER_ID"
+                android:layout_width="fill_parent"
+                android:layout_height="80dp"
+                android:scrollbars="vertical"
+                android:fillViewport="true">
+
+                <TextView
+                    android:id="@+id/tv_description"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:fontFamily="@font/gilroy_bold"
+                    android:text="@{model.description}"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="5dp"/>
+            </ScrollView>
+        </LinearLayout>
+
     </LinearLayout>
         <!--<LinearLayout
             android:layout_width="match_parent"

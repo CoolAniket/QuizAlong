@@ -354,7 +354,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 viewModel.getIsInfo().set(true);
                 /*startLobbyTimer();*/
                 viewModel.getIsLobby().set(true);
-                startCountDown();
+                //startCountDown();
 
                 if (slideTimer != null)
                     slideTimer.cancel();
@@ -494,7 +494,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
         //viewModel.getIsSkipAnswer().observe(this, this::addSkipScore);
 
-        //viewModel.getAnswerVal().observe(this, this::showResultDialog);
+        viewModel.getAnswerVal().observe(this, this::showResultDialog);
 
         viewModel.getOnSuccess().observe(this, AddDataResponse -> {
 
@@ -546,9 +546,11 @@ public class QuizActivity extends BaseActivity implements Runnable {
         //Log.e(">>> ",answer);
         /*if(cTimer != null)
             cTimer.cancel();*/
-        viewModel.setUseLifeLineInCurrentQue(false);
-        handler.removeCallbacks(this);
-
+//        viewModel.setUseLifeLineInCurrentQue(false);
+//        handler.removeCallbacks(this);
+            if(getIntent().getStringExtra("quiz_type").contains("past")){
+                addScore(viewModel.getIsAnswer().getValue() == null, "");
+            }
         //addScore(false,"");
     }
 
@@ -566,7 +568,11 @@ public class QuizActivity extends BaseActivity implements Runnable {
             viewModel.getCurrentPosition().set(viewModel.getCurrentPosition().get() + 1);
             viewModel.getIsAnswer().setValue(null);
             viewModel.resetQuestion();
-            startCountDown();
+            if(getIntent().getStringExtra("quiz_type").contains("past")){
+                //addScore(viewModel.getIsAnswer().getValue() == null, "");
+            }else {
+                startCountDown();
+            }
         } else {
             viewModel.setUseLifeLineInCurrentQue(false);
             handler.removeCallbacks(this);
