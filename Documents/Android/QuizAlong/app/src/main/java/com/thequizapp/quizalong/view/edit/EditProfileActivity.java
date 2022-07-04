@@ -8,8 +8,12 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
@@ -21,19 +25,23 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ActivityEditProfileBinding;
+import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.utils.ads.BannerAds;
 import com.thequizapp.quizalong.utils.compressimage.Compressor;
 import com.thequizapp.quizalong.view.BaseActivity;
+import com.thequizapp.quizalong.view.login.AdditionalInfoActivity;
 import com.thequizapp.quizalong.viewmodel.EditProfileViewModel;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class EditProfileActivity extends BaseActivity {
     private static final int RESULT_LOAD_IMAGE = 101;
     private static final int PERMISSION_REQUEST_CODE = 100;
     ActivityEditProfileBinding binding;
     EditProfileViewModel viewModel;
+    private ArrayList<String> years;
 
 
     @Override
@@ -41,6 +49,7 @@ public class EditProfileActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_edit_profile);
         viewModel = new ViewModelProvider(this).get(EditProfileViewModel.class);
+        years = new ArrayList<String>();
         initData();
         initObserve();
         initListener();
@@ -50,13 +59,53 @@ public class EditProfileActivity extends BaseActivity {
     private void initData() {
         SessionManager sessionManager = new SessionManager(this);
         viewModel.setUser(sessionManager.getUser());
-        String[] strings = viewModel.getUser().getUser().getFullname().split("\\s+");
-        if (strings.length > 0) {
-            viewModel.setFirstName(strings[0]);
+        CurrentUser.User user = viewModel.getUser().getUser();
+//        String[] strings = user.getFullname().split("\\s+");
+        String name = user.getFullname();
+        if (!TextUtils.isEmpty(name)) {
+            viewModel.setFullName(name);
         }
-        if (strings.length > 1) {
-            viewModel.setLastName(strings[1]);
+        viewModel.setMobileNo(user.getMobileNo());
+        viewModel.setEmail(user.getIdentity());
+
+        viewModel.setCollegeName(user.getCollege());
+        int selectedYearIndex = 1;
+
+        years.add("Current official year");
+        for(int j=0;j<viewModel.getUser().getCourse().get(0).getYear().size();j++){
+            try {
+                //Getting json object
+                years.add(viewModel.getUser().getCourse().get(0).getYear().get(j).getValue());
+                if (viewModel.getUser().getCourse().get(0).getYear().get(j).getValue().equals(user.getYear())) {
+                    selectedYearIndex = j+1;
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
+        binding.spYear.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, years));
+        binding.spYear.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String[] paymentMethods = getResources().getStringArray(R.array.payment);
+//                if (position != 0) {
+//                    viewModel.setPaymentMethod(paymentMethods[position]);
+//                } else {
+//                    viewModel.setPaymentMethod(null);
+//                }
+                if (position != 0) {
+                    viewModel.setYear(""+viewModel.getUser().getCourse().get(0).getYear().get(position-1).getKey());
+                } else {
+                    viewModel.setYear(null);
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+        binding.spYear.setSelection(selectedYearIndex);
         new BannerAds(this, binding.bannerAds);
     }
 

@@ -233,7 +233,8 @@
             <RelativeLayout
                 android:id="@+id/rtl_main"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="0dp"
+                android:layout_weight="1">
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
@@ -255,7 +256,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:orientation="vertical">
 
 
@@ -355,7 +356,7 @@
                         </LinearLayout>
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginHorizontal="20dp"
                             android:layout_marginTop="10dp"
@@ -368,59 +369,39 @@
                             android:textSize="16sp"
                             app:scroll_text="@{true}" />
 
-                        <RelativeLayout
+                        <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:layout_marginHorizontal="20dp"
-                            android:layout_marginTop="15dp">
+                            android:layout_marginTop="15dp"
+                            android:orientation="horizontal"
+                            android:gravity="left"
+                            android:visibility='@{question.image.equals("") ? View.GONE : View.VISIBLE}'
+                            >
+                            <ImageView
+                                android:layout_height="match_parent"
+                                android:layout_width="match_parent"
+                                android:scaleType="fitStart"
+                                android:adjustViewBounds="true"
+                                app:normal_image="@{question.image}"
+                                android:layout_gravity="left"
 
-                            <LinearLayout
+                                />
+                            <ImageView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_gravity="center_horizontal"
-                                android:background="@drawable/bg_white_5"
-                                android:backgroundTint="@color/dim_grey"
-                                android:orientation="horizontal"
-                                android:paddingHorizontal="10dp"
-                                android:paddingVertical="3dp"
-                                android:visibility='@{question.image.equals("") ? View.GONE : View.VISIBLE}'
-                                >
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="100dp"
-                                    app:normal_image="@{question.image}"
-                                    />
-                                <ImageView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_eye"
-                                    app:tint="@color/grey" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginStart="5dp"
-                                    android:fontFamily="@font/gilroy_medium"
-                                    android:text="Photo"
-                                    android:textColor="@color/grey" />
-                            </LinearLayout>
+                                android:src="@drawable/ic_eye"
+                                app:tint="@color/grey" />
 
                             <TextView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_centerHorizontal="true"
-                                android:background="@drawable/bg_oval"
-                                android:backgroundTint="@color/purple"
-                                android:fontFamily="@font/gilroy_semi_bold"
-                                android:gravity="center"
-                                android:padding="1dp"
-                                android:singleLine="true"
-                                android:text='@{""+viewModel.rapidFireDuration}'
-                                android:textColor="@color/white"
-                                android:textSize="14sp"
-                                android:visibility="gone"/>
-                        </RelativeLayout>
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="5dp"
+                                android:fontFamily="@font/gilroy_medium"
+                                android:text="Photo"
+                                android:textColor="@color/grey" />
+                        </LinearLayout>
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
@@ -592,7 +573,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/bg_white_5"
                 android:backgroundTint="@color/dim_white"
                 android:fontFamily="@font/gilroy_semi_bold"

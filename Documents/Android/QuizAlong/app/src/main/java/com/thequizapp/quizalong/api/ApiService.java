@@ -151,7 +151,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(Const.APP_SETTINGS)
     Single<Settings> getAllSettings(@Header(Const.API_KEY) String apiKey,
-                                    @Field(Const.PLATFORM) String platform);
+                                    @Field(Const.PLATFORM) String platform,
+                                    @Field(Const.VERSION) int versionCode);
 
     @Multipart
     @POST(Const.USER_EDIT_PROFILE)

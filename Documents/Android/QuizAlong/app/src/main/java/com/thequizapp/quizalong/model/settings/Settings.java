@@ -25,6 +25,12 @@ public class Settings {
     @SerializedName("privacy_policy")
     private String privacyPolicy;
 
+    @SerializedName("terms_conditions")
+    private String termsConditions;
+
+    @SerializedName("update")
+    private int update;
+
     public String getPrivacyPolicy() {
         return privacyPolicy;
     }
@@ -41,8 +47,13 @@ public class Settings {
         this.termsConditions = termsConditions;
     }
 
-    @SerializedName("terms_conditions")
-    private String termsConditions;
+    public int getUpdate() {
+        return update;
+    }
+
+    public void setUpdate(int update) {
+        this.update = update;
+    }
 
     public AppSettings getAppSettings() {
         return appSettings;
