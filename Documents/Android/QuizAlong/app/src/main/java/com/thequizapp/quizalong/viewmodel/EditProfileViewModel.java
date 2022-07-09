@@ -33,6 +33,7 @@ public class EditProfileViewModel extends ViewModel {
     private String collegeName;
     private String year;
     private String profileUri;
+    private String proof;
 
     public String getFullName() {
         return fullName;
@@ -94,6 +95,14 @@ public class EditProfileViewModel extends ViewModel {
         this.profileUri = profileUri;
     }
 
+    public String getProof() {
+        return proof;
+    }
+
+    public void setProof(String proof) {
+        this.proof = proof;
+    }
+
     public CurrentUser getUser() {
         return user;
     }
@@ -134,22 +143,30 @@ public class EditProfileViewModel extends ViewModel {
         HashMap<String, RequestBody> hashMap = new HashMap<>();
         hashMap.put("fullName", toRequestBody(fullName));
         hashMap.put(Const.USERID, toRequestBody(Global.userId.get()));
-        hashMap.put("year_id", toRequestBody(getYear()));
+        hashMap.put("yearId", toRequestBody(getYear()));
         hashMap.put("college", toRequestBody(getCollegeName()));
         hashMap.put("identity", toRequestBody(getEmail()));
         hashMap.put("mobile_no", toRequestBody(getMobileNo()));
 //        hashMap.put(Const.USERID, toRequestBody("35"));
-        MultipartBody.Part body = null;
+        MultipartBody.Part profile = null;
         if (profileUri != null && !profileUri.isEmpty()) {
             File file = new File(profileUri);
             RequestBody requestFile =
                     RequestBody.create(file, MediaType.parse("multipart/form-data"));
 
-            body = MultipartBody.Part.createFormData(Const.PROFILE_IMAGE, file.getName(), requestFile);
+            profile = MultipartBody.Part.createFormData(Const.PROFILE_IMAGE, file.getName(), requestFile);
+        }
+        MultipartBody.Part proof = null;
+        if (profileUri != null && !profileUri.isEmpty()) {
+            File file = new File(profileUri);
+            RequestBody requestFile =
+                    RequestBody.create(file, MediaType.parse("multipart/form-data"));
+
+            proof = MultipartBody.Part.createFormData(Const.PROOF, file.getName(), requestFile);
         }
         disposable.add(
                 Global.initRetrofit()
-                        .editProfile(BuildConfig.APIKEY, hashMap, body)
+                        .editProfile(BuildConfig.APIKEY, hashMap, profile, proof)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .unsubscribeOn(Schedulers.io())

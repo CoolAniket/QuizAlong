@@ -76,6 +76,8 @@ public final class Const {
     public static final String CATEGORY_ID = "category_id";
     public static final String QUIZ_TYPE = "quiz_type";
     public static final String VERSION = "version";
+    public static final String PROOF = "proof";
+    public static final String MESSAGE_WAITING = "waiting....";
 
     Const() {
 

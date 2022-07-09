@@ -35,193 +35,213 @@
                 android:text="@string/cancel"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:orientation="vertical">
-
-                <RelativeLayout
-                    android:id="@+id/rlt_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp">
-
-
-                    <ImageView
-                        android:id="@+id/iv_profile"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:background="@drawable/bg_oval"
-                        android:backgroundTint="@color/dim_white"
-                        android:transitionName="@string/profile"
-                        app:circle_crop="@{viewModel.user.user.image}" />
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_centerInParent="true"
-                        android:src="@drawable/ic_camera"
-                        app:tint="@color/white" />
-                </RelativeLayout>
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginHorizontal="20dp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:text="@string/full_name"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,0)}"
-                    android:background="@drawable/bg_white_5"
-                    android:backgroundTint="@color/dim_white"
-                    android:fontFamily="@font/gilroy_reguler"
-                    android:inputType="textCapWords"
-                    android:paddingHorizontal="15dp"
-                    android:text='@{viewModel.fullName}'
-                    android:textColor="@color/black" />
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:text="@string/mobile_number"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,1)}"
-                    android:background="@drawable/bg_white_5"
-                    android:backgroundTint="@color/dim_white"
-                    android:fontFamily="@font/gilroy_reguler"
-                    android:inputType="textCapWords"
-                    android:paddingHorizontal="15dp"
-                    android:text="@{viewModel.mobileNo}"
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:text="@string/email_address"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable, 2)}"
-                    android:background="@drawable/bg_white_5"
-                    android:backgroundTint="@color/dim_white"
-                    android:fontFamily="@font/gilroy_reguler"
-                    android:inputType="textCapWords"
-                    android:paddingHorizontal="15dp"
-                    android:text='@{viewModel.email}'
-                    android:textColor="@color/black" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:text="@string/current_official_year"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
+                android:layout_height="0dp"
+                android:layout_weight="1">
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_white_5"
-                    android:backgroundTint="@color/dim_white"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_gravity="center">
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
 
-                    <Spinner
-                        android:id="@+id/sp_year"
+                    <RelativeLayout
+                        android:id="@+id/rlt_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp">
+
+
+                        <ImageView
+                            android:id="@+id/iv_profile"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:background="@drawable/bg_oval"
+                            android:backgroundTint="@color/dim_white"
+                            android:transitionName="@string/profile"
+                            app:circle_crop="@{viewModel.user.user.image}" />
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_camera"
+                            app:tint="@color/white" />
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginHorizontal="20dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/full_name"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <EditText
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
-                        android:fontFamily="@font/gilroy_reguler"
-                        android:dropDownSelector="@color/black"
-                        android:textSize="14sp"
-                        android:hint="@string/select_year_pass"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,0)}"
                         android:background="@drawable/bg_white_5"
                         android:backgroundTint="@color/dim_white"
-                        />
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:inputType="textCapWords"
+                        android:paddingHorizontal="15dp"
+                        android:text='@{viewModel.fullName}'
+                        android:textColor="@color/black" />
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/mobile_number"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,1)}"
+                        android:background="@drawable/bg_white_5"
+                        android:backgroundTint="@color/dim_white"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:inputType="textCapWords"
+                        android:paddingHorizontal="15dp"
+                        android:text="@{viewModel.mobileNo}"
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/email_address"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable, 2)}"
+                        android:background="@drawable/bg_white_5"
+                        android:backgroundTint="@color/dim_white"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:inputType="textCapWords"
+                        android:paddingHorizontal="15dp"
+                        android:text='@{viewModel.email}'
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/current_official_year"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/bg_white_5"
+                        android:backgroundTint="@color/dim_white"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_gravity="center">
+
+                        <Spinner
+                            android:id="@+id/sp_year"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:fontFamily="@font/gilroy_reguler"
+                            android:dropDownSelector="@color/black"
+                            android:textSize="14sp"
+                            android:hint="@string/select_year_pass"
+                            android:background="@drawable/bg_white_5"
+                            android:backgroundTint="@color/dim_white"
+                            />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/college_name"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,3)}"
+                        android:background="@drawable/bg_white_5"
+                        android:backgroundTint="@color/dim_white"
+                        android:fontFamily="@font/gilroy_reguler"
+                        android:inputType="textCapWords"
+                        android:paddingHorizontal="15dp"
+                        android:text='@{viewModel.collegeName}'
+                        android:textColor="@color/black" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="15dp"
+                        android:fontFamily="@font/gilroy_medium"
+                        android:text="@string/select_id_proof"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"/>
+                    <RelativeLayout
+                        android:id="@+id/rtl_proof"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp">
+
+                        <ImageView
+                            android:id="@+id/iv_idProof"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:background="@drawable/ic_profile_user"
+                            android:backgroundTint="@color/white" />
+                    </RelativeLayout>
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="15dp"
-                    android:fontFamily="@font/gilroy_medium"
-                    android:text="@string/college_name"
-                    android:textColor="@color/white"
-                    android:textSize="18sp" />
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="45dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="10dp"
-                    android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,3)}"
-                    android:background="@drawable/bg_white_5"
-                    android:backgroundTint="@color/dim_white"
-                    android:fontFamily="@font/gilroy_reguler"
-                    android:inputType="textCapWords"
-                    android:paddingHorizontal="15dp"
-                    android:text='@{viewModel.collegeName}'
-                    android:textColor="@color/black" />
-
-                <Button
-                    android:layout_width="match_parent"
-                    android:layout_height="55dp"
-                    android:layout_marginHorizontal="20dp"
-                    android:layout_marginTop="30dp"
-                    android:background="@drawable/bg_white_5"
-                    android:backgroundTint="#2B2424"
-                    android:fontFamily="@font/gilroy_bold"
-                    android:onClick="@{()->viewModel.editProfile()}"
-                    android:text="Save"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
-            </LinearLayout>
-        </ScrollView>
-
+            </ScrollView>
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_white_5"
+                android:backgroundTint="#2B2424"
+                android:fontFamily="@font/gilroy_bold"
+                android:onClick="@{()->viewModel.editProfile()}"
+                android:text="Save"
+                android:textColor="@color/white"
+                android:textSize="16sp" />
             <FrameLayout
                 android:id="@+id/banner_ads"
                 android:layout_width="wrap_content"

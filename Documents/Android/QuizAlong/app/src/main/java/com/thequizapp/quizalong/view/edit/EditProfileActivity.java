@@ -39,6 +39,8 @@ import java.util.ArrayList;
 public class EditProfileActivity extends BaseActivity {
     private static final int RESULT_LOAD_IMAGE = 101;
     private static final int PERMISSION_REQUEST_CODE = 100;
+    private static final int RESULT_LOAD_PROOF = 102;
+    private static final int PERMISSION_REQUEST_CODE_PROOF = 104;
     ActivityEditProfileBinding binding;
     EditProfileViewModel viewModel;
     private ArrayList<String> years;
@@ -139,6 +141,17 @@ public class EditProfileActivity extends BaseActivity {
                 startActivityForResult(i, RESULT_LOAD_IMAGE);
             }
         });
+        binding.rtlProof.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                        PERMISSION_REQUEST_CODE_PROOF);
+            } else {
+                Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, RESULT_LOAD_PROOF);
+            }
+        });
         binding.tvCancel.setOnClickListener(v -> onBackPressed());
         Log.e("PPPP ",""+viewModel.getUser());
     }
@@ -146,9 +159,9 @@ public class EditProfileActivity extends BaseActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == PERMISSION_REQUEST_CODE && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if ((requestCode == PERMISSION_REQUEST_CODE || requestCode == PERMISSION_REQUEST_CODE_PROOF) && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(i, RESULT_LOAD_IMAGE);
+            startActivityForResult(i, requestCode == PERMISSION_REQUEST_CODE ? RESULT_LOAD_IMAGE : RESULT_LOAD_PROOF);
         }
     }
 
@@ -156,7 +169,7 @@ public class EditProfileActivity extends BaseActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
+        if ((requestCode == RESULT_LOAD_IMAGE || requestCode == RESULT_LOAD_PROOF) && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
             Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
@@ -164,13 +177,23 @@ public class EditProfileActivity extends BaseActivity {
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
-            Glide.with(this)
-                    .load(new File(picturePath))
-                    .circleCrop()
-                    .into(binding.ivProfile);
+
             File imgFile = new File(picturePath);
             File compressFile = Compressor.getDefault(this).compressToFile(imgFile);
-            viewModel.setProfileUri(compressFile.getAbsolutePath());
+            if (requestCode == RESULT_LOAD_IMAGE) {
+                Glide.with(this)
+                        .load(imgFile)
+                        .circleCrop()
+                        .into(binding.ivProfile);
+                viewModel.setProfileUri(compressFile.getAbsolutePath());
+            }
+            else {
+                Glide.with(this)
+                        .load(imgFile)
+                        .circleCrop()
+                        .into(binding.ivIdProof);
+                viewModel.setProof(compressFile.getAbsolutePath());
+            }
         }
     }
 }

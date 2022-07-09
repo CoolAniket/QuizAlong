@@ -224,6 +224,28 @@ public class CustomDialogBuilder {
         mBuilder.show();
     }
 
+    public void showFavouriteDialog(int resId, String title, String des, String positive, String negative, OnDismissListener onDismissListener) {
+        if (mContext == null)
+            return;
+        DialogSimpleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_simple, null, false);
+        binding.ivThumb.setImageResource(resId);
+        binding.tvTitle.setText(title);
+        binding.tvDes.setText(des);
+        binding.btnLogOut.setText(positive);
+        binding.tvCancel.setText(negative);
+        binding.btnLogOut.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onPositiveDismiss();
+        });
+        binding.tvCancel.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onNegativeDismiss();
+        });
+        mBuilder.setContentView(binding.getRoot());
+        mBuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        mBuilder.show();
+    }
+
     public void showSimpleDialog(int resId, String title, String des, String positive, String negative, OnDismissListener onDismissListener) {
         if (mContext == null)
             return;
