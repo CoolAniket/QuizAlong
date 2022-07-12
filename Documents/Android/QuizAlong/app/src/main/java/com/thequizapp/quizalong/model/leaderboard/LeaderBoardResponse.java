@@ -9,12 +9,14 @@ public class LeaderBoardResponse {
     @SerializedName("leaderboard")
     private LeaderboardItem leaderboardItem;
 
-
     @SerializedName("message")
     private String message;
 
     @SerializedName("status")
     private boolean status;
+
+    @SerializedName("user_rank")
+    private boolean userRank;
 
     public LeaderboardItem getLeaderboardItem() {
         return leaderboardItem;
@@ -39,6 +41,14 @@ public class LeaderBoardResponse {
 
     public void setStatus(boolean status) {
         this.status = status;
+    }
+
+    public boolean isUserRank() {
+        return userRank;
+    }
+
+    public void setUserRank(boolean userRank) {
+        this.userRank = userRank;
     }
 
     public static class LeaderboardItem {

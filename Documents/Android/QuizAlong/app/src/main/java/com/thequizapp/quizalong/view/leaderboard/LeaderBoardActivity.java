@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityLeaderBoardBinding;
+import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.Global;
 import com.thequizapp.quizalong.utils.SessionManager;
 import com.thequizapp.quizalong.view.BaseActivity;
@@ -63,10 +64,23 @@ public class LeaderBoardActivity extends BaseActivity {
 
     private void initObserve() {
         viewModel.getLeaderBoardResult().observe(this, leaderBoardResponse -> {
-            if (leaderBoardResponse.getMessage().equals(Const.MESSAGE_WAITING) && counter < MAX_ATTEMPTS) {
-                counter ++;
-                handler.postDelayed(leaderboardChecker, M_INTERVAL);
+            if (leaderBoardResponse.getMessage().equals(Const.MESSAGE_WAITING)) {
+                if (counter >= MAX_ATTEMPTS) {
+                    // Maximum attemps. exit activity
+                    new CustomDialogBuilder(this).showSimpleDialog(
+                            R.drawable.ic_warning,
+                            "Leaderboard not available.",
+                            "Please try again later.",
+                            "Okay",
+                            this::onBackPressed
+                    );
+                } else {
+                    // retry api call
+                    counter++;
+                    handler.postDelayed(leaderboardChecker, M_INTERVAL);
+                }
             } else {
+                // data retrieved.
                 ArrayAdapter<String> stringArrayAdapter = new ArrayAdapter<>(LeaderBoardActivity.this, android.R.layout.simple_spinner_dropdown_item, Global.prettyAmountDropdown(leaderBoardResponse.getLeaderboardItem().getGroups()));
                 binding.spType.setAdapter(stringArrayAdapter);
                 binding.spType.setSelection(0);
