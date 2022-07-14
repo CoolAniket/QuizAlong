@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.databinding.ItemCatCategoriesBinding;
 import com.thequizapp.quizalong.model.categories.CategoriesResponse;
+import com.thequizapp.quizalong.utils.CustomDialogBuilder;
+import com.thequizapp.quizalong.view.quiz.QuizActivity;
 
 import java.util.List;
 
@@ -94,8 +96,28 @@ public class CatCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.View
                     onItemClick.onClick(pairs, categoriesItem);
                 });
                 binding.chkFavourite.setOnClickListener((view) -> {
-                    if (onFavouriteCheck != null)
-                        onFavouriteCheck.onChecked(categoriesItem, binding.chkFavourite.isChecked());
+                    new CustomDialogBuilder(view.getContext()).showFavouriteDialog(R.drawable.gold_star,
+                            "Add Favourite",
+                            String.format("Add %s to Favourites", categoriesItem.getValue()),
+                            "Yes",
+                            "No",
+                            new CustomDialogBuilder.OnDismissListener() {
+                                @Override
+                                public void onPositiveDismiss() {
+                                    if (onFavouriteCheck != null) {
+                                        onFavouriteCheck.onChecked(categoriesItem, true);
+                                        binding.chkFavourite.setChecked(true);
+                                    }
+                                }
+
+                                @Override
+                                public void onNegativeDismiss() {
+                                    if (onFavouriteCheck != null) {
+                                        onFavouriteCheck.onChecked(categoriesItem, false);
+                                        binding.chkFavourite.setChecked(false);
+                                    }
+                                }
+                            });
 
                 });
                 binding.setModel(categoriesItem);

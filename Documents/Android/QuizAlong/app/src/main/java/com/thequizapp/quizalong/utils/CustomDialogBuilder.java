@@ -25,6 +25,7 @@ import com.thequizapp.quizalong.databinding.DialogEnrollForFreeBinding;
 import com.thequizapp.quizalong.databinding.DialogLifeLineBinding;
 import com.thequizapp.quizalong.databinding.DialogPaymentAmountBinding;
 import com.thequizapp.quizalong.databinding.DialogRapidFireBinding;
+import com.thequizapp.quizalong.databinding.DialogSimple1Binding;
 import com.thequizapp.quizalong.databinding.DialogSimpleBinding;
 import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.view.splash.SplashActivity;
@@ -50,7 +51,7 @@ public class CustomDialogBuilder {
         }
     }
 
-    public void showAnswerResultDialog(boolean isAnswerTrue, String points, OnAnswerDismissListener onAnswerDismissListener) {
+    public void showAnswerResultDialog(boolean isAnswerTrue, String points, OnDialogDismissListener onDialogDismissListener) {
         if (mContext == null)
             return;
         DialogAnswerResultBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_answer_result, null, false);
@@ -64,7 +65,7 @@ public class CustomDialogBuilder {
             binding.tvTxtPoints.setVisibility(View.GONE);
         }
         binding.lyrNext.setOnClickListener(v -> {
-            onAnswerDismissListener.onDismiss();
+            onDialogDismissListener.onDismiss();
             mBuilder.dismiss();
         });
         mBuilder.setContentView(binding.getRoot());
@@ -223,6 +224,28 @@ public class CustomDialogBuilder {
         mBuilder.show();
     }
 
+    public void showFavouriteDialog(int resId, String title, String des, String positive, String negative, OnDismissListener onDismissListener) {
+        if (mContext == null)
+            return;
+        DialogSimpleBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_simple, null, false);
+        binding.ivThumb.setImageResource(resId);
+        binding.tvTitle.setText(title);
+        binding.tvDes.setText(des);
+        binding.btnLogOut.setText(positive);
+        binding.tvCancel.setText(negative);
+        binding.btnLogOut.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onPositiveDismiss();
+        });
+        binding.tvCancel.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onNegativeDismiss();
+        });
+        mBuilder.setContentView(binding.getRoot());
+        mBuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        mBuilder.show();
+    }
+
     public void showSimpleDialog(int resId, String title, String des, String positive, String negative, OnDismissListener onDismissListener) {
         if (mContext == null)
             return;
@@ -247,7 +270,26 @@ public class CustomDialogBuilder {
         mBuilder.show();
     }
 
-    public interface OnAnswerDismissListener {
+    public void showSimpleDialog(int resId, String title, String des, String positive, OnDialogDismissListener onDismissListener) {
+        if (mContext == null)
+            return;
+        mBuilder.setCancelable(true);
+        mBuilder.setCanceledOnTouchOutside(true);
+        DialogSimple1Binding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.dialog_simple1, null, false);
+        binding.ivThumb.setImageResource(resId);
+        binding.tvTitle.setText(title);
+        binding.tvDes.setText(des);
+        binding.btnLogOut.setText(positive);
+        binding.btnLogOut.setOnClickListener(v -> {
+            mBuilder.dismiss();
+            onDismissListener.onDismiss();
+        });
+        mBuilder.setContentView(binding.getRoot());
+        mBuilder.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
+        mBuilder.show();
+    }
+
+    public interface OnDialogDismissListener {
         void onDismiss();
     }
 

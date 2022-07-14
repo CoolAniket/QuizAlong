@@ -1,9 +1,13 @@
 package com.thequizapp.quizalong.view.results;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -23,6 +27,8 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     ActivityShowQuizAnswersBinding binding;
     ShowQuizResultsViewModel viewModel;
     private int p= 1;
+    private LinearLayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,60 +57,44 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     private void initObserve(){
         viewModel.getPaginationVal().observe(this, pageStr -> {
            Log.e("pageStr .. ",""+pageStr);
-            //binding.tvPagination.setText("");
-            //binding.tvPagination.setText(pageStr);
         });
 
         viewModel.getOnSuccess().observe(this, response -> {
-            //Log.e("Response .. ",""+response.getQuestions());
-            //binding.tvPagination.setText(pageStr);
             String str = p+ "/" + response.getQuestions().size();
-            //Log.e("Start", "" + str);
             binding.tvPaginationstart.setText(str);
         });
     }
 
     private void initListener(){
-        LinearLayoutManager manager= (LinearLayoutManager) binding.rvQuestions.getLayoutManager();
-
-        /*if(binding.rvQuestions.getAdapter() != null) {*/
-
-        //Log.e("countttt", "" + binding.rvQuestions.getAdapter().getItemCount());
-            binding.btnPrev.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    p = manager.findLastVisibleItemPosition() - 1;
-                    binding.rvQuestions.smoothScrollToPosition(p);
-                    //viewModel.getPaginationVal().setValue(""+p);
-                    //Log.e("PPPP", "" + p);
-                    checkVisibility();
-                    //viewModel.getPaginationVal().setValue("");
-                    binding.tvPagination.setText("");
+        binding.rvQuestions.setHasFixedSize(true);
+        mLayoutManager = (LinearLayoutManager) binding.rvQuestions.getLayoutManager();
+        final SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(binding.rvQuestions);
+        binding.rvQuestions.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if(newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    View centerView = snapHelper.findSnapView(mLayoutManager);
+                    p = mLayoutManager.getPosition(centerView);
                     String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
-                    //Log.e("PPPP", "" + str);
                     binding.tvPagination.setText(str);
                     viewModel.getPaginationVal().setValue(str);
                     binding.tvPaginationstart.setVisibility(View.GONE);
-                }
-            });
-
-
-            binding.btnNext.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    p = manager.findFirstVisibleItemPosition() + 1;
-                    binding.rvQuestions.smoothScrollToPosition(p);
-                    //Log.e("NNNN", "" + p);
                     checkVisibility();
-                    //viewModel.getPaginationVal().setValue("");
-                    binding.tvPagination.setText("");
-                    String str = (p + 1) + "/" + binding.rvQuestions.getAdapter().getItemCount();
-                    //Log.e("NNNN", "" + str);
-                    binding.tvPagination.setText(str);
-                    viewModel.getPaginationVal().setValue(str);
                 }
-            });
-        /*}*/
+            }
+        });
+        binding.btnPrev.setOnClickListener(view -> {
+            View centerView = snapHelper.findSnapView(mLayoutManager);
+            p = mLayoutManager.getPosition(centerView) - 1;
+            binding.rvQuestions.smoothScrollToPosition(p);
+        });
+        binding.btnNext.setOnClickListener(view -> {
+            View centerView = snapHelper.findSnapView(mLayoutManager);
+            p = mLayoutManager.getPosition(centerView) + 1;
+            binding.rvQuestions.smoothScrollToPosition(p);
+        });
         binding.btnViewLeaderboard.setOnClickListener(v -> {
             startActivity(new Intent(this, LeaderBoardActivity.class).
                     putExtra(Const.QUIZ_ID, String.valueOf(viewModel.getQuizId()))
@@ -114,8 +104,6 @@ public class ShowQuizAnswersActivity extends BaseActivity {
     }
 
     public void checkVisibility() {
-        //Log.e("PPPP" ,(p+1)+""+binding.rvQuestions.getAdapter().getItemCount());
-
         if (p < 1) {
             binding.btnPrev.setVisibility(View.GONE);
             binding.btnNext.setVisibility(View.VISIBLE);

@@ -75,6 +75,9 @@ public final class Const {
     public static final int COURSE_TYPE_MEDICINE = 1;
     public static final String CATEGORY_ID = "category_id";
     public static final String QUIZ_TYPE = "quiz_type";
+    public static final String VERSION = "version";
+    public static final String PROOF = "proof";
+    public static final String MESSAGE_WAITING = "Please wait Scores are being calculated";
 
     Const() {
 

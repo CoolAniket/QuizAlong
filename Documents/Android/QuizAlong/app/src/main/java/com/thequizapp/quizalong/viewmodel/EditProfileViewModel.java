@@ -11,6 +11,7 @@ import com.thequizapp.quizalong.utils.Global;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.regex.Pattern;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -26,24 +27,52 @@ public class EditProfileViewModel extends ViewModel {
     private MutableLiveData<String> toast = new MutableLiveData<>();
     private CurrentUser user;
 
-    private String firstName;
-    private String lastName;
+    private String fullName;
+    private String mobileNo;
+    private String email;
+    private String collegeName;
+    private String year;
     private String profileUri;
+    private String proof;
 
-    public String getFirstName() {
-        return firstName;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getMobileNo() {
+        return mobileNo;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setMobileNo(String mobileNo) {
+        this.mobileNo = mobileNo;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCollegeName() {
+        return collegeName;
+    }
+
+    public void setCollegeName(String collegeName) {
+        this.collegeName = collegeName;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 
     public ObservableBoolean getIsLoading() {
@@ -66,6 +95,14 @@ public class EditProfileViewModel extends ViewModel {
         this.profileUri = profileUri;
     }
 
+    public String getProof() {
+        return proof;
+    }
+
+    public void setProof(String proof) {
+        this.proof = proof;
+    }
+
     public CurrentUser getUser() {
         return user;
     }
@@ -77,10 +114,16 @@ public class EditProfileViewModel extends ViewModel {
     public void afterTextChanged(CharSequence charSequence, int type) {
         switch (type) {
             case 0:
-                firstName = charSequence.toString();
+                fullName = charSequence.toString();
                 break;
             case 1:
-                lastName = charSequence.toString();
+                mobileNo = charSequence.toString();
+                break;
+            case 2:
+                email = charSequence.toString();
+                break;
+            case 3:
+                collegeName = charSequence.toString();
                 break;
             default:
                 //
@@ -89,29 +132,41 @@ public class EditProfileViewModel extends ViewModel {
     }
 
     public void editProfile() {
-        if (firstName == null || firstName.isEmpty()) {
-            toast.setValue("Please enter firstName");
+        if (fullName == null || fullName.isEmpty()) {
+            toast.setValue("Please enter name");
             return;
         }
-        if (lastName == null || lastName.isEmpty()) {
-            toast.setValue("Please enter lastName");
+        if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
+            toast.setValue("Please enter a valid mobile number");
             return;
         }
         HashMap<String, RequestBody> hashMap = new HashMap<>();
-        hashMap.put("fullName", toRequestBody(firstName.concat(" ").concat(lastName)));
+        hashMap.put("fullName", toRequestBody(fullName));
         hashMap.put(Const.USERID, toRequestBody(Global.userId.get()));
+        hashMap.put("yearId", toRequestBody(getYear()));
+        hashMap.put("college", toRequestBody(getCollegeName()));
+        hashMap.put("identity", toRequestBody(getEmail()));
+        hashMap.put("mobile_no", toRequestBody(getMobileNo()));
 //        hashMap.put(Const.USERID, toRequestBody("35"));
-        MultipartBody.Part body = null;
+        MultipartBody.Part profile = null;
         if (profileUri != null && !profileUri.isEmpty()) {
             File file = new File(profileUri);
             RequestBody requestFile =
                     RequestBody.create(file, MediaType.parse("multipart/form-data"));
 
-            body = MultipartBody.Part.createFormData(Const.PROFILE_IMAGE, file.getName(), requestFile);
+            profile = MultipartBody.Part.createFormData(Const.PROFILE_IMAGE, file.getName(), requestFile);
+        }
+        MultipartBody.Part proof = null;
+        if (profileUri != null && !profileUri.isEmpty()) {
+            File file = new File(profileUri);
+            RequestBody requestFile =
+                    RequestBody.create(file, MediaType.parse("multipart/form-data"));
+
+            proof = MultipartBody.Part.createFormData(Const.PROOF, file.getName(), requestFile);
         }
         disposable.add(
                 Global.initRetrofit()
-                        .editProfile(BuildConfig.APIKEY, hashMap, body)
+                        .editProfile(BuildConfig.APIKEY, hashMap, profile, proof)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .unsubscribeOn(Schedulers.io())
@@ -127,5 +182,11 @@ public class EditProfileViewModel extends ViewModel {
 
     public RequestBody toRequestBody(String value) {
         return RequestBody.create(value, MediaType.parse("text/plain"));
+    }
+    private boolean isValidMobile(String phone) {
+        if(!Pattern.matches("[a-zA-Z]+", phone)) {
+            return phone.length() > 6 && phone.length() <= 10;
+        }
+        return false;
     }
 }

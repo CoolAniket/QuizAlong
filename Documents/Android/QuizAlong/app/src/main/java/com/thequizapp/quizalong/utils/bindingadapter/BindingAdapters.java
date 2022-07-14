@@ -2,6 +2,9 @@ package com.thequizapp.quizalong.utils.bindingadapter;
 
 import android.text.TextUtils;
 import android.text.method.ScrollingMovementMethod;
+import android.view.View;
+import android.view.ViewGroup;
+import static android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -68,5 +71,12 @@ public class BindingAdapters {
         } else {
             textView.setText(R.string.silver_player);
         }
+    }
+
+    @BindingAdapter("android:layout_height")
+    public static void setHeight(View view, boolean isMatchParent) {
+        ViewGroup.LayoutParams params = view.getLayoutParams();
+        params.height = isMatchParent ? LayoutParams.MATCH_PARENT : LayoutParams.WRAP_CONTENT;
+        view.setLayoutParams(params);
     }
 }

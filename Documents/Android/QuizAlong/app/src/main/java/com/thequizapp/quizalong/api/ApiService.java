@@ -151,13 +151,15 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(Const.APP_SETTINGS)
     Single<Settings> getAllSettings(@Header(Const.API_KEY) String apiKey,
-                                    @Field(Const.PLATFORM) String platform);
+                                    @Field(Const.PLATFORM) String platform,
+                                    @Field(Const.VERSION) int versionCode);
 
     @Multipart
     @POST(Const.USER_EDIT_PROFILE)
     Single<RestResponse> editProfile(@Header(Const.API_KEY) String apiKey,
                                      @PartMap HashMap<String, RequestBody> requestBodyHashMap,
-                                     @Part MultipartBody.Part profileImage);
+                                     @Part MultipartBody.Part profileImage,
+                                     @Part MultipartBody.Part proofImage);
 
     @Multipart
     @POST(Const.ADDITIONAL_DETAILS)
