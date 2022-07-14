@@ -230,7 +230,7 @@ public class QuizViewModel extends ViewModel {
         if(isTimerOff) {
             //Log.e("Hash", String.valueOf(getTimeRemaining())+" isTimerOff "+isTimerOff);
             hashMap.put("question_id[" + (pos - 1) + "]", String.valueOf(getQuestionsList().get(pos - 1).getId()));
-            hashMap.put("selected_ans[" + (pos - 1) + "]", "");
+            hashMap.put("selected_ans[" + (pos - 1) + "]", "-");
             hashMap.put("time_taken[" + (pos - 1) + "]", "0");
         }else{
             //Log.e("Hash.....",skip);

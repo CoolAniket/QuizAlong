@@ -120,6 +120,11 @@ public class QuizActivity extends BaseActivity implements Runnable {
             binding.ivLifeLine.setVisibility(View.VISIBLE);
         }
         viewModel.setQuizType(getIntent().getStringExtra("quiz_type"));
+        if(!viewModel.getIsLobby().get()){
+            binding.tvExit.setVisibility(View.GONE);
+        }else{
+            binding.tvExit.setVisibility(View.VISIBLE);
+        }
     }
 
     private void slideTextWithTime(List<LobbyMessageResponse.QuizItem> messages,String[] TIPS){
@@ -220,7 +225,11 @@ public class QuizActivity extends BaseActivity implements Runnable {
             viewModel.getRapidFireDuration().set(sessionManager.getRapidFireTime());
             handler.postDelayed(this, 1000);
         }*/
-
+        if(!viewModel.getIsLobby().get()){
+            binding.tvExit.setVisibility(View.GONE);
+        }else{
+            binding.tvExit.setVisibility(View.VISIBLE);
+        }
         if (viewModel.getIsLobby().get()) {
             if (cTimer != null)
                 cTimer.cancel();
@@ -252,15 +261,28 @@ public class QuizActivity extends BaseActivity implements Runnable {
         /*For direct start uncomment below lines*/
         /*viewModel.getIsLobby().set(true);
         startCountDown();*/
+        Log.e("lobby difference ", "..."+viewModel.getTwistQuizesItem().getStartTime());
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm aa");
-            String currentTime = new SimpleDateFormat("hh:mm aa", Locale.getDefault()).format(new Date());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+            String currentTime = new SimpleDateFormat("hh:mm:ss", Locale.getDefault()).format(new Date());
             Date startDate = simpleDateFormat.parse(currentTime);
             Date endDate = null;
-            endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
-            //endDate = simpleDateFormat.parse("21:09");
+            //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
+            String testStr = viewModel.getTwistQuizesItem().getStartTime();//;
+            Log.e("lobby testStr 1",testStr);
+            if(testStr.contains("PM")){
+                testStr = testStr.replace(" PM","");
+            }else{
+                testStr = testStr.replace(" AM","");
+            }
+            Log.e("lobby testStr 2",testStr);
+            testStr = testStr+":00";
+            Log.e("lobby testStr 3",testStr);
+            endDate = simpleDateFormat.parse(testStr);
 
             long difference = endDate.getTime() - startDate.getTime();
+
+            Log.e("lobby difference ", ""+difference+" "+endDate.getTime()+" "+startDate.getTime());
             if(difference<0)
             {
                 Date dateMax = simpleDateFormat.parse("24:00");
@@ -270,8 +292,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
             int days = (int) (difference / (1000*60*60*24));
             int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
             int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
-            //Log.e("log_tag","Hours: "+hours+", Mins: "+min+" currentTime "+currentTime+" difference "+difference);
-            if (viewModel.getIsInfo().get()) {
+            Log.e("log_tag","Hours: "+hours+", Mins: "+min+" currentTime "+currentTime+" difference "+difference);
+            /*if (viewModel.getIsInfo().get()) {*/
+//                if (true) {
                 if (lTimer != null)
                     lTimer.cancel();
                 lTimer = new CountDownTimer(difference, 1000) {
@@ -300,8 +323,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
                     }
                 };
                 lTimer.start();
-            }
-        } catch (ParseException e) {
+//            }
+        } catch (Exception e) {
+            Log.e("lobby error ", ""+e);
             e.printStackTrace();
         }
 
@@ -352,19 +376,52 @@ public class QuizActivity extends BaseActivity implements Runnable {
             if(getIntent().getStringExtra("quiz_type").contains("past")){
 //                Log.e(">.... inside ",getIntent().getStringExtra("quiz_type"));
                 viewModel.getIsInfo().set(true);
-                /*startLobbyTimer();*/
+                //startLobbyTimer();
                 viewModel.getIsLobby().set(true);
-                //startCountDown();
+                startCountDown();
+
 
                 if (slideTimer != null)
                     slideTimer.cancel();
             }else
             {
-                viewModel.getIsInfo().set(true);
-                slideTextWithTime(lobbyMessagesList,TIPS);
-                startLobbyTimer();
+//                viewModel.getIsInfo().set(true);
+//                slideTextWithTime(lobbyMessagesList,TIPS);
+//                startLobbyTimer();
                 /*viewModel.getIsLobby().set(true);
                 startCountDown();*/
+                try {
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+                    String currentTime = new SimpleDateFormat("hh:mm:ss", Locale.getDefault()).format(new Date());
+                    Date startDate = simpleDateFormat.parse(currentTime);
+                    Date endDate = null;
+                    //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
+                    String testStr = viewModel.getTwistQuizesItem().getStartTime();//;
+                    Log.e("lobby testStr 1",testStr);
+                    if(testStr.contains("PM")){
+                        testStr = testStr.replace(" PM","");
+                    }else{
+                        testStr = testStr.replace(" AM","");
+                    }
+                    Log.e("lobby testStr 2",testStr);
+                    testStr = testStr+":00";
+                    Log.e("lobby testStr 3",testStr);
+                    endDate = simpleDateFormat.parse(testStr);
+
+                    //long difference = endDate.getTime() - startDate.getTime();
+                    long afterStart =  startDate.getTime() - endDate.getTime();
+                    Log.e(">.... ",">.... "+afterStart);
+                    if(afterStart > 1500){
+                        Toast.makeText(this, "You are out of time. Quiz already started!", Toast.LENGTH_LONG).show();
+                    }else {
+                        viewModel.getIsInfo().set(true);
+                        slideTextWithTime(lobbyMessagesList,TIPS);
+                        startLobbyTimer();
+                    }
+                } catch (Exception e) {
+                    Log.e("lobby afterStart ", ""+e);
+                    e.printStackTrace();
+                }
             }
 
 
