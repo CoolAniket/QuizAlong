@@ -3,6 +3,7 @@ package com.thequizapp.quizalong.view.home;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +30,10 @@ import com.thequizapp.quizalong.view.payment.PaymentActivity;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.view.quizes.QuizListActivity;
 import com.thequizapp.quizalong.viewmodel.HomeViewModel;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class HomeFragment extends Fragment {
@@ -64,31 +69,100 @@ public class HomeFragment extends Fragment {
     private void initListener() {
 
         viewModel.getTwistQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
-            if (pairs.length == 3) {
-                startPaymentProcess(quizesItem);
-            } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
-                enrollForFree(quizesItem);
-            } else {
-                startActivity(new Intent(getActivity(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem))
-                        .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
-                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.TWIST));
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
+                Date startDate = simpleDateFormat.parse(currentTime);
+                Date endDate = null;
+                //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
+                String testStr = quizesItem.getStartTime();//;
+                Log.e("lobby testStr 1",testStr);
+                String addAfter ="";
+                if(testStr.contains("PM")){
+                    testStr = testStr.replace(" PM","");
+                    addAfter = " PM";
+                }else{
+                    testStr = testStr.replace(" AM","");
+                    addAfter = " AM";
+                }
+                Log.e("lobby testStr 2",testStr);
+                testStr = testStr+":00"+addAfter;
+                Log.e("lobby testStr 3",testStr);
+                endDate = simpleDateFormat.parse(testStr);
+
+                //long difference = endDate.getTime() - startDate.getTime();
+                long afterStart =  startDate.getTime() - endDate.getTime();
+                Log.e(">.... ",">.... "+afterStart);
+                if(afterStart > 1500){
+                    Toast.makeText(getContext(), "You are out of time. Quiz already started!", Toast.LENGTH_LONG).show();
+                }else {
+                    if (pairs.length == 3) {
+                        startPaymentProcess(quizesItem);
+                    } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
+                        enrollForFree(quizesItem);
+                    } else {
+                        startActivity(new Intent(getActivity(), QuizActivity.class)
+                                .putExtra("data", new Gson().toJson(quizesItem))
+                                .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
+                                .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.TWIST));
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("lobby afterStart ", ""+e);
+                e.printStackTrace();
             }
+
         });
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
-            if (pairs.length == 3) {
-                startPaymentProcess(quizesItem);
-            } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
-                enrollForFree(quizesItem);
-            } else {
-                startActivity(new Intent(getActivity(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem))
-                        .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
-                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
+            try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
+                Date startDate = simpleDateFormat.parse(currentTime);
+                Date endDate = null;
+                //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
+                String testStr = quizesItem.getStartTime();//;
+                Log.e("lobby testStr 1",testStr);
+                String addAfter ="";
+                if(testStr.contains("PM")){
+                    testStr = testStr.replace(" PM","");
+                    addAfter = " PM";
+                }else{
+                    testStr = testStr.replace(" AM","");
+                    addAfter = " AM";
+                }
+                Log.e("lobby testStr 2",testStr);
+                testStr = testStr+":00"+addAfter;
+                Log.e("lobby testStr 3",testStr);
+                endDate = simpleDateFormat.parse(testStr);
+
+                //long difference = endDate.getTime() - startDate.getTime();
+                long afterStart =  startDate.getTime() - endDate.getTime();
+                Log.e(">.... ",">.... "+afterStart);
+                if(afterStart > 1500){
+                    Toast.makeText(getContext(), "You are out of time. Quiz already started!", Toast.LENGTH_LONG).show();
+                }else {
+                    if (pairs.length == 3) {
+                        startPaymentProcess(quizesItem);
+                    } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
+                        enrollForFree(quizesItem);
+                    } else {
+                        startActivity(new Intent(getActivity(), QuizActivity.class)
+                                .putExtra("data", new Gson().toJson(quizesItem))
+                                .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
+                                .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
+                    }
+                }
+            } catch (Exception e) {
+                Log.e("lobby afterStart ", ""+e);
+                e.printStackTrace();
             }
+
         });
 
         viewModel.getPastQuizesAdapter().setOnItemClicks((quizesItem) -> {
+
+            //Log.e("CLCIKKKK ","1 "+quizesItem.getStartTime());
+            //Log.e("CLCIKKKK ","1 "+new Gson().toJson(quizesItem));
             if(quizesItem.getPlayed() == 0) {
                 startActivity(new Intent(getActivity(), QuizActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
@@ -99,6 +173,7 @@ public class HomeFragment extends Fragment {
                         .putExtra(Const.QUIZ_ID, String.valueOf(quizesItem.getQuizId()))
                         .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.PAST));
             }
+
         });
 
         binding.pullToRefresh.setOnRefreshListener(() -> {

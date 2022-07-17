@@ -263,20 +263,24 @@ public class QuizActivity extends BaseActivity implements Runnable {
         startCountDown();*/
         Log.e("lobby difference ", "..."+viewModel.getTwistQuizesItem().getStartTime());
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
-            String currentTime = new SimpleDateFormat("hh:mm:ss", Locale.getDefault()).format(new Date());
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+            String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
             Date startDate = simpleDateFormat.parse(currentTime);
             Date endDate = null;
             //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
             String testStr = viewModel.getTwistQuizesItem().getStartTime();//;
             Log.e("lobby testStr 1",testStr);
+            Log.e("lobby testStr 1",testStr);
+            String addAfter ="";
             if(testStr.contains("PM")){
                 testStr = testStr.replace(" PM","");
+                addAfter = " PM";
             }else{
                 testStr = testStr.replace(" AM","");
+                addAfter = " AM";
             }
             Log.e("lobby testStr 2",testStr);
-            testStr = testStr+":00";
+            testStr = testStr+":00"+addAfter;
             Log.e("lobby testStr 3",testStr);
             endDate = simpleDateFormat.parse(testStr);
 
@@ -391,20 +395,23 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 /*viewModel.getIsLobby().set(true);
                 startCountDown();*/
                 try {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
-                    String currentTime = new SimpleDateFormat("hh:mm:ss", Locale.getDefault()).format(new Date());
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
+                    String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
                     Date startDate = simpleDateFormat.parse(currentTime);
                     Date endDate = null;
                     //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
                     String testStr = viewModel.getTwistQuizesItem().getStartTime();//;
                     Log.e("lobby testStr 1",testStr);
+                    String addAfter ="";
                     if(testStr.contains("PM")){
                         testStr = testStr.replace(" PM","");
+                        addAfter = " PM";
                     }else{
                         testStr = testStr.replace(" AM","");
+                        addAfter = " AM";
                     }
                     Log.e("lobby testStr 2",testStr);
-                    testStr = testStr+":00";
+                    testStr = testStr+":00"+addAfter;
                     Log.e("lobby testStr 3",testStr);
                     endDate = simpleDateFormat.parse(testStr);
 
