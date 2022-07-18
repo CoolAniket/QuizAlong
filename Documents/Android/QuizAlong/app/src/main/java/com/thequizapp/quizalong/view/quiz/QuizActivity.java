@@ -259,44 +259,24 @@ public class QuizActivity extends BaseActivity implements Runnable {
 
     private void startLobbyTimer(){
         /*For direct start uncomment below lines*/
-        /*viewModel.getIsLobby().set(true);
-        startCountDown();*/
         Log.e("lobby difference ", "..."+viewModel.getTwistQuizesItem().getStartTime());
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
-            String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
-            Date startDate = simpleDateFormat.parse(currentTime);
-            Date endDate = null;
-            //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
-            String testStr = viewModel.getTwistQuizesItem().getStartTime();//;
-            Log.e("lobby testStr 1",testStr);
-            Log.e("lobby testStr 1",testStr);
-            String addAfter ="";
-            if(testStr.contains("PM")){
-                testStr = testStr.replace(" PM","");
-                addAfter = " PM";
-            }else{
-                testStr = testStr.replace(" AM","");
-                addAfter = " AM";
-            }
-            Log.e("lobby testStr 2",testStr);
-            testStr = testStr+":00"+addAfter;
-            Log.e("lobby testStr 3",testStr);
-            endDate = simpleDateFormat.parse(testStr);
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+            Date startDate = new Date();
+            Date endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
 
             long difference = endDate.getTime() - startDate.getTime();
 
-            Log.e("lobby difference ", ""+difference+" "+endDate.getTime()+" "+startDate.getTime());
-            if(difference<0)
-            {
+            Log.d("lobby difference ", ""+difference+" "+endDate.getTime()+" "+startDate.getTime());
+            if(difference < 0) {
                 Date dateMax = simpleDateFormat.parse("24:00");
                 Date dateMin = simpleDateFormat.parse("00:00");
-                difference=(dateMax.getTime() -startDate.getTime() )+(endDate.getTime()-dateMin.getTime());
+                difference = (dateMax.getTime() - startDate.getTime() ) + (endDate.getTime() - dateMin.getTime());
             }
             int days = (int) (difference / (1000*60*60*24));
             int hours = (int) ((difference - (1000*60*60*24*days)) / (1000*60*60));
             int min = (int) (difference - (1000*60*60*24*days) - (1000*60*60*hours)) / (1000*60);
-            Log.e("log_tag","Hours: "+hours+", Mins: "+min+" currentTime "+currentTime+" difference "+difference);
+            Log.d("log_tag","Hours: "+hours+", Mins: "+min+" currentTime "+simpleDateFormat.format(startDate)+" difference "+difference);
             /*if (viewModel.getIsInfo().get()) {*/
 //                if (true) {
                 if (lTimer != null)
@@ -317,13 +297,16 @@ public class QuizActivity extends BaseActivity implements Runnable {
                     }
 
                     public void onFinish() {
-                        Log.e("lobby omFinish ", "");
+                        Log.d("lobby omFinish ", "");
                         viewModel.getLobbyTime().setValue("00:00:00");
                         /*For direct start comment below lines*/
                         viewModel.getIsLobby().set(true);
                         if (slideTimer != null)
                             slideTimer.cancel();
                         startCountDown();
+                        // notify server: quiz started
+                        viewModel.updateGameStarted();
+
                     }
                 };
                 lTimer.start();
@@ -376,51 +359,23 @@ public class QuizActivity extends BaseActivity implements Runnable {
         binding.tvCancel.setOnClickListener(v -> onBackPressed());
         binding.btnGo.setOnClickListener(v -> {
 
-//            Log.e(">.... ",getIntent().getStringExtra("quiz_type"));
             if(getIntent().getStringExtra("quiz_type").contains("past")){
-//                Log.e(">.... inside ",getIntent().getStringExtra("quiz_type"));
                 viewModel.getIsInfo().set(true);
                 //startLobbyTimer();
                 viewModel.getIsLobby().set(true);
                 startCountDown();
-
-
                 if (slideTimer != null)
                     slideTimer.cancel();
-            }else
-            {
-//                viewModel.getIsInfo().set(true);
-//                slideTextWithTime(lobbyMessagesList,TIPS);
-//                startLobbyTimer();
-                /*viewModel.getIsLobby().set(true);
-                startCountDown();*/
+            } else {
                 try {
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
-                    String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
-                    Date startDate = simpleDateFormat.parse(currentTime);
-                    Date endDate = null;
-                    //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
-                    String testStr = viewModel.getTwistQuizesItem().getStartTime();//;
-                    Log.e("lobby testStr 1",testStr);
-                    String addAfter ="";
-                    if(testStr.contains("PM")){
-                        testStr = testStr.replace(" PM","");
-                        addAfter = " PM";
-                    }else{
-                        testStr = testStr.replace(" AM","");
-                        addAfter = " AM";
-                    }
-                    Log.e("lobby testStr 2",testStr);
-                    testStr = testStr+":00"+addAfter;
-                    Log.e("lobby testStr 3",testStr);
-                    endDate = simpleDateFormat.parse(testStr);
-
-                    //long difference = endDate.getTime() - startDate.getTime();
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                    Date startDate = new Date();
+                    Date endDate =  simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
                     long afterStart =  startDate.getTime() - endDate.getTime();
                     Log.e(">.... ",">.... "+afterStart);
-                    if(afterStart > 1500){
-                        Toast.makeText(this, "You are out of time. Quiz already started!", Toast.LENGTH_LONG).show();
-                    }else {
+                    if (afterStart > 1500){
+                        Toast.makeText(this, R.string.quiz_already_started, Toast.LENGTH_LONG).show();
+                    } else {
                         viewModel.getIsInfo().set(true);
                         slideTextWithTime(lobbyMessagesList,TIPS);
                         startLobbyTimer();
@@ -430,8 +385,6 @@ public class QuizActivity extends BaseActivity implements Runnable {
                     e.printStackTrace();
                 }
             }
-
-
         });
 
         binding.lytShare.setOnClickListener(v -> {

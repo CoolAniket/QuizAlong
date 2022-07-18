@@ -148,6 +148,13 @@ public interface ApiService {
                                       @Field(Const.USER_ID) String userId,
                                       @Field(Const.QUIZ_ID) String points);
 
+
+    @FormUrlEncoded
+    @POST(Const.UPDATE_QUIZ_STARTED)
+    Single<RestResponse> updateGameStarted(@Header(Const.API_KEY) String apiKey,
+                                      @Field(Const.USER_ID) String userId,
+                                      @Field(Const.QUIZ_ID) String points);
+
     @FormUrlEncoded
     @POST(Const.APP_SETTINGS)
     Single<Settings> getAllSettings(@Header(Const.API_KEY) String apiKey,

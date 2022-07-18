@@ -164,6 +164,14 @@ public class QuizViewModel extends ViewModel {
                 }));
     }
 
+    public void updateGameStarted() {
+        disposable.add(Global.initRetrofit().updateGameStarted(BuildConfig.APIKEY, String.valueOf(Global.userId), String.valueOf(twistQuizesItem.getQuizId()))
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .subscribe((questions, throwable) ->
+                        Log.d("QUIZ_START", questions != null ? "updateGameStarted: "+questions.isStatus() : throwable.getLocalizedMessage())));
+    }
     public void addPointsToWallet() {
         disposable.add(Global.initRetrofit().addPointsToWallet(BuildConfig.APIKEY, String.valueOf(Global.userId), String.valueOf(totalScore.get()))
                 .subscribeOn(Schedulers.io())

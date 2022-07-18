@@ -31,6 +31,7 @@ public final class Const {
     public static final String LOBBY_MESSAGES= "quiz/lobbyMessages";
     public static final String USER_ADD_POINTS_TO_WALLET = "user/addPointsToWallet";
     public static final String USER_INCREASE_PLAY = "user/increasePlay";
+    public static final String UPDATE_QUIZ_STARTED = "leaderboard/updateGamePlayed";
     public static final String APP_SETTINGS = "app/settings";
     public static final String USER_EDIT_PROFILE = "user/editProfile";
     public static final String USER_PLACE_REDEEM = "user/placeRedeem";

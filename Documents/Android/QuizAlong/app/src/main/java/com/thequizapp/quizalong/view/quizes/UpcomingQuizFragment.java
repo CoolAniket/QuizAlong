@@ -21,7 +21,11 @@ import com.thequizapp.quizalong.view.payment.PaymentActivity;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
 import com.thequizapp.quizalong.viewmodel.UpcomingQuizViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -60,10 +64,22 @@ public class UpcomingQuizFragment extends Fragment {
                 startPaymentProcess(quizesItem);
             } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
                 enrollForFree(quizesItem);
-            } else {
-                startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
-                        .putExtra("data", new Gson().toJson(quizesItem))
-                        .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
+            } else try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                Date startDate = new Date();
+                Date endDate = simpleDateFormat.parse(quizesItem.getStartTime());
+                long afterStart = startDate.getTime() - endDate.getTime();
+                Log.d(">.... ", ">.... " + afterStart);
+                if (afterStart > 1500) {
+                    Toast.makeText(getContext(), R.string.quiz_already_started, Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(binding.getRoot().getContext(), QuizActivity.class)
+                            .putExtra("data", new Gson().toJson(quizesItem))
+                            .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
+                }
+            } catch (ParseException e) {
+                Log.e("lobby afterStart ", "" + e);
+                e.printStackTrace();
             }
         });
 

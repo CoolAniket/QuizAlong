@@ -170,6 +170,7 @@
     <string name="current_official_year">Current Official Year</string>
     <string name="email_address">Email Address</string>
     <string name="college_name">College Name</string>
+    <string name="quiz_already_started">Quiz already started!</string>
 
     <string-array name="payment">
         <item>Select Gateway</item>

@@ -87,13 +87,17 @@ public class ShowQuizAnswersActivity extends BaseActivity {
         });
         binding.btnPrev.setOnClickListener(view -> {
             View centerView = snapHelper.findSnapView(mLayoutManager);
-            p = mLayoutManager.getPosition(centerView) - 1;
-            binding.rvQuestions.smoothScrollToPosition(p);
+            if (mLayoutManager.getPosition(centerView) > 0) {
+                p = mLayoutManager.getPosition(centerView) -1;
+                binding.rvQuestions.smoothScrollToPosition(p);
+            }
         });
         binding.btnNext.setOnClickListener(view -> {
             View centerView = snapHelper.findSnapView(mLayoutManager);
-            p = mLayoutManager.getPosition(centerView) + 1;
-            binding.rvQuestions.smoothScrollToPosition(p);
+            if (mLayoutManager.getPosition(centerView) < binding.rvQuestions.getAdapter().getItemCount() -1) {
+                p = mLayoutManager.getPosition(centerView) + 1;
+                binding.rvQuestions.smoothScrollToPosition(p);
+            }
         });
         binding.btnViewLeaderboard.setOnClickListener(v -> {
             startActivity(new Intent(this, LeaderBoardActivity.class).

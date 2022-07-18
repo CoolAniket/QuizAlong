@@ -69,88 +69,52 @@ public class HomeFragment extends Fragment {
     private void initListener() {
 
         viewModel.getTwistQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
-            try {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
-                String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
-                Date startDate = simpleDateFormat.parse(currentTime);
-                Date endDate = null;
-                //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
-                String testStr = quizesItem.getStartTime();//;
-                Log.e("lobby testStr 1",testStr);
-                String addAfter ="";
-                if(testStr.contains("PM")){
-                    testStr = testStr.replace(" PM","");
-                    addAfter = " PM";
-                }else{
-                    testStr = testStr.replace(" AM","");
-                    addAfter = " AM";
-                }
-                Log.e("lobby testStr 2",testStr);
-                testStr = testStr+":00"+addAfter;
-                Log.e("lobby testStr 3",testStr);
-                endDate = simpleDateFormat.parse(testStr);
 
-                //long difference = endDate.getTime() - startDate.getTime();
-                long afterStart =  startDate.getTime() - endDate.getTime();
-                Log.e(">.... ",">.... "+afterStart);
-                if(afterStart > 1500){
-                    Toast.makeText(getContext(), "You are out of time. Quiz already started!", Toast.LENGTH_LONG).show();
-                }else {
-                    if (pairs.length == 3) {
-                        startPaymentProcess(quizesItem);
-                    } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
-                        enrollForFree(quizesItem);
-                    } else {
-                        startActivity(new Intent(getActivity(), QuizActivity.class)
-                                .putExtra("data", new Gson().toJson(quizesItem))
-                                .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
-                                .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.TWIST));
-                    }
+            if (pairs.length == 3) {
+                startPaymentProcess(quizesItem);
+            } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
+                enrollForFree(quizesItem);
+            } else try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                Date startDate = new Date();
+                Date endDate = simpleDateFormat.parse(quizesItem.getStartTime());
+
+                long afterStart = startDate.getTime() - endDate.getTime();
+                Log.d(">.... ", ">.... " + afterStart);
+                if (afterStart > 1500) {
+                    Toast.makeText(getContext(), R.string.quiz_already_started, Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(getActivity(), QuizActivity.class)
+                            .putExtra("data", new Gson().toJson(quizesItem))
+                            .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ? viewModel.getUser().getValue().getUser().getFullname() : "Player")
+                            .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.TWIST));
                 }
             } catch (Exception e) {
-                Log.e("lobby afterStart ", ""+e);
+                Log.e("lobby afterStart ", "" + e);
                 e.printStackTrace();
             }
 
         });
         viewModel.getUpcomingQuizesAdapter().setOnItemClick((pairs, quizesItem) -> {
-            try {
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss a");
-                String currentTime = new SimpleDateFormat("hh:mm:ss a", Locale.getDefault()).format(new Date());
-                Date startDate = simpleDateFormat.parse(currentTime);
-                Date endDate = null;
-                //endDate = simpleDateFormat.parse(viewModel.getTwistQuizesItem().getStartTime());
-                String testStr = quizesItem.getStartTime();//;
-                Log.e("lobby testStr 1",testStr);
-                String addAfter ="";
-                if(testStr.contains("PM")){
-                    testStr = testStr.replace(" PM","");
-                    addAfter = " PM";
-                }else{
-                    testStr = testStr.replace(" AM","");
-                    addAfter = " AM";
-                }
-                Log.e("lobby testStr 2",testStr);
-                testStr = testStr+":00"+addAfter;
-                Log.e("lobby testStr 3",testStr);
-                endDate = simpleDateFormat.parse(testStr);
 
-                //long difference = endDate.getTime() - startDate.getTime();
-                long afterStart =  startDate.getTime() - endDate.getTime();
-                Log.e(">.... ",">.... "+afterStart);
-                if(afterStart > 1500){
-                    Toast.makeText(getContext(), "You are out of time. Quiz already started!", Toast.LENGTH_LONG).show();
-                }else {
-                    if (pairs.length == 3) {
-                        startPaymentProcess(quizesItem);
-                    } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
-                        enrollForFree(quizesItem);
-                    } else {
-                        startActivity(new Intent(getActivity(), QuizActivity.class)
-                                .putExtra("data", new Gson().toJson(quizesItem))
-                                .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ?viewModel.getUser().getValue().getUser().getFullname():"Player")
-                                .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
-                    }
+            if (pairs.length == 3) {
+                startPaymentProcess(quizesItem);
+            } else if (pairs.length == 1 && pairs[0].second.equals("Free")) {
+                enrollForFree(quizesItem);
+            } else try {
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+                Date startDate = new Date();
+                Date endDate = simpleDateFormat.parse(quizesItem.getStartTime());
+
+                long afterStart = startDate.getTime() - endDate.getTime();
+                Log.d(">.... ", ">.... " + afterStart);
+                if (afterStart > 1500) {
+                    Toast.makeText(getContext(), R.string.quiz_already_started, Toast.LENGTH_LONG).show();
+                } else {
+                    startActivity(new Intent(getActivity(), QuizActivity.class)
+                            .putExtra("data", new Gson().toJson(quizesItem))
+                            .putExtra("user_name", viewModel.getUser().getValue().getUser().getFullname() != null ? viewModel.getUser().getValue().getUser().getFullname() : "Player")
+                            .putExtra(Const.QUIZ_TYPE, QuizActivity.Type.UPCOMING));
                 }
             } catch (Exception e) {
                 Log.e("lobby afterStart ", ""+e);
