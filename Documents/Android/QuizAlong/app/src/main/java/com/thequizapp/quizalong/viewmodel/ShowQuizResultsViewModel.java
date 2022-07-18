@@ -6,6 +6,7 @@ import androidx.databinding.ObservableBoolean;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.facebook.internal.Utility;
 import com.thequizapp.quizalong.BuildConfig;
 import com.thequizapp.quizalong.adapter.ShowQuestionAnsAdapter;
 import com.thequizapp.quizalong.adapter.ShowResultsAdapter;
@@ -100,18 +101,18 @@ public class ShowQuizResultsViewModel extends ViewModel {
                     .observeOn(AndroidSchedulers.mainThread())
                     .unsubscribeOn(Schedulers.io())
                     .doOnTerminate(() -> isLoading.set(false))
-                    .subscribe((ShowResult, throwable) -> {
-                        Log.e("ShowResult...","past "+ShowResult+" "+throwable);
-                        if (ShowResult != null) {
-                            onSuccess.setValue(ShowResult);
-                            paginationVal.setValue("1"+"/"+ShowResult.getQuestions().size());
-                            Log.e("ShowResult...",""+ShowResult.getUserAnswers().get(0));
-                            //showResultsAdapter.updateData(ShowResult.getQuestions(),ShowResult.getUserAnswers());
-                            showQuestionAnsAdapter.updateData(ShowResult);
+                    .subscribe((showResult, throwable) -> {
+                        Log.e("showResult...","past "+showResult+" "+throwable);
+                        if (showResult != null && !Utility.isNullOrEmpty(showResult.getQuestions())) {
+                            onSuccess.setValue(showResult);
+                            paginationVal.setValue("1"+"/"+showResult.getQuestions().size());
+                            Log.e("showResult...",""+showResult.getUserAnswers().get(0));
+                            //showResultsAdapter.updateData(showResult.getQuestions(),showResult.getUserAnswers());
+                            showQuestionAnsAdapter.updateData(showResult);
 
-                        /*String str = "1"+"/"+ShowResult.getQuestions().size();
+                        /*String str = "1"+"/"+showResult.getQuestions().size();
                         getPaginationVal().setValue(str);*/
-                            this.setUser(ShowResult);
+                            this.setUser(showResult);
                         } else if (throwable != null) {
                             toast.setValue(throwable.getLocalizedMessage());
                         }
