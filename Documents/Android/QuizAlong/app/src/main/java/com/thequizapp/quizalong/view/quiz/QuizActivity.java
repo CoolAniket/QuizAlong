@@ -368,8 +368,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
             } else {
                 try {
                     Date start = DateUtils.parseDateTime(viewModel.getTwistQuizesItem().getDate()+":"+viewModel.getTwistQuizesItem().getStartTime());
-                    long currentNetworkTime = DateUtils.getCurrentNetworkTime();
-                    Date current = currentNetworkTime != -1 ? new Date(currentNetworkTime): new Date();
+//                    long currentNetworkTime = DateUtils.getCurrentNetworkTime();
+                    Date current = new Date();
                     long afterStart = current.getTime() - start.getTime();
                     Log.e(">.... ",">.... "+afterStart);
                     if (afterStart < 15000) {
