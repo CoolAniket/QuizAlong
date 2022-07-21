@@ -188,7 +188,7 @@
                         android:layout_height="105dp"
                         android:background="@drawable/ic_profile_user"
                         android:backgroundTint="@color/cobalt_blue"
-                        android:padding="10dp"
+                        android:padding="4dp"
                         app:circle_crop="@{firstUser.image}" />
 
                     <TextView
@@ -361,7 +361,7 @@
                         android:layout_marginHorizontal="15dp"
                         android:background="@drawable/ic_profile_user"
                         android:backgroundTint="@color/white_30"
-                        android:padding="10dp"
+                        android:padding="2dp"
                         app:circle_crop="@{myUser.image}" />
 
                     <TextView

@@ -46,7 +46,7 @@
                 android:layout_marginHorizontal="15dp"
                 android:background="@drawable/ic_profile_user"
                 android:backgroundTint="@color/white_30"
-                android:padding="10dp"
+                android:padding="2dp"
                 app:circle_crop="@{model.image}" />
 
             <TextView
