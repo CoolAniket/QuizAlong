@@ -10,8 +10,8 @@ android {
         applicationId "com.thequizapp.quizalong"
         minSdkVersion 24
         targetSdkVersion 30
-        versionCode 4
-        versionName "1.4"
+        versionCode 5
+        versionName "1.5"
         buildConfigField "String", "APIKEY", '\"API_Key\"'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }

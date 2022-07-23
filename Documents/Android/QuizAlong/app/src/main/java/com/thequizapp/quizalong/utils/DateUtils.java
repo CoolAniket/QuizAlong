@@ -26,9 +26,10 @@ public class DateUtils {
     }
 
 
+    //https://stackoverflow.com/a/14720918
     //NTP server list: http://tf.nist.gov/tf-cgi/servers.cgi
     public static final String TIME_SERVER = "time-a.nist.gov";
-
+    // Server time network api call
     public static long getCurrentNetworkTime() {
         NTPUDPClient timeClient = new NTPUDPClient();
         InetAddress inetAddress = null;

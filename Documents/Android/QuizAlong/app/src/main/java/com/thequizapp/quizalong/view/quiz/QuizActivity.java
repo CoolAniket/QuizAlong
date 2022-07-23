@@ -368,17 +368,24 @@ public class QuizActivity extends BaseActivity implements Runnable {
             } else {
                 try {
                     Date start = DateUtils.parseDateTime(viewModel.getTwistQuizesItem().getDate()+":"+viewModel.getTwistQuizesItem().getStartTime());
-//                    long currentNetworkTime = DateUtils.getCurrentNetworkTime();
-                    Date current = new Date();
-                    long afterStart = current.getTime() - start.getTime();
-                    Log.e(">.... ",">.... "+afterStart);
-                    if (afterStart < 15000) {
-                        viewModel.getIsInfo().set(true);
-                        slideTextWithTime(lobbyMessagesList,TIPS);
-                        startLobbyTimer();
-                    } else {
-                        Toast.makeText(this, R.string.quiz_already_started, Toast.LENGTH_LONG).show();
-                    }
+                    new Thread(() -> {
+                        // background api call to get server time
+                        long currentNetworkTime = DateUtils.getCurrentNetworkTime();
+                        // get the data
+                        runOnUiThread(() -> {
+                            // update UI thread
+                            Date current = currentNetworkTime != -1 ? new Date(currentNetworkTime): new Date();
+                            long afterStart = current.getTime() - start.getTime();
+                            Log.e(">.... ",">.... "+afterStart);
+                            if (afterStart < 15000) {
+                                viewModel.getIsInfo().set(true);
+                                slideTextWithTime(lobbyMessagesList,TIPS);
+                                startLobbyTimer();
+                            } else {
+                                Toast.makeText(QuizActivity.this, R.string.quiz_already_started, Toast.LENGTH_LONG).show();
+                            }
+                        });
+                    }).start();
                 } catch (Exception e) {
                     Log.e("lobby afterStart ", ""+e);
                     e.printStackTrace();
