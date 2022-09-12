@@ -16,9 +16,14 @@ import java.util.Locale;
 public class DateUtils {
 
     private static SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd:hh:mm a", Locale.getDefault());
+    private static SimpleDateFormat simpleDateFormat24 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
     public static Date parseDateTime(String dateTimeString) throws ParseException {
         return simpleDateFormat.parse(dateTimeString);
+    }
+
+    public static Date parseDateTime24(String dateTimeString) throws ParseException {
+        return simpleDateFormat24.parse(dateTimeString);
     }
 
     public static String format(Date date) {

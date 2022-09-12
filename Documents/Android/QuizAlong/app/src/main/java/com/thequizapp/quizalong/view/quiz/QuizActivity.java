@@ -366,30 +366,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 if (slideTimer != null)
                     slideTimer.cancel();
             } else {
-                try {
-                    Date start = DateUtils.parseDateTime(viewModel.getTwistQuizesItem().getDate()+":"+viewModel.getTwistQuizesItem().getStartTime());
-                    new Thread(() -> {
-                        // background api call to get server time
-                        long currentNetworkTime = DateUtils.getCurrentNetworkTime();
-                        // get the data
-                        runOnUiThread(() -> {
-                            // update UI thread
-                            Date current = currentNetworkTime != -1 ? new Date(currentNetworkTime): new Date();
-                            long afterStart = current.getTime() - start.getTime();
-                            Log.e(">.... ",">.... "+afterStart);
-                            if (afterStart < 15000) {
-                                viewModel.getIsInfo().set(true);
-                                slideTextWithTime(lobbyMessagesList,TIPS);
-                                startLobbyTimer();
-                            } else {
-                                Toast.makeText(QuizActivity.this, R.string.quiz_already_started, Toast.LENGTH_LONG).show();
-                            }
-                        });
-                    }).start();
-                } catch (Exception e) {
-                    Log.e("lobby afterStart ", ""+e);
-                    e.printStackTrace();
-                }
+                // Current quiz
+                viewModel.letGoBtn();
             }
         });
 
@@ -529,6 +507,21 @@ public class QuizActivity extends BaseActivity implements Runnable {
         viewModel.getLobbyTime().observe(this, timeString -> {
             binding.tvLobbyTime.setText(timeString);
         });
+
+        viewModel.getServerTime().observe(this, timeMilliseconds -> {
+            Date current = new Date();
+            long afterStart = current.getTime() - timeMilliseconds;
+            Log.e(">.... ",">.... "+afterStart);
+            if (afterStart < 15000) {
+                viewModel.getIsInfo().set(true);
+                slideTextWithTime(lobbyMessagesList,TIPS);
+                startLobbyTimer();
+            } else {
+                Toast.makeText(this, R.string.quiz_already_started, Toast.LENGTH_LONG).show();
+            }
+        });
+
+        viewModel.getToast().observe(this, message -> Toast.makeText(this, message, Toast.LENGTH_SHORT).show());
 
         viewModel.onLobbySuccess.observe(this, response -> {
             lobbyMessagesList.addAll(response.getQuizes());

@@ -40,6 +40,7 @@ public final class Const {
     public static final String APP_LEADERBOARD = "app/leaderboard";
     public static final String USER_FETCH_REDEEMS = "user/fetchRedeems";
     public static final String APP_NOTIFICATIONS = "app/notifications";
+    public static final String APP_SYSTEM_TIME = "app/systemTime";
 
     //Header
     public static final String API_KEY = "apiKey";

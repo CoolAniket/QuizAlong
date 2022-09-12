@@ -139,7 +139,9 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility='@{secondUser.fullName != null ? View.VISIBLE : View.INVISIBLE }'
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -181,7 +183,9 @@
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="7dp"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility='@{firstUser.fullName != null ? View.VISIBLE : View.INVISIBLE }'
+                    >
 
                     <ImageView
                         android:layout_width="105dp"
@@ -216,7 +220,9 @@
                     android:layout_marginTop="29dp"
                     android:layout_marginEnd="22dp"
                     android:gravity="center_horizontal"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility='@{thirdUser.fullName != null ? View.VISIBLE : View.INVISIBLE }'
+                    >
 
                     <TextView
                         android:layout_width="wrap_content"

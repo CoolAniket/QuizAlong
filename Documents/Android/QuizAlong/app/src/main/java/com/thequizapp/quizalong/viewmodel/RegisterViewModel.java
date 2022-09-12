@@ -67,10 +67,6 @@ public class RegisterViewModel extends ViewModel {
             toast.setValue("Please enter valid email");
             return;
         }
-        if (mobileNo == null || !isValidMobile(mobileNo)) {
-            toast.setValue("Please enter valid mobile no...!");
-            return;
-        }
         if (password == null || password.isEmpty()) {
             toast.setValue("Please enter password");
             return;

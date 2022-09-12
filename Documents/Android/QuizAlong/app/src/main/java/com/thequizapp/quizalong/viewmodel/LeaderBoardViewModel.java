@@ -185,16 +185,17 @@ public class LeaderBoardViewModel extends ViewModel {
     }
 
     private void updateAdapter(List<LeaderBoardResponse.LeaderboardUser> users) {
-        if (!users.isEmpty()) {
+        LeaderBoardResponse.LeaderboardUser nullUser = new LeaderBoardResponse.LeaderboardUser();
+        if (users.isEmpty()) {
+            firstUser.setValue(nullUser);
+            secondUser.setValue(nullUser);
+            thirdUser.setValue(nullUser);
+        }
+        else {
             firstUser.setValue(users.get(0));
+            secondUser.setValue(users.size() > 1 ? users.get(1): nullUser);
+            thirdUser.setValue(users.size() > 2 ? users.get(2) : nullUser);
         }
-        if (users.size() > 1) {
-            secondUser.setValue(users.get(1));
-        }
-        if (users.size() > 2) {
-            thirdUser.setValue(users.get(2));
-        }
-
         for (int i = 3; i < users.size(); i++) {
             LeaderBoardResponse.LeaderboardUser leaderboardUser = users.get(i);
             if (leaderboardUser.getUserId() == user.getUser().getId()) {
@@ -204,7 +205,7 @@ public class LeaderBoardViewModel extends ViewModel {
             }
         }
         if (users.size() > 1) {
-            users.sort(Comparator.comparingInt(LeaderBoardResponse.LeaderboardUser::getId));
+            users.sort(Comparator.comparingInt(LeaderBoardResponse.LeaderboardUser::getRank));
         }
         leaderBoardAdapter.updateData(users);
     }

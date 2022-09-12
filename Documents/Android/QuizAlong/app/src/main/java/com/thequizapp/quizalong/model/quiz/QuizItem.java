@@ -142,7 +142,7 @@ public class QuizItem {
         return subscribed;
     }
 
-    public void setSubscribed(Integer subscribed) {
+    public void setSubscribed(int subscribed) {
         this.subscribed = subscribed;
     }
 

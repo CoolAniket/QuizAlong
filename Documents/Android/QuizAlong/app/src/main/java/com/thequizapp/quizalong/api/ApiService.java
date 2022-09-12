@@ -11,6 +11,7 @@ import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
 import com.thequizapp.quizalong.model.payment.OrderResponse;
 import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
 import com.thequizapp.quizalong.model.quiz.QuizByCatId;
+import com.thequizapp.quizalong.model.quiz.SystemTimeResponse;
 import com.thequizapp.quizalong.model.redeemrequest.RedeemRequest;
 import com.thequizapp.quizalong.model.rest.RestResponse;
 import com.thequizapp.quizalong.model.results.ShowResultsRequest;
@@ -101,7 +102,8 @@ public interface ApiService {
     @FormUrlEncoded
     @POST(Const.QUIZ_QUIZBYCATEGORY)
     Single<QuizByCatId> getQuizByCatId(@Header(Const.API_KEY) String apiKey,
-                                       @Field(Const.CATID) String userId);
+                                       @Field(Const.CATID) String catId,
+                                       @Field(Const.USER_ID) String userId);
 
     @FormUrlEncoded
     @POST(Const.QUIZ_ADD_GAME_DATA_LIVE)
@@ -136,6 +138,9 @@ public interface ApiService {
     Single<ShowResultsRequest> getQuizAnsPast(@Header(Const.API_KEY) String apiKey,
                                               @Path(Const.QUIZ_ID_NEW) String quizId,
                                               @Path(Const.USER_ID) String userId);
+    @GET(Const.APP_SYSTEM_TIME)
+    Single<SystemTimeResponse> getSystemTime(@Header(Const.API_KEY) String apiKey);
+
     @FormUrlEncoded
     @POST(Const.USER_ADD_POINTS_TO_WALLET)
     Single<RestResponse> addPointsToWallet(@Header(Const.API_KEY) String apiKey,

@@ -3,27 +3,23 @@ package com.thequizapp.quizalong.viewmodel;
 import android.util.Log;
 import android.view.View;
 
+import com.thequizapp.quizalong.BuildConfig;
+import com.thequizapp.quizalong.model.questions.NewQuestions;
+import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
+import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
+import com.thequizapp.quizalong.model.quiz.QuizItem;
+import com.thequizapp.quizalong.utils.DateUtils;
+import com.thequizapp.quizalong.utils.Global;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableInt;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.thequizapp.quizalong.BuildConfig;
-import com.thequizapp.quizalong.model.home.HomePage;
-import com.thequizapp.quizalong.model.home.TwistQuizPage;
-import com.thequizapp.quizalong.model.questions.NewQuestions;
-import com.thequizapp.quizalong.model.questions.Questions;
-import com.thequizapp.quizalong.model.quiz.AddDataLiveResponse;
-import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
-import com.thequizapp.quizalong.model.quiz.QuizItem;
-import com.thequizapp.quizalong.model.rest.RestResponse;
-import com.thequizapp.quizalong.model.user.CurrentUser;
-import com.thequizapp.quizalong.utils.Global;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.schedulers.Schedulers;
@@ -34,9 +30,19 @@ public class QuizViewModel extends ViewModel {
     private ObservableBoolean isLoading = new ObservableBoolean(true);
     private QuizItem quizesItem;
     private QuizItem twistQuizesItem;
+    private boolean isDoubleDip = false;
+    private boolean isUseDoubleDeep = false;
+    private boolean isUseFiftyFifty = false;
+    private boolean isUseSkip = false;
+    private boolean isUseOnce = false;
+    private boolean isUseLifeLineInCurrentQue = false;
 
     private String quizType = "";
-    private MutableLiveData<NewQuestions.Question> currentQuestions = new MutableLiveData<>();
+    private List<String> answerList = new ArrayList<>();
+    private List<NewQuestions.Question> questionsList = new ArrayList<>();
+    private HashMap<String, String> hashMap = new HashMap<>();
+    private ObservableInt timeRemaining = new ObservableInt(0);
+    private ObservableInt lobbyTimeRemaining = new ObservableInt(0);
     private ObservableInt trueAnswerPosition = new ObservableInt(-1);
     private ObservableInt wrongAnswerPosition = new ObservableInt(-1);
     private ObservableInt totalScore = new ObservableInt(00);
@@ -47,36 +53,29 @@ public class QuizViewModel extends ViewModel {
     private ObservableInt thirdAnswerVisibility = new ObservableInt(View.GONE);
     private ObservableInt fourthAnswerVisibility = new ObservableInt(View.GONE);
     private ObservableInt rapidFireDuration = new ObservableInt(0);
-    private List<String> answerList = new ArrayList<>();
-    private List<NewQuestions.Question> questionsList = new ArrayList<>();
+    private ObservableInt currentPosition = new ObservableInt(0);
+    private ObservableBoolean isComplete = new ObservableBoolean(false);
+    private ObservableBoolean isInfo = new ObservableBoolean(false);
+    private ObservableBoolean isLobby = new ObservableBoolean(false);
+    private MutableLiveData<NewQuestions.Question> currentQuestions = new MutableLiveData<>();
     private MutableLiveData<Boolean> isAnswer = new MutableLiveData<>();
     private MutableLiveData<Boolean> isSkipAnswer = new MutableLiveData<>();
     private MutableLiveData<String> answerVal = new MutableLiveData<>();
     private MutableLiveData<String> skipLifelines = new MutableLiveData<>();
     private MutableLiveData<String> subscribedAmount = new MutableLiveData<>();
-    private ObservableInt currentPosition = new ObservableInt(0);
-    private ObservableBoolean isComplete = new ObservableBoolean(false);
-    private ObservableBoolean isInfo = new ObservableBoolean(false);
-    private ObservableBoolean isLobby = new ObservableBoolean(false);
-    private boolean isDoubleDip = false;
-    private boolean isUseDoubleDeep = false;
-    private boolean isUseFiftyFifty = false;
-    private boolean isUseSkip = false;
-    private boolean isUseOnce = false;
-    private boolean isUseLifeLineInCurrentQue = false;
+    private final MutableLiveData<Long> serverTime = new MutableLiveData<>();
     private MutableLiveData<AddDataLiveResponse> onSuccess = new MutableLiveData<>();
     private MutableLiveData<String> toast = new MutableLiveData<>();
-    private HashMap<String, String> hashMap = new HashMap<>();
+    private MutableLiveData<String> lobbyTime = new MutableLiveData<>();
+
     public MutableLiveData<String> getToast() {
         return toast;
     }
-    private ObservableInt timeRemaining = new ObservableInt(0);
-    private ObservableInt lobbyTimeRemaining = new ObservableInt(0);
-    private MutableLiveData<String> lobbyTime = new MutableLiveData<>();
 
     public ObservableInt getTimeRemaining() {
         return timeRemaining;
     }
+
     public final MutableLiveData<LobbyMessageResponse> onLobbySuccess = new MutableLiveData<>();
 
     public void setTimeRemaining(ObservableInt timeRemaining) {
@@ -89,6 +88,10 @@ public class QuizViewModel extends ViewModel {
 
     public void setLobbyTime(MutableLiveData<String> lobbyTime) {
         this.lobbyTime = lobbyTime;
+    }
+
+    public MutableLiveData<Long> getServerTime() {
+        return serverTime;
     }
 
     public ObservableInt getLobbyTimeRemaining() {
@@ -112,7 +115,22 @@ public class QuizViewModel extends ViewModel {
 
 
     public void letGoBtn() {
-
+        disposable.add(Global.initRetrofit().getSystemTime(BuildConfig.APIKEY)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .unsubscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable1 -> isLoading.set(true))
+                .doOnTerminate(() -> isLoading.set(false))
+                .subscribe((questions, throwable) -> {
+                    if (throwable == null) {
+                        Log.d("System Time....",""+questions.getSystemTime());
+                        Date date = DateUtils.parseDateTime24(questions.getSystemTime());
+                        serverTime.postValue(date.getTime());
+                    } else {
+                        Log.e("System Time....",""+throwable);
+                        toast.postValue(throwable.getLocalizedMessage());
+                    }
+                }));
     }
     public void cancelQuiz() {
 
