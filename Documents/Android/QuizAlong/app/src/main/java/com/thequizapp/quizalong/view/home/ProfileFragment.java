@@ -110,7 +110,7 @@ public class ProfileFragment extends Fragment {
                         + " has invited you to try QuizAlong: the best medical partner you'll ever wish for.\n\n"
                         + "Smartest way to the future of learning clinical concepts for doctors to multifold your earnings and learnings in just 5 minutes.\n\n"
                         + "Join today for free and you'll get a FREE LIFELINE to help you excel the quiz.\n\n"
-                        + "Link: www.quizalong.com/download"
+                        + "Link: https://www.quizalong.com/download"
 
                         + "\n\nUse this refer code "
                         + viewModel.getUser().getValue().getUser().getRefercode() ;

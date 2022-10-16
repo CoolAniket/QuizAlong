@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <import type="android.view.View" />
         <variable
             name="viewModel"
             type="com.thequizapp.quizalong.viewmodel.EditProfileViewModel" />
@@ -106,19 +106,83 @@
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
-                    <EditText
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:layout_marginHorizontal="20dp"
-                        android:layout_marginTop="10dp"
-                        android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,1)}"
+                        android:layout_height="wrap_content"
                         android:background="@drawable/bg_white_5"
                         android:backgroundTint="@color/dim_white"
-                        android:fontFamily="@font/gilroy_reguler"
-                        android:inputType="textCapWords"
-                        android:paddingHorizontal="15dp"
-                        android:text="@{viewModel.mobileNo}"
-                        android:textColor="@color/black" />
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_gravity="center"
+                        android:orientation="horizontal">
+
+                        <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="45dp"
+                            android:layout_weight="1"
+                            android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable,1)}"
+                            android:background="@null"
+                            android:fontFamily="@font/gilroy_reguler"
+                            android:inputType="textCapWords"
+                            android:paddingHorizontal="15dp"
+                            android:text="@{viewModel.mobileNo}"
+                            android:textColor="@color/black"
+                            android:enabled="@{viewModel.isOtpVerified ? false : true}"/>
+                        <Button
+                            android:layout_width="wrap_content"
+                            android:layout_height="30dp"
+                            android:background="@drawable/bg_white_50"
+                            android:backgroundTint="@color/black"
+                            android:fontFamily="@font/gilroy_bold"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center"
+                            android:layout_marginHorizontal="8dp"
+                            android:onClick="@{()->viewModel.authenticatePhone()}"
+                            android:text="send OTP"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:enabled="@{viewModel.isOtpVerified ? false : true}"
+                            />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="@{viewModel.isOtpSent ? View.VISIBLE : View.GONE}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="start"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="15dp"
+                            android:fontFamily="@font/gilroy_medium"
+                            android:text="@string/enter_otp"
+                            android:textColor="@color/white"
+                            android:textSize="16sp" />
+                        <EditText
+                            android:id="@+id/et_otp"
+                            android:layout_width="match_parent"
+                            android:layout_height="45dp"
+                            android:layout_marginHorizontal="20dp"
+                            android:layout_marginTop="10dp"
+                            android:paddingHorizontal="15dp"
+                            android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable, 4)}"
+                            android:fontFamily="@font/gilroy_reguler"
+                            android:background="@drawable/bg_white_5"
+                            android:backgroundTint="@color/dim_white"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:singleLine="true"
+                            android:maxLength="13"
+                            android:textColor="@color/black"
+                            android:enabled="@{viewModel.isOtpVerified ? false : true}"
+                            />
+                    </LinearLayout>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -136,14 +200,15 @@
                         android:layout_height="45dp"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="10dp"
+                        android:paddingHorizontal="15dp"
                         android:afterTextChanged="@{(editable)->viewModel.afterTextChanged(editable, 2)}"
                         android:background="@drawable/bg_white_5"
                         android:backgroundTint="@color/dim_white"
                         android:fontFamily="@font/gilroy_reguler"
                         android:inputType="textCapWords"
-                        android:paddingHorizontal="15dp"
                         android:text='@{viewModel.email}'
-                        android:textColor="@color/black" />
+                        android:textColor="@color/black"
+                        android:enabled="false"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -173,8 +238,7 @@
                             android:dropDownSelector="@color/black"
                             android:textSize="14sp"
                             android:hint="@string/select_year_pass"
-                            android:background="@drawable/bg_white_5"
-                            android:backgroundTint="@color/dim_white"
+
                             />
                     </LinearLayout>
 
@@ -227,6 +291,10 @@
                             android:background="@drawable/ic_profile_user"
                             android:backgroundTint="@color/white" />
                     </RelativeLayout>
+
+                    <include
+                        layout="@layout/loader"
+                        app:isLoading="@{viewModel.isLoading}" />
                 </LinearLayout>
             </ScrollView>
             <Button
@@ -251,8 +319,5 @@
                 android:layout_marginTop="5dp" />
         </LinearLayout>
 
-        <include
-            layout="@layout/loader"
-            app:isLoading="@{viewModel.isLoading}" />
     </RelativeLayout>
 </layout>

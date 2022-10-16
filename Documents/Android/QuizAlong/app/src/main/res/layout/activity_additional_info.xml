@@ -150,7 +150,7 @@
                                 android:textColor="@color/white"
                                 android:textSize="14sp" />
 
-                            <LinearLayout
+                            <RelativeLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_white_10"
@@ -186,7 +186,7 @@
                                     android:singleLine="true"
                                     android:textSize="14sp"
                                     android:textColor="@color/black" />
-                            </LinearLayout>
+                            </RelativeLayout>
                         </androidx.cardview.widget.CardView>
                         <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"

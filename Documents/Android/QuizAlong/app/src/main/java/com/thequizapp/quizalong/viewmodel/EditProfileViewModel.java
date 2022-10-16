@@ -25,6 +25,8 @@ public class EditProfileViewModel extends ViewModel {
     private ObservableBoolean isLoading = new ObservableBoolean(false);
     private MutableLiveData<Boolean> isSuccess = new MutableLiveData<>();
     private MutableLiveData<String> toast = new MutableLiveData<>();
+    private ObservableBoolean isOtpSent = new ObservableBoolean(false);
+    private ObservableBoolean isOtpVerified = new ObservableBoolean(false);
     private CurrentUser user;
 
     private String fullName;
@@ -34,7 +36,17 @@ public class EditProfileViewModel extends ViewModel {
     private String year;
     private String profileUri;
     private String proof;
+    private String otpMobile;
+    private boolean mobileAuthenticated = false;
 
+
+    public ObservableBoolean getIsOtpSent() {
+        return isOtpSent;
+    }
+
+    public ObservableBoolean getIsOtpVerified() {
+        return isOtpVerified;
+    }
     public String getFullName() {
         return fullName;
     }
@@ -111,6 +123,22 @@ public class EditProfileViewModel extends ViewModel {
         this.user = user;
     }
 
+    public String getOtpMobile() {
+        return otpMobile;
+    }
+
+    public void setOtpMobile(String otpMobile) {
+        this.otpMobile = otpMobile;
+    }
+
+    public boolean isMobileAuthenticated() {
+        return mobileAuthenticated;
+    }
+
+    public void setMobileAuthenticated(boolean mobileAuthenticated) {
+        this.mobileAuthenticated = mobileAuthenticated;
+    }
+
     public void afterTextChanged(CharSequence charSequence, int type) {
         switch (type) {
             case 0:
@@ -125,12 +153,89 @@ public class EditProfileViewModel extends ViewModel {
             case 3:
                 collegeName = charSequence.toString();
                 break;
+            case 4:
+                otpMobile = charSequence.toString();
+                if (charSequence.toString().trim().length() == 4) {
+                    verifyOTPPhone();
+                }
             default:
                 //
                 break;
         }
     }
 
+    public void authenticatePhone() {
+        if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
+            toast.setValue("Please enter a valid mobile number");
+            return;
+        }
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("user_id", Global.userId.get());
+        /*hashMap.put("course_id", toRequestBody(getCourseName()));*/
+        hashMap.put("type", "0"); // 0 for phone number verification. 1 for forget password
+        hashMap.put("mobile_no", getMobileNo());
+
+        disposable.add(
+                Global.initRetrofit()
+                        .sentOTPonMobile(BuildConfig.APIKEY, hashMap)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .unsubscribeOn(Schedulers.io())
+                        .doOnSubscribe(disposable1 -> isLoading.set(true))
+                        .doOnTerminate(() -> isLoading.set(false))
+                        .subscribe((restResponse, throwable) -> {
+                            if (restResponse != null) {
+                                if (restResponse.isStatus()) {
+                                    isOtpSent.set(true);
+                                    toast.setValue("OTP sent successfully.");
+                                } else {
+                                    toast.setValue("OTP not sent. Please try again.");
+                                }
+                            } else {
+                                toast.setValue(throwable.getLocalizedMessage());
+                            }
+                        })
+        );
+
+    }
+
+    public void verifyOTPPhone() {
+        if (otpMobile == null || otpMobile.length() != 4) {
+            toast.setValue("Not a valid OTP...!");
+            return;
+        }
+        HashMap<String, String> hashMap = new HashMap<>();
+        hashMap.put("user_id", Global.userId.get());
+        /*hashMap.put("course_id", toRequestBody(getCourseName()));*/
+        hashMap.put("type", "0"); // 0 for phone number verification. 1 for forget password
+        hashMap.put("mobile_no", getMobileNo());
+        hashMap.put("otp", getOtpMobile());
+
+        disposable.add(
+                Global.initRetrofit()
+                        .verifyOTPonMobile(BuildConfig.APIKEY, hashMap)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .unsubscribeOn(Schedulers.io())
+                        .doOnSubscribe(disposable1 -> isLoading.set(true))
+                        .doOnTerminate(() -> isLoading.set(false))
+                        .subscribe((restResponse, throwable) -> {
+                            if (restResponse != null) {
+                                if (restResponse.isStatus()) {
+                                    isOtpVerified.set(true);
+                                    setMobileAuthenticated(true);
+                                    toast.setValue("OTP verified successfully.");
+                                }
+                                else {
+                                    toast.setValue("Incorrect OTP. Please try again.");
+                                }
+                            } else {
+                                toast.setValue(throwable.getLocalizedMessage());
+                            }
+                        })
+        );
+
+    }
     public void editProfile() {
         if (fullName == null || fullName.isEmpty()) {
             toast.setValue("Please enter name");
@@ -138,6 +243,18 @@ public class EditProfileViewModel extends ViewModel {
         }
         if (mobileNo == null || mobileNo.isEmpty() || !isValidMobile(mobileNo)) {
             toast.setValue("Please enter a valid mobile number");
+            return;
+        }
+        if (!mobileAuthenticated) {
+            toast.setValue("Please authenticate mobile number");
+            return;
+        }
+        if (year == null || year.isEmpty()) {
+            toast.setValue("Please select year");
+            return;
+        }
+        if (collegeName == null || collegeName.isEmpty()) {
+            toast.setValue("Please enter college name");
             return;
         }
         HashMap<String, RequestBody> hashMap = new HashMap<>();

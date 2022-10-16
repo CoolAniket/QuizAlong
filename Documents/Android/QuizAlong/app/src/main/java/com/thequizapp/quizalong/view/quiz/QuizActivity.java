@@ -31,6 +31,7 @@ import com.thequizapp.quizalong.api.Const;
 import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
 import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
 import com.thequizapp.quizalong.model.quiz.QuizItem;
+import com.thequizapp.quizalong.model.user.CurrentUser;
 import com.thequizapp.quizalong.receivers.GameStartReceiver;
 import com.thequizapp.quizalong.utils.CustomDialogBuilder;
 import com.thequizapp.quizalong.utils.DateUtils;
@@ -447,10 +448,12 @@ public class QuizActivity extends BaseActivity implements Runnable {
         try {
             MediaScannerConnection.scanFile(cntx, new String[]{path}, null, (path1, uri) -> {
 
+                SessionManager sessionManager = new SessionManager(this);
+                CurrentUser user = sessionManager.getUser();
                 Intent shareIntent = new Intent();
                 shareIntent.setAction(Intent.ACTION_SEND);
                 //shareIntent.putExtra(Intent.EXTRA_TEXT, "Hey, I completed this quiz, and had a lots of fun. Play and have fun in this app.https://play.google.com/store/apps/details?id=" + getPackageName());
-                shareIntent.putExtra(Intent.EXTRA_TEXT, getIntent().getStringExtra("user_name")+" has just completed this quiz on Quizalong : the best medical partner you’ll ever wish for +" +
+                shareIntent.putExtra(Intent.EXTRA_TEXT, user.getUser().getFullname()+" has just completed this quiz on Quizalong : the best medical partner you’ll ever wish for +" +
                         "\n Dive into the smartest way of learning top notch clinical accent men and start multifolding your learning and earning in just 5 minutes.+" +
                         "\n Join now for FREE+" +
                         "\n http://quizalong.com/#download+");
