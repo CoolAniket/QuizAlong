@@ -62,10 +62,10 @@ public class CategoriesViewModel extends ViewModel {
                     .doOnSubscribe(disposable1 -> isLoading.set(true))
                     .doOnTerminate(() -> isLoading.set(false))
                     .subscribe((restResponse, throwable) -> {
-//                      toast.setValue("Failed to update user category. please try again later…!");
-                        toast.setValue(restResponse.getMessage());
-                        categoriesAdapter.updateCategory(categoriesItem, checked, restResponse.isStatus());
-
+                        if (restResponse != null) {
+                            toast.setValue(restResponse.getMessage());
+                            categoriesAdapter.updateCategory(categoriesItem, checked, restResponse.isStatus());
+                        }
                     }));
         });
     }

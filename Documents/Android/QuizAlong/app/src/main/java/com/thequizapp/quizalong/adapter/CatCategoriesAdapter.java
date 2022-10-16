@@ -97,25 +97,26 @@ public class CatCategoriesAdapter extends RecyclerView.Adapter<RecyclerView.View
                 });
                 binding.chkFavourite.setOnClickListener((view) -> {
                     new CustomDialogBuilder(view.getContext()).showFavouriteDialog(R.drawable.gold_star,
-                            "Add Favourite",
-                            String.format("Add %s to Favourites", categoriesItem.getValue()),
+                            (categoriesItem.getStar() == 1 ? "Remove" : "Add")+" Favourite",
+                            String.format((categoriesItem.getStar() == 1 ? "Remove %s from Favourites" : "Add %s to Favourites"), categoriesItem.getValue()),
                             "Yes",
                             "No",
                             new CustomDialogBuilder.OnDismissListener() {
                                 @Override
                                 public void onPositiveDismiss() {
                                     if (onFavouriteCheck != null) {
-                                        onFavouriteCheck.onChecked(categoriesItem, true);
+                                        onFavouriteCheck.onChecked(categoriesItem, categoriesItem.getStar() != 1);
                                         binding.chkFavourite.setChecked(true);
                                     }
                                 }
 
                                 @Override
                                 public void onNegativeDismiss() {
-                                    if (onFavouriteCheck != null) {
+                                    /*if (onFavouriteCheck != null) {
                                         onFavouriteCheck.onChecked(categoriesItem, false);
                                         binding.chkFavourite.setChecked(false);
-                                    }
+                                    }*/
+                                    binding.chkFavourite.setChecked(categoriesItem.getStar() == 1);
                                 }
                             });
 
