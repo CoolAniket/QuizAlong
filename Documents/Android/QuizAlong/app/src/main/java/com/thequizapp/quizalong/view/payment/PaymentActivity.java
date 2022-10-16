@@ -84,6 +84,7 @@ public class PaymentActivity extends BaseActivity implements PaymentResultWithDa
         if (restResponse.isStatus()) {
             Toast.makeText(this, "Payment success. Redirecting...", Toast.LENGTH_SHORT)
                     .show();
+            setResult(Activity.RESULT_OK);
             finish();
         }
         else {
@@ -174,5 +175,11 @@ public class PaymentActivity extends BaseActivity implements PaymentResultWithDa
 //        if (requestCode == Razorpay.UPI_INTENT_REQUEST_CODE) {
 //            razorpay.onActivityResult(requestCode, resultCode, data);
 //        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_OK);
+        super.onBackPressed();
     }
 }

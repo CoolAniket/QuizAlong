@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
@@ -29,16 +30,16 @@ import com.thequizapp.quizalong.utils.ads.RewardAds;
 import com.thequizapp.quizalong.view.leaderboard.LeaderBoardActivity;
 import com.thequizapp.quizalong.view.payment.PaymentActivity;
 import com.thequizapp.quizalong.view.quiz.QuizActivity;
-import com.thequizapp.quizalong.view.quizes.QuizListActivity;
 import com.thequizapp.quizalong.viewmodel.HomeViewModel;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
+
+import static android.app.Activity.RESULT_OK;
 
 
 public class HomeFragment extends Fragment {
 
+    private static final int PAYMENT_RESULT_IN_HOME_FRAGMENT = 121;
     FragmentHomeBinding binding;
     HomeViewModel viewModel;
     private RewardAds rewardAds;
@@ -167,9 +168,9 @@ public class HomeFragment extends Fragment {
         new CustomDialogBuilder(requireContext()).showPaymentAmountDialog(quizesItem.getEntry(), new CustomDialogBuilder.OnPaymentAmountSelectListener() {
             @Override
             public void onAmountClick(int amount) {
-                startActivity(new Intent(getActivity(), PaymentActivity.class)
+                startActivityForResult(new Intent(getActivity(), PaymentActivity.class)
                         .putExtra("data", new Gson().toJson(quizesItem))
-                        .putExtra("amount", amount));
+                        .putExtra("amount", amount), PAYMENT_RESULT_IN_HOME_FRAGMENT);
             }
 
             @Override
@@ -203,4 +204,14 @@ public class HomeFragment extends Fragment {
         });
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == RESULT_OK){
+            if(requestCode == PAYMENT_RESULT_IN_HOME_FRAGMENT){
+                // Refresh homepage
+                refreshData();
+            }
+        }//end if resultCode
+    }
 }
