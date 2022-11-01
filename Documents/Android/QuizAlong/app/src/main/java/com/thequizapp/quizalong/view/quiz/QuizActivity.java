@@ -22,13 +22,11 @@ import android.widget.Toast;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
-import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
 import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
 import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.model.user.CurrentUser;
@@ -49,14 +47,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
-import java.util.Random;
 
 public class QuizActivity extends BaseActivity implements Runnable {
     public final class Type {
@@ -343,6 +339,9 @@ public class QuizActivity extends BaseActivity implements Runnable {
                         viewModel.setUseSkip(true);
                         viewModel.setUseOnce(true);
                         viewModel.skipQuestion();
+                        viewModel.setUseLifeLineInCurrentQue(true);
+                        // reduce alpha, lighter icon after lifeline used
+                        viewModel.getLifelineIconFocus().set(false);
                     }
 
                     @Override
@@ -350,7 +349,7 @@ public class QuizActivity extends BaseActivity implements Runnable {
                         handler.postDelayed(QuizActivity.this, 1000);
                     }
                 });
-                viewModel.setUseLifeLineInCurrentQue(true);
+
             }
             handler.removeCallbacks(this);
         });
@@ -594,6 +593,8 @@ public class QuizActivity extends BaseActivity implements Runnable {
             }
         } else {
             viewModel.setUseLifeLineInCurrentQue(false);
+            // icon in focus alpha, color icon
+            viewModel.getLifelineIconFocus().set(true);
             handler.removeCallbacks(this);
             viewModel.getIsComplete().set(true);
             if(cTimer != null)
@@ -633,13 +634,6 @@ public class QuizActivity extends BaseActivity implements Runnable {
                 slideTimer.cancel();
             super.onBackPressed();
         } else {
-            if(cTimer != null)
-                cTimer.cancel();
-            if(lTimer != null)
-                lTimer.cancel();
-            if (slideTimer != null)
-                slideTimer.cancel();
-            handler.removeCallbacks(this);
             new CustomDialogBuilder(this).
                     showSimpleDialog(R.drawable.ic_warning,
                             "Do you really,",
@@ -649,6 +643,13 @@ public class QuizActivity extends BaseActivity implements Runnable {
                             new CustomDialogBuilder.OnDismissListener() {
                                 @Override
                                 public void onPositiveDismiss() {
+                                    if(cTimer != null)
+                                        cTimer.cancel();
+                                    if(lTimer != null)
+                                        lTimer.cancel();
+                                    if (slideTimer != null)
+                                        slideTimer.cancel();
+                                    handler.removeCallbacks(QuizActivity.this);
                                     QuizActivity.super.onBackPressed();
                                 }
 

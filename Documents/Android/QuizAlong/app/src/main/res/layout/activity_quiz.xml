@@ -227,7 +227,11 @@
                     android:layout_height="60dp"
                     android:background="@drawable/bg_oval"
                     android:padding="12dp"
-                    android:src="@drawable/ic_light_bulb" />
+                    android:src="@drawable/ic_light_bulb"
+                    android:alpha='@{viewModel.lifelineIconFocus ? "1" : "0.6"}'
+
+                    />
+
             </LinearLayout>
 
             <RelativeLayout

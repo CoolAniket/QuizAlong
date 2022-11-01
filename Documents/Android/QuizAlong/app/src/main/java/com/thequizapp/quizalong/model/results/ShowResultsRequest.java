@@ -82,7 +82,7 @@ public class ShowResultsRequest {
         @SerializedName("assigned")
         private Integer assigned;
         @SerializedName("description")
-        private String description;
+        private String description = "";
 
         public Integer getId() {
             return id;

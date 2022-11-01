@@ -57,6 +57,7 @@ public class QuizViewModel extends ViewModel {
     private ObservableBoolean isComplete = new ObservableBoolean(false);
     private ObservableBoolean isInfo = new ObservableBoolean(false);
     private ObservableBoolean isLobby = new ObservableBoolean(false);
+    private ObservableBoolean lifelineIconFocus = new ObservableBoolean(true);
     private MutableLiveData<NewQuestions.Question> currentQuestions = new MutableLiveData<>();
     private MutableLiveData<Boolean> isAnswer = new MutableLiveData<>();
     private MutableLiveData<Boolean> isSkipAnswer = new MutableLiveData<>();
@@ -80,6 +81,10 @@ public class QuizViewModel extends ViewModel {
 
     public void setTimeRemaining(ObservableInt timeRemaining) {
         this.timeRemaining = timeRemaining;
+    }
+
+    public ObservableBoolean getLifelineIconFocus() {
+        return lifelineIconFocus;
     }
 
     public MutableLiveData<String> getLobbyTime() {
