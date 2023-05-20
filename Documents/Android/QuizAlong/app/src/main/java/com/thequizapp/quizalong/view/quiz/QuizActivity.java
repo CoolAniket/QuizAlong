@@ -27,6 +27,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.google.gson.Gson;
 import com.thequizapp.quizalong.R;
 import com.thequizapp.quizalong.api.Const;
+import com.thequizapp.quizalong.databinding.ActivityQuizBinding;
 import com.thequizapp.quizalong.model.quiz.LobbyMessageResponse;
 import com.thequizapp.quizalong.model.quiz.QuizItem;
 import com.thequizapp.quizalong.model.user.CurrentUser;

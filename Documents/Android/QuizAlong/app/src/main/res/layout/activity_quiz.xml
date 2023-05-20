@@ -56,7 +56,7 @@
                 android:ellipsize="end"
                 android:fontFamily="@font/gilroy_bold"
                 android:singleLine="true"
-                android:text="@{viewModel.twistQuizesItem.title.toString()}"
+                android:text="@{viewModel.twistQuizesItem.title}"
                 android:textColor="@color/white"
                 android:textSize="20sp" />
 
@@ -85,7 +85,7 @@
                             android:gravity="center"
                             android:padding="1dp"
                             android:singleLine="true"
-                            android:text='@{""+viewModel.twistQuizesItem.questions.toString()}'
+                            android:text='@{""+viewModel.twistQuizesItem.questions}'
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
@@ -109,7 +109,7 @@
                             android:gravity="center"
                             android:padding="1dp"
                             android:singleLine="true"
-                            android:text='@{""+viewModel.twistQuizesItem.totalTime.toString()}'
+                            android:text='@{""+viewModel.twistQuizesItem.totalTime}'
                             android:textColor="@color/white"
                             android:textSize="12sp" />
 
@@ -228,7 +228,7 @@
                     android:background="@drawable/bg_oval"
                     android:padding="12dp"
                     android:src="@drawable/ic_light_bulb"
-                    android:alpha='@{viewModel.lifelineIconFocus ? "1" : "0.6"}'
+                    android:alpha='@{viewModel.lifelineIconFocus ? 1.0f : 0.6f}'
 
                     />
 
@@ -962,7 +962,7 @@
                     android:fontFamily="@font/gilroy_bold"
                     android:text="@string/lobby"
                     android:textColor="@color/white"
-                    android:textSize="25dp"
+                    android:textSize="25sp"
                     android:layout_gravity="center"/>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -979,7 +979,7 @@
                         android:gravity="center"
                         android:padding="1dp"
                         android:singleLine="true"
-                        android:text='@{""+viewModel.twistQuizesItem.questions.toString()}'
+                        android:text='@{""+viewModel.twistQuizesItem.questions}'
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -1003,7 +1003,7 @@
                         android:gravity="center"
                         android:padding="1dp"
                         android:singleLine="true"
-                        android:text='@{""+viewModel.twistQuizesItem.totalTime.toString()}'
+                        android:text='@{""+viewModel.twistQuizesItem.totalTime}'
                         android:textColor="@color/white"
                         android:textSize="12sp" />
 
@@ -1025,12 +1025,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{viewModel.twistQuizesItem.winPercent.toString()}"
+                        android:text='@{""+viewModel.twistQuizesItem.winPercent}'
                         android:textStyle="bold"
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="10dp"/>
+                        android:layout_marginStart="10dp"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -1055,7 +1055,7 @@
                         android:textColor="@color/white"
                         android:textSize="13sp"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="30dp"/>
+                        android:layout_marginStart="30dp"/>
                     <ImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
@@ -1121,7 +1121,7 @@
                     android:fontFamily="@font/gilroy_semi_bold"
                     android:text="@string/quiz_shall"
                     android:textColor="@color/white"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:layout_gravity="center"/>
                 <TextView
                     android:id="@+id/tv_lobby_time"
@@ -1133,7 +1133,7 @@
                     android:gravity="center"
                     android:padding="1dp"
                     android:singleLine="true"
-                    android:text="00:00:00"
+                    android:text="@string/_00_00_00"
                     android:textColor="@color/white"
                     android:textSize="16sp" />
                 <androidx.cardview.widget.CardView
