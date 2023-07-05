@@ -232,7 +232,7 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         }
 
 
-        Log.e("KKKK ",""+courses);
+        Log.d("KKKK courses",""+courses);
 
         colleges.add("Select college name");
         for(int k=0;k<viewModel.getUser().getColleges().size();k++){
@@ -245,15 +245,15 @@ public class AdditionalInfoActivity extends BaseActivity implements DatePickerDi
         }
 
         years.add("Current official year");
-        for(int j=0;j<viewModel.getUser().getCourse().get(0).getYear().size();j++){
+        for(int j=0;j<viewModel.getUser().getCourse().size();j++){
             try {
                 //Getting json object
-                years.add(viewModel.getUser().getCourse().get(0).getYear().get(j).getValue());
+                years.add(viewModel.getUser().getCourse().get(j).getYear().get(0).getValue());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        Log.e("CCCC ",""+years);
+        Log.d("KKKK years",""+years);
 
         //Setting adapter to show the items in the spinner
         /*binding.spCourse.setAdapter(new ArrayAdapter<String>(AdditionalInfoActivity.this, android.R.layout.simple_spinner_dropdown_item, courses));
